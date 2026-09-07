@@ -1,96 +1,35 @@
 ---
 sidebar_position: 11
-title: "BNB Chain Liquidity API"
-description: "BNB Chain Liquidity API: read BNB Chain pool reserves and liquidity updates via Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
+title: "BNB Chain Liquidity API: PancakeSwap Pool Reserves in Real Time"
+sidebar_label: "BNB Chain Liquidity API"
+description: "BNB Chain pool reserves and spot prices with Bitquery GraphQL: PancakeSwap v2, v3 and Infinity pools, one pool now or streamed, every pool holding CAKE."
+keywords:
+  - BSC liquidity API
+  - BNB Chain pool reserves
+  - PancakeSwap liquidity API
+  - PancakeSwap Infinity pools
+  - DEXPoolEvents BSC
 ---
-# BSC Liquidity API
 
-In this section we will see how to get BSC DEX pool liquidity information using Bitquery API. The liquidity API helps you monitor real-time liquidity changes, track pool reserves, and analyze liquidity depth for token pairs on BSC DEX pools.
+import FAQ from "@site/src/components/FAQ";
 
-## Understanding Liquidity and Pool Reserves
+# BNB Chain Liquidity API: PancakeSwap Pool Reserves in Real Time
 
-Liquidity in DEX pools refers to the amount of tokens available for trading. Pool reserves (the balance of each token in the pool) determine the pool's ability to handle trades without significant price impact. Monitoring liquidity changes helps you:
+The `DEXPoolEvents` cube under `EVM(network: bsc)` emits one row every time a pool's reserves change, whether by a swap, a deposit or a withdrawal. Each row carries the reserves of both tokens after the change, in token units and in USD, the spot price in both directions, the pool and its protocol, and the transaction that moved it. BNB Chain is PancakeSwap territory, and the cube reports its three pool types under their own names: v2 pairs as `uniswap_v2`, the name shared by every Uniswap v2 fork, v3 pools as `pancake_swap_v3`, and Infinity pools as `pancakeswap_infinity`, alongside `uniswap_v3` and `uniswap_v4` pools. The cube holds the recent realtime window only and has no archive dataset: to keep a history, record the stream. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked pool is the PancakeSwap v3 USDT/WBNB pool, `0x172fcd41e0913e95784454622d1c3724f546f849`, the busiest pool on the chain.
 
-- Track when liquidity is added or removed from pools
-- Monitor pool health and depth
-- Identify liquidity events that may affect trading
-- Analyze liquidity patterns across different pools
+## Reserves of one pool now
 
-The DEXPoolEvents API provides real-time information about:
-
-- Current liquidity reserves for both tokens in the pool
-- Spot prices for both swap directions
-- Pool and token pair information
-- Transaction details for liquidity-changing events
-
-For a comprehensive explanation of how DEX pools work, liquidity calculations, and when pool events are emitted, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/).
-
-## Realtime Liquidity Stream
-
-This subscription query returns real-time liquidity data for all DEX pools on BSC. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-You can find the query [here](https://ide.bitquery.io/Realtime-Liquidity-Stream_2#)
+The newest rows for a pool. `AmountCurrencyA` and `AmountCurrencyB` are the reserves after each change, the `InUSD` twins price them, and `AtoBPrice` is how much of B one unit of A buys at the spot. Saved query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_2).
 
 ```graphql
-subscription MyQuery {
-  EVM(network: bsc) {
-    DEXPoolEvents {
-      Block {
-        Time
-        Number
-      }
-      PoolEvent {
-        AtoBPrice
-        BtoAPrice
-        Dex {
-          SmartContract
-          ProtocolName
-        }
-        Liquidity {
-          AmountCurrencyA
-          AmountCurrencyB
-        }
-        Pool {
-          CurrencyA {
-            Name
-            SmartContract
-            Symbol
-          }
-          CurrencyB {
-            Name
-            SmartContract
-            Symbol
-          }
-          PoolId
-          SmartContract
-        }
-      }
-      Transaction {
-        Gas
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Latest Liquidity Changes of a Specific Pool
-
-This query retrieves the latest liquidity events for a specific DEX pool on BSC. Use this to check current pool reserves, spot prices, and recent liquidity changes for a particular token pair.
-
-You can find the query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-a-Specific-Pool_2#)
-
-```graphql
-query MyQuery {
+{
   EVM(network: bsc) {
     DEXPoolEvents(
       limit: { count: 10 }
       orderBy: { descending: Block_Time }
       where: {
         PoolEvent: {
-          Pool: {
-            SmartContract: { is: "0xdf5106e47956dbc54524a941dc858cf9d4e91972" }
-          }
+          Pool: { SmartContract: { is: "0x172fcd41e0913e95784454622d1c3724f546f849" } }
         }
       }
     ) {
@@ -101,31 +40,28 @@ query MyQuery {
       PoolEvent {
         AtoBPrice
         BtoAPrice
-        Dex {
-          SmartContract
-          ProtocolName
-        }
         Liquidity {
           AmountCurrencyA
+          AmountCurrencyAInUSD
           AmountCurrencyB
+          AmountCurrencyBInUSD
         }
         Pool {
+          SmartContract
           CurrencyA {
-            Name
-            SmartContract
             Symbol
+            SmartContract
           }
           CurrencyB {
-            Name
-            SmartContract
             Symbol
+            SmartContract
           }
-          PoolId
-          SmartContract
+        }
+        Dex {
+          ProtocolName
         }
       }
       Transaction {
-        Gas
         Hash
       }
     }
@@ -133,21 +69,17 @@ query MyQuery {
 }
 ```
 
-## Realtime Liquidity Stream of a Specific Pool
+## Stream one pool
 
-This subscription query monitors real-time liquidity changes for a specific DEX pool on BSC. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
-
-You can find the query [here](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_1)
+The same filter as a subscription delivers a row on every reserve change; this pool changes many times a second. Saved stream [here](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_1).
 
 ```graphql
-subscription MyQuery {
+subscription {
   EVM(network: bsc) {
     DEXPoolEvents(
       where: {
         PoolEvent: {
-          Pool: {
-            SmartContract: { is: "0xdf5106e47956dbc54524a941dc858cf9d4e91972" }
-          }
+          Pool: { SmartContract: { is: "0x172fcd41e0913e95784454622d1c3724f546f849" } }
         }
       }
     ) {
@@ -158,31 +90,23 @@ subscription MyQuery {
       PoolEvent {
         AtoBPrice
         BtoAPrice
-        Dex {
-          SmartContract
-          ProtocolName
-        }
         Liquidity {
           AmountCurrencyA
+          AmountCurrencyAInUSD
           AmountCurrencyB
+          AmountCurrencyBInUSD
         }
         Pool {
+          SmartContract
           CurrencyA {
-            Name
-            SmartContract
             Symbol
           }
           CurrencyB {
-            Name
-            SmartContract
             Symbol
           }
-          PoolId
-          SmartContract
         }
       }
       Transaction {
-        Gas
         Hash
       }
     }
@@ -190,50 +114,41 @@ subscription MyQuery {
 }
 ```
 
-## Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
+## Every PancakeSwap Infinity pool
 
-This subscription query monitors real-time liquidity changes for all pools in a specific DEX protocol on BSC. Here we have taken example of Uniswap V4.
-
-You can find the query [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4)
+Infinity pools live inside one manager contract, like Uniswap v4, so `Pool.SmartContract` repeats on every row and `Pool.PoolId` identifies the pool. Filter on the protocol name to follow all of them; swap in `uniswap_v4` for the Uniswap v4 pools on BNB Chain. Saved stream [here](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4).
 
 ```graphql
-subscription MyQuery {
+subscription {
   EVM(network: bsc) {
     DEXPoolEvents(
-      where: { PoolEvent: { Dex: { ProtocolName: { is: "uniswap_v4" } } } }
+      where: { PoolEvent: { Dex: { ProtocolName: { is: "pancakeswap_infinity" } } } }
     ) {
       Block {
         Time
-        Number
       }
       PoolEvent {
-        AtoBPrice
-        BtoAPrice
-        Dex {
+        Pool {
+          PoolId
           SmartContract
-          ProtocolName
+          CurrencyA {
+            Symbol
+            SmartContract
+          }
+          CurrencyB {
+            Symbol
+            SmartContract
+          }
         }
         Liquidity {
           AmountCurrencyA
+          AmountCurrencyAInUSD
           AmountCurrencyB
+          AmountCurrencyBInUSD
         }
-        Pool {
-          CurrencyA {
-            Name
-            SmartContract
-            Symbol
-          }
-          CurrencyB {
-            Name
-            SmartContract
-            Symbol
-          }
-          PoolId
-          SmartContract
-        }
+        AtoBPrice
       }
       Transaction {
-        Gas
         Hash
       }
     }
@@ -241,90 +156,82 @@ subscription MyQuery {
 }
 ```
 
-> **Important Note:** In Uniswap V4, all pools' liquidity is stored in the PoolManager contract, so the DEX smart contract address will be the same for all pairs. Use `PoolId` to differentiate between different pools. The `PoolId` field uniquely identifies each pool within the PoolManager.
+## Pools that hold a token, with their current reserves
 
-## Realtime Liquidity Data via Kafka Streams
+`limitBy` on the pool address keeps the newest row per pool, so the result is the current state of every pool that had the token as `CurrencyA` and changed inside the window. Run it a second time with the token under `CurrencyB` to catch pools that list it second. The example is CAKE, `0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82`; the PancakeSwap v2 CAKE/WBNB pair leads. Sort the rows by the USD reserve in your code to rank them. Saved query [here](https://ide.bitquery.io/Realtime-Liquidity-Stream_2).
 
-Liquidity data can also be obtained via Kafka streams for lower latency and better reliability. The Kafka topic for BSC DEX pools is:
+```graphql
+{
+  EVM(network: bsc) {
+    DEXPoolEvents(
+      limit: { count: 20 }
+      limitBy: { by: PoolEvent_Pool_SmartContract, count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        PoolEvent: {
+          Pool: {
+            CurrencyA: { SmartContract: { is: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" } }
+          }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      PoolEvent {
+        Dex {
+          ProtocolName
+        }
+        Pool {
+          SmartContract
+          PoolId
+          CurrencyB {
+            Symbol
+            SmartContract
+          }
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+      }
+    }
+  }
+}
+```
 
-**`bsc.dexpools.proto`**
+## Fields on every row
 
-Kafka streams provide the same liquidity data as GraphQL subscriptions but with several advantages:
+| Field | Meaning |
+|---|---|
+| `PoolEvent.Liquidity.AmountCurrencyA`, `AmountCurrencyB` | Reserves of each token after the change, in token units |
+| `AmountCurrencyAInUSD`, `AmountCurrencyBInUSD` | The same reserves priced in USD |
+| `PoolEvent.AtoBPrice`, `BtoAPrice` | Spot price in each direction after the change |
+| `PoolEvent.Pool.SmartContract`, `PoolId` | Pool contract; for Infinity and Uniswap v4 the manager plus the pool id |
+| `PoolEvent.Dex.ProtocolName` | `uniswap_v2` (v2 pairs of any fork, PancakeSwap v2 included), `pancake_swap_v3`, `pancakeswap_infinity`, `uniswap_v3`, `uniswap_v4` |
+| `Transaction.Hash` | The transaction that changed the reserves |
 
-- Lower latency due to shorter data pipeline
-- Better reliability with persistent connections
-- Ability to read from latest offset without gaps
-- Better scalability with multiple consumers
+## The same data over Kafka
 
-For detailed information on how to connect to Kafka streams, subscribe to topics, and parse messages, refer to the [Kafka Streaming Concepts documentation](/docs/streams/kafka-streaming-concepts/).
+The `bsc.dexpools.proto` topic carries the same rows as protobuf messages with lower latency and no WebSocket to keep alive. Kafka needs its own credentials, separate from the IDE token; see the [Kafka streams hub](/docs/category/kafka-streams).
 
-> **Note:** IDE credentials will not work with Kafka Streams. You need separate Kafka credentials. Please contact sales on our official telegram channel or fill out the [form on our website](https://bitquery.io/forms/api).
+<FAQ
+  items={[
+    { q: "How do I get the reserves of a PancakeSwap pool?", a: "Query DEXPoolEvents under EVM(network: bsc) with the pool contract in PoolEvent.Pool.SmartContract, ordered by Block_Time descending. The newest row holds both reserves in token units and USD plus the spot price." },
+    { q: "Why do PancakeSwap v2 pairs show ProtocolName uniswap_v2?", a: "The cube names v2-style pairs after the protocol they fork, so every Uniswap v2 fork on BNB Chain, PancakeSwap v2 included, reports as uniswap_v2. PancakeSwap v3 and Infinity pools carry their own names." },
+    { q: "How do I tell PancakeSwap Infinity pools apart?", a: "Infinity pools share one manager contract in Pool.SmartContract, so filter and group on Pool.PoolId. The same applies to Uniswap v4 pools on BNB Chain." },
+    { q: "How far back does liquidity data go on BNB Chain?", a: "DEXPoolEvents keeps the recent realtime window only and has no archive dataset. Record the subscription or the Kafka topic to build a history." },
+    { q: "Can I get pool reserves from the balance cube instead?", a: "Yes, for any pool contract: TransactionBalances rows on the pool address give its token balances. DEXPoolEvents adds spot prices, USD values and protocol names in one row." },
+  ]}
+/>
 
-## Understanding the Response
+## Related pages
 
-The `DEXPoolEvents` API response contains the following information:
-
-- **`PoolEvent`**: Pool event information
-
-  - **`Liquidity`**: Current pool reserves
-    - `AmountCurrencyA`: Current balance of CurrencyA in the pool (in raw units)
-    - `AmountCurrencyB`: Current balance of CurrencyB in the pool (in raw units)
-  - **`AtoBPrice`**: Current spot price for swapping CurrencyA to CurrencyB
-  - **`BtoAPrice`**: Current spot price for swapping CurrencyB to CurrencyA
-  - **`Pool`**: Pool information
-    - `SmartContract`: Pool contract address
-    - `PoolId`: Unique pool identifier
-    - `CurrencyA`: First token in the pair (name, symbol, smart contract address)
-    - `CurrencyB`: Second token in the pair (name, symbol, smart contract address)
-  - **`Dex`**: DEX protocol information
-    - `SmartContract`: DEX router/factory contract address
-    - `ProtocolName`: Protocol name (e.g., Uniswap V2, Uniswap V3, Uniswap V4)
-
-- **`Block`**: Block information when the liquidity event occurred
-
-  - `Time`: Timestamp of the block
-  - `Number`: Block number
-
-- **`Transaction`**: Transaction information
-  - `Hash`: Transaction hash
-  - `Gas`: Gas used for the transaction
-
-For more details on when new pool events are emitted and how liquidity is calculated, see the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#when-is-a-new-dexpool-record-emitted-in-the-apis--streams).
-
-## Use Cases
-
-### Real-Time Liquidity Monitoring
-
-Use the liquidity API to monitor pool reserves in real-time:
-
-- Track when large amounts of liquidity are added or removed
-- Monitor pool health and detect potential liquidity issues
-- Alert on significant liquidity changes that may affect trading
-
-### Liquidity Depth Analysis
-
-Analyze which pools have sufficient liquidity for your needs:
-
-- Compare liquidity reserves across different pools
-- Identify pools with deep liquidity for large trades
-- Monitor liquidity trends over time
-
-### Trading Applications
-
-#### Pre-Trade Liquidity Checks
-
-Before executing large trades, check current pool reserves:
-
-- Verify sufficient liquidity exists for your trade size
-- Monitor liquidity changes that may affect execution
-- Identify optimal pools with best liquidity depth
-
-#### Liquidity Event Detection
-
-Track liquidity events that may create trading opportunities:
-
-- Detect when new liquidity is added to pools
-- Monitor liquidity removals that may signal pool abandonment
-- Identify pools experiencing rapid liquidity growth
-
-For more advanced use cases, refer to the [DEXPools Cube documentation](/docs/cubes/evm-dexpool/#advanced-use-cases-and-processing-patterns).
+- [BNB Chain DEX trades API](/docs/blockchain/BSC/bsc-dextrades)
+- [PancakeSwap Infinity API](/docs/blockchain/BSC/bsc-pancakeswap-infinity-api)
+- [DEXPools cube](/docs/cubes/evm-dexpool/)
+- [Arbitrum liquidity API](/docs/blockchain/Arbitrum/arbitrum-liquidity-api)
+- [Base liquidity API](/docs/blockchain/Base/base-liquidity-api)
