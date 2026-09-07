@@ -1,5 +1,6 @@
 ---
 title: "Optimism Transfers API: Token and ETH Transfers, Whale Alerts, Backfills"
+sidebar_label: "Optimism Transfers API"
 description: "Query and stream Optimism token and ETH transfers with Bitquery GraphQL: large USDT moves, one wallet, NFT transfers and gap-free backfills."
 keywords:
   - Optimism transfers API
