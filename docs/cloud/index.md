@@ -16,6 +16,8 @@ keywords:
   - Solana cloud data
   - Bitcoin cloud data
   - Tron cloud data
+  - Hyperliquid cloud data
+  - Robinhood cloud data
   - EVM cloud data
   - Blockchain ETL pipeline
   - Blockchain analytics
@@ -143,6 +145,32 @@ Export **Ripple / XRP Ledger data**, modelled around XRPL's ledger objects:
 
 **Use Cases:** XRP payment flow analysis, issued-token and stablecoin tracking, XRPL DEX and AMM volume analysis, order book reconstruction, trust line and issuer exposure analysis, NFT marketplace activity, network fee revenue analysis.
 
+### [Hyperliquid (HyperCore) Data Export](/docs/cloud/hyperliquid/)
+
+Export **Hyperliquid Core (HyperCore)** order-book exchange data — an event stream rather than a state chain:
+
+- **Order Statuses** – Full order lifecycle: open, canceled, filled, triggered, and every rejection reason
+- **Book Diffs** – **L4** per-order book deltas with the owning address and order id
+- **Fills** – Both sides of every match, with realized PnL, fee, fee token, and liquidation detail
+- **Oracle Updates** – Mark, spot, and external perp price inputs, and the resulting oracle prices
+- **Misc Events** – Deposits, withdrawals, transfers, funding, delegation, validator rewards
+- **TWAP Statuses** – TWAP order state, executed size and notional, terminal status
+- **Core Writer Actions** – HyperEVM to HyperCore actions, with the originating EVM transaction hash
+
+**Use Cases:** Perp market microstructure research, order book reconstruction at L4, maker and taker behaviour analysis, per-wallet realized PnL, liquidation forensics, HIP-3 builder market analysis, backtesting against full order flow.
+
+### [Robinhood Chain Data Export](/docs/cloud/robinhood/)
+
+Export **Robinhood Chain** data — an EVM network (chain ID `4663`) where tokenized equities trade alongside crypto-native assets:
+
+- **DEX Trades** – Buy and sell side with token metadata, USD amounts, pool and protocol
+- **Transfers** – Native and ERC-20 movements with USD value and currency metadata
+- **Balances** – Balance snapshot per address and currency, with change times and update count
+- **Events** – Decoded logs with arguments, topics, and the emitting call context
+- **Calls** – Internal and top-level calls with decoded arguments, returns, and state changes
+
+**Use Cases:** Tokenized equity and RWA flow analysis, USDG stablecoin tracking, Robinhood DEX volume analysis across Uniswap and Pons, wallet balance reconstruction, contract call tracing, cross-venue arbitrage research.
+
 ### [BSC (BNB Chain) Data Export](/docs/cloud/bsc/)
 
 Export **BSC (BNB Chain) blockchain data** for comprehensive EVM-compatible chain analysis:
@@ -198,11 +226,23 @@ bitquery-blockchain-dataset/
 │   ├── transactions/
 │   ├── transfers/
 │   └── ...
-└── ripple/
-    ├── transactions_tx/
-    ├── transfers_tx/
-    ├── payments_tx/
+├── ripple/
+│   ├── transactions_tx/
+│   ├── transfers_tx/
+│   ├── payments_tx/
+│   ├── balances/
+│   └── ...
+├── hyperliquid/
+│   ├── order_statuses/
+│   ├── book_diffs/
+│   ├── fills/
+│   ├── oracle_updates/
+│   └── ...
+└── robinhood/
+    ├── dex_trades/
+    ├── transfers/
     ├── balances/
+    ├── events/
     └── ...
 ```
 
@@ -390,6 +430,8 @@ If you require **low-latency or streaming blockchain data**, Bitquery also provi
 - [Solana Data Export](/docs/cloud/solana/) – Solana blockchain data dumps
 - [Tron Data Export](/docs/cloud/tron/) – Tron blockchain data dumps
 - [Bitcoin Data Export](/docs/cloud/bitcoin/) – Bitcoin blockchain and OMNI data
+- [Hyperliquid Data Export](/docs/cloud/hyperliquid/) – HyperCore order book, fills, and L4 book diffs
+- [Robinhood Data Export](/docs/cloud/robinhood/) – Robinhood Chain trades, transfers, and tokenized equities
 - [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) – Real-time blockchain data streams
 
 <FAQ

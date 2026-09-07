@@ -1402,6 +1402,8 @@ const sidebars = {
         "cloud/bitcoin",
         "cloud/bsc",
         "cloud/ripple",
+        "cloud/hyperliquid",
+        "cloud/robinhood",
         {
           type: "category",
           label: "Examples",
