@@ -1,93 +1,59 @@
 ---
 sidebar_position: 1
-title: "BSC Transaction Balance Tracker"
-description: "BSC Transaction Balance Tracker: stream BNB Chain balance changes with reason codes using Bitquery GraphQL subscriptions."
+title: "BSC Transaction Balance Tracker: Balances Before and After a Transaction"
+description: "Stream and query BNB Chain balance changes with Bitquery GraphQL: every address a transaction touched, one wallet's BNB and USDT, pool reserves and supply."
+keywords:
+  - BSC transaction balance tracker
+  - BNB Chain balance changes API
+  - BSC wallet balance stream
+  - BSC pool reserves GraphQL
+  - BSC token supply API
 ---
 
-# BSC Transaction Balance Tracker
+import FAQ from "@site/src/components/FAQ";
 
-The BSC Transaction Balance Tracker API provides real-time balance updates for all addresses involved in transactions on the BSC blockchain, including detailed information about the reason for each balance change.
+# BSC Transaction Balance Tracker: Balances Before and After a Transaction
 
-## Subscribe to All Transaction Balances
+The `TransactionBalances` cube records, for each transaction on BNB Chain, every address whose balance changed and the balance before and after, in BNB, BEP-20 tokens and NFTs. A wallet tracker, a fee monitor and a pool reserve feed all come from the same rows. Native rows carry a reason code that says why the balance moved: 10 for a transfer, 6 and 7 for gas bought and returned, 5 for the fee credited to the block producer, 12 and 13 for self-destructs, 0 when no specific reason applies. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The cube covers the recent realtime window only, so queries carry a `limit` and, for wide filters, a time window.
 
-This subscription provides real-time balance updates for all addresses involved in transactions on the BSC network.
-Try the API [here](https://ide.bitquery.io/Subscribe-to-All-Transaction-Balances-bsc).
+## Stream one address
 
-```graphql
-subscription {
-  EVM(network: bsc) {
-    TransactionBalances {
-      Block {
-        Time
-      }
-      TokenBalance {
-        Currency {
-          Symbol
-          HasURI
-          SmartContract
-        }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
-        PostBalanceInUSD
-      }
-      Transaction {
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Subscribe to Transaction Balances for a Specific Address
-
-This subscription filters transaction balances for a specific address. Try the API [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-bsc).
+BNB Chain produces so many balance rows that a stream over the whole network, one token or a broad reason code does not deliver in practice; filter on an address, or use the reason code 5 stream on the [MEV balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker), which is keyed to one address. The example is a busy exchange wallet, so rows arrive within seconds; a quiet wallet streams only when it transacts. Saved stream [here](https://ide.bitquery.io/Subscribe-to-Transaction-Balances-for-a-Specific-Address-bsc).
 
 ```graphql
 subscription {
   EVM(network: bsc) {
     TransactionBalances(
-      where: { TokenBalance: { Address: { is: "0xYourAddressHere" } } }
+      where: { TokenBalance: { Address: { is: "0x238a358808379702088667322f80ac48bad5e6c4" } } }
     ) {
       Block {
+        Number
         Time
       }
       TokenBalance {
-        Currency {
-          Symbol
-          HasURI
-          SmartContract
-        }
+        BalanceChangeReasonCode
         PreBalance
         PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
         PostBalanceInUSD
+        Currency {
+          Symbol
+          SmartContract
+          Native
+        }
       }
       Transaction {
         Hash
+        From
+        To
       }
     }
   }
 }
 ```
 
-## Latest native balance of an address
+## Latest BNB balance of an address
 
-This API gives you latest balance of a specific address (here in example `0x238a358808379702088667322f80ac48bad5e6c4`) for the native currency. Try it out [here](https://ide.bitquery.io/Latest-native-balance-of-an-address-bsc).
+The newest native row for the address; `PostBalance` is the balance after that transaction. Saved query [here](https://ide.bitquery.io/latest-native-balance-of-an-address-bsc).
 
 ```graphql
 {
@@ -106,22 +72,9 @@ This API gives you latest balance of a specific address (here in example `0x238a
         Time
       }
       TokenBalance {
-        Currency {
-          Symbol
-          HasURI
-          SmartContract
-        }
-        PreBalance
         PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
         PostBalanceInUSD
+        BalanceChangeReasonCode
       }
       Transaction {
         Hash
@@ -131,9 +84,9 @@ This API gives you latest balance of a specific address (here in example `0x238a
 }
 ```
 
-## Latest balance of an address for a specific token
+## Latest balance of an address in one token
 
-This API gives you latest balance of a specific address (here in example `0x238a358808379702088667322f80ac48bad5e6c4`) for a specific token (here we have taken example of USDC `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`). Try it out [here](https://ide.bitquery.io/Latest-balance-of-an-address-for-a-specific-token-bsc).
+The same query with the token contract in place of the native flag. The example is USDT on BNB Chain, `0x55d398326f99059fF775485246999027B3197955`. Saved query [here](https://ide.bitquery.io/latest-balance-of-an-address-for-a-specific-token-bsc).
 
 ```graphql
 {
@@ -145,7 +98,7 @@ This API gives you latest balance of a specific address (here in example `0x238a
         TokenBalance: {
           Address: { is: "0x238a358808379702088667322f80ac48bad5e6c4" }
           Currency: {
-            SmartContract: { is: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" }
+            SmartContract: { is: "0x55d398326f99059fF775485246999027B3197955" }
           }
         }
       }
@@ -154,22 +107,12 @@ This API gives you latest balance of a specific address (here in example `0x238a
         Time
       }
       TokenBalance {
+        PostBalance
+        PostBalanceInUSD
         Currency {
           Symbol
-          HasURI
-          SmartContract
+          Name
         }
-        PreBalance
-        PostBalance
-        Address
-        BalanceChangeReasonCode
-        TotalSupplyInUSD
-        TotalSupply
-        TokenOwnership {
-          Owns
-          Id
-        }
-        PostBalanceInUSD
       }
       Transaction {
         Hash
@@ -179,40 +122,43 @@ This API gives you latest balance of a specific address (here in example `0x238a
 }
 ```
 
-## Latest liquidity of EVM Pools
+An address that has not moved the token inside the realtime window has no row here; use the [Balances cube](/docs/cubes/balances-cube) for a balance that does not depend on recent activity.
 
-This API provides the latest liquidity information for multiple BSC pools in one API call. The example shows results for two pool addresses using a query updated to support multiple addresses. You can try 500 as well, just put them as a list in `where` clause. Try it out [here](https://ide.bitquery.io/latest-liquidity-of-multiple-BSC-pools).
+## Latest reserves of a pool
+
+A pool is an address like any other, so its token balances are its reserves. `limitBy` on the token contract keeps the newest row per token, and the time window keeps the query fast on a busy pool. The example is the PancakeSwap v3 WBNB/USDT pool. Saved query [here](https://ide.bitquery.io/latest-liquidity-of-a-bsc-pool).
 
 ```graphql
 {
   EVM(network: bsc) {
     TransactionBalances(
-      limitBy: { by: TokenBalance_Address, count: 2 }
-      orderBy: { descendingByField: "TokenBalance_PostBalanceInUSD" }
+      limit: { count: 2 }
+      limitBy: { by: TokenBalance_Currency_SmartContract, count: 1 }
+      orderBy: { descending: Block_Time }
       where: {
-        TokenBalance: {
-          Address: { in: ["0xYourPoolAddress1", "0xYourPoolAddress2"] }
-        }
+        TokenBalance: { Address: { is: "0x36696169C63e42cd08ce11f5deeBbCeBae652050" } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
     ) {
+      Block {
+        Time
+      }
       TokenBalance {
         Currency {
           Symbol
-          HasURI
           SmartContract
         }
-        PostBalance(maximum: Block_Time)
-        PostBalanceInUSD(maximum: Block_Time)
-        Address
+        PostBalance
+        PostBalanceInUSD
       }
     }
   }
 }
 ```
 
-## Latest Supply and Marketcap of a specific token on BSC
+## Latest supply and market cap of a token
 
-This API gives you latest Supply and Marketcap of a token on BSC (here as example we have taken a BEP-20 token `0x55d398326f99059ff775485246999027b3197955`). Try it out [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-bsc).
+Token rows carry `TotalSupply` and `TotalSupplyInUSD` as of that transaction, so the newest row for a token gives its supply and on-chain market cap. The example is CAKE. Saved query [here](https://ide.bitquery.io/Total-Supply-and-onchain-Marketcap-of-a-specific-token-bsc).
 
 ```graphql
 {
@@ -222,26 +168,44 @@ This API gives you latest Supply and Marketcap of a token on BSC (here as exampl
       orderBy: { descending: Block_Time }
       where: {
         TokenBalance: {
-          Currency: {
-            SmartContract: { is: "0x55d398326f99059ff775485246999027b3197955" }
-          }
+          Currency: { SmartContract: { is: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82" } }
         }
       }
     ) {
       Block {
         Time
-        Number
       }
       TokenBalance {
         Currency {
           Symbol
-          HasURI
-          SmartContract
+          Name
         }
-        TotalSupplyInUSD
         TotalSupply
+        TotalSupplyInUSD
       }
     }
   }
 }
 ```
+
+## Which fields each currency type carries
+
+- **BNB:** `BalanceChangeReasonCode`, `PreBalance`, `PostBalance`, `PostBalanceInUSD`.
+- **BEP-20:** `PostBalance`, `PostBalanceInUSD`, `TotalSupply`, `TotalSupplyInUSD`; no pre-balance or reason code.
+- **NFTs:** `PostBalance` and `TokenOwnership`; no USD values.
+
+<FAQ
+  items={[
+    { q: "What is the BSC transaction balance tracker?", a: "A cube that records, per transaction, every address whose balance changed with the balance before and after. It covers BNB, BEP-20 tokens and NFTs and can be queried or streamed with the same filters." },
+    { q: "Which reason codes appear on BNB Chain?", a: "In live data: 0, 5, 6, 7, 10, 12 and 13. The mining codes 1 and 2 never appear because BNB Chain has validators, not miners; see the miner and MEV balance tracker pages for what block producers earn." },
+    { q: "How do I get a wallet's current balance if it has been idle?", a: "TransactionBalances only has rows for addresses that transacted inside the realtime window. Use the Balances cube for a balance that does not depend on recent activity." },
+    { q: "Can I read pool reserves from this cube?", a: "Yes. Filter on the pool address with a short time window and use limitBy on the token contract to get the newest balance per token; those are the reserves after the pool's latest transaction." },
+  ]}
+/>
+
+## Related pages
+
+- [BSC transaction balance tracker overview](/docs/blockchain/BSC/transaction-balance-tracker/)
+- [BSC gas balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-gas-balance-tracker)
+- [BSC MEV balance tracker](/docs/blockchain/BSC/transaction-balance-tracker/bsc-mev-balance-tracker)
+- [Balances and Holders cubes](/docs/cubes/balances-cube)
