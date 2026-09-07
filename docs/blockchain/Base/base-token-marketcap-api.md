@@ -232,7 +232,7 @@ subscription {
 }
 ```
 
-## Treat rankings as a screen, not a league table
+## Why rankings need bounds
 
 Market cap here is on-chain supply times an on-chain price, and Base has thousands of launchpad tokens with enormous supplies and a few dollars of trades in one thin pool. A raw "top tokens by market cap" over the cube is led by them. Rank inside a list you trust, as the watchlist query does, or bound the ranking with `Volume: { Usd: { gt: ... } }` and `Supply: { MarketCap: { lt: ... } }`; the saved [top tokens by market cap](https://ide.bitquery.io/Top-Tokens-by-Market-Cap-on-Base) query shows the bounded form.
 
