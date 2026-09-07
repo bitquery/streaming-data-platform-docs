@@ -877,10 +877,8 @@ const sidebars = {
           type: "category",
           label: "Cross-Chain",
           link: {
-            type: "generated-index",
-            title: "Cross-Chain API",
-            description:
-              "Query blockchain data across multiple chains in a single Bitquery API.",
+            type: "doc",
+            id: "examples/cross-chain/index",
           },
           items: ["examples/cross-chain/cross-chain-api"],
         },
