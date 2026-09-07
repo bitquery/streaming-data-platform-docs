@@ -1,6 +1,7 @@
 ---
 sidebar_position: 4
 title: "BSC MEV Balance Tracker: Priority Fees and Block Producer Income"
+sidebar_label: "BSC MEV Balance Tracker"
 description: "Track MEV on BNB Chain from balance changes with Bitquery GraphQL: stream fee credits, rank the largest tips, follow one bot and see fee income per block."
 keywords:
   - BSC MEV balance tracker
