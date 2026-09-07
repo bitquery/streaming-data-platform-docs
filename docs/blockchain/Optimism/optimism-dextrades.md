@@ -1,48 +1,36 @@
 ---
 sidebar_position: 2
-title: "Optimism DEX Trades API"
-description: "Optimism DEX Trades API: get Optimism DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Works with WebSocket live subscriptions."
+title: "Optimism DEX Trades API: Uniswap, Velodrome and Every Swap on Optimism"
+sidebar_label: "Optimism DEX Trades API"
+description: "Optimism DEX data with Bitquery GraphQL: live swaps with trader and USD, which DEXs trade, busiest pairs, top traders, token prices and top tokens."
+keywords:
+  - Optimism DEX trades API
+  - Velodrome API
+  - Uniswap Optimism trades
+  - Optimism token price API
+  - top traders Optimism
 ---
-# Optimism DEX Trades API
 
-:::tip Need real-time Optimism DEX data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API** (filter with `Pair.Market.Network: Optimism`). Use this page when you need **historical Optimism data older than ~30 days** (with `dataset: combined` or `archive`), raw per-swap detail, or call / event context.
-:::
+import FAQ from "@site/src/components/FAQ";
 
-If you were using Optimism RPC till now to get data, forget about it.
+# Optimism DEX Trades API: Uniswap, Velodrome and Every Swap on Optimism
 
-Our Optimism real time streams are perfect alternative for Optimism web3 subscribe.
+Optimism's DEX trading runs through Uniswap v3, which carries most of the swaps, Uniswap v4, Velodrome, whose pools report under the protocol name `aerodrome_v1` because they share that code base, v2-style pairs, and Balancer. Bitquery indexes all of them into the chain cubes, `DEXTrades` for one row per swap and `DEXTradeByTokens` for one row per swap per token, and into the Trading cube, which adds the trader, USD price, market cap and supply on every row for the last month or so. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. Two Optimism details shape the examples: native USDC is `0x0b2c639c533813f4aa9d7837caf62653d097ff85` and the bridged USDC.e is `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, and a few swaps in thin pools carry absurd USD values, so every USD sum here caps a single trade with `Side: { AmountInUSD: { lt: "10000000" } }`.
 
-In this section we will see how to get Optimism DEX trades information using our GraphQL APIs.
+## Live swaps with trader and USD
 
-## Live DEX swap stream (Optimism) {#crypto-trades-live-stream}
-
-[Crypto Trades API](/docs/trading/crypto-trades-api/trades-api): one row per swap, with USD and supply. Filter **`Pair.Market.Network: Optimism`**. [When to use this vs chain DEX APIs](/docs/cubes/dextrades-dextradebytokens-trading-trades).
-
-Run this subscription in the [Bitquery IDE](https://ide.bitquery.io) (open a new tab, paste the subscription below, and run).
+The [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api) of the Trading cube, filtered to the Optimism market. Each message is one swap with the side, the trader, both amounts in USD and the token's supply. Paste it into the [IDE](https://ide.bitquery.io) to run.
 
 ```graphql
 subscription {
   Trading {
     Trades(where: { Pair: { Market: { Network: { is: "Optimism" } } } }) {
-      Side
-      Supply {
-        MaxSupply
-        TotalSupply
-        FullyDilutedValuationUsd
-        CirculatingSupply
-        MarketCap
+      Block {
+        Time
       }
+      Side
       Trader {
         Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-        Hash
-        Index
       }
       Amounts {
         Base
@@ -52,158 +40,112 @@ subscription {
         Base
         Quote
       }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
       Pair {
         Currency {
+          Symbol
           Id
-          Name
+        }
+        QuoteCurrency {
           Symbol
         }
         Market {
+          Protocol
           Address
-          Program
-          Network
-        }
-        QuoteCurrency {
-          Id
-          Name
-          Symbol
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
         }
       }
-      Price
-      PriceInUsd
+      Supply {
+        MarketCap
+      }
     }
   }
 }
 ```
 
-## Top Trending Pairs on Optimism
+## Which DEXs trade on Optimism
 
-[This](https://ide.bitquery.io/trending-pairs-on-optimism) query returns the top trending trading pairs on Optimism based on the `Trade Volume`, and returns info like unique buyers and sellers, number of markets where the pair exist, latest price and price at a given time and much more.
-
-Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextradebytokens-trading-trades) to get a better understanding on when to use which cube.
+Group the last day by protocol. Saved query [here](https://ide.bitquery.io/trending-pairs-on-optimism).
 
 ```graphql
-query pairs(
-  $min_count: String
-  $network: evm_network
-  $time_ago: DateTime
-  $time_10min_ago: DateTime
-  $time_1h_ago: DateTime
-  $time_3h_ago: DateTime
-  $weth: String!
-  $usdc: String!
-  $usdt: String!
-  $usdc2: String!
-) {
-  EVM(network: $network) {
+{
+  EVM(network: optimism) {
     DEXTradeByTokens(
       where: {
-        Block: { Time: { since: $time_ago } }
-        any: [
-          { Trade: { Side: { Currency: { SmartContract: { is: $usdt } } } } }
-          {
-            Trade: {
-              Side: { Currency: { SmartContract: { is: $usdc } } }
-              Currency: { SmartContract: { notIn: [$usdt] } }
-            }
-          }
-          {
-            Trade: {
-              Side: { Currency: { SmartContract: { is: $usdc2 } } }
-              Currency: { SmartContract: { notIn: [$usdt, $usdc] } }
-            }
-          }
-          {
-            Trade: {
-              Side: { Currency: { SmartContract: { is: $weth } } }
-              Currency: { SmartContract: { notIn: [$usdc, $usdt, $usdc2] } }
-            }
-          }
-          {
-            Trade: {
-              Side: {
-                Currency: { SmartContract: { notIn: [$usdc, $usdt, $weth] } }
-              }
-              Currency: {
-                SmartContract: { notIn: [$usdc, $usdc2, $usdt, $weth] }
-              }
-            }
-          }
-        ]
+        Trade: { Side: { AmountInUSD: { lt: "10000000" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      orderBy: { descendingByField: "usd" }
-      limit: { count: 100 }
+      orderBy: { descendingByField: "trades" }
+      limit: { count: 20 }
+    ) {
+      Trade {
+        Dex {
+          ProtocolFamily
+          ProtocolName
+        }
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      traders: uniq(of: Transaction_From)
+    }
+  }
+}
+```
+
+## The busiest pairs
+
+Tokens traded against WETH, USDC or USDC.e over the last day, ranked by USD volume, with distinct buyers and sellers and the latest price. [DEXrabbit](https://dexrabbit.bitquery.io/optimism) shows the same table live.
+
+```graphql
+{
+  EVM(network: optimism) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Side: {
+            AmountInUSD: { lt: "10000000" }
+            Currency: {
+              SmartContract: {
+                in: [
+                  "0x4200000000000000000000000000000000000006"
+                  "0x0b2c639c533813f4aa9d7837caf62653d097ff85"
+                  "0x7f5c764cbc14f9669b88837ca1490cca17c31607"
+                ]
+              }
+            }
+          }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 30 }
     ) {
       Trade {
         Currency {
           Symbol
-          Name
           SmartContract
-          ProtocolName
         }
         Side {
           Currency {
             Symbol
-            Name
-            SmartContract
-            ProtocolName
           }
         }
-        price_last: PriceInUSD(maximum: Block_Number)
-        price_10min_ago: PriceInUSD(
-          maximum: Block_Number
-          if: { Block: { Time: { before: $time_10min_ago } } }
-        )
-        price_1h_ago: PriceInUSD(
-          maximum: Block_Number
-          if: { Block: { Time: { before: $time_1h_ago } } }
-        )
-        price_3h_ago: PriceInUSD(
-          maximum: Block_Number
-          if: { Block: { Time: { before: $time_3h_ago } } }
-        )
       }
-      dexes: uniq(of: Trade_Dex_OwnerAddress)
-      amount: sum(of: Trade_Side_Amount)
-      usd: sum(of: Trade_Side_AmountInUSD)
-      sellers: uniq(of: Trade_Seller)
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
       buyers: uniq(of: Trade_Buyer)
-      count(selectWhere: { ge: $min_count })
+      sellers: uniq(of: Trade_Seller)
+      price: Trade {
+        PriceInUSD(maximum: Block_Time)
+      }
     }
   }
 }
 ```
 
-The example of this could be seen on the [DEXRabbit](https://dexrabbit.bitquery.io/optimism).
+![Trending pairs on Optimism](/img/dexrabbit/optimism_trending_pairs.png)
 
-![Trending Pairs on Optimism](/img/dexrabbit/optimism_trending_pairs.png)
+## Latest swaps, live
 
-## Subscribe to Latest Optimism Trades
-
-This example uses the chain-specific **DEXTrades** cube via `EVM(network: optimism) { DEXTrades }` (pool-side Buy/Sell; see [DEXTrades cube](/docs/cubes/dextrades)). USD can be weak on thin pools. For trader + USD swap rows, use the [stream at the top](#crypto-trades-live-stream).
-
-You can find the query [here](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
+The raw `DEXTrades` stream for the chain: pool-side buy and sell with USD on both, the protocol and the transaction. Saved stream [here](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket).
 
 ```graphql
 subscription {
@@ -215,245 +157,179 @@ subscription {
       Trade {
         Dex {
           ProtocolName
-          ProtocolFamily
           SmartContract
         }
         Buy {
-          Amount
-          Buyer
-          Seller
           Currency {
-            Decimals
-            Fungible
-            HasURI
-            Name
-            ProtocolName
-            SmartContract
             Symbol
           }
-          OrderId
+          Amount
+          AmountInUSD
+          PriceInUSD
         }
         Sell {
-          Buyer
-          Seller
           Currency {
-            Decimals
-            Fungible
-            HasURI
-            Name
-            ProtocolName
-            SmartContract
             Symbol
           }
+          Amount
+          AmountInUSD
         }
+      }
+      Transaction {
+        Hash
+        From
       }
     }
   }
 }
-
 ```
 
-## Get Top Traders on Optimism
+## Top traders on Optimism
 
-[This](https://ide.bitquery.io/top-traders-on-optimism) query returns the top traders om Optimism chain based on the number of unique tokens held and number of trades. This also provides info like `Buyer Address` and `Seller Address`.
+Rank by `Transaction.From` over the last day. Saved query [here](https://ide.bitquery.io/top-traders-on-optimism).
 
 ```graphql
-query topTraders($network: evm_network, $time_ago: DateTime) {
-  EVM(network: $network) {
+{
+  EVM(network: optimism) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "trades" }
-      limit: { count: 100 }
-      where: { Block: { Time: { since: $time_ago } } }
-    ) {
-      Trade {
-        Seller
-        Buyer
+      where: {
+        Trade: { Side: { AmountInUSD: { lt: "10000000" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      trades: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 50 }
+    ) {
+      Transaction {
+        From
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
       tokens: uniq(of: Trade_Currency_SmartContract)
     }
   }
 }
 ```
 
-You can checkout a completed product using this info on [DEXRabbit](https://dexrabbit.bitquery.io/optimism/trader).
+![Top traders on Optimism](/img/dexrabbit/optimism_top_traders.png)
 
-![Top Traders on Optimism](/img/dexrabbit/optimism_top_traders.png)
+## Top traders of one pair
 
-## Get Top Traders for a Pair on Optimism
-
-[This](https://ide.bitquery.io/top-traders-for-wld-usdc-pair) query returns the top traders of a pair based on the trade volume in USD. For this example we are taking the pair of WLD `0xdc6ff44d5d932cbd77b52e5612ba0529dc6226f1` and USDC `0x0b2c639c533813f4aa9d7837caf62653d097ff85`, including amount sold, amount bought, volume and volume in USD.
+Fix the token and the quote. The example is WETH against native USDC over the last day; the saved query used WLD/USDC, a quieter pair that needs a week. Saved query [here](https://ide.bitquery.io/top-traders-for-wld-usdc-pair).
 
 ```graphql
-query pairTopTraders(
-  $network: evm_network
-  $token: String
-  $base: String
-  $time_ago: DateTime
-) {
-  EVM(network: $network) {
+{
+  EVM(network: optimism) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "volumeUsd" }
-      limit: { count: 100 }
       where: {
         Trade: {
-          Currency: { SmartContract: { is: $base } }
+          Currency: { SmartContract: { is: "0x4200000000000000000000000000000000000006" } }
           Side: {
-            Amount: { gt: "0" }
-            Currency: { SmartContract: { is: $token } }
+            AmountInUSD: { lt: "10000000" }
+            Currency: { SmartContract: { is: "0x0b2c639c533813f4aa9d7837caf62653d097ff85" } }
           }
         }
-        Block: { Time: { since: $time_ago } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 20 }
     ) {
-      Trade {
-        Buyer
+      Transaction {
+        From
       }
-      bought: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sold: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
-      volume: sum(of: Trade_Amount)
-      sideVolume: sum(of: Trade_Side_Amount)
+      trades: count
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
     }
   }
 }
 ```
 
-An example for the same could be seen in the [DEXRabbit](https://dexrabbit.bitquery.io/optimism/pair/0xdc6ff44d5d932cbd77b52e5612ba0529dc6226f1/0x0b2c639c533813f4aa9d7837caf62653d097ff85#pair_top_traders) as shown below.
+![Top traders for a pair](/img/dexrabbit/optimism_top_pair_traders.png)
 
-![Top Traders for a Pair](/img/dexrabbit/optimism_top_pair_traders.png)
+## Latest price of a token
 
-## Subscribe to Latest Price of a Token in Real-time
-
-This query provides real-time updates on price of WETH `0x4200000000000000000000000000000000000006` in terms of USD Coin `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, including details about the DEX, market, and order specifics. Find the query [here](https://ide.bitquery.io/Price-of-WETH-in-terms-of-USDC-on-Optimism#)
+The newest `DEXTradeByTokens` row for a token carries its price in USD and the quote it traded against; the example is WBTC. For a price in a specific quote, filter the quote under `Side` as well, as in the WETH in USDC.e example. Saved queries: [WBTC in USD](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism), [WETH in USDC.e](https://ide.bitquery.io/Price-of-WETH-in-terms-of-USDC-on-Optimism).
 
 ```graphql
-subscription {
+{
   EVM(network: optimism) {
-    DEXTrades(
-      where: {Trade: {Sell: {Currency: {SmartContract: {is: "0x4200000000000000000000000000000000000006"}}}, Buy: {Currency: {SmartContract: {is: "0x7f5c764cbc14f9669b88837ca1490cca17c31607"}}}}}
+    DEXTradeByTokens(
+      where: {
+        Trade: { Currency: { SmartContract: { is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095" } } }
+      }
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
     ) {
       Block {
         Time
       }
       Trade {
-        Buy {
-          Amount
-          Buyer
-          Seller
-          Price_in_terms_of_sell_currency: Price
-          Currency {
-            Name
-            Symbol
-            SmartContract
-          }
-        }
-        Sell {
-          Amount
-          Buyer
-          Seller
-          Price_in_terms_of_buy_currency: Price
-          Currency {
-            Symbol
-            SmartContract
-            Name
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-## Top Trending Tokens on Optimism
-
-[This](https://ide.bitquery.io/top-tokens-on-optimism) query returns the top trending token info based on the number of trades and returns values like number of unique buyers, sellers, markets, pools along with volume in USD.
-
-```graphql
-query topTokens($network: evm_network, $time_ago: DateTime!) {
-  EVM(network: $network) {
-    DEXTradeByTokens(
-      orderBy: { descendingByField: "count" }
-      limit: { count: 100 }
-      where: { Block: { Time: { since: $time_ago } } }
-    ) {
-      Trade {
-        Currency {
-          Symbol
-          SmartContract
-          Fungible
-          Name
-        }
-        Amount(maximum: Block_Number)
-        AmountInUSD(maximum: Block_Number)
-      }
-      pairs: uniq(of: Trade_Side_Currency_SmartContract)
-      dexes: uniq(of: Trade_Dex_SmartContract)
-      amount: sum(of: Trade_Amount)
-      usd: sum(of: Trade_AmountInUSD)
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Sender)
-      count
-    }
-  }
-}
-```
-
-An example of the utilisation of this data could be seen on [DEXRabbit](https://dexrabbit.bitquery.io/optimism/token).
-
-![Top Tokens on Optimism](/img/dexrabbit/optimism_top_tokens.png)
-
-## Latest USD Price of a Token
-
-The below query retrieves the USD price of a token on Optimism by setting `SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}` . Check the field `PriceInUSD` for the USD value. You can access the query [here](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism#).
-
-```graphql
-subscription {
-  EVM(network: optimism) {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}}}}
-    ) {
-      Transaction {
-        Hash
-      }
-      Trade {
-        Buyer
-        AmountInUSD
-        Amount
-        Price
         PriceInUSD
-        Seller
-        Currency {
-          Name
-          Symbol
-          SmartContract
+        Price
+        Side {
+          Currency {
+            Symbol
+          }
         }
         Dex {
-          ProtocolFamily
-          SmartContract
           ProtocolName
-        }
-        Side {
-          Amount
-          AmountInUSD
-          Buyer
-          Seller
-          Currency {
-            Name
-            SmartContract
-            Symbol
-          }
         }
       }
     }
   }
 }
-
 ```
+
+Change `query` to `subscription` and drop `limit` and `orderBy` to stream each new price; WBTC trades often enough on Optimism for that to update every few minutes.
+
+## Top tokens by trades
+
+Tokens ranked by number of trades over the last day, with buyers, sellers, pools and volume. Saved query [here](https://ide.bitquery.io/top-tokens-on-optimism).
+
+```graphql
+{
+  EVM(network: optimism) {
+    DEXTradeByTokens(
+      where: {
+        Trade: { Side: { AmountInUSD: { lt: "10000000" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      orderBy: { descendingByField: "trades" }
+      limit: { count: 50 }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          SmartContract
+        }
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      pools: uniq(of: Trade_Dex_SmartContract)
+    }
+  }
+}
+```
+
+![Top tokens on Optimism](/img/dexrabbit/optimism_top_tokens.png)
+
+<FAQ
+  items={[
+    { q: "Which DEXs does Bitquery index on Optimism?", a: "Uniswap v2, v3 and v4, Velodrome, which reports as aerodrome_v1, Balancer and the smaller venues. The protocol query on this page lists whatever traded in the window." },
+    { q: "How do I get Velodrome trades on Optimism?", a: "Filter Trade.Dex.ProtocolName on aerodrome_v1 in DEXTrades or DEXTradeByTokens; Velodrome and Aerodrome share a code base and the cube uses that name on both chains." },
+    { q: "Why cap AmountInUSD in the queries?", a: "A swap in a pool with almost no liquidity can carry a nonsense USD value that swamps any sum. Keeping single trades under ten million dollars removes those rows from rankings." },
+    { q: "How do I get the price of a token on Optimism?", a: "Take the newest DEXTradeByTokens row for the token contract and read PriceInUSD, or filter the quote currency under Side for the price in that quote." },
+    { q: "Where do the trader addresses come from?", a: "Transaction.From is the account that sent the swap. The Trading cube's Trader field is the same idea with USD and market cap attached." },
+  ]}
+/>
+
+## Related pages
+
+- [Optimism API hub](/docs/blockchain/Optimism/)
+- [Uniswap v4 on Optimism](/docs/blockchain/Optimism/uniswap-v4-api)
+- [Optimism transfers API](/docs/blockchain/Optimism/optimism-transfers)
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)
+- [DEXTrades vs DEXTradeByTokens vs Trades](/docs/cubes/dextrades-dextradebytokens-trading-trades)
