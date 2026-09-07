@@ -107,7 +107,7 @@ subscription {
 
 ## The deepest pool for a token at a given tolerance
 
-Which pool takes the largest WETH sell within 0.5%? Keep the newest row per pool with `limitBy`, fix the level, and compare `AtoB.MaxAmountIn` across pools that list WETH first. On Arbitrum the Uniswap v3 WETH/USDC pool usually leads by a wide margin. Repeat with WETH under `CurrencyB` and read `BtoA` for pools that list it second.
+Which pool takes the largest WETH sell within 0.5%? Keep the newest row per pool with `limitBy`, fix the level, and compare `AtoB.MaxAmountIn` across pools that list WETH first. On Arbitrum the large WETH pools against USDC and USDT0 lead. Repeat with WETH under `CurrencyB` and read `BtoA` for pools that list it second.
 
 ```graphql
 {
@@ -166,7 +166,7 @@ The `arbitrum.dexpools.proto` Kafka topic carries the same tables as protobuf me
     { q: "How do I check price impact before a trade on Arbitrum?", a: "Query DEXPoolSlippages for the pool and read the row for your tolerance. If your size is below MaxAmountIn at that level, the trade stays within it, and MinAmountOut is the least you receive." },
     { q: "Which slippage levels are available?", a: "Seven fixed levels per update: 0, 10, 50, 100, 200, 500 and 1000 basis points. Filter on Price.SlippageBasisPoints to keep one." },
     { q: "How do I find the deepest pool for a token on Arbitrum?", a: "Fix the slippage level, filter the token as CurrencyA, keep the latest row per pool with limitBy, and compare AtoB.MaxAmountIn. Run it again with the token as CurrencyB and compare BtoA." },
-    { q: "Which pools have slippage tables on Arbitrum?", a: "The same set as the liquidity cube: Uniswap v2, v3 and v4 pools and PancakeSwap v3 pools. Other Arbitrum protocols are not in this cube." },
+    { q: "Which pools have slippage tables on Arbitrum?", a: "The same set as the liquidity cube: Uniswap v2, v3 and v4 pools and PancakeSwap v3 pools. Balancer, Curve, Fluid and DODO pools have no tables here." },
     { q: "Is there history for slippage data?", a: "No. The cube holds the recent realtime window and has no archive. Subscribe, or consume the Kafka topic, and store the rows you need." },
   ]}
 />
