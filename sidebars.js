@@ -329,10 +329,8 @@ const sidebars = {
                   type: "category",
                   label: "Topics",
                   link: {
-                    type: "generated-index",
-                    title: "gRPC Solana Topics",
-                    description:
-                      "Docs on how to use Bitquery Solana gRPC topics",
+                    type: "doc",
+                    id: "grpc/solana/topics/index",
                   },
                   items: [
                     "grpc/solana/topics/dextrades",
