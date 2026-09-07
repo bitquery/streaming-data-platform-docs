@@ -52,17 +52,17 @@ Meteora runs four trading programs on Solana, each with its own Bitquery page:
 | DAMM v1, the legacy Dynamic AMM | `Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB` | `amm` | [Meteora DYN API](/docs/blockchain/Solana/Meteora-DYN-API/) |
 | Dynamic Bonding Curve, token launches that graduate to a DAMM pool | `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN` | `dynamic_bonding_curve` | [Meteora DBC API](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/) |
 
-Instruction names in Bitquery follow the Anchor IDL in camelCase: Meteora's `initialize_lb_pair2` appears as `initializeLbPair2` and `swap_exact_out2` as `swapExactOut2`. The trade cubes decode every DLMM swap variant (`swap`, `swap2`, `swapExactOut`, `swapExactOut2`, `swapWithPriceImpact`, `swapWithPriceImpact2`), including swaps executed as inner instructions of aggregator routes, so filter trades by program address rather than by method.
+Bitquery shows instruction names in camelCase, so the snake_case names in Meteora's IDL change shape: `initialize_lb_pair2` appears as `initializeLbPair2` and `swap_exact_out2` as `swapExactOut2`. The trade cubes decode DLMM `swap` and `swap2` instructions wherever they run, including as inner instructions of aggregator routes through Jupiter and other routers, so filter trades by program address rather than by method.
 
 ## Does Meteora have an API?
 
-Yes, for pool-level data. Meteora publishes a free REST [DLMM Data API](https://docs.meteora.ag/developer-guides/dlmm/api-reference/overview) at `https://dlmm.datapi.meteora.ag`, limited to 30 requests a second with no key, covering pools and pool groups, per-pool OHLCV and volume history, wallet portfolios and positions, limit orders and protocol stats. It has no per-swap trade endpoint, no wallet-level trade history and no streaming. The older `dlmm-api.meteora.ag` host and its `/pair/all` route have been superseded by it. The queries on this page read the same on-chain activity through Bitquery: every swap as a row, new pools the moment they are created, reserves after every liquidity change, and history back to mid-2024.
+Yes, for pool-level data. Meteora publishes a free REST [DLMM Data API](https://docs.meteora.ag/developer-guides/dlmm/api-reference/overview) at `https://dlmm.datapi.meteora.ag`, limited to 30 requests a second with no key, covering pools and pool groups, per-pool OHLCV and volume history, wallet portfolios and positions, limit orders and protocol stats. It has no per-swap trade endpoint, no wallet-level trade history and no streaming. The older `dlmm-api.meteora.ag` host and its `/pair/all` route have been superseded by it. The queries on this page read the same on-chain activity through Bitquery: swaps as individual rows, new pools the moment they are created, reserves after every liquidity change, and history back to mid-2024.
 
 | | Meteora DLMM Data API | Bitquery Meteora DLMM API |
 | --- | --- | --- |
 | Access | REST, no key, 30 requests a second | GraphQL, WebSocket, Kafka and gRPC with an access token; seven-day free trial |
-| Pools | Paginated pool list with search and windowed sorting; single-pool state | New pools as they are created; reserves after every swap, deposit or withdrawal |
-| Trades | No per-swap endpoint | Every swap with trader, amounts, price, USD value and signature |
+| Pools | Paginated pool list with search and windowed sorting; single-pool state | New pools as they are created; reserves after each decoded swap, deposit or withdrawal |
+| Trades | No per-swap endpoint | Swaps as individual rows with trader, amounts, price, USD value and signature |
 | Candles and volume | Per-pool OHLCV and volume history | OHLC at any interval from `DEXTradeByTokens`; pre-built candles from `Trading.Pairs` |
 | Traders | Portfolio, positions and limit orders per wallet | Top traders, buy and sell volume per wallet, PnL from `Trading.Trades` |
 | History | Per-pool candles and volume; depth not stated in the reference | `DEXTradeByTokens` back to mid-2024 on the `archive` dataset; realtime cubes hold hours to days |
@@ -70,7 +70,7 @@ Yes, for pool-level data. Meteora publishes a free REST [DLMM Data API](https://
 
 ## Real-time Meteora DLMM trades
 
-This subscription streams every swap on the DLMM program as it lands, filtered by the program address `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`. `Trade.Buy.Currency` is what the trader received and `Trade.Sell.Currency` what the trader paid; `Trade.Market.MarketAddress` is the DLMM pool and `Transaction.Signer` the wallet that signed. `AmountInUSD` and `PriceInUSD` give the USD view of each side.
+This subscription streams DLMM swaps as they land, filtered by the program address `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`. `Trade.Buy.Currency` is what the trader received and `Trade.Sell.Currency` what the trader paid; `Trade.Market.MarketAddress` is the DLMM pool and `Transaction.Signer` the wallet that signed. `AmountInUSD` and `PriceInUSD` give the USD view of each side.
 
 You can run the subscription [in the Bitquery IDE](https://ide.bitquery.io/Real-time-trades-on-MeteoraDLMM-DEX-on-Solana).
 
@@ -143,7 +143,7 @@ For the lowest latency, the same trades are on the Kafka topic `solana.dextrades
 
 ## New Meteora DLMM pools in real time
 
-Every DLMM pool is an `LbPair` account created by an `initializeLbPair2` instruction, or by `initializeCustomizablePermissionlessLbPair2` for pools with custom parameters; the un-numbered variants are the legacy SPL-Token-only forms. This subscription emits one row per new pool. `Program.AccountNames` gives the meaning of each entry in `Instruction.Accounts` in order: the first account is the new pool address (`lbPair`), `tokenMintX` and `tokenMintY` are the two token mints, `reserveX` and `reserveY` the pool vaults, and `funder` the wallet that created the pool. Pool creation is far less frequent than swaps, so expect this stream to stay quiet for minutes at a time. To list recent pools instead, run the same filter as a query with `Block: { Time: { since_relative: { hours_ago: 24 } } }`.
+Every DLMM pool is an `LbPair` account created by one of the pool-creation instructions: `initializeLbPair2` for standard permissionless pools, `initializeCustomizablePermissionlessLbPair2` for pools with custom parameters, `initializePermissionLbPair` for permissioned launches, and the un-numbered legacy SPL-Token-only forms. This subscription emits one row per new pool. `Program.AccountNames` gives the meaning of each entry in `Instruction.Accounts` in order: the first account is the new pool address (`lbPair`), `tokenMintX` and `tokenMintY` are the two token mints, `reserveX` and `reserveY` the pool vaults, and `funder` the wallet that paid for the pool's creation. Pool creation is far less frequent than swaps, so expect this stream to stay quiet for minutes at a time. To list recent pools instead, run the same filter as a query with `Block: { Time: { since_relative: { hours_ago: 24 } } }`.
 
 You can test the subscription [in the Bitquery IDE](https://ide.bitquery.io/Track-Latest-created-pools-on-Meteora-DLMM_1).
 
@@ -160,6 +160,7 @@ subscription {
               in: [
                 "initializeLbPair2",
                 "initializeCustomizablePermissionlessLbPair2",
+                "initializePermissionLbPair",
                 "initializeLbPair",
                 "initializeCustomizablePermissionlessLbPair"
               ]
@@ -330,7 +331,7 @@ subscription {
 
 ## Meteora DLMM OHLC API
 
-One-minute candles for TRUMP/USDC on DLMM built from `DEXTradeByTokens`: `open` and `close` are the prices at the lowest and highest slot in each interval, `high` and `low` the extremes, `volume` the TRUMP amount and `volumeUsd` the USD value. `PriceAsymmetry: { lt: 0.1 }` drops trades whose two sides disagree on price by more than 10 percent, which removes most bad prints. Change `interval` for other timeframes and `limit` for more candles.
+One-minute candles for TRUMP/USDC on DLMM built from `DEXTradeByTokens`: `open` and `close` are the prices at the lowest and highest slot in each interval, `high` and `low` the extremes, `volume` the TRUMP amount and `volumeUsd` the USD value. `PriceAsymmetry: { lt: 0.1 }` drops trades whose two sides differ in USD value by more than 10 percent, which removes most bad prints. Change `interval` for other timeframes and `limit` for more candles.
 
 :::note
 Run this as a query, not a subscription: aggregates and time intervals do not work well over WebSocket.
@@ -435,7 +436,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Meteora-DLM
 
 ## Liquidity of a Meteora DLMM pool
 
-`DEXPools` records a pool's reserves after every swap, deposit or withdrawal. `Base.PostAmount` and `Quote.PostAmount` are the token balances after the event, `PostAmountInUSD` their USD value, and `ChangeAmount` the signed change the event caused. This query returns the latest state of the TRUMP/USDC DLMM pool.
+`DEXPools` records a pool's reserves after each swap, deposit or withdrawal it decodes. `Base.PostAmount` and `Quote.PostAmount` are the token balances after the event, `PostAmountInUSD` their USD value, and `ChangeAmount` the signed change the event caused. This query returns the latest state of the TRUMP/USDC DLMM pool.
 
 :::note
 `DEXPools` is a realtime-only cube: it keeps roughly the last 12 hours and has no archive dataset, so use it for current reserves and live liquidity events rather than TVL history. See [data coverage and retention](/docs/graphql/data-coverage-retention/).
@@ -648,7 +649,7 @@ query MyQuery {
 
 ## DLMM trades with USD price, market cap and supply
 
-The [Trades cube](/docs/trading/crypto-trades-api/trades-api/) (`Trading.Trades`) is trader-centric: one MEV-filtered row per swap, `Side` from the trader's point of view, `PriceInUsd`, `AmountsInUsd`, market cap and circulating supply on every row. Filter `Pair.Market.Protocol` `lb_clmm` to stream every DLMM swap in one subscription. See [DEXTrades vs DEXTradeByTokens vs Trading.Trades](/docs/cubes/dextrades-dextradebytokens-trading-trades/) for when to use which.
+The [Trades cube](/docs/trading/crypto-trades-api/trades-api/) (`Trading.Trades`) is trader-centric: one MEV-filtered row per swap, `Side` from the trader's point of view, `PriceInUsd`, `AmountsInUsd`, market cap and circulating supply on every row. Filter `Pair.Market.Protocol` `lb_clmm` to stream DLMM swaps across all pools in one subscription. See [DEXTrades vs DEXTradeByTokens vs Trading.Trades](/docs/cubes/dextrades-dextradebytokens-trading-trades/) for when to use which.
 
 ```graphql
 subscription {
