@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 title: "Query Fact Records: Return Raw Rows from a Bitquery Cube"
+sidebar_label: "Query Fact Records"
 description: "The simplest Bitquery query returns raw rows from a cube, such as the latest transactions with cost. When it fits, how to bound it, and when to aggregate."
 keywords:
   - Bitquery fact records
