@@ -16,6 +16,13 @@ RUN apk add --no-cache git
 
 COPY . .
 
+# Warn loudly when the history is missing: the build still succeeds, but
+# plugins/git-history.js then omits sitemap lastmod, TechArticle dates and
+# the last-updated footer rather than stamping every page with today.
+# Fix on the deploy side: run `git fetch --unshallow` before `docker build`.
+RUN if [ "$(git rev-parse --is-shallow-repository 2>/dev/null)" != "false" ]; then \
+      echo "WARNING: shallow or missing git history in the build context; page dates will be omitted"; fi
+
 RUN yarn install && yarn build
 
 
