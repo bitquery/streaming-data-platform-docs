@@ -1,5 +1,6 @@
 ---
 title: "Get the Latest Block Number with Bitquery Instead of eth_blockNumber"
+sidebar_label: "eth_blockNumber"
 description: "Latest Ethereum block number and time by GraphQL query or WebSocket stream, with the same call for BSC, Base and other EVM chains."
 keywords:
   - eth_blockNumber
