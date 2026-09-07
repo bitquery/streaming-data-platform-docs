@@ -43,7 +43,7 @@ If you want fastest data without any latency, we can provide Kafka streams, plea
 | What                                       | Address                                        | Notes                                                                                 |
 | ------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Raydium LaunchLab program                  | `LanMV9sAd7wArD4vJFi2qDdfnVhFxYSUg6eADduJ3uj` | Bonding-curve launches. `raydium_launchpad` in `Dex.ProtocolName` and `Market.Protocol` |
-| StonkFun platform config, reward launches  | `6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt` | Token-2022 mints with a transfer fee (1% or 3%) that pays holders                     |
+| StonkFun platform config, reward launches  | `6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt` | Token-2022 mints with a 1% or 3% transfer fee, the source of StonkFun's reward payouts |
 | StonkFun platform config, standard launches | `4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7` | Token-2022 mints without a transfer fee                                               |
 | Raydium CPMM program                       | `CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C` | Where graduated tokens trade. `raydium_cp_swap`                                       |
 | CPMM fee config used at graduation         | `CRRS5ieQmBrZjWhcj99JuGrT5tyuWDaGAXLXLFjbAtjQ` | 0.25% trade fee tier                                                                  |
@@ -59,16 +59,16 @@ Both platform configs carry the name `StonkFun` on-chain and share the same fee 
 
 A launch is one `initialize_with_token_2022` instruction on the LaunchLab program that references a StonkFun platform config. It does the following:
 
-1. Creates the base mint with 1,000,000,000 supply and 6 decimals on the Token-2022 program. Reward launches attach a transfer fee of 100 or 300 basis points; the fee authority is `5KXDF6QnqhBj72hDtJNkkpFaQVUfbFXNybMsp3DiK6tD`.
+1. Creates the base mint with 1,000,000,000 supply and 6 decimals on the Token-2022 program. Reward launches attach a transfer fee of 100 or 300 basis points. Its authority is `5KXDF6QnqhBj72hDtJNkkpFaQVUfbFXNybMsp3DiK6tD`, the wallet that also sends out StonkFun's reward payouts.
 2. Opens a constant-product bonding curve that sells 793,100,000 tokens (79.31% of supply). The graduation target is `total_quote_fund_raising`, expressed in the quote asset's smallest unit. StonkFun converts a fixed dollar target into the quote asset at launch time, so the number differs from launch to launch even for the same quote asset. Read it from the launch instruction instead of hard-coding it.
-3. Charges a 1% trading fee on every curve trade (`fee_rate` 10,000 out of 1,000,000 on the platform config), paid to the StonkFun fee wallet. The creator fee rate is 0.
+3. Charges 1.25% on every curve trade: StonkFun's 1% platform fee (`fee_rate` 10,000 out of 1,000,000 on the platform config), paid to the StonkFun fee wallet, plus Raydium's 0.25% protocol fee from the LaunchLab global config. The creator fee rate is 0. On buys the fee comes off the quote amount before the curve math; on sells it comes off the quote amount the curve pays out.
 4. Optionally runs the creator's dev buy as a `buy_exact_in` instruction in the same transaction.
 
 When the quote vault reaches the target, LaunchLab calls `migrate_to_cpswap`: the remaining 206,900,000 tokens and the raised quote asset seed a Raydium CPMM pool on the 0.25% fee tier. The whole LP position is locked to the platform (`platform_scale` 1,000,000, nothing burned, no creator share), which is how StonkFun keeps earning fees from graduated pools.
 
 ### Direct-pool launch on Raydium CLMM
 
-The original StonkFun mode mints the token and opens a one-sided Raydium CLMM pool in a single transaction signed by the launcher wallet: 1,000,000,000 supply with 9 decimals, mint and freeze authorities revoked, two one-sided positions holding the full supply (950M + 50M) and an optional dev buy as `swapV2`. There is no curve and no migration, so the pool address never changes. "Graduation" for these tokens is only a label on the StonkFun site, applied at $40k market cap.
+The original StonkFun mode mints the token and opens a one-sided Raydium CLMM pool in a single transaction signed by the launcher wallet: 1,000,000,000 supply with 9 decimals, mint and freeze authorities revoked, two one-sided positions holding the full supply (950M + 50M) and an optional dev buy as `swapV2`. There is no curve, no migration and no on-chain graduation, so the pool address never changes.
 
 ## Track StonkFun Token Launches on Raydium LaunchLab in Real Time
 
