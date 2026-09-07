@@ -50,7 +50,7 @@ export const SEARCH_INDEX = [
     t: "Token prices & OHLCV",
     s: "Real-time & historical candles, price index",
     g: "Data",
-    u: "/docs/trading/crypto-price-api/introduction/",
+    u: "/docs/trading/crypto-price-api/",
   },
   {
     t: "DEX trades",

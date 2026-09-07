@@ -43,7 +43,7 @@ clean, MEV-filtered swap data with USD price, market cap, and supply on every ro
 
 - [Trading data overview](https://docs.bitquery.io/docs/trading/trading-data-overview/) — when to use Trading cube vs chain-level APIs
 - [Crypto Trades API](https://docs.bitquery.io/docs/trading/crypto-trades-api/trades-api/) — real-time DEX swaps across 9 chains in one query
-- [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/introduction/) — token prices, pairs, and aggregated feeds
+- [Crypto Price API](https://docs.bitquery.io/docs/trading/crypto-price-api/) — token prices, pairs, and aggregated feeds
 - [OHLC / candlestick (K-line) API](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api/) — build charts and technical indicators
 - [Market cap & supply fields](https://docs.bitquery.io/docs/trading/crypto-price-api/crypto-marketcap-api/) — FDV, circulating supply on trade rows
 - [Traders API](https://docs.bitquery.io/docs/trading/crypto-trades-api/traders-api/) — wallet-level trade history and PnL-style analytics
