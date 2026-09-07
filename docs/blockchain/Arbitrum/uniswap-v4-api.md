@@ -1,102 +1,29 @@
 ---
-title: "Arbitrum Uniswap V4 API"
-description: "Arbitrum Uniswap V4 API: query Arbitrum Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Keep queries fast with indexed filters."
+title: "Arbitrum Uniswap v4 API: Swaps, Pools by PoolId, Traders and Liquidity"
+sidebar_label: "Uniswap v4 API"
+description: "Uniswap v4 on Arbitrum with Bitquery GraphQL: live swaps, pools of a token by PoolId, daily pool stats, top traders and reserves, worked on ETH/USDC."
+keywords:
+  - Arbitrum Uniswap v4 API
+  - Uniswap v4 Arbitrum trades
+  - Uniswap v4 PoolId Arbitrum
+  - Arbitrum PoolManager
+  - Uniswap v4 liquidity Arbitrum
 ---
-# Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 
-Uniswap v4 introduces a major shift in protocol architecture. Instead of deploying a separate smart contract for each liquidity pool, Uniswap v4 uses a singleton PoolManager contract that manages all pools internally as structured state.
+import FAQ from "@site/src/components/FAQ";
 
-Each pool in Uniswap v4 is uniquely identified by a `PoolId`, which is derived from the pool configuration (token pair, fee, tick spacing, and optional hooks), rather than a dedicated contract address. Using Bitquery's Uniswap v4 APIs, you can track:
-- DEX trades across all v4 pools
-- Trades by specific traders
-- Token-level trade activity
-- Real-time trade metrics
+# Arbitrum Uniswap v4 API: Swaps, Pools by PoolId, Traders and Liquidity
 
-The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Arbitrum.
+Uniswap v4 on Arbitrum runs through one contract, the PoolManager at `0x360e68faccca8ca495c1b759fd9eee466db9fb32`. Every pool is a record inside it, identified by a `PoolId` hash of the two tokens, the fee, the tick spacing and the hook, not by an address of its own. That changes how you query: the protocol name `uniswap_v4` selects the whole venue, `Trade.PoolId` selects a pool, and on swap rows the buyer and seller fields both show the PoolManager, so the trader is `Transaction.From`. Activity on Arbitrum sits in a few majors: ETH/USDC, USDC against the USDT0 bridged stablecoin, WBTC/USDC, and a rotating set of launch tokens. Every example runs in the [IDE](https://ide.bitquery.io) on a free account; the worked pool is ETH/USDC, `PoolId 0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8`, and the worked token is USDC, `0xaf88d065e77c8cc2239327c5edb3a432268e5831`.
 
-## Real time Trades on Uniswap V4
+## Live swaps across all v4 pools
 
-[This](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-arbitrum) subscription allows user to stream trades on Uniswap V4 in real time on Arbitrum.
+Filter `DEXTrades` on the protocol name and subscribe. Each message is one swap with both sides priced in USD; `Trade.PoolId` says which pool. Saved stream [here](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-arbitrum).
 
 ```graphql
 subscription {
   EVM(network: arbitrum) {
-    DEXTrades(where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}) {
-      Block{
-        Time
-      }
-      Trade {
-        PoolId
-        Buy {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-          Amount
-          AmountInUSD
-          Price
-          PriceInUSD
-          Seller
-        }
-        Sell {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-          Amount
-          AmountInUSD
-          Price
-          PriceInUSD
-          Seller
-        }
-      }
-      Transaction {
-        From
-        To
-        Hash
-      }
-    }
-  }
-}
-```
-
-## Get All Pool Ids for a Currency
-
-Using [this](https://ide.bitquery.io/get-virtual-pool-address-for-a-token-on-uniswap-v4-arbitrum) API we can get all the virtual pool addresses (`PoolId`) for a currency on Arbitrum.
-
-```graphql
-query MyQuery {
-  EVM(network: arbitrum) {
-    DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}, Currency: {SmartContract: {is: "0xaf88d065e77c8cc2239327c5edb3a432268e5831"}}}}
-    ) {
-      Trade {
-        PoolId
-      }
-      count
-    }
-  }
-}
-```
-
-## Latest Trades for a Specific Currencies Pair
-
-[This](https://ide.bitquery.io/Latest-Trades-for-a-currency-pair-on-arbitrum) API endpoint allows us to filter out the latest trades for a specific pair on Arbitrum, using `PoolId` as a filter option.
-
-```graphql
-{
-  EVM(network: arbitrum) {
-    DEXTrades(
-      orderBy: {descending: Block_Time}
-      limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v4"}}, PoolId: {is: "0x09588c415f6c809de684d3dd749e76d6bf0c12ac37d1d59a79e746013384a722"}}}
-    ) {
+    DEXTrades(where: { Trade: { Dex: { ProtocolName: { is: "uniswap_v4" } } } }) {
       Block {
         Time
       }
@@ -104,34 +31,24 @@ query MyQuery {
         PoolId
         Buy {
           Currency {
-            Name
             Symbol
             SmartContract
-            Decimals
           }
           Amount
           AmountInUSD
-          Price
           PriceInUSD
-          Seller
         }
         Sell {
           Currency {
-            Name
             Symbol
             SmartContract
-            Decimals
           }
-          Buyer
           Amount
           AmountInUSD
-          Price
-          PriceInUSD
         }
       }
       Transaction {
         From
-        To
         Hash
       }
     }
@@ -139,190 +56,212 @@ query MyQuery {
 }
 ```
 
-## Uniswap V4 Pair Trade Stats
+## Every v4 pool that trades a token
 
-Using [this](https://ide.bitquery.io/trade-stats-for-a-token-pair-on-uniswap-v4-arbitrum) query get pool stats (volume, bought, sold) for a specific Uniswap V4 pool on Arbitrum.
+Group `DEXTradeByTokens` by `PoolId` with the token in `Currency` to list its pools, ranked by trades in the window, with the other token of each pool and its USD volume. This is how you find the `PoolId` to use in the queries below. Saved query [here](https://ide.bitquery.io/get-virtual-pool-address-for-a-token-on-uniswap-v4-arbitrum).
 
 ```graphql
-query pairTopTraders {
-  EVM(network: arbitrum, dataset: realtime) {
+{
+  EVM(network: arbitrum) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "volumeUsd" }
       where: {
-        Block:{
-          Time: {since_relative: {days_ago: 1}}
-        }
         Trade: {
-          Dex: {
-            ProtocolName: {is: "uniswap_v4"}
-          }
-          PoolId: {is: "0x09588c415f6c809de684d3dd749e76d6bf0c12ac37d1d59a79e746013384a722"}
+          Dex: { ProtocolName: { is: "uniswap_v4" } }
+          Currency: { SmartContract: { is: "0xaf88d065e77c8cc2239327c5edb3a432268e5831" } }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
+      orderBy: { descendingByField: "count" }
+      limit: { count: 20 }
     ) {
       Trade {
-        Currency{
-          Name
-          Symbol
-          SmartContract
+        PoolId
+        Side {
+          Currency {
+            Symbol
+            SmartContract
+          }
         }
       }
-      bought: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sold: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
-      volume: sum(of: Trade_Amount)
+      count
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
 ```
 
-## Top Buyers of a Token on Uniswap V4
+## Latest swaps in one pool
 
-[This](https://ide.bitquery.io/top-buyers-of-a-currency-on-uniswap-v4-arbitrum) API returns the top buyers of a token on Uniswap V4 virtual pool on Arbitrum, along with the amount bought in token denominations and USD.
-
-```graphql
-{
-  EVM(network: arbitrum) {
-    DEXTrades(
-      orderBy: {descendingByField: "bought_in_usd"}
-      limit: {count: 100}
-      where: {
-        Trade: {
-          Dex: {ProtocolName: {is: "uniswap_v4"}}, 
-          Buy: {Currency: {SmartContract: {is: "0xaf88d065e77c8cc2239327c5edb3a432268e5831"}}}
-          PoolId: {is: "0x09588c415f6c809de684d3dd749e76d6bf0c12ac37d1d59a79e746013384a722"}
-        }
-      }
-    ) {
-      Trade {
-        Sell {
-          Currency {
-            Name
-            Symbol
-            SmartContract
-            Decimals
-          }
-          Buyer
-        }
-      }
-      bought:sum(of: Trade_Buy_Amount)
-      bought_in_usd:sum(of: Trade_Buy_AmountInUSD)
-    }
-  }
-}
-```
-
-## Top Sellers of a Token on Uniswap V4
-
-[This](https://ide.bitquery.io/top-sellers-of-a-token-on-uniswap-v4-arbitrum) API returns the top sellers of a token on Uniswap V4 virtual pool on Arbitrum, along with the amount sold in token denominations and USD.
+Filter on the `PoolId`. Saved query [here](https://ide.bitquery.io/Latest-Trades-for-a-currency-pair-on-arbitrum).
 
 ```graphql
 {
   EVM(network: arbitrum) {
     DEXTrades(
-      orderBy: {descendingByField: "sold_in_usd"}
-      limit: {count: 10}
       where: {
         Trade: {
-          Dex: {ProtocolName: {is: "uniswap_v4"}}, 
-          Sell: {Currency: {SmartContract: {is: "0xaf88d065e77c8cc2239327c5edb3a432268e5831"}}}
-          PoolId: {is: "0x09588c415f6c809de684d3dd749e76d6bf0c12ac37d1d59a79e746013384a722"}
+          PoolId: { is: "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8" }
         }
       }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
+      Block {
+        Time
+      }
       Trade {
         Buy {
           Currency {
-            Name
             Symbol
-            SmartContract
-            Decimals
           }
-          Seller
+          Amount
+          AmountInUSD
+          PriceInUSD
+        }
+        Sell {
+          Currency {
+            Symbol
+          }
+          Amount
+          AmountInUSD
         }
       }
-      sold:sum(of: Trade_Buy_Amount)
-      sold_in_usd:sum(of: Trade_Buy_AmountInUSD)
+      Transaction {
+        From
+        Hash
+      }
     }
   }
 }
 ```
 
-## Get Uniswap V4 Pool Liquidity
+## Pool stats for the last 24 hours
 
-Liquidity for v4 pools is reconstructed by stepping through each price range where liquidity is concentrated, so `AmountCurrencyA` / `AmountCurrencyB` reflect the actual PoolManager balances for that `PoolId`. See the [Arbitrum Liquidity API](/docs/blockchain/Arbitrum/arbitrum-liquidity-api) for the full `DEXPoolEvents` schema.
-
-Stream live liquidity for all Uniswap v4 pools on Arbitrum. [Run in the Bitquery IDE](https://ide.bitquery.io/uniswap-v4-pool-liquidity-arbitrum).
+One row with trades, distinct buyers and sellers, and volume split by direction, for the token you name in `Currency`. Saved query [here](https://ide.bitquery.io/trade-stats-for-a-token-pair-on-uniswap-v4-arbitrum).
 
 ```graphql
-subscription MyQuery {
+{
   EVM(network: arbitrum) {
-    DEXPoolEvents(
-      where: {PoolEvent: {Dex: {ProtocolName: {is: "uniswap_v4"}}}}
-    ) {
-      Block { Time Number }
-      PoolEvent {
-        AtoBPrice
-        BtoAPrice
-        Liquidity {
-          AmountCurrencyA
-          AmountCurrencyAInUSD
-          AmountCurrencyB
-          AmountCurrencyBInUSD
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          PoolId: { is: "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8" }
+          Currency: { SmartContract: { is: "0xaf88d065e77c8cc2239327c5edb3a432268e5831" } }
         }
-        Pool {
-          PoolId
-          SmartContract
-          CurrencyA { Name Symbol SmartContract }
-          CurrencyB { Name Symbol SmartContract }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+        }
+        Side {
+          Currency {
+            Symbol
+          }
         }
       }
-      Transaction { Hash }
+      trades: count
+      buyers: uniq(of: Trade_Buyer)
+      sellers: uniq(of: Trade_Seller)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      buyVolumeUsd: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: buy } } } })
+      sellVolumeUsd: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: sell } } } })
     }
   }
 }
 ```
 
-Filter to a specific pool by `PoolId`. [Run in the Bitquery IDE](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-arbitrum).
+## Top traders of a pool
+
+Because the PoolManager settles every v4 swap, `Trade.Buyer` and `Trade.Seller` on `DEXTrades` are the PoolManager itself. Group by `Transaction.From` instead to rank the accounts that sent the swaps. `bought` sums the token the trader received and `sold` the token it gave up; `Side.Type` describes the counter-side of the trade, which is why the two conditions look reversed. Saved query [here](https://ide.bitquery.io/top-buyers-of-a-currency-on-uniswap-v4-arbitrum).
 
 ```graphql
-subscription MyQuery {
+{
+  EVM(network: arbitrum) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          PoolId: { is: "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8" }
+          Currency: { SmartContract: { is: "0xaf88d065e77c8cc2239327c5edb3a432268e5831" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 20 }
+    ) {
+      Transaction {
+        From
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+Put one of those addresses into `Transaction: { From: { is: "0x..." } }` on the latest-swaps query to see its trades. The [top sellers](https://ide.bitquery.io/top-sellers-of-a-token-on-uniswap-v4-arbitrum) saved query is the same shape sorted on `sold`.
+
+## Reserves of a v4 pool
+
+`DEXPoolEvents` emits a row on every reserve change. For v4 the reserves are rebuilt from the concentrated positions around the current price, so they are what the PoolManager holds for that pool, priced in USD. Filter by `PoolId`; drop the filter and keep the protocol name to stream every v4 pool on Arbitrum. Saved stream for [all pools](https://ide.bitquery.io/uniswap-v4-pool-liquidity-arbitrum).
+
+```graphql
+{
   EVM(network: arbitrum) {
     DEXPoolEvents(
       where: {
         PoolEvent: {
-          Dex: { ProtocolName: { is: "uniswap_v4" } }
-          Pool: { PoolId: { is: "0x09588c415f6c809de684d3dd749e76d6bf0c12ac37d1d59a79e746013384a722" } }
+          Pool: {
+            PoolId: { is: "0x864abca0a6202dba5b8868772308da953ff125b0f95015adbf89aaf579e903a8" }
+          }
         }
       }
+      limit: { count: 5 }
+      orderBy: { descending: Block_Time }
     ) {
-      Block { Time Number }
+      Block {
+        Time
+      }
       PoolEvent {
-        AtoBPrice
-        BtoAPrice
+        Pool {
+          PoolId
+          CurrencyA {
+            Symbol
+          }
+          CurrencyB {
+            Symbol
+          }
+        }
         Liquidity {
           AmountCurrencyA
           AmountCurrencyAInUSD
           AmountCurrencyB
           AmountCurrencyBInUSD
         }
-        Pool {
-          PoolId
-          SmartContract
-          CurrencyA { Name Symbol SmartContract }
-          CurrencyB { Name Symbol SmartContract }
-        }
+        AtoBPrice
       }
-      Transaction { Hash }
     }
   }
 }
 ```
 
-> In Uniswap v4 all pools live in the singleton PoolManager, so `Pool.SmartContract` is the same across pools — use `Pool.PoolId` to identify each pool.
+<FAQ
+  items={[
+    { q: "What is the Uniswap v4 PoolManager address on Arbitrum?", a: "0x360e68faccca8ca495c1b759fd9eee466db9fb32. Every v4 pool on Arbitrum lives inside it, so Dex.SmartContract is the same on every row and Trade.PoolId identifies the pool." },
+    { q: "How do I find the PoolId of a pair on Arbitrum?", a: "Group DEXTradeByTokens by Trade.PoolId with one token in Currency and the protocol name uniswap_v4. Each row is a pool of that token with its counter token, trade count and volume." },
+    { q: "Why are the buyer and seller the same address on v4 swaps?", a: "The PoolManager settles both sides, so DEXTrades shows it as buyer and seller. Use Transaction.From for the trader, or DEXTradeByTokens, whose Buyer and Seller fields are trader-aware." },
+    { q: "Can I get Uniswap v4 liquidity on Arbitrum?", a: "Yes. DEXPoolEvents rows carry the pool's reserves in token units and USD after each change; filter on PoolEvent.Pool.PoolId or on the protocol name for all pools." },
+    { q: "How far back does v4 trade data go on Arbitrum?", a: "DEXTrades and DEXTradeByTokens reach history on the archive and combined datasets; DEXPoolEvents is realtime-only. Add dataset: combined to the EVM root for longer windows." },
+  ]}
+/>
+
+## Related pages
+
+- [Arbitrum liquidity API](/docs/blockchain/Arbitrum/arbitrum-liquidity-api)
+- [Arbitrum DEX trades API](/docs/blockchain/Arbitrum/DexTrades)
+- [Uniswap v4 on Ethereum](/docs/blockchain/Ethereum/dextrades/uniswap-v4-api)
+- [Uniswap v4 on Base](/docs/blockchain/Base/uniswap-v4-api)
+- [Uniswap v4 on BNB Chain](/docs/blockchain/BSC/uniswap-v4-api)
