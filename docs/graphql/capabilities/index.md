@@ -1,5 +1,5 @@
 ---
-title: "GraphQL Query Capabilities: Filters, Time Windows, Aggregates, Joins"
+title: "GraphQL Query Capabilities: Filters, Windows, Aggregates, Joins"
 description: "What a Bitquery GraphQL query can do: filters, relative time windows, sorting, limits, aggregates, calculations, joins, JSON argument filters and subscriptions."
 slug: /category/capabilities
 sidebar_label: "Capabilities"
@@ -14,7 +14,7 @@ keywords:
 
 import FAQ from "@site/src/components/FAQ";
 
-# GraphQL Query Capabilities: Filters, Time Windows, Aggregates, Joins
+# GraphQL Query Capabilities: Filters, Windows, Aggregates, Joins
 
 A Bitquery query is a GraphQL selection on a cube with four kinds of building blocks. Filters in `where` narrow rows by address, token, amount, date or a relative window such as the last 30 minutes. `orderBy` and `limit` shape the result, including sorting by an aggregate you define. Metrics such as `count`, `sum`, `uniq`, `quantile` and `calculate` turn rows into numbers, with `if` conditions so one query returns buys and sells side by side. Joins, array intersection and JSON argument filters reach across cubes and into decoded contract data. All of it runs as a query or a subscription, and the same syntax works on every chain.
 
