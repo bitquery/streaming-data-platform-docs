@@ -1,22 +1,32 @@
 ---
 sidebar_position: 1
 sidebar_label: GeckoTerminal
-title: "GeckoTerminal EVM API"
-description: "GeckoTerminal EVM API: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams. Great for bots, dashboards, and alerts."
+title: "GeckoTerminal-style Pool Data on Ethereum: Trending Pools, OHLC, Reserves"
+description: "GeckoTerminal-style pool pages on Ethereum via Bitquery GraphQL: trending pools, live pool trades, buys, sells and makers, hourly OHLC, reserves, new pools."
+keywords:
+  - GeckoTerminal API
+  - GeckoTerminal alternative Ethereum
+  - Ethereum pool trades API
+  - trending pools Ethereum
+  - Ethereum pool reserves API
 ---
-# GeckoTerminal EVM API
 
+import FAQ from "@site/src/components/FAQ";
+
+# GeckoTerminal-style Pool Data on Ethereum: Trending Pools, OHLC, Reserves
+
+GeckoTerminal is organised around pools: a ranked list of them, and for each one the trades, the buy and sell counts, the makers, the candles and the reserves. Bitquery's `DEXTradeByTokens` cube keys Ethereum trades by pool contract, and `DEXPoolEvents` records reserves in USD after every change, so each panel is one query. The worked pool is Mog/WETH on Uniswap v2, `0xc2eab7d33d3cb97692ecb231a5d0e4a649cb539d`, with Mog at `0xaaee1a9723aadb7afa2810263653a34ba2c21c7a`. Every example runs in the [IDE](https://ide.bitquery.io) on a free account, and the same queries work on BSC, Base, Arbitrum and the other EVM chains by changing the network. The [Solana version](/docs/blockchain/Solana/solana-geckoterminal-api/) covers Solana pools.
 
 ## Recommended: Trading API queries (real-time + last ~30 days)
 
 ### Live trades with USD price, market cap and supply
 
-Streams MEV-filtered trades across all 9 chains — add `Network: {is: "Ethereum"}` inside `Pair.Market` to scope to one chain. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
+Every Ethereum DEX trade with the trader, USD amounts and the market on the row, MEV trades filtered out; drop the network filter for all nine chains. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
 
 ```graphql
 subscription {
   Trading {
-    Trades {
+    Trades(where: { Pair: { Market: { Network: { is: "Ethereum" } } } }) {
       Block { Time }
       Price
       PriceInUsd
@@ -35,14 +45,14 @@ subscription {
 
 ### Most accurate token price with 1-minute OHLC (top market)
 
-Returns the token's price from its top-volume market via `Ranking: { Position: { eq: 1 } }` — swap the token address and network for your token. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Token-Price-Top-Market-Rank-1).
+`Ranking: { Position: { eq: 1 } }` picks the token's deepest market, so this is the price a pool list should show; change the token address and network for any other token. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Token-Price-Top-Market-Rank-1).
 
 ```graphql
 {
   Trading {
     Pairs(
       where: {
-        Token: {Address: {is: "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"}, Network: {is: "Solana"}}
+        Token: {Address: {is: "0xaaee1a9723aadb7afa2810263653a34ba2c21c7a"}, Network: {is: "Ethereum"}}
         Ranking: {Position: {eq: 1}}
         Interval: {Time: {Duration: {eq: 60}}}
         Price: {IsQuotedInUsd: true}
@@ -61,432 +71,280 @@ Returns the token's price from its top-volume market via `Ranking: { Position: {
 }
 ```
 
-The chain-level queries below remain the right tool for **history older than ~30 days** and per-pool detail.
+## Trending pools
 
-:::danger `BalanceUpdates` sunsets 10 August 2026
-Queries on this page that use **`BalanceUpdates`** will stop working on **10 August 2026**. Migrate to the **`Balances`** and **`Holders`** cubes, which return the current balance directly instead of summing deltas.
-
-See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupdates) for the query-by-query translation.
-:::
-
-
-Everything you see on the GeckoTerminal EVM dashboard—live pairs, trades, prices, volumes, makers/buyers/sellers, and more—can be accessed via APIs/Streams with Bitquery.
-We expose the same on-chain data via GraphQL APIs, real-time WebSocket streams, and enterprise Kafka topics, with optional cloud connectors (AWS, GCP, Snowflake) for analytics pipelines.
-
-Checkout our [GeckoTerminal Solana API documentation](/docs/blockchain/Solana/solana-geckoterminal-api/) if you are interested in getting Solana data which GeckoTerminal shows.
-
-:::note
-GeckoTerminal EVM APIs include data apis for EVM chains like Ethereum, Binance Smart Chain(BSC), Arbitrum, Base, Matic, Optimism, etc
-:::
-
-## Bitquery EVM Data Access Options
-
-- **GraphQL APIs**: Query historical and real-time EVM data with flexible filtering and aggregation
-- **Real-time Streams**: Subscribe to live EVM blockchain events via WebSocket subscriptions
-- **Cloud Solutions**: Access EVM data through AWS, GCP, and Snowflake integrations
-- **Kafka Streams**: High-throughput data streaming for enterprise applications
-
-## Getting Started with EVM
-
-- **[EVM API Examples](/docs/blockchain/Ethereum/)** - Complete collection of EVM API examples
-- **[EVM DEX Trades](/docs/category/dex-trades/)** - Real-time DEX trading data and analytics
-- **[EVM Subscriptions](/docs/subscriptions/subscription)** - Learn how to set up real-time data streams
-- **[IDE for EVM](https://ide.bitquery.io)** - Interactive development environment for testing EVM queries
-
-This guide shows how to retrieve the same EVM DEX data that GeckoTerminal displays—real-time trades, pair stats, volumes, buyers/sellers, and more—using Bitquery APIs, streams, and Kafka.
-
-import VideoPlayer from "../../../../src/components/videoplayer.js";
-
-## Get the Top Trading Pairs
-
-The query will fetch you the Top Trading Pairs in desceneding order of the total number of trades took place in them just like how GeckoTerminal shows in its UI.
-
-You can find the query [here](https://ide.bitquery.io/List-of-trading-pairs-in-descending-order-of-trxns-in-last-24-hours)
+The pools with the most trades in the last day, one row per pool contract with the pair, the maker count and USD volume. The single-trade USD cap keeps mispriced thin-pool rows out of the sums. Saved query [here](https://ide.bitquery.io/List-of-trading-pairs-in-descending-order-of-trxns-in-last-24-hours).
 
 ```graphql
-query TrendingPairs {
-  EVM(dataset: combined, network: eth) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "TradeCount"}
-      where: {Block: {Time: {since: "2024-06-05T08:08:00Z"}}, TransactionStatus: {Success: true}}
-      limit: {count: 10}
-      limitBy: {by: Trade_Dex_Pair_SmartContract, count: 1}
-    ) {
-      TradeCount: count
-      Trade {
-        Dex {
-          SmartContract
-          ProtocolName
-          ProtocolFamily
-          Pair {
-            SmartContract
-          }
-        }
-        Currency {
-          Symbol
-          SmartContract
-        }
-        Side {
-          Currency {
-            Symbol
-            SmartContract
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-## Get Trade Transactions for a particular pair in realtime
-
-The query will subscribe you to real-time trade transactions for a pair, providing a continuous stream of data as new trades are processed and recorded.
-You can find the query [here](https://ide.bitquery.io/Get-pair-trades-data-just-like-geckoterminal)
-
-```graphql
-subscription{
+{
   EVM(network: eth) {
     DEXTradeByTokens(
-      orderBy: {ascending: Block_Time}
-      where: {Trade: {Currency: {SmartContract: {is: "0x382ea807A61a418479318Efd96F1EFbC5c1F2C21"}}, Side: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}}}
-    ) {
-      Block{
-        Time
+      orderBy: { descendingByField: "trades" }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        TransactionStatus: { Success: true }
+        Trade: { Side: { AmountInUSD: { lt: "10000000" } } }
       }
+      limit: { count: 20 }
+      limitBy: { by: Trade_Dex_SmartContract, count: 1 }
+    ) {
       Trade {
-        Amount
+        Dex {
+          SmartContract
+          ProtocolName
+        }
         Currency {
           Symbol
-        }
-        PriceInUSD
-        Dex {
-          ProtocolName
-          SmartContract
-        }
-        Side {
-          Amount
-          AmountInUSD
-          Currency {
-            Symbol
-          }
-          Buyer
-          Seller
-        }
-        Buyer
-        Seller
-      }
-      Transaction {
-        Maker: From
-        Hash
-        Type
-      }
-    }
-  }
-}
-
-```
-
-## Get Price of a Token
-
-This query will give you the latest Price of a specified token using DEXTrades API. Here we have calculated the price of a token in USD and also against the sell currency. Here is the [saved query link](https://ide.bitquery.io/Price-of-a-token-in-realtime)
-
-```graphql
-query MyQuery {
-  EVM(network: eth, dataset: realtime) {
-    DEXTrades(
-      limit: {count: 1}
-      orderBy: {descending: Block_Time}
-      where: {Trade: {Buy: {Currency: {SmartContract: {is: "0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a"}}}, Sell: {Currency: {SmartContract: {is: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"}}}, Dex: {Pair: {SmartContract: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}}}, TransactionStatus: {Success: true}}
-    ) {
-      Trade {
-        Buy {
-          Currency {
-            Symbol
-          }
-          Price_In_USD: PriceInUSD
-          Price_against_sell_currency: Price
-        }
-        Sell {
-          Currency {
-            Symbol
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-## Get Liquidity of a specific pair by using its Pair Address
-
-The below query finds the liquidity of a pool using the pool address `0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d`. With this query we can get balance of the pool tokens. And to get the USD Liquidity you can multiply the balances of both the tokens to their respective USD prices and then sum it up.
-
-You can find the query [here](https://ide.bitquery.io/Get-liquidity-of-a-pair_1)
-
-**Migrated query** — use this. `BalanceUpdates` sunsets 10 August 2026.
-
-```graphql
-query MyQuery {
-  EVM(dataset: archive, network: eth) {
-    Balances(
-      where: {Balance: {Address: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}, Currency: {SmartContract: {in: ["0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]}}}
-      orderBy: { descending: Balance_Amount }
-  ) {
-      Currency {
-        Name
-      }
-      Balance { Amount }
-    }
-  }
-}
-```
-
-<details>
-<summary>Old <code>BalanceUpdates</code> version (stops working 10 August 2026)</summary>
-
-```graphql
-query MyQuery {
-  EVM(dataset: archive, network: eth) {
-    BalanceUpdates(
-      where: {BalanceUpdate: {Address: {is: "0xc2eaB7d33d3cB97692eCB231A5D0e4A649Cb539d"}}, Currency: {SmartContract: {in: ["0xaaeE1A9723aaDB7afA2810263653A34bA2C21C7a","0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]}}}
-      orderBy: {descendingByField: "balance"}
-  ) {
-      Currency {
-        Name
-      }
-      balance: sum(of: BalanceUpdate_Amount)
-    }
-  }
-}
-```
-
-</details>
-
-## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
-
-The query will fetch you the buys, sells, buy volume, sell volume and also the number of makers for a particular token just like how GeckoTerminal shows in its UI. We are getting these trade metrics for this particular pool address `0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`.
-
-You can find the query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair#)
-
-```graphql
-query MyQuery($network: evm_network, $token: String,$pairAddress: String , $min5_timestamp: DateTime, $hr1_timestamp: DateTime) {
-  EVM(dataset: realtime, network: $network) {
-    DEXTradeByTokens(
-      where: {TransactionStatus: {Success: true}, Trade: {Currency: {SmartContract: {is: $token}}, Dex: {SmartContract: {is: $pairAddress}}}, Block: {Time: {since: $hr1_timestamp}}}
-    ) {
-      Trade {
-        Currency {
-          Name
-          SmartContract
-          Symbol
-        }
-        startPrice: PriceInUSD(minimum: Block_Time)
-        Price_at_min5: PriceInUSD(
-          minimum: Block_Time
-          if: {Block: {Time: {after: $min5_timestamp}}}
-        )
-        current_price: PriceInUSD(maximum: Block_Time)
-        Dex {
-          ProtocolName
-          ProtocolFamily
           SmartContract
         }
         Side {
           Currency {
             Symbol
-            Name
             SmartContract
           }
         }
       }
-      makers: count(distinct: Transaction_From)
-      makers_5min: count(
-        distinct: Transaction_From
-        if: {Block: {Time: {after: $min5_timestamp}}}
-      )
-      buyers: count(
-        distinct: Transaction_From
-        if: {Trade: {Side: {Type: {is: sell}}}}
-      )
-      buyers_5min: count(
-        distinct: Transaction_From
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
-      )
-      sellers: count(
-        distinct: Transaction_From
-        if: {Trade: {Side: {Type: {is: buy}}}}
-      )
-      sellers_5min: count(
-        distinct: Transaction_From
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
-      )
       trades: count
-      trades_5min: count(if: {Block: {Time: {after: $min5_timestamp}}})
-      traded_volume: sum(of: Trade_Side_AmountInUSD)
-      traded_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Block: {Time: {after: $min5_timestamp}}}
-      )
-      buy_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}}
-      )
-      buy_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
-      )
-      sell_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}}
-      )
-      sell_volume_5min: sum(
-        of: Trade_Side_AmountInUSD
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
-      )
-      buys: count(if: {Trade: {Side: {Type: {is: sell}}}})
-      buys_5min: count(
-        if: {Trade: {Side: {Type: {is: sell}}}, Block: {Time: {after: $min5_timestamp}}}
-      )
-      sells: count(if: {Trade: {Side: {Type: {is: buy}}}})
-      sells_5min: count(
-        if: {Trade: {Side: {Type: {is: buy}}}, Block: {Time: {after: $min5_timestamp}}}
-      )
-    }
-  }
-}
-{
-  "network": "eth",
-  "token": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
-  "pairAddress": "0xA43fe16908251ee70EF74718545e4FE6C5cCEc9f",
-  "hr1_timestamp": "2024-11-14T03:20:00Z",
-  "min5_timestamp": "2024-11-14T04:15:00Z"
-}
-```
-
-## Get OHLC of a token pair
-
-This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on DEXes over a defined time period and interval. You can use the `quoteCurrency` to input the contract address of the currency used for quoting the token prices.
-
-You can find the query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum_1)
-
-```graphql
-{
-  EVM(network: eth, dataset: archive) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_testfield"}
-      where: {Trade: {Currency: {SmartContract: {is: "0xdac17f958d2ee523a2206206994597c13d831ec7"}}, Side: {Currency: {SmartContract: {is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"}}, Type: {is: buy}}, PriceAsymmetry: {lt: 0.1}}}
-      limit: {count: 10}
-    ) {
-      Block {
-        testfield: Time(interval: {in: hours, count: 1})
-      }
-      volume: sum(of: Trade_Amount)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
-      }
-      count
-    }
-  }
-}
-```
-
-## Top Traders of a token
-
-This query will fetch you top traders of a token for the selected network.
-You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token_1).
-
-```graphql
-query topTraders($network: evm_network, $token: String) {
-  EVM(network: $network) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}}}
-    ) {
-      Trade {
-        Dex {
-          OwnerAddress
-          ProtocolFamily
-          ProtocolName
-        }
-      }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Amount)
+      makers: uniq(of: Transaction_From)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
   }
 }
-{
-  "network": "eth",
-  "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-}
 ```
 
-## Track newly created pairs on uniswap v3
+## Live trades of a pool
 
-You can track newly created pairs on uniswap v3 on ethereum mainnet.
-
-Open this query on our GraphQL IDE using this [link](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9).
+Each message is one swap in the pool with the amount, the USD price, the side and the wallet that sent it. Saved stream [here](https://ide.bitquery.io/Get-pair-trades-data-just-like-geckoterminal).
 
 ```graphql
 subscription {
   EVM(network: eth) {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Dex: { SmartContract: { is: "0xc2eab7d33d3cb97692ecb231a5d0e4a649cb539d" } }
+          Currency: { SmartContract: { is: "0xaaee1a9723aadb7afa2810263653a34ba2c21c7a" } }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Amount
+        PriceInUSD
+        Currency {
+          Symbol
+        }
+        Side {
+          Amount
+          AmountInUSD
+          Type
+          Currency {
+            Symbol
+          }
+        }
+      }
+      Transaction {
+        Maker: From
+        Hash
+      }
+    }
+  }
+}
+```
+
+## Buys, sells, makers and volume of a pool
+
+The stat block of a pool page: trades, buys, sells, makers, buyers, sellers and USD volume over the last day, each with a one-hour sub-window, plus the price at both ends of the window. `Side.Type` names the counter-side of a trade, so the token was bought where the side was sold, and wallets are counted by `Transaction.From`. Saved query [here](https://ide.bitquery.io/Buys-Sells-BuyVolume-SellVolume-Makers-TotalTradedVolume-PriceinUSD-for-a-eth-pair).
+
+```graphql
+{
+  EVM(network: eth) {
+    DEXTradeByTokens(
+      where: {
+        TransactionStatus: { Success: true }
+        Trade: {
+          Dex: { SmartContract: { is: "0xc2eab7d33d3cb97692ecb231a5d0e4a649cb539d" } }
+          Currency: { SmartContract: { is: "0xaaee1a9723aadb7afa2810263653a34ba2c21c7a" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Trade {
+        Currency {
+          Symbol
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
+          }
+        }
+        Dex {
+          ProtocolName
+        }
+        start: PriceInUSD(minimum: Block_Number)
+        end: PriceInUSD(maximum: Block_Number)
+      }
+      trades: count
+      trades1h: count(if: { Block: { Time: { after_relative: { hours_ago: 1 } } } })
+      buys: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      sells: count(if: { Trade: { Side: { Type: { is: buy } } } })
+      makers: uniq(of: Transaction_From)
+      makers1h: uniq(of: Transaction_From, if: { Block: { Time: { after_relative: { hours_ago: 1 } } } })
+      buyers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: sell } } } })
+      sellers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: buy } } } })
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      volumeUsd1h: sum(of: Trade_Side_AmountInUSD, if: { Block: { Time: { after_relative: { hours_ago: 1 } } } })
+      buyVolumeUsd: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: sell } } } })
+      sellVolumeUsd: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+## Hourly OHLC of a pair
+
+Candles from the Trading cube for WETH against USDT, quoted in USD, one row per hour. Change the two token ids for any pair. Saved query [here](https://ide.bitquery.io/WETH-USDT-OHLC-on-Ethereum_1).
+
+```graphql
+{
+  Trading {
+    Pairs(
+      where: {
+        Token: { Id: { is: "bid:eth:0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" } }
+        QuoteToken: { Id: { is: "bid:eth:0xdac17f958d2ee523a2206206994597c13d831ec7" } }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+        Price: { IsQuotedInUsd: true }
+      }
+      limit: { count: 24 }
+      orderBy: { descending: Interval_Time_Start }
+    ) {
+      Interval {
+        Time {
+          Start
+        }
+      }
+      Token {
+        Symbol
+      }
+      QuoteToken {
+        Symbol
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+        Average {
+          Mean
+        }
+      }
+      Volume {
+        Base
+        Usd
+      }
+    }
+  }
+}
+```
+
+## Reserves of a pool
+
+`DEXPoolEvents` emits both reserves in USD after every swap, mint or burn in the pool. The newest rows are the current liquidity. Saved query [here](https://ide.bitquery.io/Get-liquidity-of-a-pair_1).
+
+```graphql
+{
+  EVM(network: eth) {
+    DEXPoolEvents(
+      where: { PoolEvent: { Pool: { SmartContract: { is: "0xc2eab7d33d3cb97692ecb231a5d0e4a649cb539d" } } } }
+      limit: { count: 5 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      PoolEvent {
+        Pool {
+          CurrencyA {
+            Symbol
+          }
+          CurrencyB {
+            Symbol
+          }
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+        AtoBPrice
+      }
+    }
+  }
+}
+```
+
+## New pools
+
+`PoolCreated` on the Uniswap v3 factory names both tokens, the fee tier and the pool address; the v2 factory at `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f` emits `PairCreated` for the older design. New pools on Ethereum arrive minutes to hours apart, so query the last day rather than waiting on a stream. Saved query [here](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9).
+
+```graphql
+{
+  EVM(network: eth) {
     Events(
-      orderBy: { descending: Block_Number }
-      limit: { count: 10 }
       where: {
         Log: {
           SmartContract: { is: "0x1f98431c8ad98523631ae4a59f267346ea31f984" }
           Signature: { Name: { is: "PoolCreated" } }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
+      limit: { count: 50 }
+      orderBy: { descending: Block_Time }
     ) {
-      Log {
-        Signature {
-          Name
-          Parsed
-          Signature
-        }
-        SmartContract
+      Block {
+        Time
       }
       Transaction {
         Hash
       }
-      Block {
-        Date
-        Number
-      }
       Arguments {
-        Type
+        Name
         Value {
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
           ... on EVM_ABI_Address_Value_Arg {
             address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
           }
           ... on EVM_ABI_Integer_Value_Arg {
             integer
           }
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
         }
-        Name
       }
     }
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "How do I build a GeckoTerminal-style pool page for Ethereum?", a: "Filter DEXTradeByTokens on the pool under Trade.Dex.SmartContract for trades, stats and rankings, DEXPoolEvents on the same address for reserves in USD, and the Trading cube for candles." },
+    { q: "How do I find trending pools?", a: "Group DEXTradeByTokens over a window with limitBy on Trade.Dex.SmartContract and sort by count. Add a single-trade USD cap so a mispriced thin pool does not top the volume column." },
+    { q: "How are buys and sells told apart?", a: "By Side.Type, which describes the counter-side of the trade: a buy of the token under Trade.Currency is a row whose side type is sell, and a sale is a row whose side type is buy." },
+    { q: "Where do reserves come from?", a: "DEXPoolEvents, which records both reserves with USD values after every change in Uniswap and PancakeSwap family pools. It is realtime only; the Ethereum liquidity API page covers history." },
+    { q: "Can I run these queries on BSC, Base or Arbitrum?", a: "Yes. Set network to bsc, base or arbitrum and swap the pool and token addresses; DEXTradeByTokens and DEXPoolEvents have the same fields on each of them." },
+  ]}
+/>
+
+## Related pages
+
+- [GeckoTerminal-style Solana API](/docs/blockchain/Solana/solana-geckoterminal-api/)
+- [BullX-style EVM API](/docs/blockchain/Ethereum/dextrades/evm-bullx-api/)
+- [Ethereum liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api)
+- [Ethereum DEX trades API](/docs/blockchain/Ethereum/dextrades/dex-api)
