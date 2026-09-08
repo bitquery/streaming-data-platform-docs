@@ -952,6 +952,57 @@ Here we have selected the filter `Price: {IsQuotedInUsd: true}`, this means that
 }
 ```
 
+## Trending Tokens (Multi-Chain)
+
+Rank the top trending tokens **across all supported chains in a single query** by trailing 1-hour USD volume. It is built on 1-minute `Tokens` candles over the last hour: `vol_1h` sums the window with a **$10k floor** via `selectWhere`, `vol_5m` is a conditional sum for the last 5 minutes, and `priceMove` is the **absolute 1h price change (%)** computed with an [expression](/docs/graphql/capabilities/expression/). Quote/wrapped assets are excluded by symbol and market cap is capped at **$100M**.
+
+> The Trading cube has **no liquidity/TVL field** — for pool depth, join a chain-level [`DEXPools`](/docs/trading/trading-data-overview#what-the-trading-cube-cannot-do) query client-side. Apply the **≤ 500% price-move cut client-side** (a computed expression cannot be filtered server-side).
+
+[Run query ➤](https://ide.bitquery.io/Trending-tokens-multi-chain)
+
+```graphql
+{
+  Trading {
+    Tokens(
+      limit: { count: 20 }
+      orderBy: { descendingByField: "vol_1h" }
+      where: {
+        Price: { IsQuotedInUsd: true }
+        Interval: { Time: { Duration: { eq: 60 } } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Supply: { MarketCap: { le: 100000000 } }
+        Token: {
+          Symbol: { notIn: ["WSOL", "USDC", "USDT", "WETH", "DAI", "cbBTC"] }
+        }
+      }
+    ) {
+      Token {
+        Id
+        Network
+        Symbol(maximum: Block_Time)
+        Name(maximum: Block_Time)
+        Address(maximum: Block_Time)
+      }
+      vol_1h: sum(of: Volume_Usd, selectWhere: { ge: "10000" })
+      vol_5m: sum(of: Volume_Usd, if: { Block: { Time: { since_relative: { minutes_ago: 5 } } } })
+      Price {
+        Ohlc {
+          open: Open(minimum: Interval_Time_Start)
+          high: High(maximum: Price_Ohlc_High)
+          low: Low(minimum: Price_Ohlc_Low)
+          close: Close(maximum: Interval_Time_Start)
+        }
+      }
+      priceMove: calculate(expression: "abs(($Price_Ohlc_close - $Price_Ohlc_open) / $Price_Ohlc_open) * 100")
+      Supply {
+        MarketCap(maximum: Block_Time)
+        FullyDilutedValuationUsd(maximum: Block_Time)
+      }
+    }
+  }
+}
+```
+
 ## PumpAMM 1-second Price, OHLC, Volume, SMA, EMA Stream for Traders
 
 Real-time (1-second interval) price, OHLC, volume, and moving averages for Pump.fun AMM tokens on Solana. Useful for high-frequency trading bots.

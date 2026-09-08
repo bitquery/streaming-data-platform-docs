@@ -149,6 +149,7 @@ max-based threshold when a stable membership list matters.
 
 ## Related
 
+- [Trending Tokens (Multi-Chain)](/docs/trading/crypto-price-api/examples#trending-tokens-multi-chain) — a real multi-chain screener built with `selectWhere`
 - [Select by metric (general reference)](/docs/graphql/metrics/selectWhere/)
 - [Conditions with `if`](/docs/graphql/metrics/if/)
 - [Trading Data Overview](/docs/trading/trading-data-overview/)
