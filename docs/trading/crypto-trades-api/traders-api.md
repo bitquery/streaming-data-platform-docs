@@ -197,7 +197,7 @@ subscription {
 
 ## How do I catch whale trades as they happen?
 
-Trades over a hundred thousand dollars on any chain, a handful a minute across the cube. Saved stream [here](https://ide.bitquery.io/Stream---Trades-over-100k-usd).
+Trades over a hundred thousand dollars on any chain, which arrive steadily across the cube. Saved stream [here](https://ide.bitquery.io/Stream---Trades-over-100k-usd).
 
 ```graphql
 subscription {
@@ -233,7 +233,7 @@ subscription {
 
 ## How do I get the whale trades of one wallet?
 
-Combine the trader and the USD floor. The example wallet moves six figures of stablecoins on Manifest a few times a day, so the query form over the last day returns rows; the same `where` as a subscription fires only when the wallet trades. Saved query [here](https://ide.bitquery.io/How-do-I-stream-whale-trades-for-a-specific-wallet).
+Combine the trader and the USD floor. The example wallet makes six-figure stablecoin trades on Manifest at the time of writing, so the query form over the last day returns rows; the same `where` as a subscription fires only when the wallet trades. Saved query [here](https://ide.bitquery.io/How-do-I-stream-whale-trades-for-a-specific-wallet).
 
 ```graphql
 {
