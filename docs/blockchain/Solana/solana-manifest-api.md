@@ -1,79 +1,75 @@
 ---
-title: "Solana Manifest API"
-description: "Solana Manifest API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
+title: "Manifest DEX API: Order Book Fills, Prices, 1-Minute OHLC and Top Traders"
+sidebar_label: "Manifest API"
+description: "Manifest, Solana's on-chain order book, via Bitquery GraphQL: live fills, USDT/USDC price and 1-minute candles, buy and sell volume and top traders."
+keywords:
+  - Manifest DEX API
+  - Manifest Solana order book
+  - Manifest trades GraphQL
+  - USDT USDC Solana order book
+  - Manifest OHLC API
 ---
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
-# Manifest DEX API
+# Manifest DEX API: Order Book Fills, Prices, 1-Minute OHLC and Top Traders
 
-:::tip Need real-time Manifest data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Manifest swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Manifest data older than ~30 days**, raw per-swap detail, or call / event context.
-:::
-
-Track real-time trades, token prices, OHLC data, top traders, and trading volume on **Manifest** DEX on Solana using Bitquery's GraphQL API. Filter by `Dex: { ProtocolFamily: { is: "Manifest" } }` to get Manifest-only data.
-
-:::note
-Use these APIs as **queries** for OHLC, top traders, and volume aggregates. Subscriptions are for real-time trades and price feeds; aggregates and time intervals do not work with subscriptions.
-:::
+Manifest is an on-chain limit order book on Solana, program `MNFSTqtC93rEfYHB6hF82sKdZpUDFWkViLByLd1k1Ms`, and most of what trades on it is stablecoins: the USDT/USDC market at `8sjV1AqBFvFuADBCQHhotaRq5DFFYSjjg1jMyVWMqXvZ` is its busiest market by a wide margin. Because fills are matched orders rather than pool swaps, prices sit within a few basis points of parity and candles are tight, which makes Manifest a good reference market for stablecoin pricing. Bitquery records each fill in the Solana `DEXTrades` and `DEXTradeByTokens` cubes under `ProtocolFamily: "Manifest"` and `ProtocolName: "manifest"`. Every example runs in the [IDE](https://ide.bitquery.io) on a free account; Solana queries go to the `eap` endpoint. Aggregates such as candles and rankings are queries; subscriptions are for the live fill and price feeds.
 
 <VideoPlayer url="https://youtu.be/SgFPOql5Q5A" />
 
-## Real-time Manifest DEX Trades
+## Live fills
 
-Subscribe to trades on Manifest DEX as they happen. Returns buy/sell amounts, currencies, accounts, and prices.
-
-[Run Query](https://ide.bitquery.io/manifest-dextrades)
+Every Manifest fill as it lands, with both sides, the accounts and the market. Saved stream [here](https://ide.bitquery.io/manifest-dextrades).
 
 ```graphql
-subscription ManifestDEXTrades {
+subscription {
   Solana {
-    DEXTrades(
-      where: { Trade: { Dex: { ProtocolFamily: { is: "Manifest" } } } }
-    ) {
+    DEXTrades(where: { Trade: { Dex: { ProtocolFamily: { is: "Manifest" } } } }) {
+      Block {
+        Time
+      }
       Trade {
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
+        Market {
+          MarketAddress
         }
         Buy {
           Currency {
-            Name
             Symbol
             MintAddress
           }
           Amount
+          AmountInUSD
+          Price
           Account {
             Address
           }
-          PriceAgainstSellCurrency: Price
         }
         Sell {
-          Account {
-            Address
-          }
-          Amount
           Currency {
-            Name
             Symbol
             MintAddress
           }
-          PriceAgainstBuyCurrency: Price
+          Amount
+          AmountInUSD
+          Account {
+            Address
+          }
         }
       }
-      Block {
-        Time
+      Transaction {
+        Signature
+        Signer
       }
     }
   }
 }
 ```
 
-## Latest Price of a Token on Manifest
+## Price of USDT in USDC, right now
 
-Get the most recent trade price for a token on Manifest. Example uses USDC (`EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v`) against SOL (`So11111111111111111111111111111111111111112`). Change the mint addresses in the `where` clause for another pair.
-
-[Run Query](https://ide.bitquery.io/token-price-on-manifest)
+The newest fill in the market. `Price` is the quote per unit of the token and `PriceInUSD` its dollar value. Saved query [here](https://ide.bitquery.io/token-price-on-manifest).
 
 ```graphql
 {
@@ -84,14 +80,8 @@ Get the most recent trade price for a token on Manifest. Example uses USDC (`EPj
       where: {
         Trade: {
           Dex: { ProtocolFamily: { is: "Manifest" } }
-          Currency: {
-            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "So11111111111111111111111111111111111111112" }
-            }
-          }
+          Currency: { MintAddress: { is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" } }
+          Side: { Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } } }
         }
       }
     ) {
@@ -101,28 +91,26 @@ Get the most recent trade price for a token on Manifest. Example uses USDC (`EPj
       Trade {
         Price
         PriceInUSD
+        Market {
+          MarketAddress
+        }
       }
     }
   }
 }
 ```
 
-## Realtime Price Feed of a Token on Manifest
-
-Subscribe to live price updates for a token on Manifest. Replace the currency mint address with your token’s mint.
-
-[Run Query](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Manifest)
+As a subscription the same filter is a price feed that ticks on every fill. Saved stream [here](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Manifest).
 
 ```graphql
-subscription RealtimeManifestPrice {
+subscription {
   Solana {
     DEXTradeByTokens(
       where: {
         Trade: {
           Dex: { ProtocolFamily: { is: "Manifest" } }
-          Currency: {
-            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-          }
+          Currency: { MintAddress: { is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" } }
+          Side: { Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } } }
         }
       }
     ) {
@@ -132,38 +120,33 @@ subscription RealtimeManifestPrice {
       Trade {
         Price
         PriceInUSD
+        Amount
       }
     }
   }
 }
 ```
 
-## Manifest OHLC API
+## One-minute candles
 
-Get OHLC (open, high, low, close), volume, and trade count for a token pair on Manifest. Uses 1-minute candles. `PriceAsymmetry: { lt: 0.1 }` filters for balanced price data. Use as a **query** only; aggregates and intervals are not supported in subscriptions.
-
-[Run Query](https://ide.bitquery.io/manifest-OHLC-API)
+USDT/USDC over the last hour, one row per minute with volume and fill count. `PriceAsymmetry` below 0.1 keeps fills whose two sides agree on price. Saved query [here](https://ide.bitquery.io/manifest-OHLC-API).
 
 ```graphql
 {
   Solana {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "Block_Timefield" }
       where: {
         Trade: {
-          Currency: {
-            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB" }
-            }
-          }
           Dex: { ProtocolFamily: { is: "Manifest" } }
+          Currency: { MintAddress: { is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" } }
+          Side: { Currency: { MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } } }
           PriceAsymmetry: { lt: 0.1 }
         }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
-      limit: { count: 10 }
+      limit: { count: 60 }
+      orderBy: { descendingByField: "Block_Timefield" }
     ) {
       Block {
         Timefield: Time(interval: { in: minutes, count: 1 })
@@ -181,109 +164,114 @@ Get OHLC (open, high, low, close), volume, and trade count for a token pair on M
 }
 ```
 
-## Top Traders of a Token on Manifest
+## Buy and sell volume of a token
 
-Get the top 100 traders by USD volume for a token on Manifest. Pass the token mint address as the `$token` variable.
-
-[Run Query](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-ManifestDEX)
-
-**Variables (example):**
-
-```json
-{
-  "token": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-}
-```
+Totals for USDT on Manifest over the last hour, in USD, split by direction. `Side.Type` describes the counter-side, so USDT was bought where the side was sold. Saved query [here](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token_7).
 
 ```graphql
-query TopTraders($token: String) {
+{
   Solana {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "volumeUsd" }
-      limit: { count: 100 }
       where: {
         Trade: {
-          Currency: { MintAddress: { is: $token } }
           Dex: { ProtocolFamily: { is: "Manifest" } }
+          Currency: { MintAddress: { is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" } }
         }
         Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
     ) {
-      Trade {
-        Account {
-          Owner
-        }
-        Side {
-          Account {
-            Address
-          }
-          Type
-        }
-      }
-      bought: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sold: sum(
-        of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
+      trades: count
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
     }
   }
 }
 ```
 
-## Trading Volume, Buy Volume, and Sell Volume of a Token
+## Top traders of a token
 
-Get total traded volume (token and USD), buy volume, and sell volume for a token on Manifest over a time window. Example uses last 1 hour and USDC/SOL pair; adjust `since_relative` or mint addresses as needed. Uses `dataset: combined` for historical coverage.
-
-[Run Query](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token_7)
+Rank signers by USD volume over a day. Saved query [here](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-ManifestDEX).
 
 ```graphql
-query ManifestTokenVolume {
-  Solana(dataset: combined) {
+{
+  Solana {
     DEXTradeByTokens(
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 50 }
       where: {
-        Block: { Time: { since_relative: { hours_ago: 1 } } }
-        Transaction: { Result: { Success: true } }
         Trade: {
-          Currency: {
-            MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "So11111111111111111111111111111111111111112" }
-            }
-          }
           Dex: { ProtocolFamily: { is: "Manifest" } }
+          Currency: { MintAddress: { is: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB" } }
         }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
+      Transaction {
+        Signer
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+## The busiest Manifest markets
+
+Group the last day by market and token pair.
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: { Dex: { ProtocolFamily: { is: "Manifest" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      orderBy: { descendingByField: "fills" }
+      limit: { count: 20 }
+    ) {
       Trade {
+        Market {
+          MarketAddress
+        }
         Currency {
+          Symbol
           MintAddress
-          Decimals
         }
         Side {
           Currency {
-            Name
+            Symbol
             MintAddress
           }
         }
       }
-      traded_volume_USD: sum(of: Trade_Side_AmountInUSD)
-      traded_volume: sum(of: Trade_Amount)
-      buy_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sell_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
+      fills: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      traders: uniq(of: Transaction_Signer)
     }
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "How do I get Manifest trades on Solana?", a: "Filter Trade.Dex.ProtocolFamily on Manifest in the Solana DEXTrades or DEXTradeByTokens cubes on the eap endpoint. Each row is one fill, with the market address, both sides and the signer." },
+    { q: "What is the Manifest program address?", a: "MNFSTqtC93rEfYHB6hF82sKdZpUDFWkViLByLd1k1Ms. A filter on Trade.Dex.ProgramAddress is equivalent to the family filter." },
+    { q: "Which Manifest market is the most active?", a: "USDT/USDC at 8sjV1AqBFvFuADBCQHhotaRq5DFFYSjjg1jMyVWMqXvZ. The busiest-markets query on this page ranks them for any window." },
+    { q: "Can I get order book depth from these cubes?", a: "No. The cubes record fills, not resting orders. For the book itself read the program's accounts; for fills, prices and volume the queries here are enough." },
+    { q: "Do candles work as subscriptions?", a: "No. Intervals and aggregates run as queries only. Subscribe to the price feed for live ticks and build candles on your side, or poll the candle query." },
+  ]}
+/>
+
+## Related pages
+
+- [Solana DEX trades API](/docs/blockchain/Solana/solana-dextrades)
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)
+- [Solana API hub](/docs/blockchain/Solana/)
