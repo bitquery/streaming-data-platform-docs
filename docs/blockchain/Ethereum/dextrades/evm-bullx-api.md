@@ -187,7 +187,7 @@ Rank by `Transaction.From`, the wallet that sent the swap, so routers and aggreg
 
 ## One wallet's trades
 
-The Trading cube keys trades by wallet across chains, with USD on every row. The example is an Ethereum wallet that moves six figures a day; take any address from the top traders above. As a subscription without the `Block` filter the same `where` follows the wallet live.
+The Trading cube keys trades by wallet across chains, with USD on every row. The example is an Ethereum wallet with large trades at the time of writing; take any address from the top traders above. As a subscription without the `Block` filter the same `where` follows the wallet live.
 
 ```graphql
 {
@@ -271,7 +271,7 @@ Swaps over a hundred thousand dollars in the last hour, newest first. Drop the `
 
 ## New Uniswap v3 pools
 
-The factory's `PoolCreated` event names both tokens, the fee tier and the new pool address. A few pools a day are created on Ethereum, so query the last day rather than waiting on a stream. Saved query [here](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9).
+The factory's `PoolCreated` event names both tokens, the fee tier and the new pool address. New pools on Ethereum arrive minutes to hours apart, so query the last day rather than waiting on a stream. Saved query [here](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9).
 
 ```graphql
 {
