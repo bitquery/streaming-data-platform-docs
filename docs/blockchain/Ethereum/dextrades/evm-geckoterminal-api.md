@@ -291,7 +291,7 @@ Candles from the Trading cube for WETH against USDT, quoted in USD, one row per 
 
 ## New pools
 
-`PoolCreated` on the Uniswap v3 factory names both tokens, the fee tier and the pool address; the v2 factory at `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f` emits `PairCreated` for the older design. Only a handful of pools a day appear on Ethereum, so query the last day rather than waiting on a stream. Saved query [here](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9).
+`PoolCreated` on the Uniswap v3 factory names both tokens, the fee tier and the pool address; the v2 factory at `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f` emits `PairCreated` for the older design. New pools on Ethereum arrive minutes to hours apart, so query the last day rather than waiting on a stream. Saved query [here](https://ide.bitquery.io/Latest-pools-created-Uniswap-v3_9).
 
 ```graphql
 {
