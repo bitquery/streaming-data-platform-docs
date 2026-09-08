@@ -1,515 +1,285 @@
 ---
-title: "Uniswap V3 Position API - Track Liquidity Positions"
-description: "Uniswap V3 Position API - Track Liquidity Positions: get Ethereum DEX swaps, prices, and OHLC with Bitquery GraphQL queries and live streams."
-sidebar_label: Uniswap v3 LP Positions
----
-# Uniswap V3 Position API - Track Liquidity Positions
-
-Uniswap V3 introduced NFT-based liquidity positions, where each position is represented as an ERC-721 NFT. Bitquery's Position API allows you to track position creation, liquidity additions, removals, burns, and query position details in real-time.
-
-The Uniswap V3 NonfungiblePositionManager contract (`0xC36442b4a4522E871399CD717aBDD847Ab11FE88`) handles all position-related operations:
-
-- **Mint**: Creates new positions and returns a token ID
-- **Burn**: Closes positions (requires NFT ID)
-- **IncreaseLiquidity/DecreaseLiquidity**: Modifies existing positions (requires NFT ID)
-- **Positions**: Queries position details by token ID
-
-## Table of Contents
-
-### 1. Position Creation & Tracking
-
-- [Recent Position NFT Mints ➤](#recent-position-nft-mints)
-
-### 2. Position Management
-
-- [Burn Position Events ➤](#burn-position-events)
-- [Increase & Decrease Liquidity Events ➤](#increase--decrease-liquidity-events)
-
-### 3. Position Queries
-
-- [Get Position Details by Token ID ➤](#get-position-details-by-token-id)
-
-### 4. Uniswap V4
-
-- [Latest ModifyLiquidity Events (V4) ➤](#latest-modifyliquidity-events-on-uniswap-v4)
-
+title: "Uniswap V3 Position API: Mints, Burns, Liquidity Changes and Fee Collections"
+sidebar_label: "Uniswap v3 LP Positions"
+description: "Uniswap V3 positions on Ethereum via Bitquery GraphQL: mints with token IDs, burns, liquidity increases and decreases, fee collections, and V4 ModifyLiquidity."
+keywords:
+  - Uniswap V3 position API
+  - NonfungiblePositionManager
+  - Uniswap LP position token ID
+  - Uniswap V3 collect fees API
+  - Uniswap V4 ModifyLiquidity
 ---
 
-## Position Creation & Tracking
+import FAQ from "@site/src/components/FAQ";
 
-### Recent Position NFT Mints
+# Uniswap V3 Position API: Mints, Burns, Liquidity Changes and Fee Collections
 
-Track recently created Uniswap V3 positions. When users create a new position, the `mint` function is called and returns a unique NFT token ID representing the position.
+Every Uniswap V3 liquidity position on Ethereum is an NFT issued by the NonfungiblePositionManager, `0xc36442b4a4522e871399cd717abdd847ab11fe88`. The contract's calls and events are the whole lifecycle: `mint` creates a position and returns its token ID, `increaseLiquidity` and `decreaseLiquidity` resize it, `Collect` pays out fees, `burn` destroys it. Bitquery decodes all of them in the `Calls` and `Events` cubes, arguments and return values included, and the contract sees hundreds of position changes and around a thousand fee collections on a busy day. Every example below runs in the [IDE](https://ide.bitquery.io) on a free account against the realtime dataset, which is where decoded call arguments and returns live; the archive dataset does not serve the `Calls` cube. Uniswap V4 keeps positions inside its PoolManager instead, and the last section covers it.
 
-[Run Query ➤](https://ide.bitquery.io/recent-uniswap-position-NFTs-mint_1)
+## New positions with their token IDs
 
-<details>
-  <summary>Click to expand GraphQL query</summary>
+`mint` calls from the last day, newest first. The `params` struct arrives as one argument per member in contract order: token0, token1, fee, tickLower, tickUpper, amount0Desired, amount1Desired, amount0Min, amount1Min, recipient, deadline. `Returns` carries the new `tokenId`, the `liquidity` minted and the two amounts pulled in. Saved query [here](https://ide.bitquery.io/recent-uniswap-position-NFTs-mint_1).
 
 ```graphql
-query RecentPositionsRealtime {
+{
   EVM(network: eth) {
     Calls(
       where: {
         Call: {
           Signature: { Name: { is: "mint" } }
-          To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
+          To: { is: "0xc36442b4a4522e871399cd717abdd847ab11fe88" }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      limit: { count: 100 }
-      orderBy: { descending: Block_Number }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
-      Arguments {
-        Index
-        Name
-        Type
-        Path {
-          Name
-          Index
-        }
-        Value {
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-        }
-      }
-      Call {
-        Signature {
-          Name
-        }
-        To
-        Value
-        ValueInUSD
-        From
+      Block {
+        Time
       }
       Transaction {
-        position_creator: From
-        To
+        From
         Hash
-        ValueInUSD
-        Value
-        Time
       }
-      Block {
-        Number
-        Time
-      }
-      Returns {
+      Arguments {
+        Name
+        Path {
+          Name
+        }
         Value {
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
           ... on EVM_ABI_Address_Value_Arg {
             address
           }
-          ... on EVM_ABI_String_Value_Arg {
-            string
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
           }
           ... on EVM_ABI_Integer_Value_Arg {
             integer
           }
         }
-        Type
+      }
+      Returns {
         Name
+        Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+        }
       }
     }
   }
 }
 ```
 
-</details>
-
----
-
-## Position Management
-
-### Burn Position Events
-
-Track when liquidity providers close their positions. The `burn` function permanently removes the position NFT.
-
-[Run Query ➤](https://ide.bitquery.io/Uniswap-v3-weth-usdt-burn-calls-only)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+The same filter as a subscription delivers each new position as it is minted; expect one every few minutes rather than a firehose.
 
 ```graphql
-query LiquidityBurnEvents {
-  EVM(dataset: archive, network: eth) {
+subscription {
+  EVM(network: eth) {
+    Calls(
+      where: {
+        Call: {
+          Signature: { Name: { is: "mint" } }
+          To: { is: "0xc36442b4a4522e871399cd717abdd847ab11fe88" }
+        }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Transaction {
+        From
+        Hash
+      }
+      Returns {
+        Name
+        Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## Closed positions
+
+`burn` destroys the NFT once its liquidity is zero and fees are collected. The only argument is the token ID. Saved query [here](https://ide.bitquery.io/Uniswap-v3-weth-usdt-burn-calls-only).
+
+```graphql
+{
+  EVM(network: eth) {
     Calls(
       where: {
         Call: {
           Signature: { Name: { is: "burn" } }
-          To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
+          To: { is: "0xc36442b4a4522e871399cd717abdd847ab11fe88" }
         }
-        Block: { Date: { after: "2025-09-20", before: "2025-09-22" } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      limit: { count: 10 }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
-      Arguments {
-        Index
-        Name
-        Type
-        Path {
-          Name
-          Index
-        }
-        Value {
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-        }
-      }
-      Call {
-        Signature {
-          Name
-        }
-        To
-        Value
-        ValueInUSD
-        From
+      Block {
+        Time
       }
       Transaction {
         From
-        To
         Hash
-        ValueInUSD
-        Value
-        Time
       }
-      Block {
-        Number
-        Time
+      Arguments {
+        Name
+        Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+        }
       }
     }
   }
 }
 ```
 
-</details>
+## Liquidity added to or removed from a position
 
-### Increase & Decrease Liquidity Events
-
-Monitor when liquidity providers add or remove liquidity from existing positions. These operations modify the liquidity amount without creating or destroying the NFT. The `Returns` field will have the `liquidity`, `amount0`,`amount1`.
-
-[Run Query ➤](https://ide.bitquery.io/uniswap-v3-liquidity-increase-decrease)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+`increaseLiquidity` and `decreaseLiquidity` keep the token ID and change the size. The `params` members arrive in order: tokenId, then the desired and minimum amounts for `increaseLiquidity` or the liquidity to remove and the minimum amounts for `decreaseLiquidity`, then the deadline. `Returns` gives the liquidity delta and the token amounts moved. Saved query [here](https://ide.bitquery.io/uniswap-v3-liquidity-increase-decrease).
 
 ```graphql
-query LiquidityEvents {
-  EVM(dataset: archive, network: eth) {
+{
+  EVM(network: eth) {
     Calls(
       where: {
         Call: {
-          Signature: {
-            Name: { in: ["increaseLiquidity", "decreaseLiquidity"] }
-          }
-          To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
+          Signature: { Name: { in: ["increaseLiquidity", "decreaseLiquidity"] } }
+          To: { is: "0xc36442b4a4522e871399cd717abdd847ab11fe88" }
         }
-        Block: { Date: { after: "2025-09-20", before: "2025-09-22" } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      limit: { count: 1 }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
-      Arguments {
-        Index
-        Name
-        Type
-        Path {
-          Name
-          Index
-        }
-        Value {
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-        }
+      Block {
+        Time
       }
       Call {
         Signature {
           Name
         }
-        To
-        Value
-        ValueInUSD
-        From
       }
       Transaction {
         From
-        To
         Hash
-        ValueInUSD
-        Value
-        Time
       }
-      Block {
-        Number
-        Time
-      }
-      Returns {
+      Arguments {
+        Name
         Value {
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
           ... on EVM_ABI_BigInt_Value_Arg {
             bigInteger
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
           }
           ... on EVM_ABI_Integer_Value_Arg {
             integer
           }
         }
+      }
+      Returns {
         Name
+        Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
+        }
       }
     }
   }
 }
 ```
 
-</details>
+## Position details by token ID
 
----
-
-## Position Queries
-
-### Get Position Details by Token ID
-
-Query detailed information about a specific position using its NFT token ID. This returns the position's configuration including tick range, liquidity, tokens owed, and more.
-
-[Run Query ➤](https://ide.bitquery.io/uniswap-v3-weth-usdt-positions-of-tokenid-with-returns)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+`positions(tokenId)` is a view function, but contracts call it on-chain all day, and each recorded call returns the full position: `token0`, `token1`, `fee`, `tickLower`, `tickUpper`, `liquidity`, the fee growth counters and the tokens owed. Add the commented `Arguments` filter to pin one token ID. Saved query [here](https://ide.bitquery.io/uniswap-v3-weth-usdt-positions-of-tokenid-with-returns).
 
 ```graphql
-query PositionDetailsByTokenId {
-  EVM(dataset: archive, network: eth) {
+{
+  EVM(network: eth) {
     Calls(
       where: {
         Call: {
           Signature: { Name: { is: "positions" } }
-          To: { is: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88" }
+          To: { is: "0xc36442b4a4522e871399cd717abdd847ab11fe88" }
         }
-        Block: { Date: { after: "2025-09-20", before: "2025-09-22" } }
-        Arguments: { includes: { Value: { BigInteger: { eq: "783837" } } } }
+        # Arguments: { includes: { Value: { BigInteger: { eq: "1360638" } } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
       limit: { count: 10 }
-      orderBy: { descending: Block_Number }
+      orderBy: { descending: Block_Time }
     ) {
-      Arguments {
-        Index
-        Name
-        Type
-        Path {
-          Name
-          Index
-        }
-        Value {
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-        }
+      Block {
+        Time
       }
       Call {
-        Signature {
-          Name
-        }
-        To
-        Value
-        ValueInUSD
         From
       }
-      Transaction {
-        From
-        To
-        Hash
-        ValueInUSD
-        Value
-        Time
-      }
-      Block {
-        Number
-        Time
-      }
-      Returns {
+      Arguments {
+        Name
         Value {
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
           ... on EVM_ABI_BigInt_Value_Arg {
             bigInteger
           }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
+        }
+      }
+      Returns {
+        Name
+        Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
           }
           ... on EVM_ABI_Integer_Value_Arg {
             integer
           }
+          ... on EVM_ABI_Address_Value_Arg {
+            address
+          }
         }
-        Type
-        Name
       }
     }
   }
 }
 ```
 
-</details>
+## Fee collections
 
-## Fee Collectors on Uniswap
-
-## Recent Fee Collections
-
-This query lists the most recent Uniswap V3 fee collection events by scanning `Collect` logs emitted by the Nonfungible Position Manager (`0xc36442b4a4522e871399cd717abdd847ab11fe88`).
-
-It returns decoded arguments—including the Uniswap position `tokenId`, the `recipient` address, and the collected `amount0` and `amount1` values (raw integer amounts).
-
-[Run query](https://ide.bitquery.io/Fee-collection-on-Uniswap-v3-Positions)
+The `Collect` event on the position manager names the `tokenId`, the `recipient` and the raw `amount0` and `amount1` paid out. Filtering on the log's contract catches collections routed through other contracts as well as direct calls. Saved query [here](https://ide.bitquery.io/Fee-collection-on-Uniswap-v3-Positions).
 
 ```graphql
 {
-  EVM(dataset: realtime, network: eth) {
+  EVM(network: eth) {
     Events(
-      limit: {count: 20}
-      where: {Log: {Signature: {Name: {is: "Collect"}}}, Transaction: {To: {is: "0xc36442b4a4522e871399cd717abdd847ab11fe88"}}}
-      orderBy: {descending: Block_Time}
+      where: {
+        Log: {
+          SmartContract: { is: "0xc36442b4a4522e871399cd717abdd847ab11fe88" }
+          Signature: { Name: { is: "Collect" } }
+        }
+      }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
       Block {
         Time
-        Number
-        Hash
-      }
-      Receipt {
-        ContractAddress
-      }
-      Topics {
-        Hash
-      }
-      TransactionStatus {
-        Success
-      }
-      LogHeader {
-        Address
-        Index
-        Data
       }
       Transaction {
         Hash
         From
-        To
-      }
-      Log {
-        EnterIndex
-        ExitIndex
-        Index
-        LogAfterCallIndex
-        Pc
-        SmartContract
-        Signature {
-          Name
-          Signature
-        }
       }
       Arguments {
         Name
         Value {
-          ... on EVM_ABI_Integer_Value_Arg {
-            integer
-          }
-          ... on EVM_ABI_Address_Value_Arg {
-            address
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
-          }
           ... on EVM_ABI_BigInt_Value_Arg {
             bigInteger
           }
-          ... on EVM_ABI_Bytes_Value_Arg {
-            hex
-          }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
+          ... on EVM_ABI_Address_Value_Arg {
+            address
           }
         }
       }
@@ -518,145 +288,69 @@ It returns decoded arguments—including the Uniswap position `tokenId`, the `re
 }
 ```
 
-## Uniswap V4
+## Uniswap V4 positions
 
-Uniswap V4 uses a different architecture than V3: a single **PoolManager** contract (`0x000000000004444c5dc75cb358380d2e3de08a90`) manages pool state, and liquidity changes are emitted as `ModifyLiquidity` events.
-
-### Latest ModifyLiquidity Events on Uniswap V4
-
-Track the most recent liquidity modifications on Uniswap V4 by querying `ModifyLiquidity` events from the PoolManager contract. The response includes `tickLower` and `tickUpper` (int24 tick range), `liquidityDelta` (int256 — positive for adds, negative for removes), and `salt` (bytes32).
-
-[Run Query ➤](https://ide.bitquery.io/Latest-ModifyLiquidity-Events-on-Uniswap-v4)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+V4 has no position NFT contract of its own: the PoolManager, `0x000000000004444c5dc75cb358380d2e3de08a90`, emits `ModifyLiquidity` with the pool `id`, the `sender`, `tickLower`, `tickUpper`, the signed `liquidityDelta` and the position `salt`. A positive delta adds liquidity and a negative one removes it. Saved query [here](https://ide.bitquery.io/Latest-ModifyLiquidity-Events-on-Uniswap-v4).
 
 ```graphql
-query MyQuery {
-  EVM(dataset: realtime, network: eth) {
+{
+  EVM(network: eth) {
     Events(
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
       where: {
         Log: {
           SmartContract: { is: "0x000000000004444c5dc75cb358380d2e3de08a90" }
           Signature: { Name: { is: "ModifyLiquidity" } }
         }
       }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
     ) {
       Block {
-        Number
         Time
-      }
-      Call {
-        CallPath
-        InternalCalls
-        From
-        To
-        Signature {
-          Name
-        }
-      }
-      Topics {
-        Hash
-      }
-      Receipt {
-        CumulativeGasUsed
       }
       Transaction {
         From
-        To
-        Type
+        Hash
       }
       Arguments {
         Name
-        Type
         Value {
+          ... on EVM_ABI_BigInt_Value_Arg {
+            bigInteger
+          }
           ... on EVM_ABI_Integer_Value_Arg {
             integer
-          }
-          ... on EVM_ABI_String_Value_Arg {
-            string
           }
           ... on EVM_ABI_Address_Value_Arg {
             address
           }
-          ... on EVM_ABI_BigInt_Value_Arg {
-            bigInteger
-          }
           ... on EVM_ABI_Bytes_Value_Arg {
             hex
           }
-          ... on EVM_ABI_Boolean_Value_Arg {
-            bool
-          }
         }
-      }
-      Log {
-        Signature {
-          Name
-        }
-        SmartContract
       }
     }
   }
 }
 ```
 
-</details>
+## Turning ticks into a price band
 
-## Key Concepts
+A position earns fees only while the pool price sits between its ticks. The price at a tick is `1.0001 ^ tick` in token1 per token0 raw units, so a position with `tickLower` of -100 and `tickUpper` of 100 covers roughly 0.990 to 1.010. Multiply by `10 ^ (decimals0 - decimals1)` to get a human price, and invert it if you want token0 per token1. The tick values come from the `mint` arguments, the `positions` returns or the V4 `ModifyLiquidity` event above.
 
-### Understanding Uniswap V3 Positions
+<FAQ
+  items={[
+    { q: "How do I get the token ID of a new Uniswap V3 position?", a: "Query mint calls to the NonfungiblePositionManager and read Returns: tokenId is the first return value, followed by liquidity, amount0 and amount1. The subscription form delivers each new position as it is minted." },
+    { q: "Why does the archive dataset fail for these queries?", a: "Decoded call arguments and returns are served from the realtime dataset only; the archive dataset does not serve the Calls cube. Use relative time windows on the default dataset as the examples do." },
+    { q: "How do I track fees collected by one position?", a: "Filter the Collect events on the position manager and add Arguments includes Value BigInteger eq with the token ID, the same filter shape shown for positions calls." },
+    { q: "Which contract holds Uniswap V4 positions?", a: "The PoolManager, 0x000000000004444c5dc75cb358380d2e3de08a90. Its ModifyLiquidity event carries the pool id, sender, tick range, liquidityDelta and salt; there is no separate position NFT contract in V4." },
+    { q: "Can I see the liquidity of a whole pool rather than one position?", a: "Yes. The Ethereum liquidity API page covers pool reserves and changes through DEXPoolEvents, with USD values on every row." },
+  ]}
+/>
 
-1. **Position NFTs**: Each liquidity position is a unique ERC-721 NFT with a token ID
-2. **Token ID**: Returned from `mint` calls, required for all subsequent operations
-3. **Tick Range**: Positions are defined by upper and lower tick bounds
-4. **Liquidity**: Amount of liquidity provided within the tick range
-5. **Fees**: Uncollected fees accumulate and can be collected separately
+## Related pages
 
-### Position Lifecycle
-
-1. **Creation** (`mint`): User creates position → receives NFT token ID
-2. **Management**:
-   - `increaseLiquidity`: Add more liquidity to existing position
-   - `decreaseLiquidity`: Remove liquidity from existing position
-   - `collect`: Collect accumulated fees
-3. **Closure** (`burn`): Remove all liquidity and destroy NFT
-
-### Calculating Price Bands from Position Ticks
-
-Uniswap V3 positions are defined by tick ranges, which represent the price boundaries where liquidity is active. You can calculate the actual price band from the tick values returned in the position arguments.
-
-**Formula:**
-
-```
-price_lower = 1.0001 ** tick_lower
-price_upper = 1.0001 ** tick_upper
-```
-
-**Where:**
-
-- `tick_lower`: The lower tick boundary (available in Arguments)
-- `tick_upper`: The upper tick boundary (available in Arguments)
-- `1.0001`: The base multiplier used by Uniswap V3
-
-**Example:**
-
-If a position has:
-
-- `tick_lower = -100`
-- `tick_upper = 100`
-
-Then:
-
-- `price_lower = 1.0001 ** (-100) ≈ 0.990`
-- `price_upper = 1.0001 ** 100 ≈ 1.010`
-
-**Note:** The tick values are returned in the `Arguments` field when querying position data using the `positions`, `mint`, `increaseLiquidity`, or `decreaseLiquidity` functions.
-
-### NonfungiblePositionManager Contract
-
-- **Address**: `0xC36442b4a4522E871399CD717aBDD847Ab11FE88` (Ethereum Mainnet)
-- **Purpose**: Manages all Uniswap V3 liquidity positions as NFTs
-- **Key Functions**: `mint`, `burn`, `increaseLiquidity`, `decreaseLiquidity`, `positions`, `collect`
+- [Uniswap API on Ethereum](/docs/blockchain/Ethereum/dextrades/uniswap-api/)
+- [Uniswap v4 API on Ethereum](/docs/blockchain/Ethereum/dextrades/uniswap-v4-api)
+- [Ethereum liquidity API](/docs/blockchain/Ethereum/dextrades/ethereum-liquidity-api)
+- [Ethereum slippage API](/docs/blockchain/Ethereum/dextrades/ethereum-slippage-api)
