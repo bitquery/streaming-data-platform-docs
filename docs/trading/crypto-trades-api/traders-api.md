@@ -1,6 +1,7 @@
 ---
-title: "Traders API — Real-Time Wallet Trade Streams"
-description: "Traders API — Real-Time Wallet Trade Streams via Bitquery Trading APIs for multi-chain prices, OHLC candles, volume metrics, and live streams."
+title: "Traders API: Stream and Rank Wallet Trades on Solana, Ethereum, BSC, Base"
+sidebar_label: "Traders API"
+description: "Wallet view of the Trading API: stream one or many wallets' DEX trades, filter by token, chain, DEX or pair, catch whale trades, rank traders by volume and PnL."
 keywords:
   - traders API
   - wallet trade tracking API
@@ -9,64 +10,35 @@ keywords:
   - whale trader alerts API
   - smart money tracking crypto
   - multi-wallet monitoring subscription
-  - track wallet trades GraphQL
-  - Solana trader API Bitquery
-  - Ethereum wallet trade history
-  - BSC top traders API
-  - wallet DEX trade filter
-  - top traders by trade count
   - trader PnL GraphQL query
   - top traders by PnL API
-  - crypto wallet activity feed
 ---
-# Traders API — Real-Time Wallet Trade Streams
 
-:::tip Which trade API should you use?
-The Traders API is the wallet-centric view of **`Trading.Trades`** — designed for **real-time and the last ~30 days**. For older / historical wallet activity (anything beyond ~30 days), use chain-level [`DEXTrades`](/docs/cubes/dextrades) or [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) on the relevant chain root. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the full comparison.
-:::
+import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
-> **Bitquery Traders API** lets you **stream wallet trades in real time** across **Solana**, **Ethereum**, **BSC**, **Base**, and **Arbitrum** . You can track a **single wallet** or **multiple addresses**, detect **whale trades** above a USD threshold, filter by **token**, **pair**, **DEX program**, or **chain**, rank **top traders by volume** or **PnL**, and aggregate **buy/sell USD** with **`sum`**, **`calculate`**, **`limitBy`**, and **`orderBy`** using **GraphQL subscriptions** and **queries**.
+# Traders API: Stream and Rank Wallet Trades on Solana, Ethereum, BSC, Base
 
-This page focuses on **trader/wallet-centric** queries using the unified **Trading** schema. For trade-level streaming (by token, pair, chain, or DEX), see the **[Trades API](/docs/trading/crypto-trades-api/trades-api)**.
+The Traders API is the wallet view of `Trading.Trades`: every DEX trade a wallet makes on Solana, Ethereum, BSC, Base, Arbitrum and the other chains the cube covers, with the token pair, the USD amounts, the market and the side on each row. Filter on `Trader.Address` for one wallet, `in` for a watchlist, and combine with token, chain, DEX or pair filters. The cube keeps about a month of trades, which is where copy trading, whale alerts and leaderboards live; for older wallet history use the chain cubes. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked wallet, `AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51`, is one of the most active Solana wallets at the time of writing; take any address from the top-traders query below.
 
 ## Video Tutorial
 
-import VideoPlayer from "../../../src/components/videoplayer.js";
-
 <VideoPlayer url="https://youtu.be/-Jwh2I46XIw" />
 
----
+## How do I stream all trades of a wallet?
 
-## How Do I Stream All Trades for a Specific Wallet?
-
-> Subscribe to **every DEX trade** a wallet executes in **real time** across all supported chains — captures **buys and sells** across all tokens and DEXs, returning **token pair**, **USD amounts**, **market cap**, **supply**, **pool**, and **transaction metadata**. Useful for **copy trading bots**, **whale watching**, and **wallet activity feeds**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-trades-of-a-trader).
+Every DEX trade the wallet sends, on every chain, as it lands. Saved stream [here](https://ide.bitquery.io/All-trades-of-a-trader).
 
 ```graphql
 subscription {
   Trading {
-    Trades(
-      where: {
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
+    Trades(where: { Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } } }) {
+      Block {
+        Time
       }
-    ) {
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
+      Price
+      PriceInUsd
       Amounts {
         Base
         Quote
@@ -75,132 +47,63 @@ subscription {
         Base
         Quote
       }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
       Pair {
-        Pool {
-          Address
+        Token {
+          Symbol
+          Id
+        }
+        QuoteToken {
+          Symbol
+          Id
         }
         Market {
           Address
-          Program
+          Protocol
           Network
         }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
+      }
+      TransactionHeader {
+        Fee
       }
     }
   }
 }
 ```
 
----
+## How do I track a wallet's trades on one token?
 
-## How Do I Track a Wallet's Trades on a Specific Token?
-
-> Filter a wallet's trade stream to a **single token** — combines **`Trader.Address`** with **`any`** on **`Pair.Token.Id`** and **`Pair.QuoteToken.Id`** so the token is matched whether it appears on the base or quote side of the pair. Returns **side**, **USD amounts**, **market cap**, **supply**, and **pool** for every trade — useful for **position tracking**, **entry/exit analysis**, and **per-token wallet stats**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/trades-of-a-specific-trader-of-a-specific-token_1).
+The token can sit on either side of a pair, so match `Pair.Token.Id` or `Pair.QuoteToken.Id` with `any`. Token ids are `bid:<chain>:<address>`. Saved stream [here](https://ide.bitquery.io/trades-of-a-specific-trader-of-a-specific-token_1).
 
 ```graphql
 subscription {
   Trading {
     Trades(
       where: {
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
         any: [
-          {
-            Pair: {
-              Token: {
-                Id: {
-                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
-                }
-              }
-            }
-          }
-          {
-            Pair: {
-              QuoteToken: {
-                Id: {
-                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
-                }
-              }
-            }
-          }
+          { Pair: { Token: { Id: { is: "bid:solana:AGi2s9zPRPHs3zEDPhPTroumTEXK5ufymYSfEFndCSSW" } } } }
+          { Pair: { QuoteToken: { Id: { is: "bid:solana:AGi2s9zPRPHs3zEDPhPTroumTEXK5ufymYSfEFndCSSW" } } } }
         ]
-        Pair: { Market: { Network: { is: "Solana" } } }
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
       }
     ) {
+      Block {
+        Time
+      }
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
+      PriceInUsd
       AmountsInUsd {
         Base
         Quote
       }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
       Pair {
-        Pool {
-          Address
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
         Token {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
         }
         QuoteToken {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
+        }
+        Market {
+          Protocol
         }
       }
     }
@@ -208,13 +111,9 @@ subscription {
 }
 ```
 
----
+## How do I monitor several wallets in one subscription?
 
-## How Do I Monitor Multiple Wallets in One Subscription?
-
-> Watch **multiple wallets** in a **single real-time subscription** using the **`in`** operator on **`Trader.Address`** — captures every buy and sell across all tokens for your entire watchlist. Ideal for **copy trading dashboards**, **fund monitoring**, and **whale group tracking**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-monitor-multiple-wallets-in-one-subscription).
+An `in` list on the trader address; each message carries the wallet it belongs to. Saved stream [here](https://ide.bitquery.io/How-do-I-monitor-multiple-wallets-in-one-subscription).
 
 ```graphql
 subscription {
@@ -224,65 +123,34 @@ subscription {
         Trader: {
           Address: {
             in: [
-              "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"
-              "7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX"
-              "6LNdbvyb11JH8qxAsJoPSfkwK4zJDQKQ6LNp4mxt8VpR"
+              "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51"
+              "Gygj9QQby4j2jryqyqBHvLP7ctv2SaANgh4sCb69BUpA"
+              "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT"
             ]
           }
         }
       }
     ) {
-      Side
-      Supply {
-        CirculatingSupply
-        MarketCap
+      Block {
+        Time
       }
       Trader {
         Address
       }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
+      Side
       AmountsInUsd {
         Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
       }
       Pair {
-        Pool {
-          Address
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
         Token {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
         }
         QuoteToken {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
+        }
+        Market {
           Network
+          Protocol
         }
       }
     }
@@ -290,13 +158,9 @@ subscription {
 }
 ```
 
----
+## How do I stream a wallet's trades on one chain?
 
-## How Do I Stream a Wallet's Trades on a Specific Chain?
-
-> Filter a wallet's real-time trade stream to a **single chain** (e.g. Solana, Ethereum, BSC) by combining **`Trader.Address`** with **`Pair.Market.Network`**. Returns every swap the wallet executes on that chain with **side**, **USD amounts**, **market cap**, **pool**, and **transaction details**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-stream-a-wallets-trades-on-a-specific-chain).
+Add `Pair.Market.Network`. Saved stream [here](https://ide.bitquery.io/How-do-I-stream-a-wallets-trades-on-a-specific-chain).
 
 ```graphql
 subscription {
@@ -304,62 +168,26 @@ subscription {
     Trades(
       where: {
         Pair: { Market: { Network: { is: "Solana" } } }
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
       }
     ) {
+      Block {
+        Time
+      }
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
       AmountsInUsd {
         Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
       }
       Pair {
-        Pool {
-          Address
+        Token {
+          Symbol
+        }
+        QuoteToken {
+          Symbol
         }
         Market {
           Address
-          Program
-          Network
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
+          Protocol
         }
       }
     }
@@ -367,71 +195,35 @@ subscription {
 }
 ```
 
-Change `Network` to `"Ethereum"`, `"Binance Smart Chain"`, `"Base"`, `"Arbitrum"`, etc. for other chains.
+## How do I catch whale trades as they happen?
 
----
-
-## How Do I Detect Whale Traders in Real Time?
-
-> Stream **large trades** above a **USD threshold** across all chains — each event includes the **trader wallet address**, **token pair**, **USD amounts**, **market cap**, **pool**, and **transaction details**. Use for **whale alert bots**, **smart money feeds**, and **large-order flow monitoring**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/Stream---Trades-over-100k-usd).
+Trades over a hundred thousand dollars on any chain, which arrive steadily across the cube. Saved stream [here](https://ide.bitquery.io/Stream---Trades-over-100k-usd).
 
 ```graphql
 subscription {
   Trading {
     Trades(where: { AmountsInUsd: { Base: { gt: 100000 } } }) {
-      Side
-      Supply {
-        CirculatingSupply
-        MarketCap
+      Block {
+        Time
       }
+      Side
       Trader {
         Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
       }
       AmountsInUsd {
         Base
         Quote
       }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
       Pair {
-        Pool {
-          Address
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
         Token {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
         }
         QuoteToken {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
+        }
+        Market {
           Network
+          Protocol
         }
       }
     }
@@ -439,78 +231,39 @@ subscription {
 }
 ```
 
-Adjust the `gt` threshold — e.g. `10000` for $10K+, `1000000` for $1M+ trades.
+## How do I get the whale trades of one wallet?
 
----
-
-## How Do I Stream Whale Trades for a Specific Wallet?
-
-> Combine **wallet address** and **USD amount threshold** to stream only **large trades** by a specific wallet — useful for tracking when a **known whale** or **smart money wallet** makes a significant move above your chosen USD value.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-stream-whale-trades-for-a-specific-wallet).
+Combine the trader and the USD floor. The example wallet makes six-figure stablecoin trades on Manifest at the time of writing, so the query form over the last day returns rows; the same `where` as a subscription fires only when the wallet trades. Saved query [here](https://ide.bitquery.io/How-do-I-stream-whale-trades-for-a-specific-wallet).
 
 ```graphql
-subscription {
+{
   Trading {
     Trades(
       where: {
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
-        AmountsInUsd: { Base: { gt: 10000 } }
+        Trader: { Address: { is: "5edLA6ZZFAUfDa8mkdPTi6GXY7fqiZ3CrbRwF7dCGjgr" } }
+        AmountsInUsd: { Base: { gt: 100000 } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
+      orderBy: { descending: Block_Time }
+      limit: { count: 20 }
     ) {
+      Block {
+        Time
+      }
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
       AmountsInUsd {
         Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
       }
       Pair {
-        Pool {
-          Address
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
         Token {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
         }
         QuoteToken {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
+        }
+        Market {
           Network
+          Protocol
         }
       }
     }
@@ -518,76 +271,42 @@ subscription {
 }
 ```
 
----
+## How do I get a wallet's recent trades?
 
-## How Do I Get Recent Trades for a Wallet (Last 10 Minutes)?
-
-> Query a wallet's **most recent trades** using **`Block.Time.since_relative`** — returns trades sorted by **most recent first** with **side**, **USD amounts**, **market cap**, **pool**, and **token pair**. Ideal for building **wallet activity feeds**, **recent trades tables**, and **portfolio dashboards**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-get-recent-trades-for-a-wallet-last-10-minutes).
+The last ten minutes as a query, newest first. Saved query [here](https://ide.bitquery.io/How-do-I-get-recent-trades-for-a-wallet-last-10-minutes).
 
 ```graphql
 {
   Trading {
     Trades(
       orderBy: { descending: Block_Time }
+      limit: { count: 50 }
       where: {
         Block: { Time: { since_relative: { minutes_ago: 10 } } }
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
       }
     ) {
+      Block {
+        Time
+      }
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
+      Price
+      PriceInUsd
       AmountsInUsd {
         Base
         Quote
       }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
       Pair {
-        Pool {
-          Address
+        Token {
+          Symbol
+          Id
+        }
+        QuoteToken {
+          Symbol
         }
         Market {
           Address
-          Program
-          Network
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
+          Protocol
           Network
         }
       }
@@ -596,13 +315,9 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-ge
 }
 ```
 
----
+## How do I watch several wallets on one token?
 
-## How Do I Monitor Multiple Wallets Trading a Specific Token?
-
-> Combine a **wallet watchlist** with a **token filter** using the **`any`** combinator on **`Pair.Token.Id`** and **`Pair.QuoteToken.Id`** — captures trades where any of the watched wallets swap the token on either side of the pair. Ideal for **tracking smart money positions on a token**, **coordinated trading detection**, and **group wallet analysis**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-monitor-multiple-wallets-trading-a-specific-token).
+A watchlist and a token together, the copy-trading shape. Saved stream [here](https://ide.bitquery.io/How-do-I-monitor-multiple-wallets-trading-a-specific-token).
 
 ```graphql
 subscription {
@@ -612,84 +327,33 @@ subscription {
         Trader: {
           Address: {
             in: [
-              "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3"
-              "7eWHXZefGY98o9grrrt1Z3j7DcPDEhA4UviQ1pVNhTXX"
+              "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51"
+              "Gygj9QQby4j2jryqyqBHvLP7ctv2SaANgh4sCb69BUpA"
             ]
           }
         }
         any: [
-          {
-            Pair: {
-              Token: {
-                Id: {
-                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
-                }
-              }
-            }
-          }
-          {
-            Pair: {
-              QuoteToken: {
-                Id: {
-                  is: "bid:solana:4YiLHDR4B4pE4R5GUMA8HG8YunyeLwcobtEtvwMupump"
-                }
-              }
-            }
-          }
+          { Pair: { Token: { Id: { is: "bid:solana:AGi2s9zPRPHs3zEDPhPTroumTEXK5ufymYSfEFndCSSW" } } } }
+          { Pair: { QuoteToken: { Id: { is: "bid:solana:AGi2s9zPRPHs3zEDPhPTroumTEXK5ufymYSfEFndCSSW" } } } }
         ]
       }
     ) {
-      Side
-      Supply {
-        CirculatingSupply
-        MarketCap
+      Block {
+        Time
       }
       Trader {
         Address
       }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
+      Side
       AmountsInUsd {
         Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
       }
       Pair {
-        Pool {
-          Address
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
         Token {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
         }
         QuoteToken {
-          Address
-          Id
-          IsNative
           Symbol
-          TokenId
-          Network
         }
       }
     }
@@ -697,80 +361,36 @@ subscription {
 }
 ```
 
----
+## How do I stream a wallet's trades on one DEX?
 
-## How Do I Stream a Wallet's Trades on a Specific DEX?
-
-> Filter a wallet's trade stream to a **specific DEX program** (e.g. Raydium, PumpSwap, PancakeSwap) by combining **`Trader.Address`** with **`Pair.Market.Program`**. Useful for understanding **which DEXs a wallet prefers**, **protocol-level analytics**, and **DEX-specific copy trading**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-stream-a-wallets-trades-on-a-specific-DEX).
+`Pair.Market.Program` is the DEX program on Solana and the router or pool manager on EVM chains; the example is Raydium's CPMM. Saved stream [here](https://ide.bitquery.io/How-do-I-stream-a-wallets-trades-on-a-specific-DEX).
 
 ```graphql
 subscription {
   Trading {
     Trades(
       where: {
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
-        Pair: {
-          Market: {
-            Program: { is: "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA" }
-          }
-        }
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
+        Pair: { Market: { Program: { is: "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C" } } }
       }
     ) {
+      Block {
+        Time
+      }
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
       AmountsInUsd {
         Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
       }
       Pair {
-        Pool {
-          Address
+        Token {
+          Symbol
+        }
+        QuoteToken {
+          Symbol
         }
         Market {
           Address
-          Program
-          Network
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
+          Protocol
         }
       }
     }
@@ -778,87 +398,34 @@ subscription {
 }
 ```
 
-Change the `Program` address to target different DEXs — e.g. `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` for Pump.fun.
+## How do I get a wallet's trades on one pair?
 
----
-
-## How Do I Get a Wallet's Trades on a Specific Pair?
-
-> Filter a wallet's trades to a **specific token pair** (e.g. WSOL/USDC) by combining **`Trader.Address`**, **`Pair.Token.Id`**, and **`Pair.QuoteToken.Id`** — captures every swap the wallet makes between those two tokens **across all pools and DEXs**. Useful for **pair-level position tracking** and **per-pair PnL**.
-
-You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/How-do-I-get-a-wallets-trades-on-a-specific-pair).
+Pin both token ids; here WSOL against USDC. Saved stream [here](https://ide.bitquery.io/How-do-I-get-a-wallets-trades-on-a-specific-pair).
 
 ```graphql
 subscription {
   Trading {
     Trades(
       where: {
-        Trader: {
-          Address: { is: "GWcAopUZKokUUQAMDrNzd1YVHLJqbzJomu2pzNqLe9U3" }
-        }
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
         Pair: {
-          Token: {
-            Id: { is: "bid:solana:So11111111111111111111111111111111111111112" }
-          }
-          QuoteToken: {
-            Id: {
-              is: "bid:solana:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-            }
-          }
+          Token: { Id: { is: "bid:solana:So11111111111111111111111111111111111111112" } }
+          QuoteToken: { Id: { is: "bid:solana:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" } }
         }
       }
     ) {
+      Block {
+        Time
+      }
       Side
-      Supply {
-        CirculatingSupply
-        MarketCap
-      }
-      Trader {
-        Address
-      }
-      TransactionHeader {
-        Fee
-        FeePayer
-        Sender
-        To
-      }
-      Amounts {
-        Base
-        Quote
-      }
+      Price
       AmountsInUsd {
         Base
-        Quote
-      }
-      Block {
-        Date
-        Time
-        Timestamp
       }
       Pair {
-        Pool {
-          Address
-        }
         Market {
           Address
-          Program
-          Network
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
+          Protocol
         }
       }
     }
@@ -866,13 +433,9 @@ subscription {
 }
 ```
 
----
+## Who are the most active traders on Solana this hour?
 
-## Who Are the Top Traders on Solana by Trade Count in the Last Hour?
-
-> Rank up to **100** **Solana** wallets in the last **hour** by **trade count**, with **total quoted USD volume**, **per-side buy/sell volume**, and **buy/sell trade counts**. Useful for **activity leaderboards**, **bot detection**, and **comparing aggressive buyers vs sellers**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Most-active-traders-by-trade-count#).
+Wallets ranked by trade count, with USD volume split by side. Change the network or the window as needed. Saved query [here](https://ide.bitquery.io/Most-active-traders-by-trade-count).
 
 ```graphql
 {
@@ -885,27 +448,25 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Most-active
         Pair: { Market: { Network: { is: "Solana" } } }
       }
     ) {
+      Trader {
+        Address
+      }
       Trades_count: count
       Total_Volume: sum(of: AmountsInUsd_Quote)
       buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
       sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
       buys: count(if: { Side: { is: "Buy" } })
       sells: count(if: { Side: { is: "Sell" } })
-      Trader {
-        Address
-      }
     }
   }
 }
 ```
 
----
+Sort the same query on `Total_Volume` to rank whales by USD volume instead. Saved query [here](https://ide.bitquery.io/Whales-traders-by-total-USD-volume_1).
 
-## How do I rank whale traders on Solana by total USD volume (last hour)?
+## Which wallets only bought, or only sold, this hour?
 
-> Same **one-hour Solana** window as above, but ordered by **`Total_Volume`** (quoted USD) so the **largest notional traders** surface first — still includes **trade count** and **buy vs sell** split.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Whales-traders-by-total-USD-volume_1).
+`selectWhere` on an aggregate keeps rows where that count is zero. Sort by volume to see the largest one-sided flows. Saved queries: [only buys](https://ide.bitquery.io/Traders-who-only-buys), [only sells](https://ide.bitquery.io/Traders-who-only-sells_1).
 
 ```graphql
 {
@@ -918,93 +479,23 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Whales-trad
         Pair: { Market: { Network: { is: "Solana" } } }
       }
     ) {
-      Trades_count: count
-      Total_Volume: sum(of: AmountsInUsd_Quote)
-      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
-      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
-      buys: count(if: { Side: { is: "Buy" } })
-      sells: count(if: { Side: { is: "Sell" } })
       Trader {
         Address
       }
-    }
-  }
-}
-```
-
----
-
-## How do I find traders on Solana who only bought (no sells) in the last hour?
-
-> Lists wallets with **`sells: 0`** in the last hour on **Solana** (only **Buy** side trades), ordered by **total quoted USD volume**. Adjust the window or network in **`where`** for other scopes.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-who-only-buys#).
-
-```graphql
-{
-  Trading {
-    Trades(
-      limit: { count: 100 }
-      orderBy: [{ descendingByField: "Total_Volume" }]
-      where: {
-        Block: { Time: { since_relative: { hours_ago: 1 } } }
-        Pair: { Market: { Network: { is: "Solana" } } }
-      }
-    ) {
       Trades_count: count
       Total_Volume: sum(of: AmountsInUsd_Quote)
-      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
-      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
       buys: count(if: { Side: { is: "Buy" } })
       sells: count(if: { Side: { is: "Sell" } }, selectWhere: { eq: "0" })
-      Trader {
-        Address
-      }
     }
   }
 }
 ```
 
----
+For wallets that only sold, move `selectWhere` to `buys`.
 
-## How do I find traders on Solana who only sold (no buys) in the last hour?
+## Which pools did a wallet trade this hour?
 
-> Lists wallets with **`buys: 0`** (only **Sell** side trades) in the same window. Pair with the **only buy** query to study **one-sided flow**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-who-only-sells_1#).
-
-```graphql
-{
-  Trading {
-    Trades(
-      limit: { count: 100 }
-      orderBy: [{ descendingByField: "Total_Volume" }]
-      where: {
-        Block: { Time: { since_relative: { hours_ago: 1 } } }
-        Pair: { Market: { Network: { is: "Solana" } } }
-      }
-    ) {
-      Trades_count: count
-      Total_Volume: sum(of: AmountsInUsd_Quote)
-      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
-      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
-      buys: count(if: { Side: { is: "Buy" } }, selectWhere: { eq: "0" })
-      sells: count(if: { Side: { is: "Sell" } })
-      Trader {
-        Address
-      }
-    }
-  }
-}
-```
-
----
-
-## How do I list pools a wallet traded on Solana (last hour)?
-
-> For a fixed **`Trader.Address`**, aggregate up to **100** **pools** by **trade count** with **volume** and **buy/sell** breakdown per pool. Replace the sample address with any wallet you track.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Trader-interacted-with-these-tokens).
+One row per market with the counts and USD volume. Saved query [here](https://ide.bitquery.io/Trader-interacted-with-these-tokens).
 
 ```graphql
 {
@@ -1015,62 +506,34 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Trader-inte
       where: {
         Block: { Time: { since_relative: { hours_ago: 1 } } }
         Pair: { Market: { Network: { is: "Solana" } } }
-        Trader: {
-          Address: { is: "2amy6YiYin3s49MEnXNA6ASDDnrrvhjMTd4WF59LJXBu" }
-        }
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
       }
     ) {
-      Trades_count: count
-      Total_Volume: sum(of: AmountsInUsd_Quote)
-      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
-      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
-      buys: count(if: { Side: { is: "Buy" } })
-      sells: count(if: { Side: { is: "Sell" } })
-      Trader {
-        Address
-      }
       Pair {
-        Pool {
-          Address
-        }
         Market {
           Address
-          Program
-          Network
           Protocol
-          ProtocolFamily
         }
         Token {
-          Name
           Symbol
-          Address
           Id
-          IsNative
-          TokenId
-          Network
         }
         QuoteToken {
-          Name
           Symbol
-          Address
-          Id
-          IsNative
-          TokenId
-          Network
         }
       }
+      Trades_count: count
+      Total_Volume: sum(of: AmountsInUsd_Base)
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
     }
   }
 }
 ```
 
----
+## How do I calculate a wallet's PnL on one token?
 
-## How do I calculate a wallet's PnL for a specific token (last 30 minutes)?
-
-> Aggregate **`Trades`** over **`Block.Time`** (last **30 minutes**) for one **`Pair.Token.Id`** and one **`Trader.Address`**. **`PnL`** is **`Amount_Sold − Amount_Bought`** on **`AmountsInUsd_Base`**; native sums use **`Amounts_Base`**. Useful for **short-window position PnL**, **per-wallet token performance**, and **trading dashboards**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-PnL-for-the-last-30mins-for-a-specific-token#).
+Sum what the wallet paid and what it received in USD over the window; `calculate` takes the difference. It is a cash-flow PnL over the window, so open inventory is not marked to market. Saved query [here](https://ide.bitquery.io/Traders-PnL-for-the-last-30mins-for-a-specific-token).
 
 ```graphql
 {
@@ -1078,20 +541,17 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-PnL
     Trades(
       where: {
         Block: { Time: { since_relative: { minutes_ago: 30 } } }
-        Pair: {
-          Token: {
-            Id: {
-              is: "bid:solana:8xs8TCoAMJ4zj5aeXmrDP2BechGrXLMzVyMVBxfCpump"
-            }
-          }
-        }
-        Trader: {
-          Address: { is: "QeHykJGZj6B2Syhi5a63t9oaLTwKXZqM4J5PjeZBWC2" }
-        }
+        Pair: { Token: { Id: { is: "bid:solana:AGi2s9zPRPHs3zEDPhPTroumTEXK5ufymYSfEFndCSSW" } } }
+        Trader: { Address: { is: "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51" } }
       }
     ) {
       Trader {
         Address
+      }
+      Pair {
+        Token {
+          Symbol
+        }
       }
       Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
       Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
@@ -1100,46 +560,14 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-PnL
       PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
       buys: count(if: { Side: { is: "Buy" } })
       sells: count(if: { Side: { is: "Sell" } })
-      Pair {
-        Currency {
-          Id
-          Name
-          Symbol
-        }
-        Market {
-          Address
-          Program
-          Network
-        }
-        Token {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-        QuoteToken {
-          Address
-          Id
-          IsNative
-          Symbol
-          TokenId
-          Network
-        }
-      }
     }
   }
 }
 ```
 
----
+## How do I rank traders by PnL on one pool?
 
-## How Do I Rank Top Traders by PnL for a Specific Pool (Last 30 Minutes)?
-
-> Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pair#).
+Filter `Pair.Market.Address` and sort on the calculated field. Saved query [here](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pair).
 
 ```graphql
 {
@@ -1149,11 +577,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
       orderBy: [{ descendingByField: "PnL" }]
       where: {
         Block: { Time: { since_relative: { minutes_ago: 30 } } }
-        Pair: {
-          Market: {
-            Address: { is: "2axyccPzS7Ei57c7ESEq7tBpo4HxtpfCR9gKxh5uNUpu" }
-          }
-        }
+        Pair: { Market: { Address: { is: "CsjcF4mEmJsXZDWzBtuviVEV7JiKTY4NAJ1rdcHhVxi3" } } }
       }
     ) {
       Trader {
@@ -1161,8 +585,6 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
       }
       Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
       Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
-      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
-      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
       PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
       buys: count(if: { Side: { is: "Buy" } })
       sells: count(if: { Side: { is: "Sell" } })
@@ -1171,13 +593,9 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 }
 ```
 
----
+## How do I rank traders by PnL across Solana?
 
-## How Do I Rank Top Traders on Solana by PnL (Last 30 Minutes)?
-
-> Across **Solana** pairs in the window, aggregate **one row per trader** with **`limitBy: {count: 1, by: Trader_Address}`**, then return the top **10** by **`PnL`**. Useful for **chain-wide PnL leaderboards** and **short-horizon trader rankings**.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-on-Solana_2#).
+Drop the pool filter and keep one row per wallet with `limitBy`. Saved query [here](https://ide.bitquery.io/Top-Traders-on-Solana_2).
 
 ```graphql
 {
@@ -1196,23 +614,15 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
       }
       Amount_Bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
       Amount_Sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
-      Amount_Bought_native: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
-      Amount_Sold_native: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
       PnL: calculate(expression: "$Amount_Sold - $Amount_Bought")
-      buys: count(if: { Side: { is: "Buy" } })
-      sells: count(if: { Side: { is: "Sell" } })
     }
   }
 }
 ```
 
----
+## Which traders paid the most fees this hour?
 
-## How do I rank traders paying the highest total transaction fees on Solana (last hour)?
-
-> Ranks up to **100** wallets by **sum of `TransactionHeader.Fee`** over **Solana** **`Trades`** in the last hour (native fee units, e.g. **lamports** — convert with your own **SOL** price or decimals). Includes **trade count** and **quoted USD volume** for context.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-paying-the-highest-total-fees).
+`TransactionHeader.Fee` summed per wallet, a quick way to spot bots. Saved query [here](https://ide.bitquery.io/Traders-paying-the-highest-total-fees).
 
 ```graphql
 {
@@ -1225,34 +635,30 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Traders-pay
         Pair: { Market: { Network: { is: "Solana" } } }
       }
     ) {
-      Trades_count: count
-      Total_fees_paid_by_trader: sum(of: TransactionHeader_Fee)
-      Total_Volume: sum(of: AmountsInUsd_Quote)
-      buy_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
-      sell_volume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
-      buys: count(if: { Side: { is: "Buy" } })
-      sells: count(if: { Side: { is: "Sell" } })
       Trader {
         Address
       }
+      Trades_count: count
+      Total_fees_paid_by_trader: sum(of: TransactionHeader_Fee)
+      Total_Volume: sum(of: AmountsInUsd_Quote)
     }
   }
 }
 ```
 
----
+<FAQ
+  items={[
+    { q: "How do I stream all trades of a wallet with an API?", a: "Subscribe to Trading.Trades with Trader.Address set to the wallet. Every DEX trade it sends on any supported chain arrives with the pair, the side, USD amounts and the market." },
+    { q: "How do I track several wallets at once?", a: "Use an in list on Trader.Address in one subscription. Each message carries the trader address, so one connection serves a whole watchlist." },
+    { q: "How far back does the Traders API go?", a: "About a month. For older wallet history use the chain cubes, such as DEXTradeByTokens on Solana or EVM chains, which reach the archive." },
+    { q: "How is PnL calculated here?", a: "As USD received from sells minus USD paid on buys inside the window, with calculate on the two sums. Tokens still held are not marked to market." },
+    { q: "Which address is the trader on EVM chains?", a: "Trader.Address is the account that sent the swap transaction, so router and aggregator contracts do not appear as traders." },
+  ]}
+/>
 
 ## Related APIs {#related-apis}
 
-> Extend your **trader analytics** with these complementary Bitquery APIs — **trade streams**, **price data**, **market cap**, **OHLC**, and **chain-specific DEX** docs for deeper wallet and token analysis.
-
-- **[Trades API](/docs/trading/crypto-trades-api/trades-api)** — stream trades by token, pair, chain, DEX, or USD threshold (not wallet-filtered)
-- **[Crypto MarketCap API](/docs/trading/crypto-price-api/crypto-marketcap-api)** — USD market cap, FDV, and token supply data
-- **[Crypto Price API](/docs/trading/crypto-price-api/)** — Tokens, Pairs, Currencies cubes and Kafka `trading.prices`
-- **[OHLC / K-line API](/docs/trading/crypto-price-api/crypto-ohlc-candle-k-line-api)** — candlestick and interval data for charting
-- **[Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades)** — chain-level `DEXTrades` and `DEXTradeByTokens` with aggregation (top traders, PnL, first buyers)
-- **[Solana Trader API](/docs/blockchain/Solana/solana-trader-API)** — Solana-specific wallet queries with `DEXTradeByTokens` aggregation
-- **[BSC DEX Trades](/docs/blockchain/BSC/bsc-dextrades)** — BSC top traders by profit, first buyers, and per-wallet token stats
-- **[Pump.fun API](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API)** — Pump.fun trades, bonding curve, top traders, and market cap
-- **[PumpSwap API](/docs/blockchain/Solana/Pumpfun/pump-swap-api)** — PumpSwap AMM trades, pools, and pricing
-- **[gRPC Copy Trading Bot](/docs/grpc/solana/examples/grpc-copy-trading-bot)** — low-latency CoreCast gRPC streaming for copy trading
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)
+- [Crypto Price API](/docs/trading/crypto-price-api/)
+- [Solana DEX trades API](/docs/blockchain/Solana/solana-dextrades)
+- [Ethereum DEX trades API](/docs/blockchain/Ethereum/dextrades/dex-api)
