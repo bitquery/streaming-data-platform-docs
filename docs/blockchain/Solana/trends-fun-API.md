@@ -1,65 +1,24 @@
 ---
-title: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices"
-description: "Trends.Fun API - Solana - New Tokens, Trades, Live Prices: query and stream Solana on-chain data with Bitquery GraphQL examples for developers."
----
-# Trends.Fun API - Solana - New Tokens, Trades, Live Prices
-
-:::tip Need real-time Trends.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Trends.fun data older than ~30 days**, raw per-swap detail, or call / event context.
-:::
-
-In this page, we will explore several examples related to Trends.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [Jupiter Studio API Docs](/docs/blockchain/Solana/jupiter-studio-api/).
-
-:::note
-**Trends.fun tokens are created and traded on Meteora Dynamic Bonding Curve (DBC).**
-:::
-
-Need zero-latency Trends.fun data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
-
-:::note
-To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
-
-Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
-:::
-
-If you want fastest data without any latency, we can provide gRPC and Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
-
-## Table of Contents
-
-### 1. Trends.fun Token Launches & Creation
-
-- [Track Trends.fun Token Creation ➤](#track-trendsfun-pool-creation)
-
-### 2. Bonding Curve & Progress APIs
-
-- [Bonding Curve Progress API ➤](#bonding-curve-progress-api)
-- [Track Tokens above 95% Bonding Curve Progress ➤](#track-trendsfun-tokens-above-95-bonding-curve-progress-in-realtime)
-
-### 3. Token Migration & Graduation
-
-- [Track Trends.fun Token Migrations ➤](#track-trendsfun-token-migrations-to-meteora-dex-in-realtime)
-- [Top 100 About to Graduate Tokens ➤](#track-trendsfun-tokens-above-95-bonding-curve-progress-in-realtime)
-
-### 4. Trading & Market Data
-
-- [Latest Trades of a Trends.fun Token ➤](#latest-trades-of-a-trendsfun-token)
-- [Latest Price of a Trends.fun Token ➤](#ohlcv-for-specific-trendsfun-token)
-- [OHLCV Data ➤](#ohlcv-for-specific-trendsfun-token)
-- [Top Buyers and Sellers ➤](#top-buyers-of-a-trendsfun-token)
-
-### 5. Liquidity & Pool Data
-
-- [Get Pair Address for a Token ➤](#get-liquidity-for-a-trendsfun-token-pair-address)
-- [Get Liquidity for a Token Pair ➤](#get-liquidity-for-a-trendsfun-token-pair-address)
-
+title: "Trends.fun API: Token Launches, Bonding Curve Progress, Migrations and Trades"
+sidebar_label: "Trends.fun API"
+description: "Trends.fun tokens launch on Meteora's Dynamic Bonding Curve. Bitquery GraphQL for launches by config, curve progress, pools near graduation, migrations, trades."
+keywords:
+  - Trends.fun API
+  - trends.fun token launches
+  - Meteora dynamic bonding curve API
+  - bonding curve progress Solana
+  - DBC migration stream
 ---
 
-## Track Trends.fun Pool Creation
+import FAQ from "@site/src/components/FAQ";
 
-Using [this stream](https://ide.bitquery.io/latest-pools-created-on-trendsfun-stream) , we can get the realtime created Trends.fun tokens on Meteora Dynamic Bonding Curve.
+# Trends.fun API: Token Launches, Bonding Curve Progress, Migrations and Trades
 
-<details>
-  <summary>Click to expand GraphQL query</summary>
+Trends.fun turns a tweet into a token on Solana. The tokens it mints launch on Meteora's Dynamic Bonding Curve, program `dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN`, trade there until the curve fills, and then migrate to a Meteora DAMM v2 pool. Bitquery decodes the curve program's instructions, records every pool state change in `DEXPools` and every trade in `DEXTradeByTokens`, so a trends.fun tracker is a set of Dynamic Bonding Curve queries. The curve program is shared by many launchpads; what makes a launch a trends.fun launch is the config account passed as the first account of the launch instruction, and the second section shows how to isolate one. Every example runs in the [IDE](https://ide.bitquery.io) on a free account on the `eap` endpoint. The worked token is a trends.fun token, `@easytopredict` at `CY1P83KnKwFYostvjQcoR2HJLyEJWRBRaVQmYyyD3cR8`, which launched on the curve in October 2025 and trades on Meteora DAMM v2 today. Curve pool rows are kept for about half a day and decoded instructions for a few days, so the curve and launch queries below run without a token filter and show the filter line as a comment; trade history reaches the archive.
+
+## Every launch on the bonding curve, live
+
+`initialize_virtual_pool_with_spl_token` creates the curve pool. The accounts arrive in program order: `config`, `pool_authority`, `creator`, `base_mint`, `quote_mint`, `pool`, then the vaults. Saved stream [here](https://ide.bitquery.io/latest-pools-created-on-trendsfun-stream).
 
 ```graphql
 subscription {
@@ -79,50 +38,14 @@ subscription {
         Time
       }
       Instruction {
-        Accounts {
-          Address
-          IsWritable
-          Token {
-            Mint
-            Owner
-            ProgramId
-          }
-        }
         Program {
           AccountNames
+        }
+        Accounts {
           Address
-          Arguments {
-            Name
-            Type
-            Value {
-              ... on Solana_ABI_Integer_Value_Arg {
-                integer
-              }
-              ... on Solana_ABI_String_Value_Arg {
-                string
-              }
-              ... on Solana_ABI_Address_Value_Arg {
-                address
-              }
-              ... on Solana_ABI_BigInt_Value_Arg {
-                bigInteger
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-            }
+          Token {
+            Mint
           }
-          Method
-          Name
         }
       }
       Transaction {
@@ -134,86 +57,86 @@ subscription {
 }
 ```
 
-</details>
+## Launches from one launchpad config
 
-## Bonding Curve Progress API
-
-Below query will give you the Bonding curve progress percentage of a specific Trends.fun Token.
-
-### Bonding Curve Progress Formula
-
-- **Formula**:
-  BondingCurveProgress = 100 - ((leftTokens \* 100) / initialRealTokenReserves)
-
-Where:
-
-- leftTokens = realTokenReserves - reservedTokens
-- initialRealTokenReserves = totalSupply - reservedTokens
-
-- **Definitions**:
-  - `initialRealTokenReserves` = `totalSupply` - `reservedTokens`
-    - `totalSupply`: 1,000,000,000 (Trends.fun Token)
-    - `reservedTokens`: Varies by token configuration
-  - `leftTokens` = `realTokenReserves` - `reservedTokens`
-    - `realTokenReserves`: Token balance at the market address.
-
-:::note
-**Note**: The exact reserved tokens amount may vary for Trends.fun tokens. Check the specific token's parameters for accurate calculations.
-:::
-
-### Get Bonding Curve Progress
-
-Use this query to fetch the bonding curve progress percentage: [Query Link](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-trends-fun-token).
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+Every launchpad on the curve program has its own config account, and it is the first account of every launch it makes. Run the query below once, read the first address of a row that belongs to a trends.fun token, then uncomment the `Accounts` filter with that address to see only trends.fun launches. The same `includes` filter with a mint address finds one token's launch.
 
 ```graphql
-query GetBondingCurveProgressPercentage {
+{
   Solana {
-    DEXPools(
-      limit: { count: 1 }
-      orderBy: { descending: Block_Slot }
+    Instructions(
       where: {
-        Pool: {
-          Market: {
-            BaseCurrency: {
-              MintAddress: { is: "YOUR_TRENDS_FUN_TOKEN_ADDRESS" }
-            }
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "initialize_virtual_pool_with_spl_token" }
           }
-          Dex: {
-            ProgramAddress: {
-              is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"
-            }
-          }
+          # Accounts: { includes: { Address: { is: "<config account>" } } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+      }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      Instruction {
+        Accounts {
+          Address
         }
       }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
+## Bonding curve state and progress
+
+Each `DEXPools` row is the curve after one trade: the tokens still on the curve under `Base.PostAmount`, the quote raised under `Quote.PostAmount` with its USD value, and the price. Progress toward graduation is the quote raised against the migration threshold set in the launchpad's config, since the curve migrates when the quote reserve reaches it. The query returns the latest state of every curve pool that traded recently, one row per market; uncomment the `BaseCurrency` filter for one token. Saved query [here](https://ide.bitquery.io/bonding-curve-progress-percentage-of-a-trends-fun-token).
+
+```graphql
+{
+  Solana {
+    DEXPools(
+      where: {
+        Pool: {
+          Dex: { ProgramAddress: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" } }
+          # Market: { BaseCurrency: { MintAddress: { is: "<token mint>" } } }
+        }
+        Transaction: { Result: { Success: true } }
+      }
+      limitBy: { by: Pool_Market_MarketAddress, count: 1 }
+      orderBy: { descending: Block_Time }
+      limit: { count: 20 }
     ) {
+      Block {
+        Time
+      }
       Pool {
         Market {
           MarketAddress
           BaseCurrency {
-            MintAddress
-            Symbol
             Name
+            Symbol
+            MintAddress
           }
           QuoteCurrency {
-            MintAddress
             Symbol
-            Name
           }
         }
-        Dex {
-          ProtocolFamily
-          ProtocolName
+        Base {
+          PostAmount
         }
         Quote {
           PostAmount
-          PriceInUSD
           PostAmountInUSD
-        }
-        Base {
-          Balance: PostAmount
+          PriceInUSD
         }
       }
     }
@@ -221,31 +144,21 @@ query GetBondingCurveProgressPercentage {
 }
 ```
 
-</details>
+## Pools closest to graduation
 
-## Track Trends.fun Tokens above 95% Bonding Curve Progress in realtime
-
-Track Trends.fun tokens that are approaching graduation with high bonding curve progress percentages. Run the query: [Trends.fun tokens between 95–100% bonding-curve progress ➤](https://ide.bitquery.io/trends-fun-tokens-between-95-and-100-bonding-curve-progress).
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+The curve pools with the fewest tokens left, among those that traded in the last hour, one row per market. Saved query [here](https://ide.bitquery.io/trends-fun-tokens-between-95-and-100-bonding-curve-progress).
 
 ```graphql
-subscription TrendsFunHighProgressTokens {
+{
   Solana {
     DEXPools(
       where: {
         Pool: {
-          Dex: {
-            ProgramAddress: {
-              is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"
-            }
-          }
+          Dex: { ProgramAddress: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" } }
           Market: {
             QuoteCurrency: {
               MintAddress: {
                 in: [
-                  "11111111111111111111111111111111"
                   "So11111111111111111111111111111111111111112"
                   "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
                 ]
@@ -254,32 +167,28 @@ subscription TrendsFunHighProgressTokens {
           }
         }
         Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
       }
+      limitBy: { by: Pool_Market_MarketAddress, count: 1 }
+      orderBy: { ascending: Pool_Base_PostAmount }
+      limit: { count: 20 }
     ) {
+      Block {
+        Time
+      }
       Pool {
         Market {
-          BaseCurrency {
-            MintAddress
-            Name
-            Symbol
-          }
           MarketAddress
-          QuoteCurrency {
-            MintAddress
-            Name
+          BaseCurrency {
             Symbol
+            MintAddress
           }
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
         }
         Base {
-          Balance: PostAmount
+          PostAmount
         }
         Quote {
           PostAmount
-          PriceInUSD
           PostAmountInUSD
         }
       }
@@ -288,19 +197,12 @@ subscription TrendsFunHighProgressTokens {
 }
 ```
 
-</details>
+## Migrations to Meteora, live
 
-## Track Trends.fun Token Migrations to Meteora DEX in Realtime
-
-Track real-time migrations of Trends.fun tokens from the bonding curve to Meteora DEX when they graduate.
-
-Run the stream: [Track Trends.fun token migrations ➤](https://ide.bitquery.io/Track-trends-fun-Token-Migrations-to-Meteora-DEX-in-realtime).
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+When a curve fills, the program migrates the token's liquidity into a DAMM pool. Two methods cover both destinations, and the accounts of each call name the token and the new pool.
 
 ```graphql
-subscription TrendsFunMigrations {
+subscription {
   Solana {
     Instructions(
       where: {
@@ -320,45 +222,10 @@ subscription TrendsFunMigrations {
         Program {
           Method
           AccountNames
-          Address
-          Arguments {
-            Value {
-              ... on Solana_ABI_Json_Value_Arg {
-                json
-              }
-              ... on Solana_ABI_Float_Value_Arg {
-                float
-              }
-              ... on Solana_ABI_Boolean_Value_Arg {
-                bool
-              }
-              ... on Solana_ABI_Bytes_Value_Arg {
-                hex
-              }
-              ... on Solana_ABI_BigInt_Value_Arg {
-                bigInteger
-              }
-              ... on Solana_ABI_Address_Value_Arg {
-                address
-              }
-              ... on Solana_ABI_Integer_Value_Arg {
-                integer
-              }
-              ... on Solana_ABI_String_Value_Arg {
-                string
-              }
-            }
-            Type
-            Name
-          }
-          Name
         }
         Accounts {
           Address
-          IsWritable
           Token {
-            ProgramId
-            Owner
             Mint
           }
         }
@@ -372,28 +239,19 @@ subscription TrendsFunMigrations {
 }
 ```
 
-</details>
+## Latest trades of a token
 
-## Latest Trades of a Trends.fun Token
-
-This query fetches the most recent trades of a specific Trends.fun token.
-[Run query](https://ide.bitquery.io/Latest-Trades-of-a-Trends-Fun-Token)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+One row per trade, newest first, with the counter token, the USD price and the market. For the worked token the market is its DAMM v2 pool; for a token still on the curve it is the curve pool. Saved query [here](https://ide.bitquery.io/Latest-Trades-of-a-Trends-Fun-Token).
 
 ```graphql
-query LatestTrades {
+{
   Solana {
     DEXTradeByTokens(
       orderBy: { descending: Block_Time }
       limit: { count: 50 }
       where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "CY1P83KnKwFYostvjQcoR2HJLyEJWRBRaVQmYyyD3cR8" }
-          }
-        }
+        Trade: { Currency: { MintAddress: { is: "CY1P83KnKwFYostvjQcoR2HJLyEJWRBRaVQmYyyD3cR8" } } }
+        Transaction: { Result: { Success: true } }
       }
     ) {
       Block {
@@ -401,6 +259,7 @@ query LatestTrades {
       }
       Transaction {
         Signature
+        Signer
       }
       Trade {
         Market {
@@ -408,25 +267,17 @@ query LatestTrades {
         }
         Dex {
           ProtocolName
-          ProtocolFamily
         }
+        Amount
         AmountInUSD
         PriceInUSD
-        Amount
-        Currency {
-          Name
-          Symbol
-          MintAddress
-        }
         Side {
           Type
+          Amount
+          AmountInUSD
           Currency {
             Symbol
-            MintAddress
-            Name
           }
-          AmountInUSD
-          Amount
         }
       }
     }
@@ -434,266 +285,114 @@ query LatestTrades {
 }
 ```
 
-</details>
+## Top buyers and top sellers of a token
 
-## Top Buyers of a Trends.fun Token
-
-[This](https://ide.bitquery.io/Top-Buyers-of-a-Trends-Fun-Token) API endpoint returns the top 100 buyers for a specific Trends.fun token.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query TopBuyers {
-  Solana {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Currency: { MintAddress: { is: "YOUR_TRENDS_TOKEN_ADDRESS" } }
-          Side: { Type: { is: buy } }
-        }
-      }
-      orderBy: { descendingByField: "buy_volume" }
-      limit: { count: 100 }
-    ) {
-      Trade {
-        Currency {
-          MintAddress
-          Name
-          Symbol
-        }
-      }
-      Transaction {
-        Signer
-      }
-      buy_volume: sum(of: Trade_Side_AmountInUSD)
-    }
-  }
-}
-```
-
-</details>
-
-## Top Sellers of a Trends.fun Token
-
-Using [this](https://ide.bitquery.io/Top-Sellers-of-a-Trends-Fun-Token) query, get the top 100 sellers for a specific Trends.fun token.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-query TopSellers {
-  Solana {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Currency: { MintAddress: { is: "YOUR Token Address here" } }
-          Side: { Type: { is: buy } }
-        }
-      }
-      orderBy: { descendingByField: "sell_volume" }
-      limit: { count: 100 }
-    ) {
-      Trade {
-        Currency {
-          MintAddress
-          Name
-          Symbol
-        }
-      }
-      Transaction {
-        Signer
-      }
-      sell_volume: sum(of: Trade_AmountInUSD)
-    }
-  }
-}
-```
-
-</details>
-
-## OHLCV for specific Trends.fun Token
-
-[This](https://ide.bitquery.io/OHLCV-of-a-trends-fun-token) API endpoint returns the OHLCV values for a Trends.fun token when traded against WSOL or USDC.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+`Side.Type` names the counter-side, so the token was bought where the side was sold. Sort on `bought` for buyers and `sold` for sellers; add `dataset: archive` to the root for the token's whole life. Saved queries: [top buyers](https://ide.bitquery.io/Top-Buyers-of-a-Trends-Fun-Token), [top sellers](https://ide.bitquery.io/Top-Sellers-of-a-Trends-Fun-Token).
 
 ```graphql
 {
-  Trading {
-    Currencies(
+  Solana {
+    DEXTradeByTokens(
       where: {
-        Currency: {
-          Id: { is: "bid:solana:CY1P83KnKwFYostvjQcoR2HJLyEJWRBRaVQmYyyD3cR8" }
-        }
-        Interval: { Time: { Duration: { eq: 1 } } }
+        Trade: { Currency: { MintAddress: { is: "CY1P83KnKwFYostvjQcoR2HJLyEJWRBRaVQmYyyD3cR8" } } }
+        Transaction: { Result: { Success: true } }
       }
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
+      orderBy: { descendingByField: "bought" }
+      limit: { count: 100 }
     ) {
-      Currency {
-        Id
-        Name
-        Symbol
+      Transaction {
+        Signer
       }
+      bought: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: buy } } } })
+      trades: count
+    }
+  }
+}
+```
+
+## Hourly OHLC of a token
+
+Candles against WSOL for the last week; curve tokens are quoted in WSOL or USDC, so put the quote mint under `Side.Currency`. Saved query [here](https://ide.bitquery.io/OHLCV-of-a-trends-fun-token).
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Currency: { MintAddress: { is: "CY1P83KnKwFYostvjQcoR2HJLyEJWRBRaVQmYyyD3cR8" } }
+          Side: { Currency: { MintAddress: { is: "So11111111111111111111111111111111111111112" } } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { days_ago: 7 } } }
+      }
+      limit: { count: 168 }
+      orderBy: { descendingByField: "Block_Timefield" }
+    ) {
       Block {
-        Date
-        Time
-        Timestamp
+        Timefield: Time(interval: { in: hours, count: 1 })
       }
-      Interval {
-        Time {
-          Start
-          Duration
-          End
-        }
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
       }
-      Volume {
-        Base
-        BaseAttributedToUsd
-        Quote
-        Usd
-      }
-      Price {
-        IsQuotedInUsd #The price is shown in USD (`IsQuotedInUsd: true` by default).
-        Ohlc {
-          Open # Earliest price across chains in the interval
-          High # Highest price across chains in the interval
-          Low # Lowest price across chains in the interval
-          Close # Latest price across chains in the interval
-        }
-        Average {
-          Estimate
-          ExponentialMoving
-          Mean
-          SimpleMoving
-          WeightedSimpleMoving
-        }
-      }
+      count
     }
   }
 }
 ```
 
-</details>
+## Tokens launched by one creator
 
-## Get Liquidity for a Trends.fun Token Pair Address
-
-Using [this](https://ide.bitquery.io/liquidity-for-a-trends-fun-token-pair) query we can get the liquidity for a Trends.fun Token Pair, where `Base_PostBalance` is the amount of tokens present in the pool and `Quote_PostBalance` is the amount of quote currency (WSOL/USDC) present in the pool.
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
+The creator signs the launch transaction, so grouping launches by signer ranks the most active creators of the last day; uncomment the `Signer` filter and drop the aggregate to list one creator's launches, where the fourth account of each row is the mint. Saved query [here](https://ide.bitquery.io/All-Tokens-Created-by-a-Trends-Fun-Token-CreatorDeveloper).
 
 ```graphql
 {
   Solana {
-    DEXPools(
-      where: {Pool: {Market: {BaseCurrency: {MintAddress: {is: "TOKEN ADDRESS here"}}}, Dex: {ProgramAddress: {is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN"}}}, Transaction: {Result: {Success: true}}}
-      orderBy: {descending: Block_Time}
-      limit: {count: 1}
-    ) {
-      Pool {
-        Base {
-          PostAmount
-        }
-        Quote {
-          PostAmount
-        }
-        Market {
-          BaseCurrency {
-            MintAddress
-            Name
-            Symbol
-          }
-          QuoteCurrency {
-            MintAddress
-            Name
-            Symbol
-          }
-        }
-      }
-    }
-  }
-}
-
-```
-
-</details>
-
-## Find All Tokens Created by a Trends.fun Developer
-
-Get all tokens created by a specific Trends.fun developer/creator address.
-
-[Run Query](https://ide.bitquery.io/All-Tokens-Created-by-a-Trends-Fun-Token-CreatorDeveloper)
-
-<details>
-  <summary>Click to expand GraphQL query</summary>
-
-```graphql
-{
-  Solana(network: solana) {
     Instructions(
-      limit: { count: 10 }
       where: {
-        Instruction: { Program: { Method: { is: "initializeMint2" } } }
-        Transaction: { FeePayer: { is: "DEVELOPER_ADDRESS_HERE" } }
-      }
-    ) {
-      Instruction {
-        Program {
-          Address
-          Name
-          Method
-          AccountNames
-        }
-        Accounts {
-          Address
-          IsWritable
-          Token {
-            Mint
-            Owner
-            ProgramId
+        Instruction: {
+          Program: {
+            Address: { is: "dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN" }
+            Method: { is: "initialize_virtual_pool_with_spl_token" }
           }
         }
-        Logs
-        BalanceUpdatesCount
-        AncestorIndexes
-        CallPath
-        CallerIndex
-        Data
-        Depth
-        ExternalSeqNumber
-        Index
-        InternalSeqNumber
-        TokenBalanceUpdatesCount
-      }
-      Transaction {
-        Fee
-        FeeInUSD
-        Signature
-        Signer
-        FeePayer
-        Result {
-          Success
-          ErrorMessage
+        Transaction: {
+          # Signer: { is: "<creator address>" }
+          Result: { Success: true }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      Block {
-        Time
-        Height
+      orderBy: { descendingByField: "launches" }
+      limit: { count: 20 }
+    ) {
+      Transaction {
+        Signer
       }
+      launches: count
     }
   }
 }
 ```
 
-</details>
+<FAQ
+  items={[
+    { q: "How do I get trends.fun token data from an API?", a: "Trends.fun tokens launch on Meteora's Dynamic Bonding Curve, so filter the curve program dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN in Bitquery's Solana Instructions, DEXPools and DEXTradeByTokens cubes as this page shows." },
+    { q: "How do I tell trends.fun launches apart from other launchpads on the curve?", a: "By the config account, the first account of every launch instruction. Read it from any trends.fun token's launch and filter Accounts includes on it." },
+    { q: "How is bonding curve progress calculated?", a: "The curve migrates when its quote reserve reaches the migration threshold in the launchpad's config, so progress is Quote.PostAmount from the latest DEXPools row divided by that threshold. Base.PostAmount shows how many tokens are still on the curve." },
+    { q: "How do I know a token has graduated?", a: "The curve program emits migrate_meteora_damm or migration_damm_v2 for the token; after that its trades carry a Meteora DAMM market instead of the curve pool." },
+    { q: "How far back does the data go?", a: "Trades reach the archive dataset. Curve pool rows are kept for about half a day and decoded instructions for a few days, which is why the curve and launch queries take a live token." },
+  ]}
+/>
 
----
+## Related pages
 
-### Additional Resources
-
-- Need ultra-low latency Trends.fun data? Check out our [Kafka Streaming Services](/docs/streams/kafka-streaming-concepts/)
-- Explore more Solana APIs: [Solana Documentation ➤](/docs/blockchain/Solana/)
-- For technical support, join our [Telegram](https://t.me/Bloxy_info)
+- [Meteora Dynamic Bonding Curve API](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/)
+- [Solana DEX trades API](/docs/blockchain/Solana/solana-dextrades)
+- [Solana API hub](/docs/blockchain/Solana/)
+- [Kafka streams for Solana](/docs/streams/kafka-streaming-concepts/)
