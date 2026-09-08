@@ -226,7 +226,7 @@ subscription {
 
 ### One wallet's stablecoin flows on Solana
 
-Filter the transaction signer and the stablecoin mints. The example wallet swaps USDC many times an hour; the totals split what it bought from what it sold. Saved query [here](https://ide.bitquery.io/real-time-stablecoin-portfolio_2).
+Filter the transaction signer and the stablecoin mints. The example wallet swaps USDC around the clock at the time of writing; the totals split what it bought from what it sold. Saved query [here](https://ide.bitquery.io/real-time-stablecoin-portfolio_2).
 
 ```graphql
 {
