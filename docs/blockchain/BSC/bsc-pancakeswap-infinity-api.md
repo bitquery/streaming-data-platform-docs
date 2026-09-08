@@ -1,146 +1,185 @@
 ---
 sidebar_position: 7
-title: "BSC PancakeSwap Infinity API"
-description: "BSC PancakeSwap Infinity API: query and stream BNB Chain on-chain data with Bitquery GraphQL examples for developers. See examples in the Bitquery IDE."
+title: "PancakeSwap Infinity API on BNB Chain: Swaps, Pools by PoolId, Prices, Traders"
+sidebar_label: "PancakeSwap Infinity API"
+description: "PancakeSwap Infinity on BNB Chain via Bitquery GraphQL: live swaps with USD, busiest pools by PoolId, a token's price, OHLC, volume and top traders."
+keywords:
+  - PancakeSwap Infinity API
+  - PancakeSwap Infinity BSC
+  - pancakeswap_infinity PoolId
+  - PancakeSwap Infinity trades GraphQL
+  - BNB Chain DEX API
 ---
+
 import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
-# BSC PancakeSwap Infinity API
+# PancakeSwap Infinity API on BNB Chain: Swaps, Pools by PoolId, Prices, Traders
 
-Bitquery provides PancakeSwap Infinity (BSC) data through APIs, Streams and Data Dumps.
-The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Binance Smart Chain (BSC).
+PancakeSwap Infinity keeps all of its pools inside one manager contract on BNB Chain, `0xa0ffb9c1ce1fe56963b0321b32e7a0302114058b`, the same singleton design as Uniswap v4. In Bitquery's cubes that means the protocol name `pancakeswap_infinity` selects the venue, `Trade.PoolId` selects a pool, and `Dex.SmartContract` is the manager on every row. Infinity is one of the busiest venues on the chain, and stablecoin pairs such as USDT/KII are among its most traded markets. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. The worked token is POWER, `0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223`, and the worked pool is USDT/KII, `PoolId 0xf43fdb854021ddeb41e06ac1d6e5df475197038ba5d3cba147f469a56870cd1b`. Bitquery also indexes PancakeSwap v2 and v3 on BNB Chain; those are on the [PancakeSwap API](/docs/blockchain/BSC/pancake-swap-api/) page.
 
+## Live swaps with USD on every row
 
-## Live PancakeSwap Infinity Trades on BSC (Trading API — recommended)
-
-This subscription streams every PancakeSwap Infinity trade on BSC in real time with **USD price and USD amounts on every row**, MEV-filtered. Run it [in the IDE](https://ide.bitquery.io/Trading-API-PancakeSwap-Infinity-Trades-BSC).
+The Trading cube streams every Infinity swap with the trader, USD amounts and the token's market cap. Saved stream [here](https://ide.bitquery.io/Trading-API-PancakeSwap-Infinity-Trades-BSC).
 
 ```graphql
 subscription {
   Trading {
     Trades(
-      where: {Pair: {Market: {Network: {is: "Binance Smart Chain"}, Protocol: {is: "pancakeswap_infinity"}}}}
-    ) {
-      Block { Time }
-      Price
-      PriceInUsd
-      AmountsInUsd { Base Quote }
-      Trader { Address }
-      Pair { Token { Symbol } QuoteToken { Symbol } Market { Protocol } }
-    }
-  }
-}
-```
-If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
-
-Need zero-latency Binance Smart Chain (BSC) data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).
-
-You may also be interested in:
-
-- [Four.meme APIs ➤](/docs/blockchain/BSC/four-meme-api/)
-- [BSC PancakeSwap APIs ➤](/docs/blockchain/BSC/pancake-swap-api/)
-
-:::note
-To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
-
-Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
-:::
-
-<VideoPlayer url="https://www.youtube.com/watch?v=nVHdJUdKrJ8" />
-
-## Get Latest Trades on PancakeSwap Infinity
-
-Below query will subscribe you to the latest DEX Trades on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/pancakeswap-infinity-trades-on-bsc)
-
-```graphql
-query MyQuery {
-  EVM(dataset: realtime, network: bsc) {
-    DEXTrades(
       where: {
-        Trade: { Dex: { ProtocolName: { is: "pancakeswap_infinity" } } }
+        Pair: {
+          Market: { Network: { is: "Binance Smart Chain" }, Protocol: { is: "pancakeswap_infinity" } }
+        }
       }
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
     ) {
-      Transaction {
-        From
-        To
-      }
-      Trade {
-        Dex {
-          ProtocolName
-          SmartContract
-        }
-        Buy {
-          Currency {
-            Name
-          }
-          Price
-          Amount
-        }
-        Sell {
-          Amount
-          Currency {
-            Name
-          }
-          Price
-        }
-      }
       Block {
         Time
       }
+      Side
+      Trader {
+        Address
+      }
+      Price
+      PriceInUsd
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Pair {
+        Currency {
+          Symbol
+        }
+        QuoteCurrency {
+          Symbol
+        }
+        Pool {
+          Id
+        }
+      }
+      Supply {
+        MarketCap
+      }
     }
   }
 }
 ```
 
-## Get Latest Price of a token on PancakeSwap Infinity
+<VideoPlayer url="https://www.youtube.com/watch?v=nVHdJUdKrJ8" />
 
-Below query will get you Latest Price of a token on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/Get-Latest-Price-of-a-token-on-PancakeSwap-Infinity_1)
+## Latest swaps on Infinity
+
+The chain cube view: what the pool received and paid out, with USD on both sides and the PoolId. Saved query [here](https://ide.bitquery.io/pancakeswap-infinity-trades-on-bsc).
 
 ```graphql
-query MyQuery {
-  EVM(dataset: realtime, network: bsc) {
+{
+  EVM(network: bsc) {
+    DEXTrades(
+      where: { Trade: { Dex: { ProtocolName: { is: "pancakeswap_infinity" } } } }
+      limit: { count: 20 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        PoolId
+        Buy {
+          Currency {
+            Symbol
+            SmartContract
+          }
+          Amount
+          AmountInUSD
+          PriceInUSD
+        }
+        Sell {
+          Currency {
+            Symbol
+            SmartContract
+          }
+          Amount
+          AmountInUSD
+        }
+      }
+      Transaction {
+        From
+        Hash
+      }
+    }
+  }
+}
+```
+
+## The busiest Infinity pools
+
+Group by `PoolId` over the last day. Each row is one pool with the token, the trade count and USD volume; the single-trade USD cap keeps thin-pool outliers out of the sums.
+
+```graphql
+{
+  EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: {
-            SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" }
+          Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
+          Side: { AmountInUSD: { lt: "10000000" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      orderBy: { descendingByField: "trades" }
+      limit: { count: 20 }
+    ) {
+      Trade {
+        PoolId
+        Currency {
+          Symbol
+          SmartContract
+        }
+        Side {
+          Currency {
+            Symbol
           }
+        }
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+    }
+  }
+}
+```
+
+## Price of a token on Infinity
+
+The newest `DEXTradeByTokens` row for the token carries its price in the quote and in USD, plus the pool it traded in. Saved query [here](https://ide.bitquery.io/Get-Latest-Price-of-a-token-on-PancakeSwap-Infinity_1).
+
+```graphql
+{
+  EVM(network: bsc) {
+    DEXTradeByTokens(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Trade: {
+          Currency: { SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" } }
           Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
         }
       }
-      limit: { count: 10 }
-      orderBy: { descending: Block_Time }
     ) {
-      Transaction {
-        From
-        To
-      }
       Block {
         Time
       }
       Trade {
         Price
         PriceInUSD
-        Amount
-        AmountInUSD
+        PoolId
         Currency {
-          Name
           Symbol
+          Name
           SmartContract
-        }
-        Dex {
-          ProtocolName
-          SmartContract
+          Decimals
         }
         Side {
-          Amount
-          AmountInUSD
           Currency {
-            Name
             Symbol
-            SmartContract
           }
         }
       }
@@ -149,76 +188,36 @@ query MyQuery {
 }
 ```
 
-## Get Top Traders of a token on PancakeSwap Infinity
+The same row answers the metadata question, so the saved [token metadata](https://ide.bitquery.io/get-metadata-for-bsc-pancakeswap-infnity-token) query is this one with the price fields removed.
 
-This query will fetch you top traders of a token on PancakeSwap Infinity for the selected network. You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-pancakeswap_1).
+## Hourly OHLC in USD
 
-```graphql
-query topTraders($network: evm_network, $token: String) {
-  EVM(network: $network) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {ProtocolName: {is: "pancakeswap_infinity"}}}}
-    ) {
-      Trade {
-        Dex {
-          OwnerAddress
-          ProtocolFamily
-          ProtocolName
-        }
-        Buyer
-      }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-    }
-  }
-}
-{
-  "network": "bsc",
-  "token": "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223"
-}
-```
-
-## OHLC in USD of a Token
-
-This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on PancakeSwap Infinity over a defined time period and interval. You can try out the API [here](https://ide.bitquery.io/OHLC-on-bsc-pancakeswap-infinity) on Bitquery Playground.
+One-hour candles for the last day. `PriceAsymmetry` below 0.1 drops trades whose two sides disagree on price, which cleans candles on thin pools. Saved query [here](https://ide.bitquery.io/OHLC-on-bsc-pancakeswap-infinity).
 
 ```graphql
 {
-  EVM(network: bsc, dataset: realtime) {
+  EVM(network: bsc) {
     DEXTradeByTokens(
       orderBy: { descendingByField: "Block_testfield" }
       where: {
         Trade: {
-          Currency: {
-            SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" }
-          }
-          Side: {
-            Currency: {
-              SmartContract: {
-                is: "0x55d398326f99059ff775485246999027b3197955"
-              }
-            }
-            Type: { is: buy }
-          }
-          PriceAsymmetry: { lt: 0.1 }
+          Currency: { SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" } }
           Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
+          PriceAsymmetry: { lt: 0.1 }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      limit: { count: 10 }
+      limit: { count: 24 }
     ) {
       Block {
         testfield: Time(interval: { in: hours, count: 1 })
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
+        high: PriceInUSD(maximum: Trade_PriceInUSD)
+        low: PriceInUSD(minimum: Trade_PriceInUSD)
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
       }
       count
     }
@@ -226,142 +225,151 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
 }
 ```
 
-## Get trading volume, buy volume, sell volume of a token
+## Volume, bought and sold
 
-This query fetches you the traded volume, buy volume and sell volume of a token `0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223` on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/trade_volume_bsc_pancakeswap_infinity).
+Totals for the token over a day. `Side.Type` describes the counter-side of each trade, so the token was bought where the side was sold. Saved query [here](https://ide.bitquery.io/trade_volume_bsc_pancakeswap_infinity).
 
 ```graphql
-query MyQuery {
+{
   EVM(network: bsc) {
     DEXTradeByTokens(
       where: {
         Trade: {
-          Currency: {
-            SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" }
-          }
+          Currency: { SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" } }
           Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
         }
-        TransactionStatus: { Success: true }
-        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
-      Trade {
-        Currency {
-          Name
-          Symbol
-          SmartContract
-          Decimals
-        }
-      }
-      traded_volume_in_usd: sum(of: Trade_Side_AmountInUSD)
-      sell_volume_in_usd: sum(
-        of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      buy_volume_in_usd: sum(
-        of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
+      trades: count
+      volume: sum(of: Trade_Amount)
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
     }
   }
 }
 ```
 
-## Get top bought tokens on PancakeSwap Infinity
+## Top traders of a token
 
-This query will fetch you the top bought tokens on PancakeSwap Infinity. Try out the query [here](https://ide.bitquery.io/top-bought-tokens-on-pancakeswap_infinity_1).
+Rank by `Transaction.From`, the account that sent the swap, since the manager contract appears as buyer and seller on raw Infinity rows. Saved query [here](https://ide.bitquery.io/top-traders-of-a-token-on-pancakeswap_1).
 
 ```graphql
-query timeDiagram($network: evm_network) {
-  EVM(network: $network) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "buy"}
-      limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "pancakeswap_infinity"}}}}
-    ) {
-      Trade {
-        Currency {
-          Symbol
-          Name
-          SmartContract
-        }
-        Dex {
-          ProtocolName
-        }
-      }
-      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
-    }
-  }
-}
 {
-  "network": "bsc"
-}
-```
-
-## Get top sold tokens on PancakeSwap Infinity
-
-This query will fetch you the top bought tokens on PancakeSwap Infinity. Try out the query [here](https://ide.bitquery.io/top-sold-tokens-on-pancake-infinty_1).
-
-```graphql
-query timeDiagram($network: evm_network) {
-  EVM(network: $network) {
+  EVM(network: bsc) {
     DEXTradeByTokens(
-      orderBy: {descendingByField: "sell"}
-      limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "pancakeswap_infinity"}}}}
-    ) {
-      Trade {
-        Currency {
-          Symbol
-          Name
-          SmartContract
-        }
-        Dex {
-          ProtocolName
-        }
-      }
-      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
-    }
-  }
-}
-{
-  "network": "bsc"
-}
-```
-
-## Get Metadata of a token
-
-Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContract Address`, `Decimals`. Try out the API [here](https://ide.bitquery.io/get-metadata-for-bsc-pancakeswap-infnity-token) in the Bitquery Playground.
-
-```graphql
-query MyQuery {
-  EVM(network: bsc, dataset: realtime) {
-    DEXTradeByTokens(
-      limit: { count: 1 }
-      orderBy: { descending: Block_Time }
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 20 }
       where: {
         Trade: {
-          Currency: {
-            SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" }
-          }
+          Currency: { SmartContract: { is: "0x9dc44ae5be187eca9e2a67e33f27a4c91cea1223" } }
           Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
         }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Transaction {
+        From
+      }
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
+    }
+  }
+}
+```
+
+## Most bought and most sold tokens on Infinity
+
+One query, sorted on `bought` for the buy side; sort on `sold` for the other list. Saved queries: [top bought](https://ide.bitquery.io/top-bought-tokens-on-pancakeswap_infinity_1), [top sold](https://ide.bitquery.io/top-sold-tokens-on-pancake-infinty_1).
+
+```graphql
+{
+  EVM(network: bsc) {
+    DEXTradeByTokens(
+      orderBy: { descendingByField: "bought" }
+      limit: { count: 20 }
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
+          Side: { AmountInUSD: { lt: "10000000" } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {
         Currency {
-          Name
           Symbol
           SmartContract
-          ProtocolName
-          HasURI
-          Fungible
-          Decimals
         }
+      }
+      bought: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Side_AmountInUSD, if: { Trade: { Side: { Type: { is: buy } } } })
+      trades: count
+    }
+  }
+}
+```
+
+## Reserves of a pool
+
+`DEXPoolEvents` emits the reserves in USD after every change; filter on the `PoolId`. The [BNB Chain liquidity API](/docs/blockchain/BSC/bsc-liquidity-api) has the stream form and the other pool queries.
+
+```graphql
+{
+  EVM(network: bsc) {
+    DEXPoolEvents(
+      where: {
+        PoolEvent: {
+          Pool: {
+            PoolId: { is: "0xf43fdb854021ddeb41e06ac1d6e5df475197038ba5d3cba147f469a56870cd1b" }
+          }
+        }
+      }
+      limit: { count: 5 }
+      orderBy: { descending: Block_Time }
+    ) {
+      Block {
+        Time
+      }
+      PoolEvent {
+        Pool {
+          CurrencyA {
+            Symbol
+          }
+          CurrencyB {
+            Symbol
+          }
+        }
+        Liquidity {
+          AmountCurrencyA
+          AmountCurrencyAInUSD
+          AmountCurrencyB
+          AmountCurrencyBInUSD
+        }
+        AtoBPrice
       }
     }
   }
 }
 ```
+
+<FAQ
+  items={[
+    { q: "How do I get PancakeSwap Infinity trades on BNB Chain?", a: "Filter Trade.Dex.ProtocolName on pancakeswap_infinity in DEXTrades or DEXTradeByTokens under EVM(network: bsc), or use the Trading cube with Market Protocol pancakeswap_infinity for swaps with the trader and USD on every row." },
+    { q: "Why do all Infinity pools share one contract address?", a: "Infinity keeps every pool inside its manager contract, 0xa0ffb9c1ce1fe56963b0321b32e7a0302114058b. Trade.PoolId identifies the pool; Dex.SmartContract is always the manager." },
+    { q: "How do I find the PoolId of a pair?", a: "Group DEXTradeByTokens by Trade.PoolId with one token in Currency and ProtocolName pancakeswap_infinity. Each row is a pool of that token with its counter token and volume." },
+    { q: "Is Infinity the same as Uniswap v4 on BNB Chain?", a: "Same singleton design, different protocol and manager. Uniswap v4 on BNB Chain has its own page and PoolManager address; filter ProtocolName uniswap_v4 for it." },
+    { q: "How far back does Infinity trade data go?", a: "DEXTrades and DEXTradeByTokens reach history on the archive and combined datasets; the Trading cube keeps about a month; DEXPoolEvents is realtime-only." },
+  ]}
+/>
+
+## Related pages
+
+- [PancakeSwap API on BNB Chain](/docs/blockchain/BSC/pancake-swap-api/)
+- [Uniswap v4 on BNB Chain](/docs/blockchain/BSC/uniswap-v4-api)
+- [BNB Chain liquidity API](/docs/blockchain/BSC/bsc-liquidity-api)
+- [BNB Chain DEX trades API](/docs/blockchain/BSC/bsc-dextrades)
+- [Four.meme API](/docs/blockchain/BSC/four-meme-api/)
