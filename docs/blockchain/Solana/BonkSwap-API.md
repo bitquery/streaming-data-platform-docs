@@ -1,263 +1,238 @@
 ---
-title: "Solana Bonkswap API"
-description: "Solana Bonkswap API: query and stream Solana on-chain data with Bitquery GraphQL examples for developers. Includes filters and field selection tips."
+title: "BonkSwap API: Trades, Top Traders, One Wallet's Swaps and OHLC on Solana"
+sidebar_label: "BonkSwap API"
+description: "BonkSwap on Solana via Bitquery GraphQL: latest swaps, top traders by USD volume, one wallet's BonkSwap trades, hourly OHLC for USELESS/USD1, and a live stream."
+keywords:
+  - BonkSwap API
+  - BonkSwap trades Solana
+  - bonkswap GraphQL
+  - USD1 Solana DEX
+  - BonkSwap top traders
 ---
-# BonkSwap API
-
-:::tip Need real-time BonkSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered BonkSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical BonkSwap data older than ~30 days**, raw per-swap detail, or call / event context.
-:::
-
-In this document, we will explore several examples related to BonkSwap data.
-
-Need zero-latency BonkSwap data? [Read about our Shred Streams and Contact us for a Trial](/docs/streams/real-time-solana-data/).
-
-:::note
-To query or stream data via graphQL **outside the Bitquery IDE**, you need to generate an API access token.
-
-Follow the steps here to create one: [How to generate Bitquery API token ➤](/docs/authorization/how-to-generate/)
-:::
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
+import FAQ from "@site/src/components/FAQ";
 
-## Table of Contents
+# BonkSwap API: Trades, Top Traders, One Wallet's Swaps and OHLC on Solana
 
-- [BonkSwap Examples](#bonkswap-examples)
-  - [Latest Trades on BonkSwap](#latest-trades-on-bonkswap)
-  - [Get Top Traders on BonkSwap](#get-top-traders-on-bonkswap)
-  - [Get Latest Trades By Trader on BonkSwap](#get-latest-trades-by-trader-on-bonkswap)
-  - [OHLC of a token on BonkSwap](#get-ohlc-for-a-bonkswap-token)
+BonkSwap is the AMM of the Bonk ecosystem on Solana, program `BSwp6bEBihVLdqJRKGgzjcGLHkcTuzmSo1TQkHepzH8p`. Its volume today runs through pairs quoted in USD1, the stablecoin the venue leans on, with USELESS/USD1 the busiest of them. Bitquery labels its swaps `ProtocolName: "bonkswap"` in the Solana `DEXTrades` and `DEXTradeByTokens` cubes, so every query on this page is one filter away from covering any other Solana DEX. Every example runs in the [IDE](https://ide.bitquery.io) on a free account; Solana queries go to the `eap` endpoint. For swaps with the trader, USD and market cap on every row for the last month, the [Trading cube](/docs/trading/crypto-trades-api/trades-api) covers BonkSwap too.
 
-If you want fastest data without any latency, we can provide Kafka streams, please [fill this form](https://bitquery.io/forms/api) for it. Our Team will reach out.
+## Latest swaps on BonkSwap
 
-## BonkSwap Examples
-
-## Latest Trades on BonkSwap
-
-This is a graphQL query that fetches latest swaps on BonkSwap, you can convert this to a stream by changing the word `query` to `subscription`.
-
-[Run Query ➤](https://ide.bitquery.io/Latest-Trades-on-BonkSwap)
-
-```graphql
-query LatestTrades {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descending: Block_Time}
-      limit: {count: 50}
-      where: {
-        Transaction: {Result: {Success: true}},
-        Trade: {Dex: {ProtocolName: {is: "bonkswap"}}}
-      }
-    ) {
-      Block {
-        Time
-      }
-      Transaction {
-        Signature
-      }
-      Trade {
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Account {
-          Owner
-        }
-        Side {
-          Type
-          Account {
-            Address
-            Owner
-          }
-        }
-        AmountInUSD
-        PriceInUSD
-        Amount
-        Side {
-          Currency {
-            Symbol
-            MintAddress
-            Name
-          }
-          AmountInUSD
-          Amount
-        }
-        Currency {
-          Symbol
-          MintAddress
-          Name
-        }
-      }
-    }
-  }
-}
-
-```
-
-## Get Top Traders on BonkSwap
-
-The below API fetches top traders on BonkSwap using recent trading volume of the trader.
-
-[Run Query ➤](https://ide.bitquery.io/Top-Traders-on-BonkSwap)
-
-```graphql
-query TopTraders {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volumeUsd"}
-      limit: {count: 70}
-      where: {
-        Transaction: {Result: {Success: true}},
-        Trade: {Dex: {ProtocolName: {is: "bonkswap"}}},
-        Block: {Time: {after: "2025-06-10T09:07:39Z"}},
-        any: [
-          {Trade: {Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}},
-          {Trade: {
-            Currency: {MintAddress: {not: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}},
-            Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}
-          }},
-          {Trade: {
-            Currency: {MintAddress: {notIn: [
-              "So11111111111111111111111111111111111111112",
-              "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-            ]}},
-            Side: {Currency: {MintAddress: {notIn: [
-              "So11111111111111111111111111111111111111112",
-              "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-            ]}}}
-          }}
-        ]
-      }
-    ) {
-      Trade {
-        Account {
-          Owner
-        }
-        Dex {
-          ProtocolFamily
-          ProtocolName
-        }
-        Currency {
-          MintAddress
-          Symbol
-          Name
-        }
-        Side {
-          Currency {
-            MintAddress
-            Symbol
-            Name
-          }
-        }
-      }
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-    }
-  }
-}
-
-```
-
-## Get Latest Trades By Trader on BonkSwap
-
-The below API fetches recent trades by a particular trader. We use the `Transaction->Signer` field to set this criteria.
-
-[Run Query ➤](https://ide.bitquery.io/Bonkswap-Trades-by-Trader-API)
+One row per swap per token, newest first, with the counter token, the price in USD, the market and the signer. Change `query` to `subscription` and drop `limit` and `orderBy` for a live feed. Saved query [here](https://ide.bitquery.io/Latest-Trades-on-BonkSwap).
 
 ```graphql
 {
-  Solana(network: solana, dataset: realtime) {
-    DEXTrades(
-      orderBy: [{descending: Block_Time}, {descending: Transaction_Index}, {descending: Trade_Index}]
-      limit: {count: 10}
-      where: {Transaction: {Signer: {is: "EATeN8nptyVmydeDGD6966Sgw14BXdbLwxKXr19UH9q8"}}, Trade: {Dex: {ProtocolName: {is: "bonkswap"}}}}
+  Solana {
+    DEXTradeByTokens(
+      orderBy: { descending: Block_Time }
+      limit: { count: 50 }
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: { Dex: { ProtocolName: { is: "bonkswap" } } }
+      }
     ) {
       Block {
         Time
       }
-      Instruction {
-        Program {
-          Method
-        }
-      }
       Trade {
-        Dex {
-          ProtocolFamily
-          ProtocolName
-          ProgramAddress
+        Currency {
+          Symbol
+          MintAddress
         }
-        Buy {
-          Price
-          PriceInUSD
-          Amount
-          AmountInUSD
-          Account {
-            Address
-            Owner
-          }
+        Amount
+        PriceInUSD
+        Side {
           Currency {
-            Name
             Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
           }
+          Amount
+          Type
         }
-        Sell {
-          Price
-          PriceInUSD
-          Amount
-          AmountInUSD
-          Account {
-            Owner
-            Address
-          }
-          Currency {
-            Name
-            Symbol
-            MintAddress
-            Decimals
-            Fungible
-            Uri
-          }
+        Market {
+          MarketAddress
         }
       }
       Transaction {
         Signature
         Signer
-        FeePayer
       }
     }
   }
 }
-
 ```
 
-## Get OHLC for a BonkSwap Token
+## Top traders by USD volume
 
-[Run Query ➤](https://ide.bitquery.io/ohlc-for-bonkswap-token)
+Group the last day by the transaction signer. `tokens` says how many different tokens each wallet touched. Saved query [here](https://ide.bitquery.io/Top-Traders-on-BonkSwap).
 
 ```graphql
-query MyQuery {
+{
   Solana {
     DEXTradeByTokens(
-      where: {Trade: {Dex: {ProtocolName: {is: "bonkswap"}}, Currency: {MintAddress: {is: "token mint address"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}}, Transaction: {Result: {Success: true}}}
-      limit: {count: 100}
-      orderBy: {descendingByField: "Block_Timefield"}
-    ){
-      Block{
-        Timefield: Time(interval:{count:1 in:minutes})
+      orderBy: { descendingByField: "volumeUsd" }
+      limit: { count: 50 }
+      where: {
+        Transaction: { Result: { Success: true } }
+        Trade: { Dex: { ProtocolName: { is: "bonkswap" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
-      Trade{
-        open: Price(minimum:Block_Slot)
-        high: Price(maximum:Trade_Price)
-        low: Price(minimum:Trade_Price)
-        close: Price(maximum:Block_Slot)
+    ) {
+      Transaction {
+        Signer
       }
-      volumeInUSD: sum(of:Trade_Side_AmountInUSD)
+      trades: count
+      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      tokens: uniq(of: Trade_Currency_MintAddress)
+    }
+  }
+}
+```
+
+## One wallet's BonkSwap trades
+
+Filter `Transaction.Signer`. The example is the most active BonkSwap wallet at the time of writing; take any address from the table above. Saved query [here](https://ide.bitquery.io/Bonkswap-Trades-by-Trader-API).
+
+```graphql
+{
+  Solana {
+    DEXTrades(
+      orderBy: [{ descending: Block_Time }, { descending: Transaction_Index }, { descending: Trade_Index }]
+      limit: { count: 20 }
+      where: {
+        Transaction: { Signer: { is: "9EVzTzLSfYHrjXpejBRFGmZVG9jRsS4tDtcE1NpD6srb" } }
+        Trade: { Dex: { ProtocolName: { is: "bonkswap" } } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Currency {
+            Symbol
+          }
+          Amount
+          AmountInUSD
+        }
+        Sell {
+          Currency {
+            Symbol
+          }
+          Amount
+          AmountInUSD
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      Transaction {
+        Signature
+      }
+    }
+  }
+}
+```
+
+## Hourly OHLC for USELESS/USD1
+
+Candles for the last day of the busiest BonkSwap pair. `Trade.Amount` sums the USELESS volume; the four price fields come from the highest and lowest prices in the hour and the first and last slot. Saved query [here](https://ide.bitquery.io/ohlc-for-bonkswap-token).
+
+```graphql
+{
+  Solana {
+    DEXTradeByTokens(
+      where: {
+        Trade: {
+          Dex: { ProtocolName: { is: "bonkswap" } }
+          Currency: { MintAddress: { is: "Dz9mQ9NzkBcCsuGPFJ3r1bS4wgqKMHBPiVuniW8Mbonk" } }
+          Side: { Currency: { MintAddress: { is: "USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB" } } }
+        }
+        Transaction: { Result: { Success: true } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+      limit: { count: 24 }
+      orderBy: { descendingByField: "Block_Timefield" }
+    ) {
+      Block {
+        Timefield: Time(interval: { in: hours, count: 1 })
+      }
+      volume: sum(of: Trade_Amount)
+      Trade {
+        high: Price(maximum: Trade_Price)
+        low: Price(minimum: Trade_Price)
+        open: Price(minimum: Block_Slot)
+        close: Price(maximum: Block_Slot)
+      }
       count
     }
   }
 }
-
 ```
+
+## Every BonkSwap swap, live
+
+The protocol filter on `DEXTrades` as a subscription; each message is one swap with both sides.
+
+```graphql
+subscription {
+  Solana {
+    DEXTrades(
+      where: {
+        Trade: { Dex: { ProtocolName: { is: "bonkswap" } } }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Trade {
+        Buy {
+          Currency {
+            Symbol
+            MintAddress
+          }
+          Amount
+          AmountInUSD
+          Account {
+            Address
+          }
+        }
+        Sell {
+          Currency {
+            Symbol
+            MintAddress
+          }
+          Amount
+          AmountInUSD
+        }
+        Market {
+          MarketAddress
+        }
+      }
+      Transaction {
+        Signature
+        Signer
+      }
+    }
+  }
+}
+```
+
+<FAQ
+  items={[
+    { q: "How do I get BonkSwap trades with the Bitquery API?", a: "Filter Trade.Dex.ProtocolName on bonkswap in the Solana DEXTrades or DEXTradeByTokens cubes on the eap endpoint. DEXTradeByTokens gives one row per swap per token, which is the shape for prices, candles and rankings." },
+    { q: "What is the BonkSwap program address?", a: "BSwp6bEBihVLdqJRKGgzjcGLHkcTuzmSo1TQkHepzH8p. Filtering Trade.Dex.ProgramAddress on it is equivalent to the protocol name filter." },
+    { q: "How do I find the top traders on BonkSwap?", a: "Group DEXTradeByTokens by Transaction.Signer over a window and sort by the USD sum of Trade.Side.AmountInUSD. Add a token filter to rank traders of one token." },
+    { q: "Which quote token do BonkSwap pairs use?", a: "Most BonkSwap volume today is quoted in USD1, mint USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB. Put it under Trade.Side.Currency to build candles in USD1 terms." },
+    { q: "How far back does BonkSwap data go?", a: "DEXTradeByTokens reaches history on the archive dataset from mid-2024; add dataset: archive or combined to the Solana root for windows beyond the realtime one." },
+  ]}
+/>
+
+## Related pages
+
+- [Solana DEX trades API](/docs/blockchain/Solana/solana-dextrades)
+- [Crypto Trades API](/docs/trading/crypto-trades-api/trades-api)
+- [Solana API hub](/docs/blockchain/Solana/)
+- [Shred streams for Solana](/docs/streams/real-time-solana-data/)
