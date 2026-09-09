@@ -22,7 +22,15 @@ keywords:
 
 # Hyperliquid API
 
+import VideoPlayer from "../../../src/components/videoplayer.js";
+
 Bitquery indexes **Hyperliquid core** (the L1 order-book exchange) and exposes it through the `Hyperliquid` cube on the [streaming API](https://streaming.bitquery.io/graphql). Every dataset is available both as a **GraphQL query** and as a **WebSocket subscription** (real-time stream) — change `query` to `subscription` and drop `limit`/`orderBy`.
+
+## Video Tutorials
+
+<VideoPlayer url="https://www.youtube.com/watch?v=72KUgKEwDrU" />
+
+<VideoPlayer url="https://www.youtube.com/watch?v=xMrG1_IzgF8" />
 
 :::info How far back the API goes
 The `Hyperliquid` cubes serve a **rolling ~30-day window**. That covers live streaming and recent history, which is what most bots, dashboards and monitoring need.
