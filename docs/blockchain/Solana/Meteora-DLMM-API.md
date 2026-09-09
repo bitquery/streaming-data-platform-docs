@@ -21,10 +21,10 @@ import FAQ from "@site/src/components/FAQ";
 
 Meteora DLMM (Dynamic Liquidity Market Maker) is Meteora's concentrated-liquidity DEX on Solana. It runs on the `lb_clmm` program at `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`, holds liquidity in discrete price bins, and raises fees when volatility rises. Bitquery reads that program's activity into GraphQL queries, WebSocket subscriptions, Kafka and gRPC streams: live swaps, new pools, token prices, OHLC candles, pool reserves, top traders and volume. Every query below runs as written in the [Bitquery IDE](https://ide.bitquery.io) with a free trial token. Meteora's own [DLMM Data API](#does-meteora-have-an-api) serves pool state, positions and per-pool candles but has no trade feed and no streaming; the queries below cover both, with history back to mid-2024.
 
-:::tip Want structured trades, OHLC and market cap? Start with the Trading API
-The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path to clean Meteora DLMM market data. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API**; filter `Pair: { Market: { Protocol: { is: "lb_clmm" } } }` for DLMM. [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) gives pre-aggregated OHLC per DLMM pool down to one second, so you never build candles yourself. Worked examples are in [DLMM trades with USD price, market cap and supply](#dlmm-trades-with-usd-price-market-cap-and-supply) below.
+:::tip Start with the Trading API
+The [**Trading API**](/docs/trading/trading-data-overview) answers most questions on this page fastest. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API**, and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) gives pre-aggregated OHLC per DLMM pool down to one second.
 
-Reach for the chain-level queries on this page when you need what the Trading API does not carry: **history older than the Trading window** (about 30 days), pool reserves, per-instruction detail such as pool creation, or call / event context.
+Drop to the chain-level cubes further down for what the Trading API does not carry: **history older than about 30 days**, pool reserves, and per-instruction detail such as pool creation.
 :::
 
 :::note
@@ -70,68 +70,52 @@ Yes, for pool-level data. Meteora publishes a free REST [DLMM Data API](https://
 
 ## Real-time Meteora DLMM trades {#subscribe-to-realtime-dlmm-trades}
 
-This subscription streams DLMM swaps as they land, filtered by the program address `LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo`. `Trade.Buy.Currency` is what the trader received and `Trade.Sell.Currency` what the trader paid; `Trade.Market.MarketAddress` is the DLMM pool and `Transaction.Signer` the wallet that signed. `AmountInUSD` and `PriceInUSD` give the USD view of each side.
-
-You can run the subscription [in the Bitquery IDE](https://ide.bitquery.io/Real-time-trades-on-MeteoraDLMM-DEX-on-Solana).
+Stream every decoded DLMM swap with the trader, both amounts, the USD price and the token's market cap and circulating supply. `Side` is the trader's own side. This is where most integrations start.
 
 ```graphql
 subscription {
-  Solana {
-    DEXTrades(
+  Trading {
+    Trades(
       where: {
-        Trade: {
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
+        Pair: { Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } } }
       }
     ) {
       Block {
         Time
       }
-      Transaction {
-        Signature
-        Signer
+      Side
+      Price
+      PriceInUsd
+      Trader {
+        Address
       }
-      Trade {
-        Dex {
-          ProgramAddress
-          ProtocolFamily
-          ProtocolName
-        }
+      Amounts {
+        Base
+        Quote
+      }
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Supply {
+        MarketCap
+        CirculatingSupply
+      }
+      TransactionHeader {
+        Hash
+      }
+      Pair {
         Market {
-          MarketAddress
+          Address
+          Protocol
         }
-        Buy {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-          }
-          Amount
-          AmountInUSD
-          Account {
-            Address
-            Owner
-          }
-          PriceAgainstSellCurrency: Price
-          PriceInUSD
+        Token {
+          Symbol
+          Address
         }
-        Sell {
-          Currency {
-            Name
-            Symbol
-            MintAddress
-          }
-          Amount
-          AmountInUSD
-          Account {
-            Address
-            Owner
-          }
-          PriceAgainstBuyCurrency: Price
-          PriceInUSD
+        QuoteToken {
+          Symbol
+          Address
         }
       }
     }
@@ -139,9 +123,236 @@ subscription {
 }
 ```
 
-For the lowest latency, the same trades are on the Kafka topic `solana.dextrades.proto` and the [gRPC DEX trades topic](/docs/grpc/solana/topics/dextrades/); filter on `ProgramAddress` or on `ProtocolFamily` `Meteora` in the consumer. See the [Solana protobuf reference](/docs/streams/protobuf/chains/Solana-protobuf/) and [real-time Solana streams](/docs/streams/real-time-solana-data/).
+Add `Pair: { Token: { Address: { is: "<mint>" } } }` to follow one token, or `AmountsInUsd: { Base: { gt: 10000 } }` to watch only large trades. The same body runs as a query with `limit`, `orderBy: { descending: Block_Time }` and a `Block: { Time: { since_relative: { minutes_ago: 10 } } }` filter.
 
-## New Meteora DLMM pools in real time {#latest-pool-creation-on-meteora-dlmm}
+For the lowest latency the same swaps are on the Kafka topic `solana.dextrades.proto` and the [gRPC DEX trades topic](/docs/grpc/solana/topics/dextrades/); filter on `ProgramAddress` or on `ProtocolFamily` `Meteora` in the consumer. See the [Solana protobuf reference](/docs/streams/protobuf/chains/Solana-protobuf/) and [real-time Solana streams](/docs/streams/real-time-solana-data/).
+
+:::note Some DLMM swaps are not decoded yet
+The trade cubes decode DLMM `swap` and `swap2` instructions, including inside aggregator routes through Jupiter and other routers. Swaps sent as `swapExactOut`, `swapExactOut2` or `swapWithPriceImpact2` do not currently produce trade rows in either the chain-level or the Trading cubes, so DLMM volume read from any cube is lower than the on-chain total.
+:::
+
+## Latest price of a token on Meteora DLMM {#latest-price-of-a-token-on-meteora-dlmm}
+
+The token examples below use TRUMP (`6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN`), which has traded on Meteora DLMM since its launch in January 2025; where a pool address is needed they use a TRUMP/USDC DLMM pool, `3C5YE97HADPDxZehYq9Cis8AXr9aNyrUsczKzE1nDbW9`. `Trading.Pairs` returns the latest interval for the pool with OHLC, average price, volume and market cap already computed.
+
+`Price: { IsQuotedInUsd: true }` matters: every market publishes each interval twice, once in USD and once in the quote token.
+
+```graphql
+{
+  Trading {
+    Pairs(
+      limit: { count: 1 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Token: { Address: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" } }
+        Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } }
+        Price: { IsQuotedInUsd: true }
+        Interval: { Time: { Duration: { eq: 60 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Token {
+        Symbol
+        Address
+      }
+      QuoteToken {
+        Symbol
+      }
+      Market {
+        Address
+        Protocol
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+        Average {
+          Mean
+        }
+      }
+      Volume {
+        Usd
+        Base
+      }
+      Supply {
+        MarketCap
+        FullyDilutedValuationUsd
+      }
+    }
+  }
+}
+```
+
+This gives the price **on DLMM**, which is what you want on a venue page. For a token's price across every venue, weighted to its deepest market, drop the protocol filter and add `Ranking: { Position: { eq: 1 } }` as described in [most accurate token price](/docs/trading/crypto-price-api/pairs/#most-accurate-token-price).
+
+## Real-time price feed of a token {#realtime-price-feed-of-a-token-on-meteora-dlmm}
+
+The same filter as a subscription, at one-second intervals.
+
+```graphql
+subscription {
+  Trading {
+    Pairs(
+      where: {
+        Token: { Address: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" } }
+        Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } }
+        Price: { IsQuotedInUsd: true }
+        Interval: { Time: { Duration: { eq: 1 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Token {
+        Symbol
+      }
+      QuoteToken {
+        Symbol
+      }
+      Market {
+        Address
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Volume {
+        Usd
+      }
+      Supply {
+        MarketCap
+      }
+    }
+  }
+}
+```
+
+## Meteora DLMM OHLC API {#meteora-dlmm-ohlc-api}
+
+`Trading.Pairs` serves candles at whatever interval you ask for, so there is nothing to aggregate. Set `Interval.Time.Duration` in seconds: 1 for one-second candles, 60 for one-minute, 3600 for hourly.
+
+```graphql
+{
+  Trading {
+    Pairs(
+      limit: { count: 30 }
+      orderBy: { descending: Block_Time }
+      where: {
+        Token: { Address: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" } }
+        Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } }
+        Price: { IsQuotedInUsd: true }
+        Interval: { Time: { Duration: { eq: 3600 } } }
+      }
+    ) {
+      Block {
+        Time
+      }
+      Market {
+        Address
+      }
+      QuoteToken {
+        Symbol
+      }
+      Price {
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Volume {
+        Usd
+        Base
+        Quote
+      }
+    }
+  }
+}
+```
+
+## Top traders of a token on Meteora DLMM {#get-the-top-traders-of-a-specific-token-on-meteora-dlmm-dex}
+
+Ranks wallets by USD volume on DLMM over the last 24 hours, one row per wallet, with the USD each bought and sold. `Trading.Trades` reports `Side` from the trader's point of view, so the split needs no field gymnastics.
+
+:::note
+Run this as a query, not a subscription. Aggregates over WebSocket return partial results.
+:::
+
+```graphql
+query TopTraders($token: String) {
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "volumeUsd" }
+      where: {
+        Pair: {
+          Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } }
+          Token: { Address: { is: $token } }
+        }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+      }
+    ) {
+      Trader {
+        Address
+      }
+      volumeUsd: sum(of: AmountsInUsd_Base)
+      bought: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      sold: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+      trades: count
+    }
+  }
+}
+{
+  "token": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN"
+}
+```
+
+Subtracting `bought` from `sold` gives a rough realised PnL for the window. The [wallet PnL guide](/docs/trading/crypto-trades-api/wallet-pnl/) covers the full method.
+
+## Trading volume, buy volume and sell volume of a token {#get-trading-volume-buy-volume-sell-volume-of-a-token}
+
+Seven-day totals for TRUMP on DLMM: USD volume, the buy and sell split, trade counts and the number of distinct wallets. Change `days_ago` for other windows, up to the roughly 30-day Trading window. Drop the `Token` filter for the whole DLMM program.
+
+```graphql
+{
+  Trading {
+    Trades(
+      where: {
+        Pair: {
+          Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } }
+          Token: { Address: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" } }
+        }
+        Block: { Time: { since_relative: { days_ago: 7 } } }
+      }
+    ) {
+      volumeUsd: sum(of: AmountsInUsd_Base)
+      buy_volume: sum(of: AmountsInUsd_Base, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: AmountsInUsd_Base, if: { Side: { is: "Sell" } })
+      buys: count(if: { Side: { is: "Buy" } })
+      sells: count(if: { Side: { is: "Sell" } })
+      traders: count(distinct: Trader_Address)
+    }
+  }
+}
+```
+
+## Chain-level DLMM data
+
+The sections above cover trades, prices, candles, traders and volume through the Trading cubes. Three things live only in the Solana chain-level cubes: pool creation, pool reserves, and history older than the roughly 30-day Trading window. See [DEXTrades vs DEXTradeByTokens vs Trading.Trades](/docs/cubes/dextrades-dextradebytokens-trading-trades/) for the full comparison.
+
+### New Meteora DLMM pools in real time {#latest-pool-creation-on-meteora-dlmm}
 
 Every DLMM pool is an `LbPair` account created by one of the pool-creation instructions: `initializeLbPair2` for standard permissionless pools, `initializeCustomizablePermissionlessLbPair2` for pools with custom parameters, `initializePermissionLbPair` for permissioned launches, and the un-numbered legacy SPL-Token-only forms. This subscription emits one row per new pool. `Program.AccountNames` gives the meaning of each entry in `Instruction.Accounts` in order: the first account is the new pool address (`lbPair`), `tokenMintX` and `tokenMintY` are the two token mints, `reserveX` and `reserveY` the pool vaults, and `funder` the wallet that paid for the pool's creation. Pool creation is far less frequent than swaps, so expect this stream to stay quiet for minutes at a time. To list recent pools instead, run the same filter as a query with `Block: { Time: { since_relative: { hours_ago: 24 } } }`.
 
@@ -228,215 +439,9 @@ subscription {
 }
 ```
 
-## Latest price of a token on Meteora DLMM
+### Liquidity of a Meteora DLMM pool
 
-The token examples below use TRUMP (`6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN`), which has traded on Meteora DLMM since its launch in January 2025; where a pool address is needed they use a TRUMP/USDC DLMM pool, `3C5YE97HADPDxZehYq9Cis8AXr9aNyrUsczKzE1nDbW9`. Swap in any mint and quote. `Trade.Currency` is the token you price, `Trade.Side.Currency` the quote it traded against, `Trade.Price` the price in the quote token and `Trade.PriceInUSD` the USD price; `Trade.Market.MarketAddress` tells you which DLMM pool printed the trade.
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/latest-price-of-a-token-on-DLMM).
-
-```graphql
-{
-  Solana {
-    DEXTradeByTokens(
-      limit: { count: 1 }
-      orderBy: { descending: Block_Time }
-      where: {
-        Trade: {
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-          Currency: {
-            MintAddress: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-            }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Trade {
-        Price
-        PriceInUSD
-        Market {
-          MarketAddress
-        }
-        Currency {
-          Symbol
-        }
-        Side {
-          Currency {
-            Symbol
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-This is the last DLMM print for that pair. For a token's price across every venue, weighted to its most liquid market, use `Trading.Pairs` with `Ranking.Position` 1 as described in [most accurate token price](/docs/trading/crypto-price-api/pairs/#most-accurate-token-price).
-
-## Real-time price feed of a token {#realtime-price-feed-of-a-token-on-meteora-dlmm}
-
-The same filter as a subscription: one message per TRUMP/USDC trade on DLMM with the price of that print. `Side.Type` is `buy` when the trader bought TRUMP and `sell` when they sold it.
-
-You can run the subscription [in the Bitquery IDE](https://ide.bitquery.io/Realtime-Price-feed-of-a-Token-on-Meteora-DLMM).
-
-```graphql
-subscription {
-  Solana {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-          Currency: {
-            MintAddress: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-            }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Trade {
-        Market {
-          MarketAddress
-        }
-        Price
-        PriceInUSD
-        Amount
-        Side {
-          Amount
-          Type
-        }
-      }
-    }
-  }
-}
-```
-
-## Meteora DLMM OHLC API
-
-One-minute candles for TRUMP/USDC on DLMM built from `DEXTradeByTokens`: `open` and `close` are the prices at the lowest and highest slot in each interval, `high` and `low` the extremes, `volume` the TRUMP amount and `volumeUsd` the USD value. `PriceAsymmetry` is the absolute difference between the two sides' USD prices divided by their sum, computed only when both tokens have a USD price, so `PriceAsymmetry: { lt: 0.1 }` keeps trades whose sides agree to within roughly 20 percent and removes most bad prints. Change `interval` for other timeframes and `limit` for more candles.
-
-:::note
-Run this as a query, not a subscription: aggregates and time intervals do not work well over WebSocket.
-:::
-
-You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Meteora-DLMM-OHLC-API).
-
-```graphql
-{
-  Solana {
-    DEXTradeByTokens(
-      orderBy: { descendingByField: "Block_Timefield" }
-      limit: { count: 10 }
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-            }
-          }
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-          PriceAsymmetry: { lt: 0.1 }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Timefield: Time(interval: { in: minutes, count: 1 })
-      }
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
-      Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Slot)
-        close: Price(maximum: Block_Slot)
-      }
-      count
-    }
-  }
-}
-```
-
-### Pre-built DLMM candles from the Trading cube
-
-`Trading.Pairs` already aggregates every DLMM pool into OHLC, average price, volume and market cap per interval. This query returns the latest one-minute candle for TRUMP on DLMM quoted in USD. `Price: { IsQuotedInUsd: true }` matters: every market publishes each interval twice, once in USD and once in the quote token.
-
-```graphql
-{
-  Trading {
-    Pairs(
-      limit: { count: 1 }
-      orderBy: { descending: Block_Time }
-      where: {
-        Token: { Address: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" } }
-        Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } }
-        Price: { IsQuotedInUsd: true }
-        Interval: { Time: { Duration: { eq: 60 } } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Token {
-        Symbol
-        Address
-      }
-      QuoteToken {
-        Symbol
-      }
-      Market {
-        Address
-        Protocol
-      }
-      Price {
-        Ohlc {
-          Open
-          High
-          Low
-          Close
-        }
-        Average {
-          Mean
-        }
-      }
-      Volume {
-        Usd
-        Base
-      }
-      Supply {
-        MarketCap
-      }
-    }
-  }
-}
-```
-
-## Liquidity of a Meteora DLMM pool
-
-`DEXPools` records a pool's reserves after each swap, deposit or withdrawal it decodes. `Base.PostAmount` and `Quote.PostAmount` are the token balances after the event, `PostAmountInUSD` their USD value, and `ChangeAmount` the signed change the event caused. This query returns the latest state of the TRUMP/USDC DLMM pool.
+`DEXPools` records a pool's reserves after each swap, deposit or withdrawal it decodes. `Base.PostAmount` and `Quote.PostAmount` are the balances after the event, `PostAmountInUSD` their USD value, and `ChangeAmount` the signed change that event caused.
 
 :::note
 `DEXPools` is a realtime-only cube: it keeps roughly the last 12 hours and has no archive dataset, so use it for current reserves and live liquidity events rather than TVL history. See [data coverage and retention](/docs/graphql/data-coverage-retention/).
@@ -450,12 +455,8 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Meteora-DLM
       orderBy: { descending: Block_Time }
       where: {
         Pool: {
-          Market: {
-            MarketAddress: { is: "3C5YE97HADPDxZehYq9Cis8AXr9aNyrUsczKzE1nDbW9" }
-          }
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
+          Market: { MarketAddress: { is: "3C5YE97HADPDxZehYq9Cis8AXr9aNyrUsczKzE1nDbW9" } }
+          Dex: { ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" } }
         }
       }
     ) {
@@ -495,18 +496,14 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Meteora-DLM
 }
 ```
 
-To stream liquidity changes across all DLMM pools, subscribe to the same cube and keep rows where either reserve moved. DLMM deposits are often one-sided, so filter on `Base` or `Quote` with `any` rather than on `Base` alone. Each message is one reserve change with the pool, both currencies and the post-event balances.
+To stream liquidity changes across all DLMM pools, subscribe to the same cube and keep rows where either reserve moved. DLMM deposits are often one-sided, so filter on `Base` or `Quote` with `any` rather than on `Base` alone.
 
 ```graphql
 subscription {
   Solana {
     DEXPools(
       where: {
-        Pool: {
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-        }
+        Pool: { Dex: { ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" } } }
         any: [
           { Pool: { Base: { ChangeAmount: { ne: "0" } } } }
           { Pool: { Quote: { ChangeAmount: { ne: "0" } } } }
@@ -549,166 +546,39 @@ subscription {
 }
 ```
 
-## Top traders of a token on Meteora DLMM {#get-the-top-traders-of-a-specific-token-on-meteora-dlmm-dex}
+### Historical Meteora DLMM trades
 
-Ranks wallets by USD volume traded in TRUMP on DLMM over the last 24 hours, with the amount each wallet bought and sold. `Trade.Account.Owner` is the trader's wallet. On Solana, `Side.Type` is the trader's action on `Trade.Currency`: `buy` rows are purchases of the token in the filter and `sell` rows are sales.
+For anything older than the Trading window, use `DEXTradeByTokens` with `dataset: archive`, which reaches back to mid-2024. This returns monthly trade counts and TRUMP volume on DLMM.
 
-:::note
-Run this as a query, not a subscription, because aggregates over WebSocket return wrong results. `Trade.Side.Account` is not available as an aggregate dimension on the `archive` and `combined` datasets.
+:::caution Aggregate in native amounts on `archive` and `combined`, not USD
+Summing `Trade_Side_AmountInUSD` on the Solana `archive` and `combined` datasets does not aggregate cleanly: adding it to a grouped query shatters one row per month into many partial rows, and `combined` also returns fewer trades than `realtime` over the same window. Aggregate `Trade_Amount` instead, and take USD figures from the Trading cubes, where every row carries a vetted USD price.
 :::
 
-You can run the query [in the Bitquery IDE](https://ide.bitquery.io/Get-the-Top-Traders-of-a-specific-Token-on-Meteora-DLMM-DEX).
-
 ```graphql
-query TopTraders($token: String) {
-  Solana {
+{
+  Solana(dataset: archive) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "volumeUsd" }
-      limit: { count: 100 }
+      orderBy: { descendingByField: "Block_month" }
       where: {
-        Trade: {
-          Currency: { MintAddress: { is: $token } }
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-        }
+        Block: { Time: { since: "2025-01-01T00:00:00Z" } }
         Transaction: { Result: { Success: true } }
-        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Trade: {
+          Currency: { MintAddress: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" } }
+          Dex: { ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" } }
+        }
       }
     ) {
-      Trade {
-        Account {
-          Owner
-        }
+      Block {
+        month: Time(interval: { in: months, count: 1 })
       }
-      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
-      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
-      volume: sum(of: Trade_Amount)
-      volumeUsd: sum(of: Trade_Side_AmountInUSD)
+      volume_trump: sum(of: Trade_Amount)
       trades: count
     }
   }
 }
-{
-  "token": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN"
-}
 ```
 
-## Trading volume, buy volume and sell volume of a token {#get-trading-volume-buy-volume-sell-volume-of-a-token}
-
-Seven-day totals for TRUMP/USDC on DLMM from the `combined` dataset, which joins realtime and archive: total volume in TRUMP and in USD, USD volume split into buys and sells, and the count of each. Widen `days_ago` for longer windows; the archive reaches back to mid-2024.
-
-You can run the query [in the Bitquery IDE](https://ide.bitquery.io/Get-trading-volume-buy-volume-sell-volume-of-a-token_3).
-
-```graphql
-query MyQuery {
-  Solana(dataset: combined) {
-    DEXTradeByTokens(
-      where: {
-        Block: { Time: { since_relative: { days_ago: 7 } } }
-        Transaction: { Result: { Success: true } }
-        Trade: {
-          Currency: {
-            MintAddress: { is: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN" }
-          }
-          Side: {
-            Currency: {
-              MintAddress: { is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" }
-            }
-          }
-          Dex: {
-            ProgramAddress: { is: "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo" }
-          }
-        }
-      }
-    ) {
-      Trade {
-        Currency {
-          Symbol
-          MintAddress
-          Decimals
-        }
-        Side {
-          Currency {
-            Symbol
-            MintAddress
-          }
-        }
-      }
-      traded_volume_USD: sum(of: Trade_Side_AmountInUSD)
-      traded_volume: sum(of: Trade_Amount)
-      buy_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: buy } } } }
-      )
-      sell_volume: sum(
-        of: Trade_Side_AmountInUSD
-        if: { Trade: { Side: { Type: { is: sell } } } }
-      )
-      buys: count(if: { Trade: { Side: { Type: { is: buy } } } })
-      sells: count(if: { Trade: { Side: { Type: { is: sell } } } })
-    }
-  }
-}
-```
-
-## DLMM trades with USD price, market cap and supply
-
-The [Trades cube](/docs/trading/crypto-trades-api/trades-api/) (`Trading.Trades`) is trader-centric: one MEV-filtered row per swap, `Side` from the trader's point of view, `PriceInUsd`, `AmountsInUsd`, market cap and circulating supply on every row. Filter `Pair.Market.Protocol` `lb_clmm` to stream DLMM swaps across all pools in one subscription. See [DEXTrades vs DEXTradeByTokens vs Trading.Trades](/docs/cubes/dextrades-dextradebytokens-trading-trades/) for when to use which.
-
-```graphql
-subscription {
-  Trading {
-    Trades(
-      where: {
-        Pair: { Market: { Protocol: { is: "lb_clmm" }, Network: { is: "Solana" } } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Side
-      Price
-      PriceInUsd
-      Trader {
-        Address
-      }
-      Amounts {
-        Base
-        Quote
-      }
-      AmountsInUsd {
-        Base
-        Quote
-      }
-      Supply {
-        MarketCap
-        CirculatingSupply
-      }
-      TransactionHeader {
-        Hash
-      }
-      Pair {
-        Market {
-          Address
-          Protocol
-          ProtocolFamily
-        }
-        Token {
-          Symbol
-          Address
-        }
-        QuoteToken {
-          Symbol
-          Address
-        }
-      }
-    }
-  }
-}
-```
-
-The same body runs as a query with `limit: { count: 10 }`, `orderBy: { descending: Block_Time }` and a `Block: { Time: { since_relative: { minutes_ago: 10 } } }` filter for the latest DLMM swaps. Add `Pair: { Token: { Address: { is: "<mint>" } } }` to follow one token, or reuse the PnL leaderboard pattern from the [Meteora DBC page](/docs/blockchain/Solana/meteora-dynamic-bonding-curve-api/#top-traders-by-pnl-for-a-specific-meteora-dbc-token-last-30-minutes) with a DLMM `Market.Address`.
+The chain-level cubes also carry per-swap detail the Trading cubes leave out, such as the exact instruction behind a swap and the token accounts on each side; the [Solana DEX Trades API](/docs/blockchain/Solana/solana-dextrades/) documents those fields.
 
 ## API key, free trial and pricing
 
