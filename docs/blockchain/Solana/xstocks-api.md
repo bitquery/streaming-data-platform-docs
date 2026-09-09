@@ -4,8 +4,8 @@ description: "Solana Xstocks API: query and stream Solana on-chain data with Bit
 ---
 # xStocks API
 
-:::tip Need real-time xStocks data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered xStocks swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical xStocks data older than ~30 days**, raw per-swap detail, or call / event context.
+:::tip These examples use the Trading API
+The queries on this page use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered xStocks swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**, and [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) / [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) give you ready-made OHLC candles. `Trading.Trades` covers **real-time and roughly the last 30 days**; for xStocks history older than that, drop down to the chain-level [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) cube.
 :::
 
 :::note Some tickers only trade via RFQ
@@ -16,112 +16,70 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 ## Tesla xStock Trades in Real-Time
 
-Below query will give you realtime trades of Tesla xStock (TESLAx).
-You can run the query [here](https://ide.bitquery.io/Latest-Trades-of-TESLA-onchain-xStock_1)
+Below subscription gives you realtime trades of Tesla xStock (TESLAx). The token is selected with `Pair.Token.Id`, which on Solana takes the form `bid:solana:<mint>`.
+
+[Run in IDE ➤](https://ide.bitquery.io/Tesla-stock-trades-stream)
 
 ```graphql
 subscription LatestTrades {
-  Solana {
-    DEXTradeByTokens(
-      where: {
-        Trade: {
-          Currency: {
-            MintAddress: { is: "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB" }
-          }
-        }
-        Transaction: { Result: { Success: true } }
-      }
-    ) {
-      Block {
-        Time
-      }
-      Transaction {
-        Signature
-      }
-      Trade {
-        Market {
-          MarketAddress
-        }
-        Dex {
-          ProtocolName
-          ProtocolFamily
-        }
-        AmountInUSD
-        PriceInUSD
-        Amount
-        Currency {
-          Name
-          Symbol
-          MintAddress
-        }
-        Side {
-          Type
-          Currency {
-            Symbol
-            MintAddress
-            Name
-          }
-          AmountInUSD
-          Amount
-        }
-      }
-    }
-  }
-}
-```
-
-## Latest Price of xStocks using Crypto Price api
-
-You can get latest price of xStocks tokens prices using our [Crypto price api](/docs/trading/crypto-price-api/).
-
-You can run the query [here](https://ide.bitquery.io/xStocks-prices)
-
-```graphql
-subscription {
   Trading {
-    Tokens(
-      where: {Token: {Name: {includes: "xStock"}}, Interval: {Time: {Duration: {eq: 1}}}}
-    ) {
-      Token {
-        Address
-        Id
-        IsNative
-        Name
-        Network
-        Name
-        Symbol
-        TokenId
-      }
-      Block {
-        Date
-        Time
-        Timestamp
-      }
-      Interval {
-        Time {
-          Start
-          Duration
-          End
+    Trades(
+      where: {
+        Pair: {
+          Market: { Network: { is: "Solana" } }
+          Token: {
+            Id: { is: "bid:solana:XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB" }
+          }
         }
       }
-      Volume {
+    ) {
+      Block {
+        Time
+      }
+      TransactionHeader {
+        Hash
+      }
+      Side
+      Price
+      PriceInUsd
+      Amounts {
         Base
         Quote
-        Usd
       }
-      Price {
-        IsQuotedInUsd
-        Ohlc {
-          Close
-          High
-          Low
-          Open
+      AmountsInUsd {
+        Base
+        Quote
+      }
+      Trader {
+        Address
+      }
+      Supply {
+        CirculatingSupply
+        TotalSupply
+        MarketCap
+        FullyDilutedValuationUsd
+      }
+      Pair {
+        Pool {
+          Address
         }
-        Average {
-          ExponentialMoving
-          Mean
-          SimpleMoving
-          WeightedSimpleMoving
+        Market {
+          Address
+          Program
+          Protocol
+          Network
+        }
+        Token {
+          Address
+          Id
+          Symbol
+          Name
+        }
+        QuoteToken {
+          Address
+          Id
+          Symbol
+          Name
         }
       }
     }
@@ -131,44 +89,28 @@ subscription {
 
 ## Latest Price of the Apple xstock
 
-You can use the following query to get the latest price of a Apple xStock on Solana.
+You can use the following query to get the latest price of Apple xStock (AAPLx) on Solana. We are using `Ranking_Position` filter set to one to ensure that the latest price comes from the pair providing the most liquidity, hence the price is normalised. If you need the latest price regardless of that, then the filter could be removed.
 
-You can run this query using this [link](https://ide.bitquery.io/Get-Latest-Price-of-Apple-xStock-in--USD-Real-time).
+[Run in IDE ➤](https://ide.bitquery.io/Apple-xStock-latest-price)
 
 ```graphql
-query {
-  Solana {
-    DEXTradeByTokens(
-      limit:{count:1}
-      orderBy:{descending:Block_Time}
-      where: {Trade: {Currency: {MintAddress: {is: "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"}}}}
+{
+  Trading {
+    Trades(
+      where: {Pair: {Token: {Address: {is: "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"}, Network: {is: "Solana"}}}, Ranking: {Position: {eq: 1}}}
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
     ) {
-      Transaction {
-        Signature
+      Block {
+        Time
       }
-      Trade {
-        AmountInUSD
-        Amount
-        Currency {
-          MintAddress
+      Price
+      PriceInUsd
+      Pair {
+        QuoteToken {
+          Address
           Name
-        }
-        Dex {
-          ProgramAddress
-          ProtocolName
-        }
-        Price
-        PriceInUSD
-        Side {
-          Account {
-            Address
-          }
-          AmountInUSD
-          Amount
-          Currency {
-            Name
-            MintAddress
-          }
+          Symbol
         }
       }
     }
@@ -176,45 +118,32 @@ query {
 }
 ```
 
-## Realtime Price feed of Apple xstock
+## Stream Real Time Price and Marketcap of Apple xstock
 
-You can use the following query to get the latest price of a Apple xStock on Solana.
+Change the query above into a subscription to receive every new Apple xStock print as it is confirmed on-chain. By adding the Supply_MarketCap, you can also see the Market cap of the token in real time.
 
-You can run this query using this [link](https://ide.bitquery.io/Get-realtime-Price-of-Apple-xStock-in--USD-Real-time).
+[Run in IDE ➤](https://ide.bitquery.io/Apple-xStock-price-and-market-cap-stream)
 
 ```graphql
 subscription {
-  Solana {
-    DEXTradeByTokens(
-      where: {Trade: {Currency: {MintAddress: {is: "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"}}}}
+  Trading {
+    Trades(
+      where: {Pair: {Token: {Address: {is: "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"}, Network: {is: "Solana"}}}, Ranking: {Position: {eq: 1}}}
     ) {
-      Transaction {
-        Signature
+      Block {
+        Time
       }
-      Trade {
-        AmountInUSD
-        Amount
-        Currency {
-          MintAddress
+      Price
+      PriceInUsd
+      Pair {
+        QuoteToken {
+          Address
           Name
+          Symbol
         }
-        Dex {
-          ProgramAddress
-          ProtocolName
-        }
-        Price
-        PriceInUSD
-        Side {
-          Account {
-            Address
-          }
-          AmountInUSD
-          Amount
-          Currency {
-            Name
-            MintAddress
-          }
-        }
+      }
+      Supply{
+        MarketCap
       }
     }
   }
@@ -223,100 +152,160 @@ subscription {
 
 ## Tesla xStock OHLC API
 
-If you want to get OHLC data for any xStock, you can use this api. Only use [this API](https://ide.bitquery.io/Tesla-xStock-OHLC-for-specific-pair) as query and not subscription websocket as Aggregates and Time Intervals don't work well with subscriptions.
+The Trading API publishes ready-made candles, so you no longer need to aggregate raw trades yourself. The query below returns the last 10 one-minute candles for Tesla xStock on its top-ranked market. Change `Interval.Time.Duration` to get another timeframe (`60` = 1 minute, `300` = 5 minutes, `3600` = 1 hour).
+
+[Run in IDE ➤](https://ide.bitquery.io/Tslax-OHLCV)
 
 ```graphql
 {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "Block_Timefield"}
-      where: {Trade: {Currency: {MintAddress: {is: "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB"}}, Side: {Currency: {MintAddress: {is: "So11111111111111111111111111111111111111112"}}}, PriceAsymmetry: {lt: 0.1}}}
-      limit: {count: 10}
+  Trading {
+    Pairs(
+      where: {
+        Token: {
+          Address: { is: "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB" }
+          Network: { is: "Solana" }
+        }
+        Ranking: { Position: { eq: 1 } }
+        Interval: { Time: { Duration: { eq: 60 } } }
+        Price: { IsQuotedInUsd: true }
+      }
+      limit: { count: 10 }
+      orderBy: { descending: Block_Time }
     ) {
+      Token {
+        Symbol
+        Address
+      }
+      QuoteToken {
+        Symbol
+        Address
+      }
+      Market {
+        Protocol
+        Address
+        Network
+      }
+      Interval {
+        Time {
+          Start
+          Duration
+          End
+        }
+      }
+      Price {
+        IsQuotedInUsd
+        Ohlc {
+          Open
+          High
+          Low
+          Close
+        }
+      }
+      Volume {
+        Base
+        Quote
+        Usd
+      }
       Block {
-        Timefield: Time(interval: {in: minutes, count: 1})
+        Time
       }
-      volume: sum(of: Trade_Side_AmountInUSD)
-      Trade {
-        high: PriceInUSD(maximum: Trade_Price)
-        low: PriceInUSD(minimum: Trade_Price)
-        open: PriceInUSD(minimum: Block_Slot)
-        close: PriceInUSD(maximum: Block_Slot)
-      }
-      count
     }
   }
 }
 ```
+
+For candles blended across every market the token trades on, use the [`Tokens`](/docs/trading/crypto-price-api/tokens) cube with the same `Interval` filter instead of `Pairs`.
 
 ## Get the Top Traders of the Apple xStock
 
-The below query gets the Top Traders of the Apple xStock `XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp`. Keep in mind you can use this API only as a query and not a subscription websocket because aggregates don't work with subscription and you will end up getting wrong results. You can run the query [here](https://ide.bitquery.io/Top-Traders-of-the-Apple-xStock_1)
+The below query gets the Top Traders of the Apple xStock `XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp`, ranked by USD volume over the last 24 hours. Keep in mind you can use this API only as a query and not a subscription websocket, because aggregates don't work with subscriptions and you will end up getting wrong results.
+
+[Run in IDE ➤](https://ide.bitquery.io/Top-traders-of-Apple-on-xStocks)
 
 ```graphql
 query TopTraders($token: String) {
-  Solana {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "volume"}
-      limit: {count: 100}
-      where: {Trade: {Currency: {MintAddress: {is: $token}}}, Transaction: {Result: {Success: true}}}
-    ) {
-      Trade {
-        Account {
-          Owner
-        }
-        Currency{
-          Name
-          Symbol
-          MintAddress
-        }
-        Side {
-          Account {
-            Address
-          }
-          Type
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "volume" }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Pair: {
+          Market: { Network: { is: "Solana" } }
+          Token: { Id: { is: $token } }
         }
       }
-      buyVolume: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sellVolume: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
-      volume: sum(of: Trade_Side_AmountInUSD)
+    ) {
+      Trader {
+        Address
+      }
+      Pair {
+        Token {
+          Symbol
+          Name
+          Address
+        }
+      }
+      trades: count
+      volume: sum(of: AmountsInUsd_Quote)
+      buyVolume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Buy" } })
+      sellVolume: sum(of: AmountsInUsd_Quote, if: { Side: { is: "Sell" } })
     }
   }
 }
+```
+
+```json
 {
-  "token": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"
+  "token": "bid:solana:XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp"
 }
 ```
 
+`AmountsInUsd.Quote` is the sound USD leg — see [Use `AmountsInUsd.Quote` for USD](/docs/trading/crypto-trades-api/trades-api) for why you should not aggregate on `.Base`.
+
 ## Get trading volume, buy volume, sell volume of the Meta xStock
 
-This query fetches you the traded volume, buy volume and sell volume of a Meta xStock `Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu`. Try out the API [here](https://ide.bitquery.io/trade_volume-META-xStock).
+This query fetches you the traded volume, buy volume and sell volume of Meta xStock `Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu` over the last 24 hours, broken out per market.
+
+[Run in IDE ➤](https://ide.bitquery.io/trading-volume-buy-volume-sell-volume-of-the-Meta-xStock-per-pool)
 
 ```graphql
 query MyQuery {
-  Solana(dataset: combined) {
-    DEXTradeByTokens(
-      orderBy: {descendingByField: "traded_volume"}
-      where: {Block: {Time: {since: "2025-06-20T01:00:00Z"}}, Transaction: {Result: {Success: true}}, Trade: {Currency: {MintAddress: {is: "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu"}}, Side: {Currency: {MintAddress: {is: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"}}}}}
-    ) {
-      Trade {
-        Currency {
-          Name
-          MintAddress
-          Symbol
-        }
-        Side {
-          Currency {
-            Name
-            Symbol
-            MintAddress
+  Trading {
+    Trades(
+      limit: { count: 100 }
+      orderBy: { descendingByField: "traded_volume_USD" }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
+        Pair: {
+          Market: { Network: { is: "Solana" } }
+          Token: {
+            Id: { is: "bid:solana:Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu" }
           }
         }
       }
-      traded_volume_USD: sum(of:Trade_Side_AmountInUSD)
-      traded_volume: sum(of: Trade_Amount)
-      buy_volume: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell_volume: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+    ) {
+      Pair {
+        Market {
+          Protocol
+          Address
+        }
+        Token {
+          Name
+          Symbol
+          Address
+        }
+        QuoteToken {
+          Name
+          Symbol
+          Address
+        }
+      }
+      trades: count
+      traded_volume_USD: sum(of: AmountsInUsd_Quote)
+      traded_volume: sum(of: Amounts_Base)
+      buy_volume: sum(of: Amounts_Base, if: { Side: { is: "Buy" } })
+      sell_volume: sum(of: Amounts_Base, if: { Side: { is: "Sell" } })
     }
   }
 }
