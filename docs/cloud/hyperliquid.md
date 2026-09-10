@@ -1,6 +1,6 @@
 ---
-title: Hyperliquid Data - Snowflake, AWS S3, BigQuery
-description: "Hyperliquid Core (HyperCore) data - Snowflake, AWS S3, BigQuery from Bitquery cloud datasets using Parquet historical exports for S3, BigQuery, and Snowflake."
+title: Hyperliquid Historical Data - Snowflake, AWS S3, BigQuery
+description: "Complete Hyperliquid (HyperCore) history as Parquet datasets — L4 order book diffs, full order lifecycle, fills, oracle prices — queryable from S3, Snowflake, BigQuery, Athena, or DuckDB, updated continuously to real time."
 keywords:
   - Hyperliquid data
   - HyperCore data
@@ -34,7 +34,36 @@ sidebar_position: 10
 Bitquery provides **Hyperliquid Core data dumps** in **Parquet format**, designed for backtesting, market microstructure research, and data lake integrations.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, etc**.
 
-This dataset covers **HyperCore** — the L1 order-book exchange — not HyperEVM. It is an **event stream, not a state chain**: there are no blocks, transactions, or transfers tables. Every row is an exchange event (an order status change, a book delta, a match), and every row carries `Block_Number` and `Block_Time`, so datasets join on block without a separate blocks table.
+This dataset covers **HyperCore** — the L1 order-book exchange — not HyperEVM state. It is an **event stream, not a state chain**: there are no blocks, transactions, or transfers tables. Every row is an exchange event (an order status change, a book delta, a match), and every row carries `Block_Number` and `Block_Time`, so datasets join on block without a separate blocks table. It is also the one dataset that **bridges the two halves of Hyperliquid**: the `core_writer_actions` topic links every HyperEVM-originated exchange action back to its EVM transaction hash.
+
+## Coverage & Freshness
+
+- **History**: complete history back to Hyperliquid's launch, across all seven topics.
+- **Freshness**: updated continuously to real time — the archive is written from the same pipeline as our live streams, so new blocks land as they are produced rather than in daily batches.
+- **Markets**: plain perpetuals, HIP-3 builder-deployed perps, spot pairs, and outcome/prediction tokens — see [the Coin namespace](#the-coin-namespace) for how they share one column.
+
+## How Much History Is Included?
+
+All of it. Every topic runs from Hyperliquid's launch to the current block, so a backtest can replay the full life of a market — including HIP-3 markets from the block their deployer launched them.
+
+## How Is This Different From Hyperliquid's Free S3 Archive?
+
+Hyperliquid's own archive (and free mirrors of it) publishes **L2 snapshots and trades**. This dataset is a different shape:
+
+| | Free archives (HL S3, Reservoir) | Bitquery cloud dataset |
+| --- | --- | --- |
+| Order book | L2 snapshots (price levels, fixed cadence) | **L4 per-order diffs** with owner address and order id, every change |
+| Orders | Not included | **Full lifecycle** — opens, cancels, every reject reason, TP/SL children |
+| Fills | Trades | Both counterparties, realized PnL, fees, builder/deployer fees, liquidation detail |
+| Oracle | Final prices | **Per-publisher price inputs** plus resulting oracle prices |
+| HyperEVM link | None | `core_writer_actions` with the originating EVM transaction hash |
+| Freshness | Daily batches | Continuous, to real time |
+
+Queue position, order lifetime, maker behaviour, spoofing patterns, and *why* a liquidation fired are only recoverable from this shape of data.
+
+## Get Full Access
+
+The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse share (Snowflake, BigQuery). To buy or trial it, [fill the API form](https://bitquery.io/forms/api) or contact **sales@bitquery.io**.
 
 ## Available Hyperliquid Topics
 
@@ -52,9 +81,7 @@ Pick `fills` for executed volume and realized PnL, `order_statuses` for intent a
 
 ### Why L4 Matters
 
-Hyperliquid's own free archive publishes **L2 book snapshots** and asset contexts. This dataset is a different shape: `book_diffs` carries **per-order deltas** with the owning address and order id. An L2 snapshot tells you the book was 12 deep at a price; an L4 diff stream tells you *which* order moved and *whose* it was. Queue position, order lifetime, maker behaviour, and spoofing patterns are only recoverable at L4.
-
-Likewise, `order_statuses` includes orders that **never traded**. Rejects and cancels are invisible in any trades-only dataset — and in the sample below they are 96% of all order events.
+An L2 snapshot tells you the book was 12 deep at a price; an L4 diff stream tells you *which* order moved and *whose* it was. Likewise, `order_statuses` includes orders that **never traded** — rejects and cancels are invisible in any trades-only dataset, and in the sample below they are 96% of all order events.
 
 ## Sample Hyperliquid Cloud Dataset
 
@@ -87,7 +114,7 @@ https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/hyperliquid/<topi
 -   **Core Writer Actions** – [Download](https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/hyperliquid/core_writer_actions/1075858000_1075858199.parquet)
     
 
-The samples come from one continuous slice — blocks `1075858000`–`1075858999`, about **66 seconds** of live HyperCore. Event counts in that slice:
+The samples come from one continuous slice — blocks `1075858000`–`1075858999`, about **66 seconds** of live HyperCore. (Most sample files above cover `1075858800`–`1075858999`; the `twap_statuses` and `core_writer_actions` samples cover `1075858000`–`1075858199`, since those events are sparser.) Event counts in the full slice:
 
 | Topic | Records |
 | --- | ---: |
@@ -412,6 +439,20 @@ WHERE f.Fill_Crossed = true
 
 Because one order produces many status events and many fills, join on `Oid` plus a status filter, or aggregate one side first — otherwise you get a cross product.
 
+## Reading Files with DuckDB
+
+No key, no client library — point DuckDB at the public sample directly:
+
+```sql
+SELECT Fill_Coin,
+       SUM(CAST(Fill_Sz AS DECIMAL(38,8)) * CAST(Fill_Px AS DECIMAL(38,8))) AS notional
+FROM read_parquet('https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/hyperliquid/fills/1075858800_1075858999.parquet')
+WHERE Fill_Crossed = true      -- taker side only, see Correctness Notes
+GROUP BY Fill_Coin
+ORDER BY notional DESC
+LIMIT 10;
+```
+
 ## Reading Files in Python
 
 ```python
@@ -453,3 +494,10 @@ If you require **low-latency or streaming Hyperliquid data**, Bitquery also prov
     
 
 The Parquet exports and the live streams share the same field definitions, so a backtest reading this archive and a production consumer reading the stream decode with the same generated code.
+
+## Buy the Full Dataset
+
+The public samples above cover one 66-second slice. The full product is the complete history back to launch, updated continuously to real time, delivered into your own S3/GCS bucket or as a Snowflake/BigQuery share.
+
+- [Fill the request form](https://bitquery.io/forms/api), or
+- Email **sales@bitquery.io**

@@ -149,3 +149,7 @@ For the lowest latency, the same data is available as Kafka streams:
 | `hyperliquidcore.messages.proto` | [hyperliquid/hypercore.proto](https://github.com/bitquery/streaming_protobuf/blob/main/hyperliquid/hypercore.proto) |
 
 See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts) for access and consumer setup.
+
+## Historical data (Parquet cloud datasets)
+
+For backtesting and research over the complete history back to launch — L4 order book diffs, full order lifecycle, fills with PnL, oracle price inputs — Bitquery delivers the same data as [Parquet cloud datasets](/docs/cloud/hyperliquid) for S3, Snowflake, BigQuery, Athena, or DuckDB. The Parquet files and the live streams share field definitions, so backtest and production code decode identically.
