@@ -1338,11 +1338,6 @@ const config = {
                 label: "Getting started — first query",
                 to: "/docs/start/first-query/",
               },
-              { label: "Starter queries", to: "/docs/start/starter-queries/" },
-              {
-                label: "Starter subscriptions (WebSocket)",
-                to: "/docs/start/starter-subscriptions/",
-              },
               {
                 label: "Supported chains (V1, V2, Kafka…)",
                 to: "/docs/blockchain/supported-chains/",
@@ -1398,7 +1393,7 @@ const config = {
               { label: "GraphQL (HTTP)", to: "/docs/start/first-query/" },
               {
                 label: "WebSocket subscriptions",
-                to: "/docs/start/starter-subscriptions/",
+                to: "/docs/subscriptions/subscription/",
               },
               {
                 label: "Kafka streaming concepts",
