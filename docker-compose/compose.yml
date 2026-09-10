@@ -18,6 +18,12 @@ x-common-logging: &common-logging
 services:
   nginx:
     image: ${LC_COMPOSE_IMAGE}:${LC_COMPOSE_IMAGE_TAG} 
+    # Предохранитель, а не регулятор: значения из инвентаря (nginx_mem_limit / nginx_cpus),
+    # дефолты — примерно вдвое от p95 по замеру 30 дней. memswap_limit = mem_limit,
+    # чтобы контейнер не получил право уйти в своп на удвоенный объём.
+    mem_limit: ${LC_COMPOSE_NGINX_MEM_LIMIT:-512m}
+    memswap_limit: ${LC_COMPOSE_NGINX_MEM_LIMIT:-512m}
+    cpus: ${LC_COMPOSE_NGINX_CPUS:-1}
     ports:
       - ${LC_COMPOSE_IPADDR}:${LC_COMPOSE_WEB_PORT}:80
     <<: [*common-network, *common-dns, *common-restart, *common-logging]
