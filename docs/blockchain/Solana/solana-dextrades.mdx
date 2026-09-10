@@ -1999,6 +1999,60 @@ query TradesSolToken($ca: String!, $currencies: [String!], $dataset: dataset_arg
 
 Check data here on [DEXrabbit](https://dexrabbit.bitquery.io/solana/pair/9Fv7n7HuA5EzjCRSvprBMx2Qhd1VL3hPEXKhTUKPm1Qh/So11111111111111111111111111111111111111112).
 
+## Why does my per-minute OHLC query return hundreds of rows for one token? {#dextradebytokens-side-currency-grain}
+
+Three things about `DEXTradeByTokens` aggregates that are easy to miss:
+
+- **`PriceInUSD` groups by side currency.** Any `Trade { PriceInUSD(minimum: ...) }` or `PriceInUSD(maximum: ...)` selector adds `Trade.Side.Currency.MintAddress` to the grouping key, even if you do not select it, because USD conversion is computed per side currency. A minute in which WSOL traded against 797 different tokens returns 797 rows, one per side currency. The rows do not overlap and `count` stays additive. `Trade { Price(...) }` behaves the same way but groups by the side currency's `Decimals`. To get one row per token and interval, filter `Trade.Side.Currency.MintAddress` to the quote currencies you care about (for WSOL: USDC and USDT; for other tokens add WSOL) and select `Trade { Side { Currency { MintAddress } } }` so the grain is visible. If more than one quote currency traded, you get one row per quote currency; combine them on your side.
+- **Use `before`, not `till`, for the end of a candle.** `till` is inclusive. On the pre-aggregated path (below) `Block.Time` is stored at minute resolution, so `till: "…T02:35:00Z"` matches every trade in the 02:35 minute. `since` + `before` gives the half-open interval `[since, end)` on every path.
+- **Two backing tables on `dataset: realtime`.** A query that selects only `Block.Time(interval: …)`, `Trade.Price…` measures and `count` is served from a per-minute pre-aggregated table. Adding `Block { Slot(minimum: Block_Slot) }` or `uniq(of: Transaction_Signature)` switches it to the raw trades. The two can differ: the pre-aggregated table does not return the raw fill extremes, while the raw path returns the true highest and lowest fill, including dust-sized trades. Pick the path that matches your definition and keep it fixed. `dataset: combined` serves the price selectors but not `Slot(minimum/maximum)` or `uniq` on this cube.
+
+One candle per token and minute from raw trades, half-open interval:
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query SolMinuteOHLC($token: String!, $quotes: [String!]!, $since: DateTime!, $end: DateTime!) {
+  Solana(dataset: realtime) {
+    DEXTradeByTokens(
+      where: {
+        Block: {Time: {since: $since, before: $end}}
+        Transaction: {Result: {Success: true}}
+        Trade: {Currency: {MintAddress: {is: $token}}, Side: {Currency: {MintAddress: {in: $quotes}}}}
+      }
+      orderBy: {ascendingByField: "Block_bucket"}
+      limit: {count: 5000}
+    ) {
+      Block {
+        bucket: Time(interval: {count: 1, in: minutes})
+        firstSlot: Slot(minimum: Block_Slot)
+        lastSlot: Slot(maximum: Block_Slot)
+      }
+      Trade {
+        Side { Currency { MintAddress } }
+        open: PriceInUSD(minimum: Block_Slot)
+        high: PriceInUSD(maximum: Trade_PriceInUSD)
+        low: PriceInUSD(minimum: Trade_PriceInUSD)
+        close: PriceInUSD(maximum: Block_Slot)
+      }
+      fills: count
+      transactions: uniq(of: Transaction_Signature)
+    }
+  }
+}
+{
+  "token": "So11111111111111111111111111111111111111112",
+  "quotes": ["EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCdmmxZ2o8"],
+  "since": "2026-09-10T02:34:00Z",
+  "end": "2026-09-10T02:35:00Z"
+}
+```
+
+</details>
+
+`count` is the number of DEX fills in which the token is one side; a routed swap with several fills counts each of them. `open` and `close` pick one fill from the first and last slot; when several fills share that slot the choice is not defined by transaction order. For a strict first and last, query the raw trades of those two slots and sort by `Block.Slot`, `Transaction.Index`, `Trade.Index`. If you want a single all-venue candle without choosing quote currencies, use the [Trading API](/docs/trading/crypto-price-api/) `Trading { Tokens }` cube (price index, about 30 days of history).
+
 ## Solana Real time prices from multiple Markets
 
 You can retrieve data from multiple Solana DEX markets using our APIs or streams.
