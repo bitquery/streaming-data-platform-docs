@@ -2051,7 +2051,7 @@ query SolMinuteOHLC($token: String!, $quotes: [String!]!, $since: DateTime!, $en
 
 </details>
 
-`count` is the number of DEX fills in which the token is one side; a routed swap with several fills counts each of them. `open` and `close` pick one fill from the first and last slot; when several fills share that slot the choice is not defined by transaction order. For a strict first and last, query the raw trades of those two slots and sort by `Block.Slot`, `Transaction.Index`, `Trade.Index`. If you want a single all-venue candle without choosing quote currencies, use the [Trading API](/docs/trading/crypto-price-api/introduction/) `Trading { Tokens }` cube (price index, about 30 days of history).
+`count` is the number of DEX fills in which the token is one side; a routed swap with several fills counts each of them. `open` and `close` pick one fill from the first and last slot; when several fills share that slot the choice is not defined by transaction order. For a strict first and last, query the raw trades of those two slots and sort by `Block.Slot`, `Transaction.Index`, `Trade.Index`. If you want a single all-venue candle without choosing quote currencies, use the [Trading API](/docs/trading/crypto-price-api/) `Trading { Tokens }` cube (price index, about 30 days of history).
 
 ## Solana Real time prices from multiple Markets
 
