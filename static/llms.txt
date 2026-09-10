@@ -11,8 +11,6 @@
 - [GraphQL IDE](https://ide.bitquery.io/) — run queries in the browser, no setup
 - [First query in 5 minutes](https://docs.bitquery.io/docs/start/first-query/)
 - [API keys & authentication](https://docs.bitquery.io/docs/authorization/how-to-generate/)
-- [Starter queries](https://docs.bitquery.io/docs/start/starter-queries/) — tested queries by chain and data type, the same tree the IDE shows
-- [Starter subscriptions](https://docs.bitquery.io/docs/start/starter-subscriptions/) — the real-time half of the same tree
 - [MCP Server for AI agents](https://docs.bitquery.io/docs/mcp/mcp-server/)
 
 ## Endpoints, chains and datasets

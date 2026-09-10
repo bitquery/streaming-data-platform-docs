@@ -675,7 +675,6 @@ Build comprehensive wallet analysis tools:
 1. **Get API Access**: Sign up at [Bitquery](https://bitquery.io/) to get your API key
 2. **Try in IDE**: Test queries in the [Bitquery IDE](https://ide.bitquery.io/)
 3. **Read Documentation**: Explore our [Getting Started Guide](/docs/start/first-query/)
-4. **Check Examples**: See more examples in [Starter Queries](/docs/start/starter-queries)
 
 For more information on authentication and API usage, see our [Authorization Guide](/docs/authorization/how-to-use).
 

@@ -79,5 +79,4 @@ For example,
 Now that you've created your first query, learn which data primitives to use:
 
 - **[Mental Model: Transfers, Events, Calls, and DexTrades](/docs/start/mental-model-transfers-events-calls)** - Understand when to use Transfers, Events, Calls, or DexTrades for your queries
-- **[Starter Queries](/docs/start/starter-queries)** - Try pre-built queries for common use cases
 - **[Learning Path](/docs/start/learning-path)** - Follow a structured path from beginner to advanced

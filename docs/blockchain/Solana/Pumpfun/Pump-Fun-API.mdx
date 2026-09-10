@@ -925,7 +925,7 @@ query PumpFunRecentTrades {
 
 ### How do I get a wallet's PnL on Pump.fun tokens? {#how-do-i-get-a-wallets-pnl-on-pumpfun-tokens}
 
-Bitquery does not return a single “PnL” field for Pump.fun: derive it from **historical buys and sells** for that wallet and mint. Query **`Solana.DEXTrades`** or **`DEXTradeByTokens`** with **`Dex.ProtocolName: pump`**, the token **`MintAddress`**, **`Transaction.Signer`** or buy/sell accounts, and a time window; then compute realized PnL from USD volumes (see the **[Realised PnL example on Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades/#realised-pnl-avg-buy-price-buy-volume-sell-volume)** and [starter PnL queries](/docs/start/starter-queries/)). Use the **Crypto Price API** if you need mark-to-market for open positions.
+Bitquery does not return a single “PnL” field for Pump.fun: derive it from **historical buys and sells** for that wallet and mint. Query **`Solana.DEXTrades`** or **`DEXTradeByTokens`** with **`Dex.ProtocolName: pump`**, the token **`MintAddress`**, **`Transaction.Signer`** or buy/sell accounts, and a time window; then compute realized PnL from USD volumes (see the **[Realised PnL example on Solana DEX Trades](/docs/blockchain/Solana/solana-dextrades/#realised-pnl-avg-buy-price-buy-volume-sell-volume)**). Use the **Crypto Price API** if you need mark-to-market for open positions.
 
 ## Trade Activity & Volume
 

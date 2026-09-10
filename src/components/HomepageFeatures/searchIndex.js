@@ -22,18 +22,6 @@ export const SEARCH_INDEX = [
     u: "/docs/intro/",
   },
   {
-    t: "Starter queries",
-    s: "Copy-paste GraphQL queries to begin",
-    g: "Start",
-    u: "/docs/start/starter-queries/",
-  },
-  {
-    t: "Starter subscriptions (WebSocket)",
-    s: "Live streaming examples over WebSocket",
-    g: "Start",
-    u: "/docs/start/starter-subscriptions/",
-  },
-  {
     t: "V1 vs V2 APIs",
     s: "Schema and IDE differences when migrating",
     g: "Start",
@@ -104,7 +92,7 @@ export const SEARCH_INDEX = [
     t: "WebSocket subscriptions",
     s: "Live subscriptions in the browser",
     g: "Interfaces",
-    u: "/docs/start/starter-subscriptions/",
+    u: "/docs/subscriptions/websockets/",
   },
   {
     t: "Kafka streaming",

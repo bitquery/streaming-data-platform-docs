@@ -448,7 +448,6 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 - Use OAuth2 for secure, programmatic access
 
 ### 3. **Run Your First Query**
-- Try our [starter queries](/docs/start/starter-queries/) for common use cases
 - Use the IDE's autocomplete (Ctrl+Space) for query building
 - Convert queries to subscriptions for real-time data
 
@@ -519,7 +518,6 @@ Raw and processed data available in cloud storage for machine learning, deep ana
 
 ### **Learning Resources**
 - **[Learning Path](/docs/start/learning-path/)** - Structured learning from beginner to advanced
-- **[Starter Queries](/docs/start/starter-queries/)** - Pre-built queries for common use cases
 - **[GraphQL Guide](/docs/category/building-queries/)** - Complete GraphQL reference
 - **[Integration Examples](/docs/category/how-to-guides/)** - Real-world application examples
 

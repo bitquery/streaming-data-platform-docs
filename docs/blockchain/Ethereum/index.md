@@ -43,7 +43,6 @@ New to Bitquery? Here's how to get started:
 1. **[Create a free account](https://ide.bitquery.io/)** - Get instant access to our GraphQL IDE
 2. **[Generate your API key](/docs/authorization/how-to-generate/)** - Required for API access
 3. **[Run your first query](/docs/start/first-query/)** - Learn the basics in 5 minutes
-4. **[Explore examples](/docs/start/starter-queries/)** - Copy-paste ready queries
 
 **Free Trial**: 100,000 API points for 1 month. No credit card required.
 

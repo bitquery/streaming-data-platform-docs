@@ -11,7 +11,6 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 1. **[Your First Query](/docs/start/first-query)** - Create and run your first GraphQL query
 2. **[IDE Basics](/docs/ide/query)** - Learn to use the Bitquery IDE effectively
-3. **[Starter Queries](/docs/start/starter-queries)** - Try pre-built queries for common use cases
 
 ## Foundation (30 minutes)
 
@@ -23,7 +22,7 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 ## Intermediate (1-2 hours)
 
 1. **[Building Complex Queries](/docs/graphql/query)** - Learn advanced query techniques
-2. **[Real-time Subscriptions](/docs/start/starter-subscriptions)** - Set up live data streams
+2. **[Real-time Subscriptions](/docs/subscriptions/subscription)** - Set up live data streams
 3. **[Error Handling](/docs/start/errors)** - Understand and fix common issues
 
 ## Advanced (2-4 hours)
@@ -37,8 +36,8 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 ### For Traders
 
-- Start with **[Crypto Price APIs](/docs/start/starter-queries#latest-price-of-any-token)**
-- Learn **[Real-time Price Streams](/docs/start/starter-subscriptions)**
+- Start with **[Crypto Price APIs](/docs/trading/crypto-price-api/introduction)**
+- Learn **[Real-time Subscriptions](/docs/subscriptions/subscription)**
 - Explore **[DEX Trading APIs](/docs/blockchain/Solana/solana-dextrades)**
 
 ### For Developers

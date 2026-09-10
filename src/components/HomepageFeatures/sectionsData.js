@@ -4,8 +4,7 @@ export const heroQuickLinks = [
     to: "/docs/start/first-query/",
     primary: true,
   },
-  { label: "Starter queries", to: "/docs/start/starter-queries/" },
-  { label: "Live streams", to: "/docs/start/starter-subscriptions/" },
+  { label: "Live streams", to: "/docs/subscriptions/subscription/" },
   { label: "Platform overview", to: "/docs/intro/" },
 ];
 
@@ -58,7 +57,7 @@ export const startHereSteps = [
     title: "Stream it live",
     bodyCode: true,
     linkLabel: "Live subscriptions",
-    to: "/docs/start/starter-subscriptions/",
+    to: "/docs/subscriptions/subscription/",
     codeParts: [
       { text: "subscription", cls: "c1" },
       { text: " { Solana { DEXTrades { … } } }" },
@@ -130,7 +129,7 @@ export const interfaces = [
     name: "WebSocket",
     hint: "Live subscriptions in the browser, server-side filtered.",
     linkLabel: "Subscriptions",
-    to: "/docs/start/starter-subscriptions/",
+    to: "/docs/subscriptions/subscription/",
   },
   {
     abbr: "KF",

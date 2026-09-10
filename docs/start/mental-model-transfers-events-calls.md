@@ -463,7 +463,6 @@ Now that you understand the mental model:
 14. **[Tron Transfers](/docs/blockchain/Tron/tron-transfers)** - Token movements
 
 **General:**
-15. **[Try Starter Queries](/docs/start/starter-queries)** - See real examples
 16. **[Build Your First Query](/docs/start/first-query)** - Put it into practice
 
 ---

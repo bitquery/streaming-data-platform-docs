@@ -18,8 +18,6 @@ const sidebars = {
         "start/learning-path",
         "start/first-query",
         "start/bitquery-for-ai",
-        "start/starter-queries",
-        "start/starter-subscriptions",
         "tools-directory",
         "start/endpoints",
         "start/mental-model-transfers-events-calls",
