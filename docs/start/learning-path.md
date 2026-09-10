@@ -36,7 +36,7 @@ This guide provides a structured path to learn Bitquery APIs progressively, from
 
 ### For Traders
 
-- Start with **[Crypto Price APIs](/docs/trading/crypto-price-api/introduction)**
+- Start with **[Crypto Price APIs](/docs/trading/crypto-price-api/)**
 - Learn **[Real-time Subscriptions](/docs/subscriptions/subscription)**
 - Explore **[DEX Trading APIs](/docs/blockchain/Solana/solana-dextrades)**
 
