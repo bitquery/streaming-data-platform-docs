@@ -100,7 +100,7 @@ Each Parquet file name follows this format:
 Example:
 
 ```
-859350_859399.parquet
+932100_932149.parquet
 
 ```
 
@@ -112,22 +112,20 @@ The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse
 
 ## Reading Files with DuckDB
 
-Clone the [sample repository](https://github.com/bitquery/blockchain-cloud-data-dump-sample) and point DuckDB at the Bitcoin samples:
+No key, no client library — point DuckDB at the public sample directly:
 
 ```sql
 SELECT *
-FROM read_parquet('blockchain-cloud-data-dump-sample/bitcoin/blocks/*.parquet')
+FROM read_parquet('https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/bitcoin/transactions/932100_932149.parquet')
 LIMIT 10;
 ```
 
 ## Reading Files in Python
 
 ```python
-import glob
 import pandas as pd
 
-files = glob.glob("blockchain-cloud-data-dump-sample/bitcoin/blocks/*.parquet")
-df = pd.concat(pd.read_parquet(f) for f in files)
+df = pd.read_parquet("https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/bitcoin/blocks/932100_932149.parquet")
 print(df.info())
 df.head()
 ```
