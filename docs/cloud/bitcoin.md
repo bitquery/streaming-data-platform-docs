@@ -106,6 +106,32 @@ Example:
 
     
 
+## Get Full Access
+
+The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse share (Snowflake, BigQuery). To buy or trial it, [fill the API form](https://bitquery.io/forms/api) or contact **sales@bitquery.io**.
+
+## Reading Files with DuckDB
+
+Clone the [sample repository](https://github.com/bitquery/blockchain-cloud-data-dump-sample) and point DuckDB at the Bitcoin samples:
+
+```sql
+SELECT *
+FROM read_parquet('blockchain-cloud-data-dump-sample/bitcoin/blocks/*.parquet')
+LIMIT 10;
+```
+
+## Reading Files in Python
+
+```python
+import glob
+import pandas as pd
+
+files = glob.glob("blockchain-cloud-data-dump-sample/bitcoin/blocks/*.parquet")
+df = pd.concat(pd.read_parquet(f) for f in files)
+print(df.info())
+df.head()
+```
+
 ## Real-Time vs Batch Data Access
 
 Cloud data dumps are optimized for **batch analytics and historical workloads**.

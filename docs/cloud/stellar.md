@@ -167,6 +167,30 @@ Most Stellar topics share the same transaction and operation context columns, wh
 -   Asset columns are prefixed per role: `currency_from_*` / `currency_to_*` on payments and transfers, `buy_currency_*` / `sell_currency_*` on trade effects
     
 
+## Get Full Access
+
+The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse share (Snowflake, BigQuery). To buy or trial it, [fill the API form](https://bitquery.io/forms/api) or contact **sales@bitquery.io**.
+
+## Reading Files with DuckDB
+
+No key, no client library — point DuckDB at the public sample directly:
+
+```sql
+SELECT *
+FROM read_parquet('https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/stellar/blocks/55080300_55080349.parquet')
+LIMIT 10;
+```
+
+## Reading Files in Python
+
+```python
+import pandas as pd
+
+df = pd.read_parquet("https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/stellar/blocks/55080300_55080349.parquet")
+print(df.info())
+df.head()
+```
+
 ## Real-Time vs Batch Data Access
 
 Cloud data dumps are optimized for **batch analytics and historical workloads**.

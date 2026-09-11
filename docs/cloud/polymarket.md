@@ -123,6 +123,30 @@ Example:
 
 **DEX Trades** uses the standard EVM DEX trades schema documented on the [EVM Data](/docs/cloud/evm/) page.
 
+## Get Full Access
+
+The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse share (Snowflake, BigQuery). To buy or trial it, [fill the API form](https://bitquery.io/forms/api) or contact **sales@bitquery.io**.
+
+## Reading Files with DuckDB
+
+No key, no client library — point DuckDB at the public sample directly:
+
+```sql
+SELECT *
+FROM read_parquet('https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/matic/polymarket/prediction_trades/84735000_84735049.parquet')
+LIMIT 10;
+```
+
+## Reading Files in Python
+
+```python
+import pandas as pd
+
+df = pd.read_parquet("https://bitquery-blockchain-dataset.s3.us-east-1.amazonaws.com/matic/polymarket/prediction_trades/84735000_84735049.parquet")
+print(df.info())
+df.head()
+```
+
 ## Real-Time vs Batch Data Access
 
 Cloud data dumps are optimized for **batch analytics and historical workloads**.
