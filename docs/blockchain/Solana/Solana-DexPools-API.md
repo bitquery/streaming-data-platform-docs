@@ -953,9 +953,114 @@ subscription {
 
 </details>
 
+## How DEXPools Values Are Calculated
+
+What `PostAmount` measures, when its USD value is priced, and how to order updates that land in the same slot. Read this before feeding `DEXPools` into a simulator, bot or risk model.
+
+### What `Base.PostAmount` and `Quote.PostAmount` represent
+
+`PostAmount` is the pool's **vault balance** of that token after the event, read from the on-chain token balances. `Base.PostAmount + Quote.PostAmount` is therefore everything the pool holds, not just the liquidity that is currently tradable.
+
+For concentrated-liquidity pools (Raydium CLMM `amm_v3`, Orca Whirlpool, Meteora DLMM) this includes liquidity in positions that are out of range. It is not the active in-range liquidity at the current tick. For constant-product pools (Raydium `raydium_amm`, `raydium_cp_swap`, PumpSwap) the vault balances are the reserves the swap formula uses.
+
+`ChangeAmount` is the signed change that event caused: positive when tokens entered the pool, negative when they left.
+
+### How `PostAmountInUSD` is priced
+
+`PostAmountInUSD` = `PostAmount` × the token's USD price from the Bitquery [price index](/docs/trading/crypto-price-api/price-index-algorithm). The same rule fills `ChangeAmountInUSD`.
+
+The price is looked up at the block's timestamp: you get the latest index price at or before `Block.Time`, never a later one. Every row in the same block uses the same USD price for a given token.
+
+The index price is a volume-weighted blend of the token's pools over a rolling 1-hour window, with recent trades weighted more. Stablecoins take their USD price from an external spot source instead. If the index has no price for a token, its `PostAmountInUSD` is `0`. USD values carry about 7 significant digits, so use `PostAmount` when you need exact amounts.
+
+### How fresh the USD price is
+
+The response has no field for the timestamp or source of the price used in the conversion. For actively traded tokens the index updates every few seconds. For thinly traded tokens the last index price can be minutes old, because pools stay in the 1-hour blend after they stop trading.
+
+If your system needs a strict freshness limit, take the native `PostAmount` from `DEXPools` and price it yourself with [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) or [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) at a 1-second interval. Every Trading row carries its own `Block.Time`, so you can reject prices older than your limit.
+
+### `PriceInUSD` vs `PostAmountInUSD`
+
+The two fields use different prices, so dividing `PostAmountInUSD` by `PostAmount` will not match `PriceInUSD`.
+
+- `Base.PriceInUSD` / `Quote.PriceInUSD` is the pool's own price, from its reserves after the event, converted to USD with the other token's price.
+- `PostAmountInUSD` uses the price index described above, which blends all of the token's pools.
+
+For a token's market price across all venues, use the [Trading cube](/docs/trading/trading-data-overview).
+
+### Ordering multiple updates within one slot
+
+A busy pool can change several times in one slot. Sort by these four fields to get a deterministic order:
+
+1. `Block.Slot`
+2. `Transaction.Index`: position of the transaction in the block
+3. `Instruction.Index`: position of the instruction in the transaction
+4. `Instruction.InternalSeqNumber`: tie-breaker for inner instructions
+
+Sorted descending on all four, the first row is the pool's latest state. The query below returns the latest 20 updates of one pool, newest first. For only the latest state, see [Get Latest Liquidity of any Liquidity Pool](#get-latest-liquidity-of-any-liquidity-pool).
+
+<details>
+  <summary>Click to expand GraphQL query</summary>
+
+```graphql
+query PoolUpdatesInOrder($market: String) {
+  Solana(dataset: realtime) {
+    DEXPools(
+      limit: { count: 20 }
+      orderBy: [
+        { descending: Block_Slot }
+        { descending: Transaction_Index }
+        { descending: Instruction_Index }
+        { descending: Instruction_InternalSeqNumber }
+      ]
+      where: {
+        Pool: { Market: { MarketAddress: { is: $market } } }
+        Transaction: { Result: { Success: true } }
+      }
+    ) {
+      Block {
+        Time
+        Slot
+      }
+      Transaction {
+        Index
+        Signature
+      }
+      Instruction {
+        Index
+        InternalSeqNumber
+      }
+      Pool {
+        Base {
+          PostAmount
+          PostAmountInUSD
+        }
+        Quote {
+          PostAmount
+          PostAmountInUSD
+        }
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "market": "DmAsjXoceoL5vTKZbYpTpXPo7MKm16FMfNMm3PJFiUha"
+}
+```
+
+</details>
+
 <FAQ
   items={[
     { q: "How do I find newly created Solana liquidity pools?", a: "Query or subscribe to Solana.DEXPools sorted by creation time with optional protocol filters." },
     { q: "Can I monitor liquidity changes?", a: "Yes — pool reserve fields update as trades and LP events occur. Use subscriptions for live monitoring." },
+    { q: "Is DEXPools PostAmountInUSD priced at the event's Block.Time?", a: "Yes. PostAmountInUSD is PostAmount times the token's USD price from the Bitquery price index, looked up at the block timestamp: the latest index price at or before Block.Time, never a later one. All rows in a block share the same price for a token." },
+    { q: "Can I query the timestamp or source of the USD conversion price?", a: "No. The row has no field for it. For a strict freshness limit, take the native PostAmount and price it yourself with Trading.Tokens or Trading.Pairs at a 1-second interval, where every row carries its own Block.Time." },
+    { q: "Does PostAmount include inactive concentrated liquidity?", a: "Yes. PostAmount is the pool's vault balance of each token, so for Raydium CLMM, Orca Whirlpool and Meteora DLMM it includes out-of-range positions. It is not the active in-range liquidity." },
+    { q: "Why does PostAmountInUSD divided by PostAmount not match PriceInUSD?", a: "They use different prices. PriceInUSD is the pool's own price from its reserves; PostAmountInUSD uses the price index, which blends all of the token's pools over a 1-hour window." },
+    { q: "How do I order several DEXPools updates in the same slot?", a: "Sort by Block.Slot, Transaction.Index, Instruction.Index and Instruction.InternalSeqNumber, all descending. The first row is the pool's latest state." },
   ]}
 />
