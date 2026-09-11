@@ -4,6 +4,9 @@ description: "Pools.trade API: track the Uniswap launchpad on Robinhood Chain wi
 sidebar_position: 6
 keywords:
   - Pools.trade API
+  - pools trade api
+  - pools trade api robinhood
+  - pools trade data api
   - pools.trade Robinhood API
   - Uniswap launchpad API
   - Uniswap launchpad Robinhood Chain
@@ -42,7 +45,7 @@ keywords:
 
 # Pools.trade API — Uniswap Launchpad on Robinhood Chain
 
-**[Pools.trade](https://pools.trade/)** is the token launchpad **built by Uniswap for Robinhood Chain**, opened to the public on **5 August 2026** — its contracts had been live since **8 July 2026**, and flagship tokens like **FRONG** were minted on 30 July through the earlier entry contract. The contracts self-describe as the *Uniswap LiquidityLauncher*. This guide shows how to track **new pools.trade token launches**, **Crowd Launch auctions**, **trades**, **OHLCV prices**, and **holders** with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes.
+**[Pools.trade](https://pools.trade/)** is the token launchpad **built by Uniswap for Robinhood Chain**, opened to the public on **5 August 2026** — its contracts had been live since **8 July 2026**, and flagship tokens like **FRONG** were minted on 30 July through the earlier entry contract. The contracts self-describe as the *Uniswap LiquidityLauncher*. This guide shows how to track **new pools.trade token launches**, **Crowd Launch auctions**, **trades**, **OHLCV prices**, and **holders** with Bitquery GraphQL APIs, using the `EVM(network: robinhood)` and `Trading` cubes. Searching for a **Pools Trade API** (the spaced spelling of pools.trade) lands you in the right place — this page covers the full data API for the launchpad.
 
 :::note API Key Required
 To query or stream data outside the Bitquery IDE, you need an API access token.

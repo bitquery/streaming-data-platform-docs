@@ -174,7 +174,7 @@ Robinhood Chain launchpads are **not interchangeable**. Each has its own factory
 
 | Launchpad | Model | Guide |
 | --- | --- | --- |
-| **pools.trade** | Uniswap v4 pool from block one, no curve and no graduation event; Crowd Launch auctions | [Pools.trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api) |
+| **pools.trade** | Uniswap v4 pool from block one, no curve and no graduation event; Crowd Launch auctions | [Pools Trade API on Robinhood](/docs/blockchain/robinhood/pools-trade-api) |
 | **Flap.sh** | Bonding curve with per-token tax and progress events, graduates to a DEX; emits a decoded `TokenCreated` | [Flap.sh API on Robinhood](/docs/blockchain/robinhood/flap-sh-api) |
 | **trench.today** | Bonding-curve launchpad run from a single factory proxy; `TokenCreate`, `TokenPurchase`, `TokenSale` and `Sync` events expose launches, trades and live curve reserves | [trench.today API on Robinhood](/docs/blockchain/robinhood/trench-today-api) |
 | **Bags.fm** | Creator-fee launchpad | [Bags.fm API on Robinhood](/docs/blockchain/robinhood/bags-fm-api) |
