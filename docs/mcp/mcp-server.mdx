@@ -27,13 +27,13 @@ import FAQ from "@site/src/components/FAQ";
 
 # Bitquery MCP Server: Blockchain Data for AI Agents
 
-Point your AI client at [`https://mcp.bitquery.io`](https://mcp.bitquery.io) and ask Bitquery's blockchain dataset questions in plain English. Works with Claude, Cursor, ChatGPT, Claude Code, and anything else that speaks [MCP](https://modelcontextprotocol.io/).
+Point your AI client at [https://mcp.bitquery.io](https://mcp.bitquery.io) and ask Bitquery's blockchain dataset questions in plain English. Works with Claude, Cursor, ChatGPT, Claude Code, and anything else that speaks [MCP](https://modelcontextprotocol.io/).
 
 You get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wallet history across Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood Chain. Same data behind the tracing side: origin of funds, cross-chain movement, wallet clusters.
 
 |              |                                                                                                                                               |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Endpoint** | [`https://mcp.bitquery.io`](https://mcp.bitquery.io)                                                                                          |
+| **Endpoint** | [https://mcp.bitquery.io](https://mcp.bitquery.io)                                                                                          |
 | **Auth**     | OAuth 2.1, browser sign-in, no manual tokens                                                                                                  |
 | **Pricing**  | Free tier with a Bitquery account. Beyond that it meters against your existing plan.                                                          |
 | **Support**  | [Telegram](https://t.me/Bloxy_info) · [support.bitquery.io](https://support.bitquery.io/) · [support@bitquery.io](mailto:support@bitquery.io) |
@@ -41,8 +41,8 @@ You get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wa
 ## Install in one minute
 
 - **Claude Code:** `claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp`
-- **Claude Desktop and Web, ChatGPT, VS Code, Windsurf:** add a custom connector or MCP server with the URL `https://mcp.bitquery.io`, then sign in with your Bitquery account when the first tool runs.
-- **Cursor:** Settings, MCP, Add new MCP server, URL `https://mcp.bitquery.io`; or put the `mcp-remote` command in `.cursor/mcp.json`.
+- **Claude Desktop and Web, ChatGPT, VS Code, Windsurf:** add a custom connector or MCP server with the URL [https://mcp.bitquery.io](https://mcp.bitquery.io), then sign in with your Bitquery account when the first tool runs.
+- **Cursor:** Settings, MCP, Add new MCP server, URL [https://mcp.bitquery.io](https://mcp.bitquery.io); or put the `mcp-remote` command in `.cursor/mcp.json`.
 
 No API key is pasted anywhere; OAuth 2.1 handles sign-in and a free account works. Client-by-client steps with screenshots are in [Install](#install).
 
@@ -132,7 +132,7 @@ Writes, deletes, and mutations are rejected at the server, so there's nothing yo
 1. Open **Settings → Connectors → Add custom connector**.
 2. Fill in:
    - **Name:** `Bitquery Trading Data`
-   - **URL:** `https://mcp.bitquery.io`
+   - **URL:** [https://mcp.bitquery.io](https://mcp.bitquery.io)
 3. Click **Add**.
 
 ![Add custom connector: Name and Remote MCP server URL fields](/img/mcp/custom_connector.png)
@@ -143,7 +143,7 @@ You don't need to pick tools by hand in the chat UI. Ask in plain language, for 
 
 1. Settings → **Connectors** (requires Plus, Pro, or Business).
 2. **Add connector → Custom connector**.
-3. URL: `https://mcp.bitquery.io`.
+3. URL: [https://mcp.bitquery.io](https://mcp.bitquery.io).
 4. Authenticate with your Bitquery account when prompted.
 
 ### Cursor
@@ -151,7 +151,7 @@ You don't need to pick tools by hand in the chat UI. Ask in plain language, for 
 Easiest path:
 
 1. Settings → **MCP → Add new MCP server**.
-2. URL: `https://mcp.bitquery.io`.
+2. URL: [https://mcp.bitquery.io](https://mcp.bitquery.io).
 
 Or add it to `.cursor/mcp.json` directly:
 
@@ -176,7 +176,7 @@ claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp
 
 ### VS Code and other MCP clients
 
-Add a new MCP server with the URL `https://mcp.bitquery.io`. The client handles OAuth on its own.
+Add a new MCP server with the URL [https://mcp.bitquery.io](https://mcp.bitquery.io). The client handles OAuth on its own.
 
 ---
 
