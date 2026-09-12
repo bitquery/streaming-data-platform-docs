@@ -35,7 +35,7 @@ Every EVM chain Bitquery indexes is queried through one root, `EVM(network: ...)
 
 ## Networks
 
-`eth`, `bsc`, `base`, `arbitrum`, `optimism`, `matic` and `robinhood` work in `EVM(network: ...)`. The chain hubs under [Blockchain](/docs/blockchain/Ethereum/) carry worked examples per chain; the schema is the same.
+`eth`, `bsc`, `base`, `arbitrum`, `optimism`, `matic`, `robinhood` and `arc_testnet` work in `EVM(network: ...)`. Arc testnet is realtime-only with USD fields at 0; see the [Arc Testnet hub](/docs/blockchain/arc-testnet/). The chain hubs under [Blockchain](/docs/blockchain/Ethereum/) carry worked examples per chain; the schema is the same.
 
 ## Datasets and depth
 

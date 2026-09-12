@@ -85,6 +85,7 @@ To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-com
 - **Base** → `EVM(network: base)`
 - **Optimism** → `EVM(network: optimism)`
 - **Robinhood** → `EVM(network: robinhood)`
+- **Arc Testnet** → `EVM(network: arc_testnet)` (chain-level cubes only; no `Trading` cube, USD fields are 0)
 
 For full API documentation, refer to:  
 [Get OHLC Data for a Particular Token Pair](/docs/blockchain/Ethereum/dextrades/token-trades-apis/#get-ohlc-data-for-a-particular-token-pair).

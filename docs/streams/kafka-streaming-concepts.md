@@ -248,6 +248,15 @@ Where enabled, **`optimism.broadcasted.*`** topics follow the same mapping as **
 - `robinhood.raw.proto` → `BlockMessage`
 - `robinhood.dexpools.proto` → `DexPoolBlockMessage` — see [DEXPools Cube documentation](/docs/cubes/evm-dexpool)
 
+#### Arc Testnet (`arc-testnet`)
+
+- `arc-testnet.transactions.proto` → `ParsedAbiBlockMessage`
+- `arc-testnet.tokens.proto` → `TokenBlockMessage`
+- `arc-testnet.dextrades.proto` → `DexBlockMessage`
+- `arc-testnet.raw.proto` → `BlockMessage`
+
+Arc testnet is Circle's Arc Layer 1 test network (`EVM(network: arc_testnet)` in GraphQL). All `...InUSD` fields in its messages are 0 because a testnet has no token price index; native amounts are USDC, the chain's gas token. See the [Arc Testnet hub](/docs/blockchain/arc-testnet/).
+
 ### Bitcoin
 
 - `btc.transactions.proto` — decode using Bitquery Bitcoin protobuf definitions in [Bitquery Streaming Protobuf](https://github.com/bitquery/streaming_protobuf).

@@ -25,7 +25,7 @@ This page is the map of the Kafka section. Start with the concepts guide if Kafk
 | Group | Topics | Guide |
 |---|---|---|
 | Multi-chain trading | Trades, token and pair prices with USD values across the Trading cube chains | [Multi-chain trading streams](/docs/streams/protobuf/kafka-trading-topics-protobuf) |
-| EVM chains | Transactions, calls, events, transfers, balances and blocks for Ethereum, BNB Chain, Base, Polygon, Optimism and Robinhood Chain | [EVM protobuf streams](/docs/streams/protobuf/chains/EVM-protobuf) |
+| EVM chains | Transactions, calls, events, transfers, balances and blocks for Ethereum, BNB Chain, Base, Polygon, Optimism, Robinhood Chain and Arc testnet | [EVM protobuf streams](/docs/streams/protobuf/chains/EVM-protobuf) |
 | Solana | Shred-level transactions, DEX trades, transfers and balances, ahead of block confirmation | [Solana shred streams](/docs/streams/protobuf/chains/Solana-protobuf) |
 | Solana perpetuals | Orders, fills, positions, PnL, liquidations and prices | [Solana perpetuals stream](/docs/streams/protobuf/chains/Solana-perpetual-protobuf) |
 | Tron | Transactions, transfers, balances and blocks | [Tron protobuf streams](/docs/streams/protobuf/chains/Tron-protobuf) |
@@ -93,7 +93,7 @@ Change `bid:eth` to `bid:solana`, `bid:bsc`, `bid:base` or another chain id from
     { q: "How long are Kafka messages retained?", a: "Four hours. A consumer can replay anything within that window from an offset; anything older is gone, so keep consumers running and watch lag." },
     { q: "Kafka or WebSocket subscriptions: which should I use?", a: "Both carry the same rows. Kafka has lower latency, replays from offsets without gaps and lets several consumers split one feed, but runs server-side only with a fixed schema. WebSocket subscriptions work from a browser, can be filtered and reshaped in the query, and run in the IDE. Prototype on WebSocket, move to Kafka when latency or reliability matters." },
     { q: "Can I filter a Kafka topic on the server?", a: "No. Topics have a fixed protobuf schema and carry every message for that chain and data type; filtering happens in your consumer. The filtering guide shows the patterns, and the GraphQL subscription of the same data is the place to filter server-side." },
-    { q: "Which chains have Kafka topics?", a: "Ethereum, BNB Chain, Base, Polygon, Optimism, Robinhood Chain, Bitcoin, Solana (including shred-level and perpetuals topics), Tron and Hyperliquid, plus the multi-chain trading topics with USD prices. The complete list with topic names is on the concepts page." },
+    { q: "Which chains have Kafka topics?", a: "Ethereum, BNB Chain, Base, Polygon, Optimism, Robinhood Chain, Arc testnet, Bitcoin, Solana (including shred-level and perpetuals topics), Tron and Hyperliquid, plus the multi-chain trading topics with USD prices. The complete list with topic names is on the concepts page." },
   ]}
 />
 

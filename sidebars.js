@@ -920,6 +920,22 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Arc Testnet",
+          link: {
+            type: "doc",
+            id: "blockchain/arc-testnet/index",
+          },
+          items: [
+            "blockchain/arc-testnet/arc-testnet-trades-api",
+            "blockchain/arc-testnet/arc-testnet-transfers-api",
+            "blockchain/arc-testnet/arc-testnet-events-api",
+            "blockchain/arc-testnet/arc-testnet-calls-api",
+            "blockchain/arc-testnet/arc-testnet-transactions-api",
+            "blockchain/arc-testnet/arc-testnet-balances-api",
+          ],
+        },
+        {
+          type: "category",
           label: "x402 Protocol",
           link: {
             type: "generated-index",
