@@ -124,6 +124,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 - **[Ethereum](/docs/blockchain/Ethereum/)** & Layer 2s ([Arbitrum](/docs/blockchain/Arbitrum/), [Optimism](/docs/blockchain/Optimism/), [Base](/docs/blockchain/Base/), [Polygon](/docs/blockchain/Matic/))
 - **[Binance Smart Chain (BSC)](/docs/blockchain/BSC/)**
 - **[Robinhood](/docs/blockchain/robinhood/)**
+- **[Arc Testnet](/docs/blockchain/arc-testnet/)**
 - **[Solana](/docs/blockchain/Solana/)**
 - **[TRON](/docs/blockchain/Tron/)**
 - **[TON](/docs/blockchain/supported-chains/)** (limited support; see coverage matrix)

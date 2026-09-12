@@ -37,6 +37,7 @@ Our V2 API version with enhanced features and real-time streaming:
 - **[Optimism](/docs/blockchain/Optimism/)**
 - **[opBNB](/docs/blockchain/supported-chains/)** (IDE / limited docs)
 - **[Robinhood](/docs/blockchain/robinhood/)**
+- **[Arc Testnet](/docs/blockchain/arc-testnet/)** (Circle Arc, testnet; realtime dataset only)
 
 **Non-EVM Chains:**
 - **[Solana](/docs/blockchain/Solana/)**

@@ -114,6 +114,15 @@ That pair is the exception, not a general rule: **every other Solana realtime cu
 | Trades | Since the chain was onboarded | Full history from onboarding forward. |
 | Transfers | Complete history | Full transfer history available. |
 
+### Arc testnet
+
+Circle's Arc testnet (`EVM(network: arc_testnet)`) is served from the **realtime dataset only**. There is no archive for the testnet, so `dataset: archive` and `dataset: combined` return errors, the `Holders` cube is not available, and every `...InUSD` field is 0. The realtime window is a rolling range of recent blocks; measure it with `Block { Time(minimum: Block_Time) }`. Arc mainnet will carry an archive dataset and USD pricing. See the [Arc Testnet hub](/docs/blockchain/arc-testnet/).
+
+| Cube | Window | Notes |
+|---|---|---|
+| `DEXTrades`, `DEXTradeByTokens`, `Transfers`, `Events`, `Calls`, `Transactions`, `Blocks`, `Balances`, `BalanceUpdates`, `TransactionBalances` | Realtime window only | No archive; USD fields are 0. |
+| `Holders`, `DEXPoolEvents`, `DEXPoolSlippages`, `Trading.*` | Not available | `Holders` needs the archive; pool cubes have no data yet; the Trading cubes cover mainnet chains only. |
+
 ### Hyperliquid
 
 Hyperliquid core is an L1 order-book exchange, so its cubes carry exchange events rather than EVM blocks. All `Hyperliquid` cubes share one window.
