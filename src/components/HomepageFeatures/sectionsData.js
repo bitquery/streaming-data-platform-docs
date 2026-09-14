@@ -224,9 +224,8 @@ export const personas = [
   },
   {
     title: "Investigators & compliance",
-    body: "Wallet timelines, money-flow tracing, entity helpers, exportable datasets.",
-    to: "https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api",
-    external: true,
+    body: "AI fund-flow tracing via MCP, AML risk scoring, wallet timelines.",
+    to: "/docs/mcp/Tracing/overview/",
   },
 ];
 

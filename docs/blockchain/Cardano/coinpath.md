@@ -16,6 +16,10 @@ keywords:
 
 Coinpath walks ADA flows between Cardano addresses across multiple hops — forward to see where funds went, backward to see where they came from. Because Cardano uses an eUTXO model, the API stitches chains of UTXOs together and returns senders, receivers, hop depth, amounts, and transaction counts at each level. Common use cases: AML / compliance screening, DAO treasury audits, exchange deposit tracing, and source-of-funds verification.
 
+:::tip Trace Cardano funds with AI — no queries needed
+Connect the [Bitquery MCP server](https://mcp.bitquery.io/) to Claude, Cursor, or ChatGPT and ask in plain English: _"Trace where ADA from addr1... came from and where it went, 2 hops each way."_ The agent walks the fund flow for you. See [AI Investigations](https://bitquery.io/solutions/ai-investigations) and the [Tracing MCP guide](/docs/mcp/Tracing/overview).
+:::
+
 :::info Endpoint
 Cardano GraphQL queries are served at `https://graphql.bitquery.io`.
 :::

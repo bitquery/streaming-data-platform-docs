@@ -16,6 +16,10 @@ keywords:
 
 Coinpath walks ALGO and ASA flows between Algorand addresses — forward to see where funds went, backward to see where they came from. The API returns senders, receivers, hop depth, amounts, currency metadata, and transaction details at each level. Common use cases: AML screening, treasury audits, exchange deposit tracing, and source-of-funds verification.
 
+:::tip Trace Algorand funds with AI — no queries needed
+Connect the [Bitquery MCP server](https://mcp.bitquery.io/) to Claude, Cursor, or ChatGPT and ask in plain English: _"Trace where ALGO from this address went, 3 hops deep, and show the largest receivers."_ The agent walks the fund flow for you. See [AI Investigations](https://bitquery.io/solutions/ai-investigations) and the [Tracing MCP guide](/docs/mcp/Tracing/overview).
+:::
+
 :::info Endpoint
 Algorand GraphQL queries are served at `https://graphql.bitquery.io`.
 :::
