@@ -34,7 +34,7 @@ Order the wallet's incoming transfers ascending by time and take the first — t
 }
 ```
 
-Order by `Block_Time` (not a transaction-timestamp field, which can drop rows). Repeat on the funder to walk the chain back a few hops; for deep multi-hop money-flow use [Coinpath](https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api).
+Order by `Block_Time` (not a transaction-timestamp field, which can drop rows). Repeat on the funder to walk the chain back a few hops; for deep multi-hop money-flow, connect the [Bitquery MCP server](https://mcp.bitquery.io/) and ask an AI agent to trace it for you ([AI Investigations](https://bitquery.io/solutions/ai-investigations)), or use [Coinpath](https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api) directly.
 
 ## Every token a wallet deployed (rug-check)
 
@@ -62,11 +62,13 @@ Find contract-creation events by a deployer address to see all tokens/contracts 
   items={[
     { q: "How do I find who funded a wallet?", a: "Order the wallet's incoming transfers ascending by Block_Time and take the first; its sender is the initial funder. Walk back a few hops on the funder for provenance." },
     { q: "How do I list every token a deployer launched?", a: "Query contract-creation calls (Create: true) filtered by the deployer/signer address; Call.To is each newly-deployed contract. Repeat-deployer patterns are a rug signal." },
-    { q: "Can I follow funds across many hops automatically?", a: "For deep multi-hop money-flow, use Coinpath (currently a v1 capability). The transfer-ordering recipe here is best for one or a few hops." },
+    { q: "Can I follow funds across many hops automatically?", a: "Yes. Connect the Bitquery MCP server (https://mcp.bitquery.io) to Claude, Cursor, or ChatGPT and ask the agent to trace funds across hops in plain English. Coinpath (v1) is the query-level option. The transfer-ordering recipe here is best for one or a few hops." },
   ]}
 />
 
 ## Next steps
 
 - [ERC-20 transfers API](/docs/blockchain/Ethereum/transfers/erc20-token-transfer-api/)
+- [Tracing MCP guide](/docs/mcp/Tracing/overview)
+- [AI Investigations](https://bitquery.io/solutions/ai-investigations)
 - [Coinpath (v1)](https://docs.bitquery.io/v1/docs/Examples/coinpath/money-flow-api)

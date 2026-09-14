@@ -22,6 +22,10 @@ Coinpath walks Bitcoin fund flows between addresses — forward to see where fun
 
 <VideoPlayer url="https://www.youtube.com/watch?v=pEVNAhfEOJ4" />
 
+:::tip Trace Bitcoin funds with AI — no queries needed
+Connect the [Bitquery MCP server](https://mcp.bitquery.io/) to Claude, Cursor, or ChatGPT and ask in plain English: _"Trace where BTC from bc1q... went over the last 30 days, 3 hops deep, and flag any exchange deposits."_ The agent walks the fund flow for you. See [AI Investigations](https://bitquery.io/solutions/ai-investigations) and the [Tracing MCP guide](/docs/mcp/Tracing/overview).
+:::
+
 :::info Endpoint
 Bitcoin GraphQL queries are served at `https://graphql.bitquery.io`.
 :::
