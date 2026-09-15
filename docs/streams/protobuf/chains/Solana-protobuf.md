@@ -49,6 +49,57 @@ Transactions across all stream types share common elements:
 - `FeeInUsd`: Equivalent transaction fee in US dollars
 - `Index`: Position within the block
 
+#### Transaction Header
+
+The `Header` (`TransactionHeader`) carries:
+
+- `Fee`: Transaction fee in lamports
+- `FeePayer`: Account that paid the fee
+- `RecentBlockhash`: Blockhash the transaction was built against
+- `Signer`: Primary signer
+- `Signatures`: All transaction signatures
+- `Accounts`: Accounts referenced by the transaction (address, signer/writable flags, token info)
+- `TransactionConfig`: Execution parameters for V1 transactions (see below)
+
+#### V1 Transactions: `TransactionConfig`
+
+Solana V1 transactions store execution parameters in a dedicated message field instead of ComputeBudget program instructions. Bitquery exposes them in `Header.TransactionConfig`:
+
+| Field                         | Type   | Description                                  |
+| ----------------------------- | ------ | -------------------------------------------- |
+| `PriorityFee`                 | uint64 | Priority fee set for the transaction         |
+| `ComputeUnitLimit`            | uint32 | Maximum compute units the transaction can use |
+| `LoadedAccountsDataSizeLimit` | uint32 | Maximum size of account data that can be loaded |
+| `HeapSize`                    | uint32 | Requested heap size                          |
+
+All four fields are optional.
+
+- **V1 transactions:** `TransactionConfig` is set, and it is the **only** place these values appear.
+- **Legacy and V0 transactions:** `TransactionConfig` is **unset**. Read these values from the ComputeBudget program instructions in the instruction list, as before.
+
+:::tip
+To get priority fees or compute limits across all transaction versions, check `Header.TransactionConfig` first. If it is not set, fall back to decoding ComputeBudget instructions.
+:::
+
+```python
+from solana import block_message_pb2
+
+def print_tx_config(raw_bytes: bytes):
+    block = block_message_pb2.BlockMessage()
+    block.ParseFromString(raw_bytes)
+
+    for tx in block.Transactions:
+        if tx.Header.HasField("TransactionConfig"):
+            cfg = tx.Header.TransactionConfig
+            print(tx.Signature.hex(), "priority fee:", cfg.PriorityFee,
+                  "compute unit limit:", cfg.ComputeUnitLimit)
+        else:
+            # Legacy / V0: decode ComputeBudget instructions instead
+            pass
+```
+
+Use `bitquery-pb2-kafka-package` version 0.2.34 or later to get this field in Python.
+
 Transactions contain various types of instructions, which are the core of Solana's execution model:
 
 - `ProgramAccountIndex`: The program being called
