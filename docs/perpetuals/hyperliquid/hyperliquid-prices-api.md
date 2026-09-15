@@ -17,7 +17,7 @@ keywords:
 
 # Hyperliquid Mark Prices & Price Updates API
 
-**In short:** the Hyperliquid mark price is what the exchange uses for margin, liquidations, TP/SL triggers and unrealized PnL. It updates about every 3 seconds. Per [Hyperliquid's docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/robust-price-indices), it is the median of three prices:
+**In short:** the Hyperliquid mark price is what the exchange uses for margin, liquidations, TP/SL triggers and unrealized PnL. It updates about every 3 seconds and is the median of three prices:
 
 1. The oracle price plus a 150-second EMA of (Hyperliquid mid price − oracle price)
 2. The median of best bid, best ask and last trade on Hyperliquid

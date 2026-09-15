@@ -17,7 +17,7 @@ keywords:
 
 # Hyperliquid Funding Payments API
 
-**In short:** Hyperliquid pays funding every hour. Each payment is `position size × oracle price × funding rate`, and the hourly rate is one eighth of the computed 8-hour rate ([Hyperliquid docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding)). With Bitquery, the `PerpFundings` cube returns every payment a wallet paid or received, with the signed amount, the rate applied and the position size.
+**In short:** Hyperliquid pays funding every hour. Each payment is `position size × oracle price × funding rate`, and the hourly rate is one eighth of the computed 8-hour rate. With Bitquery, the `PerpFundings` cube returns every payment a wallet paid or received, with the signed amount, the rate applied and the position size.
 
 Every hour, Hyperliquid settles funding between longs and shorts. Each settlement is a **transfer against a specific wallet**, not a market statistic — and it is one of the event types that goes missing most often when people export their history for accounting.
 
