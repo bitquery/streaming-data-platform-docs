@@ -313,4 +313,4 @@ query MyQuery {
 
 ## Video Tutorial | How to Monitor Tokenized Stocks (Tesla, Apple, Meta, etc) on Solana 
 
-<VideoPlayer url="https://www.youtube.com/watch?v=ypJY7OWuoi4" />
+<VideoPlayer url="https://youtu.be/dc5iYCcc524" />
