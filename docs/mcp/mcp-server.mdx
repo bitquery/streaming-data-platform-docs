@@ -43,6 +43,7 @@ You get outlier-filtered DEX trades, transfers, OHLC candles, market cap, and wa
 - **Claude Code:** `claude mcp add bitquery -- npx -y mcp-remote https://mcp.bitquery.io/mcp`
 - **Claude Desktop and Web, ChatGPT, VS Code, Windsurf:** add a custom connector or MCP server with the URL [https://mcp.bitquery.io](https://mcp.bitquery.io), then sign in with your Bitquery account when the first tool runs.
 - **Cursor:** Settings, MCP, Add new MCP server, URL [https://mcp.bitquery.io](https://mcp.bitquery.io); or put the `mcp-remote` command in `.cursor/mcp.json`.
+- **Codex app:** add the server with an `Authorization: Bearer` header, then ask it to load the Bitquery tools in each new chat. See [Codex app](#codex-app).
 
 No API key is pasted anywhere; OAuth 2.1 handles sign-in and a free account works. Client-by-client steps with screenshots are in [Install](#install).
 
@@ -167,6 +168,33 @@ Or add it to `.cursor/mcp.json` directly:
 ```
 
 Restart Cursor, or reload the MCP configuration, so the server gets picked up.
+
+### Codex app
+
+These steps are for the Codex desktop app, not the Codex CLI. You need a Bitquery API access token; see [How to generate Bitquery API credentials](/docs/authorization/how-to-generate/).
+
+1. Open **Plugins → MCPs → Add server**.
+2. Fill in:
+   - **URL:** [https://mcp.bitquery.io](https://mcp.bitquery.io)
+   - **Bearer token env var:** leave empty
+3. Under **Headers**, click **Add header**:
+   - **Key:** `Authorization`
+   - **Value:** `Bearer YOUR_BITQUERY_TOKEN`
+4. Click **Save**.
+
+![Codex MCP server settings with the Bitquery URL and an Authorization bearer header](/img/mcp/codex-mcp-bearer-header.png)
+
+Put the token in **Headers**, not in **Bearer token env var**. That field expects the name of an environment variable, not the token itself.
+
+5. Start a **New chat** and ask Codex to load the tools before your first question:
+
+```
+Load all tools in bitquery mcp
+```
+
+![Codex chat confirming all 173 Bitquery MCP tools are loaded](/img/mcp/codex-load-bitquery-tools.png)
+
+Codex keeps MCP tools hidden until they are searched for, so skipping this step can make it reply that no Bitquery tools are available. Send the load prompt once at the start of each new chat, then ask questions normally, for example _"get Solana trending tokens"_.
 
 ### Claude Code (terminal)
 
