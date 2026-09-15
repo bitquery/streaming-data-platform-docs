@@ -3,6 +3,8 @@ title: "Hyperliquid TWAP Orders & Child Fills"
 description: "Reconstruct a Hyperliquid TWAP order end to end: the parent order lifecycle and every child fill it produced, joined on TwapId, with size, price, fees and realized PnL."
 sidebar_position: 11
 keywords:
+  - Hyperliquid TWAP
+  - Hyperliquid TWAP order
   - Hyperliquid TWAP history
   - Hyperliquid TWAP fills
   - Hyperliquid TWAP orders API
@@ -15,6 +17,8 @@ keywords:
 ---
 
 # Hyperliquid TWAP Orders & Child Fills
+
+**In short:** a Hyperliquid TWAP splits one large order into suborders sent at a fixed interval (at least 30 seconds apart) over the running time you choose. Each suborder has a 3% max slippage, and if one under-fills, later suborders catch up, up to 3x the normal slice size. With Bitquery you can get every TWAP a wallet placed from the `Twaps` cube, and every fill it produced from `Trades` filtered on `TwapId`.
 
 A TWAP on Hyperliquid is one parent order that executes as many small child fills over a set duration. Tools that only read the parent order see a single line; tools that only read fills see dozens of unexplained trades. Neither reconciles.
 

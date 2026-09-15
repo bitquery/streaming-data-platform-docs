@@ -3,6 +3,8 @@ title: "Hyperliquid Mark Prices & Price Updates API"
 description: "Get real-time Hyperliquid mark prices and oracle price updates with Bitquery GraphQL and WebSocket, covering native perps, spot and HIP-3 builder markets like tokenized stocks."
 sidebar_position: 4
 keywords:
+  - Hyperliquid mark price
+  - Hyperliquid mark price calculation
   - Hyperliquid mark price API
   - Hyperliquid oracle price
   - Hyperliquid price updates
@@ -14,6 +16,14 @@ keywords:
 ---
 
 # Hyperliquid Mark Prices & Price Updates API
+
+**In short:** the Hyperliquid mark price is what the exchange uses for margin, liquidations, TP/SL triggers and unrealized PnL. It updates about every 3 seconds. Per [Hyperliquid's docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/robust-price-indices), it is the median of three prices:
+
+1. The oracle price plus a 150-second EMA of (Hyperliquid mid price − oracle price)
+2. The median of best bid, best ask and last trade on Hyperliquid
+3. A weighted median of Binance, OKX, Bybit, Gate and MEXC perp mid prices
+
+You can get the latest mark price of every market with the `MarkPrices` query below.
 
 This page covers the `MarkPrices` and `PriceUpdates` cubes: the current mark price of every market, and the underlying oracle / reference price feed.
 
