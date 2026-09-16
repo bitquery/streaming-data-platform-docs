@@ -85,6 +85,7 @@ To fetch OHLC (Open, High, Low, Close) data for a specific token pair on EVM-com
 - **Base** → `EVM(network: base)`
 - **Optimism** → `EVM(network: optimism)`
 - **Robinhood** → `EVM(network: robinhood)`
+- **Arc Mainnet** → `EVM(network: arc)` ([Arc DEX trades and OHLCV guide](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/))
 - **Arc Testnet** → `EVM(network: arc_testnet)` (chain-level cubes only; no `Trading` cube, USD fields are 0)
 
 For full API documentation, refer to:  

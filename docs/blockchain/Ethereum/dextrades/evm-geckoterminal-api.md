@@ -21,7 +21,7 @@ GeckoTerminal is organised around pools: a ranked list of them, and for each one
 
 ### Live trades with USD price, market cap and supply
 
-Every Ethereum DEX trade with the trader, USD amounts and the market on the row, MEV trades filtered out; drop the network filter for all nine chains. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
+Every Ethereum DEX trade with the trader, USD amounts and the market on the row, MEV trades filtered out; drop the network filter for all ten chains. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
 
 ```graphql
 subscription {

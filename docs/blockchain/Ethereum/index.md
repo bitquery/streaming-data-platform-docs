@@ -27,7 +27,7 @@ import FAQ from "@site/src/components/FAQ";
 # Ethereum API - Complete Developer Guide
 
 :::tip Building a trading app or DEX UI on Ethereum?
-For **real-time trades and prices on Ethereum** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. For **historical Ethereum data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
+For **real-time trades and prices on Ethereum** (and the last ~30 days), use the curated [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. For **historical Ethereum data older than ~30 days**, use the chain-level `DEXTrades` / `DEXTradeByTokens` APIs documented below.
 :::
 
 ## What is Bitquery?

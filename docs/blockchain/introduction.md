@@ -1,13 +1,13 @@
 ---
 title: "Blockchain Data APIs Overview"
 description: "Explore Bitquery multi-chain blockchain APIs for trades, transfers, balances, NFTs, mempool data, and real-time streams."
-keywords: ["blockchain API", "blockchain data API", "multi-chain API", "Ethereum API", "Solana API", "BSC API", "Arbitrum API", "Base API", "Polygon API", "Tron API", "blockchain GraphQL API", "real-time blockchain data", "historical blockchain data", "DEX API", "DeFi API", "NFT API", "token API", "transaction API", "balance API", "smart contract API", "mempool API", "blockchain streaming", "WebSocket blockchain", "Kafka blockchain", "blockchain analytics", "blockchain developer tools", "blockchain infrastructure", "blockchain indexing", "blockchain data platform", "stablecoin API", "MEV detection", "mempool monitoring", "crypto price API", "real-time trading data", "cross-chain analytics", "blockchain compliance", "payment processing API"]
+keywords: ["blockchain API", "blockchain data API", "multi-chain API", "Ethereum API", "Solana API", "BSC API", "Arbitrum API", "Base API", "Polygon API", "Tron API", "Arc blockchain API", "blockchain GraphQL API", "real-time blockchain data", "historical blockchain data", "DEX API", "DeFi API", "NFT API", "token API", "transaction API", "balance API", "smart contract API", "mempool API", "blockchain streaming", "WebSocket blockchain", "Kafka blockchain", "blockchain analytics", "blockchain developer tools", "blockchain infrastructure", "blockchain indexing", "blockchain data platform", "stablecoin API", "MEV detection", "mempool monitoring", "crypto price API", "real-time trading data", "cross-chain analytics", "blockchain compliance", "payment processing API"]
 ---
 import FAQ from "@site/src/components/FAQ";
 
 # Blockchain Data APIs
 
-Bitquery provides the most comprehensive blockchain data platform, offering real-time and historical access to data across **40+ blockchains** including Bitcoin, Ethereum, Solana, BSC, Arbitrum, Base, Polygon, Tron, and more. Our platform serves as the backbone for thousands of developers building DeFi applications, trading tools, analytics dashboards, and blockchain infrastructure.
+Bitquery provides real-time and historical access to data across **40+ blockchains** including Bitcoin, Ethereum, Solana, BSC, Arbitrum, Base, Polygon, Tron and Arc. Thousands of developers use the APIs for DeFi apps, trading tools, analytics dashboards and blockchain infrastructure.
 
 ## Why Choose Bitquery's Blockchain Data APIs?
 
@@ -37,6 +37,7 @@ Our V2 API version with enhanced features and real-time streaming:
 - **[Optimism](/docs/blockchain/Optimism/)**
 - **[opBNB](/docs/blockchain/supported-chains/)** (IDE / limited docs)
 - **[Robinhood](/docs/blockchain/robinhood/)**
+- **[Arc Mainnet](/docs/blockchain/arc-mainnet/)** (Circle Arc; live queries and WebSocket streams)
 - **[Arc Testnet](/docs/blockchain/arc-testnet/)** (Circle Arc, testnet; realtime dataset only)
 
 **Non-EVM Chains:**
@@ -58,7 +59,7 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 
 ## Bitquery's Core Blockchain Data Capabilities
 
-**Popular APIs:** [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/)
+**Popular APIs:** [Arc Mainnet API](/docs/blockchain/arc-mainnet/) · [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/)
 
 ### **Crypto Price API - Real-Time Multi-Chain Price Data**
 
@@ -546,4 +547,3 @@ Ready to start building with blockchain data? Here's your path forward:
 ---
 
 **Start building the future of blockchain applications today with Bitquery's comprehensive multi-chain data platform.**
-

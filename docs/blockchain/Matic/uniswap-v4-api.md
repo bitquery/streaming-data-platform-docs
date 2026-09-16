@@ -5,7 +5,7 @@ description: "Polygon Uniswap V4 API: query Polygon Uniswap trades, pools, and p
 # Uniswap V4 API - Track Trader Activities, Token Trades and Market Behavior
 
 :::tip Need real-time Uniswap V4 (Polygon) data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Uniswap V4 (Polygon) swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Uniswap V4 (Polygon) data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Uniswap V4 (Polygon) swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Uniswap V4 (Polygon) data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 Uniswap v4 introduces a major shift in protocol architecture. Instead of deploying a separate smart contract for each liquidity pool, Uniswap v4 uses a singleton PoolManager contract that manages all pools internally as structured state.

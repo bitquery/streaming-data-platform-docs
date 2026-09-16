@@ -24,7 +24,11 @@ import FAQ from "@site/src/components/FAQ";
 
 # Arc Testnet API: Circle's Stablecoin L1 via GraphQL, WebSocket and Kafka
 
-**Arc** is Circle's EVM-compatible Layer 1 built for stablecoin finance: **USDC is the native gas token**, blocks finalize in well under a second on the Malachite BFT consensus, and the chain carries USDC, EURC and a growing set of DeFi deployments led by Uniswap v4. Bitquery indexes the **Arc testnet** as `EVM(network: arc_testnet)` and publishes it as Kafka topics under `arc-testnet.*`, so you can build and test against the chain before mainnet with the same queries you already use on Ethereum, Base or Robinhood Chain.
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet API](/docs/blockchain/arc-mainnet/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
+**Arc** is Circle's EVM-compatible Layer 1 built for stablecoin finance: **USDC is the native gas token**, blocks finalize in well under a second on the Malachite BFT consensus, and the chain carries USDC, EURC and a growing set of DeFi deployments led by Uniswap v4. Bitquery indexes the **Arc testnet** as `EVM(network: arc_testnet)` and publishes it as Kafka topics under `arc-testnet.*`, so you can test before deploying the same queries to mainnet, Ethereum, Base or Robinhood Chain.
 
 This page is the map. Use it to pick the cube that answers your question, then jump to the linked guide.
 
@@ -64,7 +68,7 @@ Arc testnet is indexed with the same EVM schema as every other chain, with four 
 | **No `Trading` cubes** | `Trading.Trades`, `Tokens` and `Pairs` cover mainnet chains with USD pricing. Use the chain-level `DEXTrades` and `DEXTradeByTokens` cubes. |
 | **Some cubes are unavailable** | `Holders` needs the archive and is not served. `DEXPoolEvents` and `DEXPoolSlippages` have no data yet. `Balances`, `BalanceUpdates` and `TransactionBalances` work. |
 
-Arc **mainnet** will be indexed with USD pricing from the token price index and an archive dataset.
+Arc **mainnet** is indexed with USD pricing, the `Trading` cubes and the `Holders` cube. Use the [Arc Mainnet API](/docs/blockchain/arc-mainnet/) for production data. Its `archive` and `combined` datasets are not enabled yet.
 
 ---
 
@@ -192,7 +196,7 @@ Only the **`realtime`** dataset exists for Arc testnet. It holds a rolling windo
 }
 ```
 
-`dataset: archive` and `dataset: combined` return errors on the testnet. The archive dataset, and with it the `Holders` cube and long time ranges, will be available for Arc mainnet.
+`dataset: archive` and `dataset: combined` return errors on the testnet. Arc mainnet serves the `Holders` cube, but its `archive` and `combined` datasets are not enabled yet.
 
 ---
 
@@ -201,8 +205,8 @@ Only the **`realtime`** dataset exists for Arc testnet. It holds a rolling windo
   items={[
     { q: "What is Arc and what is its chain ID?", id: "what-is-arc-and-what-is-its-chain-id", a: "Arc is Circle's EVM-compatible Layer 1 for stablecoin finance, with USDC as the native gas token and sub-second finality on the Malachite BFT consensus. The testnet chain ID is 5042002. In Bitquery it is EVM(network: arc_testnet). Solidity ABIs, topic0 hashes and 4-byte selectors work exactly as they do on Ethereum.",
       answer: <p>{"Arc is Circle's EVM-compatible Layer 1 for stablecoin finance, with USDC as the native gas token and sub-second finality on the Malachite BFT consensus. The testnet chain ID is "}<strong>{"5042002"}</strong>{". In Bitquery it is "}<code>{"EVM(network: arc_testnet)"}</code>{". Solidity ABIs, topic0 hashes and 4-byte selectors work exactly as they do on Ethereum."}</p> },
-    { q: "Why are all USD values zero?", id: "why-are-all-usd-values-zero", a: "There is no token price index for a testnet, so every ...InUSD field is 0. Native prices such as Trade.Price are correct, and because most pairs quote in USDC they are effectively dollar prices. Arc mainnet will carry USD values from the price index.",
-      answer: <p>{"There is no token price index for a testnet, so every "}<code>{"...InUSD"}</code>{" field is 0. Native prices such as "}<code>{"Trade.Price"}</code>{" are correct, and because most pairs quote in USDC they are effectively dollar prices. Arc mainnet will carry USD values from the price index."}</p> },
+    { q: "Why are all USD values zero?", id: "why-are-all-usd-values-zero", a: "There is no token price index for a testnet, so every ...InUSD field is 0. Native prices such as Trade.Price are correct, and because most pairs quote in USDC they are effectively dollar prices. Arc mainnet carries USD values from the price index.",
+      answer: <p>{"There is no token price index for a testnet, so every "}<code>{"...InUSD"}</code>{" field is 0. Native prices such as "}<code>{"Trade.Price"}</code>{" are correct, and because most pairs quote in USDC they are effectively dollar prices. Arc mainnet carries USD values from the price index."}</p> },
     { q: "How far back does Arc testnet data go?", id: "how-far-back-does-arc-testnet-data-go", a: "Only the realtime dataset exists, holding a rolling window of recent blocks. There is no archive for the testnet, so dataset: archive and dataset: combined return errors. Measure the window with a Block Time(minimum) query before assuming a range.",
       answer: <p>{"Only the "}<code>{"realtime"}</code>{" dataset exists, holding a rolling window of recent blocks. There is no archive for the testnet, so "}<code>{"dataset: archive"}</code>{" and "}<code>{"dataset: combined"}</code>{" return errors. Measure the window with the "}<a href="#datasets">{"dataset probe"}</a>{" before assuming a range."}</p> },
     { q: "Can I use the Trading cubes or the Holders cube on Arc testnet?", id: "can-i-use-the-trading-cubes-or-the-holders-cube-on-arc-testnet", a: "No. The Trading cubes cover mainnet chains with USD pricing, and Holders is served from the archive dataset. Use DEXTrades and DEXTradeByTokens for trades, and Balances grouped by address for holder rankings.",

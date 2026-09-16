@@ -1,31 +1,27 @@
 ---
-title: "Arc Testnet Events API & WebSocket Streams"
-description: "Stream every smart contract event on Circle's Arc testnet with Bitquery GraphQL: decoded logs by contract, signature, topic0 or argument, plus Uniswap v4 Initialize, v3 PoolCreated and v2 PairCreated feeds."
+title: "Arc Mainnet Events API & WebSocket Streams"
+description: "Query and stream Arc mainnet smart contract events with Bitquery GraphQL, including decoded logs, topics, arguments and new Uniswap pool events in real time."
 sidebar_position: 3
 keywords:
-  - Arc testnet events API
-  - Arc testnet smart contract events
-  - Arc testnet logs API
-  - Arc testnet eth_getLogs alternative
-  - Arc testnet event stream websocket
-  - Arc testnet Uniswap v4 Initialize
-  - Arc testnet new pools
+  - Arc mainnet events API
+  - Arc mainnet smart contract events
+  - Arc mainnet logs API
+  - Arc mainnet eth_getLogs alternative
+  - Arc mainnet event stream websocket
+  - Arc mainnet Uniswap v4 Initialize
+  - Arc mainnet new pools
   - Circle Arc events API
-  - arc_testnet Events
-  - Bitquery Arc testnet
+  - arc Events
+  - Bitquery Arc mainnet
 ---
-# Arc Testnet Events API & WebSocket Streams
+# Arc Mainnet Events API & WebSocket Streams
 
-:::tip Arc mainnet is live
-Most production integrations should use the [Arc Mainnet Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
-:::
-
-Stream **every smart contract event on Arc testnet** with Bitquery GraphQL. The `EVM.Events` cube on `network: arc_testnet` returns each log with decoded, typed arguments for known signatures, the raw topics, and the transaction, internal call and receipt that produced it. It covers what `eth_getLogs` and `eth_subscribe("logs")` return, and adds server-side filtering on decoded values.
+Stream **every smart contract event on Arc mainnet** with Bitquery GraphQL. The `EVM.Events` cube on `network: arc` returns each log with decoded, typed arguments for known signatures, the raw topics, and the transaction, internal call and receipt that produced it. It covers what `eth_getLogs` and `eth_subscribe("logs")` return, and adds server-side filtering on decoded values.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.
 
-:::warning Testnet: realtime only, USD fields are 0
-Only `dataset: realtime` exists for Arc testnet; leave the `dataset` argument out. `Transaction.ValueInUSD`, `Call.ValueInUSD` and the gas `...InUSD` fields return 0.
+:::info Availability checked 16 September 2026
+The realtime path and USD fields returned live data. Leave the `dataset` argument out until `combined` and `archive` are enabled.
 :::
 
 :::note API Key Required
@@ -35,10 +31,10 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Testnet API overview](/docs/blockchain/arc-testnet/) — network facts, every cube and stream in one place
-- [Arc Testnet Calls API](/docs/blockchain/arc-testnet/arc-testnet-calls-api/)
-- [Arc Testnet DEX Trades API](/docs/blockchain/arc-testnet/arc-testnet-trades-api/)
-- [Arc Testnet Transfers API](/docs/blockchain/arc-testnet/arc-testnet-transfers-api/)
+- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
+- [Arc Mainnet Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/)
+- [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
+- [Arc Mainnet Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
 - [EVM Events schema](/docs/schema/evm/events/)
 - [Transfers vs Events vs Calls](/docs/start/mental-model-transfers-events-calls/)
 :::
@@ -66,23 +62,23 @@ Hash fields (`SignatureHash`, `Topics.Hash`) are hex strings **without** a `0x` 
 
 | Item | Address |
 | --- | --- |
-| Uniswap v4 PoolManager | `0x1d70945634f618eefdf9edaadb59b9a183cef929` |
-| Uniswap v3 factory (busiest `PoolCreated` emitter) | `0x0fb6eeda6e90e90797083861a75d15752a27f59c` |
-| Uniswap v2 factory (busiest `PairCreated` emitter) | `0xd67f63a4f26a497b364d1c82e6747aec8b5743a5` |
+| Uniswap v4 PoolManager | `0x8366a39cc670b4001a1121b8f6a443a643e40951` |
+| Uniswap v3 factory seen at launch | `0xf0db7b58379503491d857db50ac9ece64c653918` |
+| Uniswap v2 factory seen at launch | `0x89e5db8b5aa49aa85ac63f691524311aeb649eba` |
 | USDC (ERC-20) | `0x3600000000000000000000000000000000000000` |
-| EURC | `0x89b50855aa3be2f677cd6303cec089b5f319d72a` |
+| EURC | `0xbef5f6d51cb62b58e6a8f77868681825c6fe21c1` |
 
 ---
 
 ## Stream all events
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-stream-all-events)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-stream-all-events)
 
 One socket, every event on the chain. Good for building an indexer; heavy for anything else, so use the filtered streams below in production.
 
 ```graphql
 subscription {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events {
       Block {
         Number
@@ -140,13 +136,13 @@ subscription {
 
 ## Events from one contract
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-events-from-a-contract)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-events-from-a-contract)
 
 `LogHeader.Address` is the `address` filter of `eth_getLogs`. This reads the latest events of the ERC-20 USDC contract.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 20}
       orderBy: {descending: Block_Time}
@@ -185,13 +181,13 @@ subscription {
 
 ## One event across all contracts
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-swap-events)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-swap-events)
 
 Filter by decoded signature name to watch one event type from every contract that emits it. This catches every `Swap`, from Uniswap v2 pairs, v3 pools and the v4 PoolManager alike.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 20}
       orderBy: {descending: Block_Time}
@@ -234,13 +230,13 @@ Filter by decoded signature name to watch one event type from every contract tha
 
 ## Filter by raw topic0
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-events-by-topic0)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-events-by-topic0)
 
 When you have the signature hash rather than the name, filter on `Log.Signature.SignatureHash`. This is the ERC-20 `Transfer(address,address,uint256)` hash, written without `0x`.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 10}
       orderBy: {descending: Block_Time}
@@ -284,13 +280,13 @@ When you have the signature hash rather than the name, filter on `Log.Signature.
 
 ## Filter by a decoded argument
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-events-by-argument)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-events-by-argument)
 
 Server-side filtering on decoded values is what a node cannot do. This finds every event whose argument named `to` equals a wallet, across all contracts and signatures.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 20}
       orderBy: {descending: Block_Time}
@@ -298,7 +294,7 @@ Server-side filtering on decoded values is what a node cannot do. This finds eve
         Arguments: {
           includes: {
             Name: {is: "to"}
-            Value: {Address: {is: "0x2de8906a641d65d490bc60a4179d961d59742bcb"}}
+            Value: {Address: {is: "0xada5bb90d0de0bd1b6f3938708f49295a8d1f7cb"}}
           }
         }
       }
@@ -337,18 +333,18 @@ Server-side filtering on decoded values is what a node cannot do. This finds eve
 
 ## New Uniswap v4 pools
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-new-uniswap-v4-pools)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-new-uniswap-v4-pools)
 
-Uniswap v4 carries most of the testnet's swaps. A new pool is an `Initialize` event on the PoolManager; its arguments give the pool `id`, the two currencies, the fee tier, tick spacing, hook address and opening price. `currency0` of the zero address means native USDC.
+Uniswap v4 carried most launch-day swaps. A new pool is an `Initialize` event on the PoolManager; its arguments give the pool `id`, the two currencies, the fee tier, tick spacing, hook address and opening price.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 20}
       orderBy: {descending: Block_Time}
       where: {
-        LogHeader: {Address: {is: "0x1d70945634f618eefdf9edaadb59b9a183cef929"}}
+        LogHeader: {Address: {is: "0x8366a39cc670b4001a1121b8f6a443a643e40951"}}
         Log: {Signature: {Name: {is: "Initialize"}}}
       }
     ) {
@@ -389,13 +385,13 @@ Change `query` to `subscription` and drop `limit` and `orderBy` to get each new 
 
 ## New Uniswap v3 and v2 pools
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-new-v3-v2-pools)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-new-v3-v2-pools)
 
-Several v3 and v2 factory deployments exist on the testnet, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
+Several v3 and v2 factory deployments appeared on mainnet, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 20}
       orderBy: {descending: Block_Time}
@@ -438,13 +434,13 @@ Several v3 and v2 factory deployments exist on the testnet, so filter on the eve
 
 ## Busiest contracts and signatures
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-busiest-event-contracts)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-busiest-event-contracts)
 
 Which contracts and event types dominate the log stream over 24 hours. Run this first on any network you have not explored yet.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     contracts: Events(
       limit: {count: 10}
       orderBy: {descendingByField: "count"}
@@ -476,13 +472,13 @@ Which contracts and event types dominate the log stream over 24 hours. Run this 
 
 ## Undecoded events
 
-▶️ [Run in IDE](https://ide.bitquery.io/arc-testnet-undecoded-events)
+▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-undecoded-events)
 
 Events whose ABI is not registered arrive with an empty `Signature.Name` and no `Arguments`, but the raw `Topics` and `Log.SmartContract` are still there. This lists the contracts emitting the most undecoded events; if one matters to you, ask support to register its ABI.
 
 ```graphql
 {
-  EVM(network: arc_testnet) {
+  EVM(network: arc) {
     Events(
       limit: {count: 10}
       orderBy: {descendingByField: "count"}
@@ -517,7 +513,7 @@ Events whose ABI is not registered arrive with an empty `Signature.Name` and no 
 Their ABI is not registered yet. The raw topics and data are still delivered. See [Undecoded events](#undecoded-events).
 
 **Can I get history beyond the realtime window?**
-Not on the testnet; only `dataset: realtime` exists.
+Not yet. Only the realtime path answered on 16 September 2026. Retry `archive` and `combined` before using them.
 
 **How do I follow one Uniswap v4 pool?**
-Take the pool `id` from its `Initialize` event and filter `Swap` events on the PoolManager whose first argument (`id`) matches it, using the [argument filter](#filter-by-a-decoded-argument) with `Value: {Bytes: ...}`, or read the pool's trades through the [DEX Trades API](/docs/blockchain/arc-testnet/arc-testnet-trades-api/) by its two currencies.
+Take the pool `id` from its `Initialize` event and filter `Swap` events on the PoolManager whose first argument (`id`) matches it, using the [argument filter](#filter-by-a-decoded-argument) with `Value: {Bytes: ...}`, or read the pool's trades through the [DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/) by its two currencies.

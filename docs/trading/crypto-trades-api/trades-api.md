@@ -60,6 +60,7 @@ se the same **`bid:<chain>`** convention as **`Pair.Token.Id`**.
 | Tron | `bid:tron` |
 | Optimism | `bid:optimism` |
 | Robinhood | `bid:robinhood` |
+| Arc | `bid:arc` |
 
 The same **`NetworkBid`** pattern applies on the **[Crypto Price API](/docs/trading/crypto-price-api/)** for **`Token.NetworkBid`** and **`Market.NetworkBid`** on **Tokens** and **Pairs**.
 
@@ -2341,7 +2342,7 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/first-50-bu
 <FAQ
   items={[
     { q: "What is Trading.Trades and when should I use it?", a: "Trading.Trades is the cross-chain trading cube — one API for clean, MEV-filtered swaps with USD price, market cap, and supply on every row. Use it for bots, dashboards, and analytics on recent data (~30 days)." },
-    { q: "Which chains does the Crypto Trades API cover?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, and Robinhood in a single schema. Filter with Pair.Market.Network, using case-sensitive display names — Polygon is 'Matic' and BSC is 'Binance Smart Chain'." },
+    { q: "Which chains does the Crypto Trades API cover?", a: "Solana, Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Tron, Robinhood and Arc in a single schema. Filter with Pair.Market.Network, using case-sensitive display names: Polygon is 'Matic', BSC is 'Binance Smart Chain', and Arc is 'Arc'." },
     { q: "How is Trading.Trades different from chain-level DEXTrades?", a: "Trading.Trades is normalized and enriched for traders. Chain DEXTrades gives raw per-protocol detail and supports deeper history — use both depending on the job." },
     { q: "Can I stream trades in real time?", a: "Yes. Change query to subscription for WebSocket delivery, or use Kafka trading protobuf topics for high-volume consumers." },
   ]}

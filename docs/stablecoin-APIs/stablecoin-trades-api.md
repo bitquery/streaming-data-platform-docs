@@ -14,7 +14,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # Stablecoin Trades API: USDT and USDC DEX Trades, Depeg Checks and Wallet Flows
 
-Stablecoins are the quote side of most DEX volume, so a stablecoin trade feed is close to a feed of everything. This page filters Bitquery's trade cubes down to one stablecoin at a time on Ethereum, Solana and Tron: the live trades, the trades that printed away from one dollar, and what one wallet did with its USDC. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. Solana queries go to the `eap` endpoint, Ethereum and Tron to `graphql`. The [Trading cube](/docs/trading/crypto-trades-api/trades-api) gives the same trades across nine chains with USD on every row for the last month, which is the first section; the chain cubes below add history and per-pool detail.
+Stablecoins are the quote side of most DEX volume, so a stablecoin trade feed is close to a feed of everything. This page filters Bitquery's trade cubes down to one stablecoin at a time on Ethereum, Solana and Tron: the live trades, the trades that printed away from one dollar, and what one wallet did with its USDC. Every example runs in the [IDE](https://ide.bitquery.io) on a free account. Solana queries go to the `eap` endpoint, Ethereum and Tron to `graphql`. The [Trading cube](/docs/trading/crypto-trades-api/trades-api) gives the same trades across ten chains with USD on every row for the last month, which is the first section; the chain cubes below add history and per-pool detail.
 
 ## Live USDT trades across all chains
 

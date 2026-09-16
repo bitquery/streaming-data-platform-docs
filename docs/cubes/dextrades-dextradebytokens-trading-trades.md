@@ -9,7 +9,7 @@ description: "DEXTrades vs DEXTradeByTokens vs Trades cube: Bitquery documentati
 Bitquery exposes **three** common ways to work with **DEX swap–level** data. They differ by **GraphQL root**, **row shape** (how each swap is represented), and **what fields are normalized for you**.
 
 :::tip Time window decides first, row shape second
-- **Real-time + last ~30 days** → **`Trading { Trades }`** (and `Tokens` / `Pairs` / `Currencies` for OHLC). USD price, market cap, and supply on every row; MEV-filtered; 9 chains in one API.
+- **Real-time + last ~30 days** → **`Trading { Trades }`** (and `Tokens` / `Pairs` / `Currencies` for OHLC). USD price, market cap, and supply on every row; MEV-filtered; 10 chains in one API.
 - **Older than ~30 days** → chain-level **`DEXTrades`** / **`DEXTradeByTokens`** with `dataset: combined` / `archive` — the Trading cube is a **rolling ~30-day window** and does not reach further back.
 
 Pick the cube by row shape (below) only after the time window has narrowed the choice. See the [Trading Data Overview](/docs/trading/trading-data-overview).
@@ -70,7 +70,7 @@ The [DEXTradesByTokens](/docs/cubes/dextradesbyTokens) / **`DEXTradeByTokens`** 
 
 The **`Trades`** field under **`Trading`** is documented as the [Crypto Trades API — real-time DEX trade streams](/docs/trading/crypto-trades-api/trades-api). It is **not** nested under `EVM` / `Solana` per chain in the same way; you use **`Trading { Trades }`** and narrow with **`Pair.Market.Network`**, token ids, and **`Trader.Address`**.
 
-**Trader-first model:** Rows are built for **who traded**—**`Trader.Address`** is a first-class filter—alongside **`Pair`**, **`Side`**, and amounts. That is the natural API for **wallet streams**, **leaderboards**, and **per-user** trade history across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, **Optimism**, **Polygon**, **Tron**, and **Robinhood** in one schema ([Trades API](/docs/trading/crypto-trades-api/trades-api)).
+**Trader-first model:** Rows are built for **who traded**—**`Trader.Address`** is a first-class filter—alongside **`Pair`**, **`Side`**, and amounts. That is the natural API for **wallet streams**, **leaderboards**, and **per-user** trade history across **Solana**, **Ethereum**, **BSC**, **Base**, **Arbitrum**, **Optimism**, **Polygon**, **Tron**, **Robinhood**, and **Arc** in one schema ([Trades API](/docs/trading/crypto-trades-api/trades-api)).
 
 **USD vs chain DEX cubes:** On **`DEXTrades`** / **`DEXTradeByTokens`**, **`PriceInUSD`** is often **missing or zero** for **meme or thinly traded** tokens (see [DEXTrades cube](/docs/cubes/dextrades) pricing notes). The **`Trades`** cube is different: **`PriceInUsd`** and **`AmountsInUsd`** are tied to the **Trading price index**, so you **usually get usable USD** for the same long-tail assets where raw chain DEX USD fields fail. Details: [Price Index Algorithm](/docs/trading/crypto-price-api/price-index-algorithm).
 

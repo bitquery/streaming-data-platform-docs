@@ -14,7 +14,7 @@ import ProductCTA from "@site/src/components/ProductCTA";
 # Understanding Pump.fun: From Launchpad to PumpSwap
 
 :::tip Need real-time Pump.fun & PumpSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Pump.fun & PumpSwap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Pump.fun & PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 
 Post-migration AMM activity is covered end-to-end by the [PumpSwap API](https://bitquery.io/products/pumpswap-api) — the product page lists swaps, pools and OHLCV coverage with plans.
 :::

@@ -239,6 +239,7 @@ Maintain audit trails of supply changes for regulatory compliance and financial 
 | Polygon  | `matic`     | Polygon PoS         |
 | Optimism | `optimism`  | Optimism L2         |
 | Robinhood| `robinhood` | Robinhood network   |
+| Arc      | `arc`       | Arc mainnet         |
 
 ---
 
@@ -261,4 +262,3 @@ Maintain audit trails of supply changes for regulatory compliance and financial 
 3. **Integrate**: Use the GraphQL endpoint in your application
 
 For more information on authentication and API usage, see our [Getting Started Guide](/docs/start/first-query/).
-

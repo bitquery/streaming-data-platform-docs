@@ -11,7 +11,7 @@ keywords:
 # PumpSwap API
 
 :::tip Need real-time PumpSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PumpSwap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PumpSwap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical PumpSwap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 For delivery channels, pricing and the free trial, see the [PumpSwap API product page](https://bitquery.io/products/pumpswap-api).

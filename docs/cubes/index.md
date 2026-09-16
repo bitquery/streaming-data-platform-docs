@@ -16,15 +16,15 @@ import FAQ from "@site/src/components/FAQ";
 
 # Understanding Bitquery Cubes: Which Cube Answers Which Question
 
-A cube is one GraphQL root per kind of on-chain fact. `DEXTrades` holds swaps, `Transfers` holds token movements, `Balances` holds what an address owns now, `Calls` and `Events` hold decoded contract activity, `Blocks` and `Transactions` hold the chain itself. Every cube takes the same `where`, `orderBy` and `limit` arguments, supports aggregates such as `count`, `sum` and `uniq`, and runs as a query or, with the keyword changed, as a WebSocket subscription. Cubes come in three families: chain-level EVM cubes under `EVM(network: ...)`, chain-level Solana cubes under `Solana`, and the cross-chain `Trading` cubes that carry USD prices for nine chains in one schema. The `dataset` argument decides how far back a chain-level cube reaches.
+A cube is one GraphQL root per kind of on-chain fact. `DEXTrades` holds swaps, `Transfers` holds token movements, `Balances` holds what an address owns now, `Calls` and `Events` hold decoded contract activity, `Blocks` and `Transactions` hold the chain itself. Every cube takes the same `where`, `orderBy` and `limit` arguments, supports aggregates such as `count`, `sum` and `uniq`, and runs as a query or, with the keyword changed, as a WebSocket subscription. Cubes come in three families: chain-level EVM cubes under `EVM(network: ...)`, chain-level Solana cubes under `Solana`, and the cross-chain `Trading` cubes that carry USD prices for ten chains in one schema. The `dataset` argument decides how far back a chain-level cube reaches.
 
 ## The three families
 
 | Family | Root | Cubes | What it is for |
 |---|---|---|---|
-| EVM | `EVM(network: eth)` and the other EVM chains | DEXTrades, DEXTradeByTokens, DEXPools, Transfers, Balances, Holders, BalanceUpdates, Transactions, Calls, Events, Blocks, MinerRewards | Anything on Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon or Robinhood Chain, from a single swap to decoded contract logs |
+| EVM | `EVM(network: eth)` and the other EVM chains | DEXTrades, DEXTradeByTokens, DEXPools, Transfers, Balances, Holders, BalanceUpdates, Transactions, Calls, Events, Blocks, MinerRewards | Anything on Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon, Robinhood Chain or Arc, from a single swap to decoded contract logs |
 | Solana | `Solana` | DEXTrades, DEXTradeByTokens, DEXOrders, DEXPools, Transfers, BalanceUpdates, Instructions, Transactions, Blocks, Rewards, TokenSupplyUpdates | Solana at instruction level, including launchpads and program calls |
-| Trading | `Trading` | Trades, Tokens, Pairs, Currencies | Prices, OHLC, market cap and supply across nine chains with one schema and USD on every row |
+| Trading | `Trading` | Trades, Tokens, Pairs, Currencies | Prices, OHLC, market cap and supply across ten chains with one schema and USD on every row |
 
 ## Which cube answers which question
 
@@ -99,7 +99,7 @@ The latest three DEX trades on Ethereum. Run it in the [Bitquery IDE](https://id
 <FAQ
   items={[
     { q: "What is a cube in the Bitquery API?", a: "One GraphQL root per kind of on-chain fact, such as DEXTrades for swaps, Transfers for token movements or Balances for current holdings. Every cube takes the same where, orderBy and limit arguments and supports aggregates like count and sum." },
-    { q: "Which cube should I use for token prices?", a: "The Trading cubes: Tokens for a token across its pairs, Pairs for one pair, Currencies for an asset aggregated across chains. They carry USD prices, OHLC, market cap and supply for nine chains. For raw swaps on one chain use DEXTrades, and for per-token aggregates over history use DEXTradeByTokens." },
+    { q: "Which cube should I use for token prices?", a: "The Trading cubes: Tokens for a token across its pairs, Pairs for one pair, Currencies for an asset aggregated across chains. They carry USD prices, OHLC, market cap and supply for ten chains. For raw swaps on one chain use DEXTrades, and for per-token aggregates over history use DEXTradeByTokens." },
     { q: "Why does my query return nothing for older dates?", a: "Chain-level cubes default to the realtime dataset, which holds only a short recent window. Add dataset: archive or dataset: combined to reach history. The Trading cubes hold about the last 30 days and take no dataset argument." },
     { q: "What is the difference between DEXTrades and DEXTradeByTokens?", a: "DEXTrades returns one row per swap with both sides. DEXTradeByTokens returns one row per token side of a trade, which makes per-token filters and aggregates such as volume, OHLC and buyer counts simple. The comparison page covers the choice in detail." },
     { q: "Can every cube be streamed?", a: "Yes. Change query to subscription and keep the selection set; the same rows arrive over WebSocket as they are produced. Aggregates and some Trading cube features do not survive the conversion, as the subscriptions section explains." },

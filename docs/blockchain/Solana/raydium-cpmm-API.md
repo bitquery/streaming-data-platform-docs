@@ -5,7 +5,7 @@ description: "Solana Raydium Cpmm API: real-time Solana memecoin and DEX data vi
 # Raydium CPMM API
 
 :::tip Need real-time Raydium CPMM data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CPMM swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Raydium CPMM data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CPMM swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Raydium CPMM data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 In this section we will see how to get data on Raydium CPMM trades in real-time. You can check out our [Pump Fun docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/), [Raydium v4 docs](/docs/blockchain/Solana/Solana-Raydium-DEX-API/) and [Raydium LaunchPad docs](/docs/blockchain/Solana/launchpad-raydium/) too.

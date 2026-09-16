@@ -20,7 +20,7 @@ GMGN is a discovery screen: tokens that just started trading, the ones being bou
 
 ### Live trades with USD price, market cap and supply
 
-Streams MEV-filtered trades across all 9 chains; the network filter scopes it to Ethereum. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
+Streams MEV-filtered trades across all 10 chains; the network filter scopes it to Ethereum. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
 
 ```graphql
 subscription {

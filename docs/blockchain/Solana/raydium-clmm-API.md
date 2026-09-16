@@ -7,7 +7,7 @@ import FAQ from "@site/src/components/FAQ";
 # Raydium CLMM API
 
 :::tip Need real-time Raydium CLMM data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CLMM swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Raydium CLMM data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Raydium CLMM swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Raydium CLMM data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 Bitquery provides comprehensive real-time and historical data APIs and Streams for the Solana blockchain, enabling developers and traders to build powerful applications and execute trades based on reliable information.

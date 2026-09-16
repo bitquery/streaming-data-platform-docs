@@ -921,6 +921,23 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Arc Mainnet",
+          link: {
+            type: "doc",
+            id: "blockchain/arc-mainnet/index",
+          },
+          items: [
+            "blockchain/arc-mainnet/arc-mainnet-trades-api",
+            "blockchain/arc-mainnet/arc-mainnet-launchpads-api",
+            "blockchain/arc-mainnet/arc-mainnet-transfers-api",
+            "blockchain/arc-mainnet/arc-mainnet-events-api",
+            "blockchain/arc-mainnet/arc-mainnet-calls-api",
+            "blockchain/arc-mainnet/arc-mainnet-transactions-api",
+            "blockchain/arc-mainnet/arc-mainnet-balances-api",
+          ],
+        },
+        {
+          type: "category",
           label: "Arc Testnet",
           link: {
             type: "doc",

@@ -1,6 +1,6 @@
 ---
 title: "EVM Cubes: Trades, Transfers, Balances, Calls and Events"
-description: "The cubes under EVM(network: ...) for Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon and Robinhood Chain: what each holds, how far back, which to query."
+description: "The cubes under EVM(network: ...) for Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon, Robinhood and Arc: what each holds and which to query."
 slug: /category/evm-cube
 sidebar_label: "EVM Cubes"
 keywords:
@@ -16,7 +16,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # EVM Cubes: Trades, Transfers, Balances, Calls and Events
 
-Every EVM chain Bitquery indexes is queried through one root, `EVM(network: ...)`, with the same cubes underneath: `DEXTrades`, `DEXTradeByTokens`, `DEXPools`, `Transfers`, `Balances`, `Holders`, `BalanceUpdates`, `Transactions`, `Calls`, `Events`, `Blocks` and `MinerRewards`. A query written for Ethereum runs on BNB Chain, Base, Arbitrum, Optimism, Polygon or Robinhood Chain by changing the network name. Each cube takes `where`, `orderBy` and `limit`, supports `count`, `sum`, `uniq` and the other aggregates, and streams as a subscription. This page is the map; the [EVM builder terms](/docs/cubes/EVM) page lists every field.
+Every EVM chain Bitquery indexes is queried through one root, `EVM(network: ...)`, with the same cubes underneath: `DEXTrades`, `DEXTradeByTokens`, `DEXPools`, `Transfers`, `Balances`, `Holders`, `BalanceUpdates`, `Transactions`, `Calls`, `Events`, `Blocks` and `MinerRewards`. A query written for Ethereum runs on BNB Chain, Base, Arbitrum, Optimism, Polygon, Robinhood Chain or Arc by changing the network name. Each cube takes `where`, `orderBy` and `limit`, supports `count`, `sum`, `uniq` and the other aggregates, and streams as a subscription. This page is the map; the [EVM builder terms](/docs/cubes/EVM) page lists every field.
 
 ## The cubes
 
@@ -35,7 +35,7 @@ Every EVM chain Bitquery indexes is queried through one root, `EVM(network: ...)
 
 ## Networks
 
-`eth`, `bsc`, `base`, `arbitrum`, `optimism`, `matic`, `robinhood` and `arc_testnet` work in `EVM(network: ...)`. Arc testnet is realtime-only with USD fields at 0; see the [Arc Testnet hub](/docs/blockchain/arc-testnet/). The chain hubs under [Blockchain](/docs/blockchain/Ethereum/) carry worked examples per chain; the schema is the same.
+`eth`, `bsc`, `base`, `arbitrum`, `optimism`, `matic`, `robinhood`, `arc` and `arc_testnet` work in `EVM(network: ...)`. Arc mainnet has live USD fields and is documented in the [Arc Mainnet hub](/docs/blockchain/arc-mainnet/). Arc testnet is realtime-only with USD fields at 0; see the [Arc Testnet hub](/docs/blockchain/arc-testnet/). The schema is shared across these EVM networks.
 
 ## Datasets and depth
 
@@ -83,7 +83,7 @@ Add `dataset: archive` or `dataset: combined` for history; without it a cube ret
 
 <FAQ
   items={[
-    { q: "Which EVM chains share the same cubes?", a: "Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon and Robinhood Chain. Change the network argument in EVM(network: ...) and the same query runs on another chain." },
+    { q: "Which EVM chains share the same cubes?", a: "Ethereum, BNB Chain, Base, Arbitrum, Optimism, Polygon, Robinhood Chain, Arc mainnet and Arc testnet. Change the network argument in EVM(network: ...) and the same query runs on another chain." },
     { q: "How do I get decoded contract events on an EVM chain?", a: "Use the Events cube with the contract address and the event name or topic0 in the filter. Arguments come back decoded by name, so it replaces eth_getLogs plus your own ABI decoding." },
     { q: "Which cube returns current token balances?", a: "Balances for what an address holds now and Holders for who holds a token. BalanceUpdates is the per-change history behind them." },
     { q: "How far back do EVM cubes go?", a: "It depends on the cube and the dataset. Realtime holds hours to a few days; archive and combined reach the chain's indexing start for most cubes, while DEXPools is realtime-only. The retention page lists each cube." },
