@@ -255,7 +255,7 @@ Where enabled, **`optimism.broadcasted.*`** topics follow the same mapping as **
 - `arc-testnet.dextrades.proto` → `DexBlockMessage`
 - `arc-testnet.raw.proto` → `BlockMessage`
 
-Arc testnet is Circle's Arc Layer 1 test network (`EVM(network: arc_testnet)` in GraphQL). All `...InUSD` fields in its messages are 0 because a testnet has no token price index; native amounts are USDC, the chain's gas token. See the [Arc Testnet hub](/docs/blockchain/arc-testnet/).
+Arc testnet is Circle's Arc Layer 1 test network (`EVM(network: arc_testnet)` in GraphQL). All `...InUSD` fields in its messages are 0 because a testnet has no token price index; native amounts are USDC, the chain's gas token.
 
 ### Bitcoin
 

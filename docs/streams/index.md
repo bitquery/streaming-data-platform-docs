@@ -125,7 +125,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 - **[Binance Smart Chain (BSC)](/docs/blockchain/BSC/)**
 - **[Robinhood](/docs/blockchain/robinhood/)**
 - **[Arc Mainnet](/docs/blockchain/arc-mainnet/)** (GraphQL and WebSocket subscriptions)
-- **[Arc Testnet](/docs/blockchain/arc-testnet/)**
+- **Arc testnet** (`arc-testnet.*` Kafka topics; see [Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/))
 - **[Solana](/docs/blockchain/Solana/)**
 - **[TRON](/docs/blockchain/Tron/)**
 - **[TON](/docs/blockchain/supported-chains/)** (limited support; see coverage matrix)

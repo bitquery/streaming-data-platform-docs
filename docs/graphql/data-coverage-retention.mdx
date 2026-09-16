@@ -126,7 +126,7 @@ Circle's Arc mainnet uses `EVM(network: arc)`. The realtime path, USD fields, `H
 
 ### Arc testnet
 
-Circle's Arc testnet (`EVM(network: arc_testnet)`) is served from the **realtime dataset only**. There is no archive for the testnet, so `dataset: archive` and `dataset: combined` return errors, the `Holders` cube is not available, and every `...InUSD` field is 0. The realtime window is a rolling range of recent blocks; measure it with `Block { Time(minimum: Block_Time) }`. Use [Arc mainnet](/docs/blockchain/arc-mainnet/) for live production data with USD pricing. See the [Arc Testnet hub](/docs/blockchain/arc-testnet/).
+Circle's Arc testnet (`EVM(network: arc_testnet)`) is served from the **realtime dataset only**. There is no archive for the testnet, so `dataset: archive` and `dataset: combined` return errors, the `Holders` cube is not available, and every `...InUSD` field is 0. The realtime window is a rolling range of recent blocks; measure it with `Block { Time(minimum: Block_Time) }`. Use [Arc mainnet](/docs/blockchain/arc-mainnet/) for live production data with USD pricing.
 
 | Cube | Window | Notes |
 |---|---|---|
