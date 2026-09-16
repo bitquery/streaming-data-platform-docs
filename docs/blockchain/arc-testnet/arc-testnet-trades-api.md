@@ -17,6 +17,10 @@ keywords:
 ---
 # Arc Testnet DEX Trades API & Streams
 
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
 Query and stream **DEX trades on Arc testnet** with Bitquery GraphQL. Arc is Circle's EVM Layer 1 for stablecoin finance, and its testnet is exposed as `EVM(network: arc_testnet)`. The `DEXTrades` and `DEXTradeByTokens` cubes carry every swap on **Uniswap v4, v3 and v2, Curve and Aerodrome** with buy and sell sides, native-unit prices, the DEX contract, the trader and the transaction.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows over WebSocket.
@@ -26,7 +30,7 @@ Every query on this page was executed against the production endpoint before pub
 - The multi-chain `Trading` cubes (`Trading.Trades`, `Tokens`, `Pairs`) do **not** include Arc testnet. Use the chain-level `DEXTrades` and `DEXTradeByTokens` cubes on this page.
 - Only `dataset: realtime` (the default) is served. There is no archive for the testnet, so leave the `dataset` argument out.
 
-USD pricing and an archive dataset are planned for Arc **mainnet** once it is indexed.
+For live data with USD pricing, use the [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/). The mainnet `archive` and `combined` datasets are not enabled yet.
 :::
 
 :::note API Key Required

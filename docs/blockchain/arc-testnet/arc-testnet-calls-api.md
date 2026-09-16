@@ -15,6 +15,10 @@ keywords:
 ---
 # Arc Testnet Calls & Traces API
 
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet Calls & Traces API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
 Query and stream **smart contract calls on Arc testnet** with Bitquery GraphQL. The `EVM.Calls` cube on `network: arc_testnet` holds every call in every transaction, including internal calls, with the decoded method signature, the call path, value, gas, success and revert flags, and the enclosing transaction. It returns what `debug_traceTransaction` and `trace_filter` return, without running a node, and the same query runs as a subscription.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.

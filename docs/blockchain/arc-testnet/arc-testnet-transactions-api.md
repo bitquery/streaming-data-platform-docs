@@ -16,6 +16,10 @@ keywords:
 ---
 # Arc Testnet Transactions, Blocks & Fees API
 
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet Transactions, Blocks & Fees API](/docs/blockchain/arc-mainnet/arc-mainnet-transactions-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
 Query and stream **transactions, receipts and blocks on Arc testnet** with Bitquery GraphQL. The `EVM.Transactions` and `EVM.Blocks` cubes on `network: arc_testnet` cover what a block explorer shows for a hash, an address or a block, with fees in **USDC** because USDC is the chain's gas token.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.

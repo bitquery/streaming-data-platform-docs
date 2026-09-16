@@ -16,6 +16,10 @@ keywords:
 ---
 # Arc Testnet Balances & Token Supply API
 
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet Balances & Token Supply API](/docs/blockchain/arc-mainnet/arc-mainnet-balances-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
 Query **wallet balances and token supply on Arc testnet** with Bitquery GraphQL. Three cubes on `network: arc_testnet` cover it:
 
 | Cube | What it returns |
@@ -356,7 +360,7 @@ subscription {
 ## FAQ
 
 **Why is the `Holders` cube missing?**
-`Holders` is built from the archive dataset, and the testnet has none. Rank holders by summing `BalanceUpdates` per address within the realtime window, as shown above. Arc mainnet will have the full cube.
+`Holders` is built from the archive dataset, and the testnet has none. Rank holders by summing `BalanceUpdates` per address within the realtime window, as shown above. The [Arc mainnet balances guide](/docs/blockchain/arc-mainnet/arc-mainnet-balances-api/) uses the full `Holders` cube.
 
 **Why does the same wallet show USDC twice?**
 Native USDC (`Native: true`, 18 decimals) and the ERC-20 USDC interface (`0x3600...`, 6 decimals) are tracked as two currencies. Sum them yourself if you want one USDC figure. A third row with contract `0xfff...fffe` and no symbol is a system ledger mirror and can be ignored.

@@ -16,6 +16,10 @@ keywords:
 ---
 # Arc Testnet Events API & WebSocket Streams
 
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
 Stream **every smart contract event on Arc testnet** with Bitquery GraphQL. The `EVM.Events` cube on `network: arc_testnet` returns each log with decoded, typed arguments for known signatures, the raw topics, and the transaction, internal call and receipt that produced it. It covers what `eth_getLogs` and `eth_subscribe("logs")` return, and adds server-side filtering on decoded values.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.

@@ -15,6 +15,10 @@ keywords:
 ---
 # Arc Testnet Transfers API & Streams
 
+:::tip Arc mainnet is live
+Most production integrations should use the [Arc Mainnet Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/) with `EVM(network: arc)`. Use this page only for Arc testnet data.
+:::
+
 Query and stream **token transfers on Arc testnet** with Bitquery GraphQL. This is the shared **EVM `Transfers`** cube scoped to `network: arc_testnet`, so a query written for Ethereum or Base runs here by changing the network name.
 
 Arc's native gas token is **USDC**, and the chain carries an ERC-20 USDC interface, **EURC**, a testnet **USDT** and thousands of test tokens. Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows over WebSocket.
