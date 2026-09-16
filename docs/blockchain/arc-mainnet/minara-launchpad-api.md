@@ -139,6 +139,8 @@ Topic positions in this table are zero-based. For raw `LogHeader.Data`, strip an
 
 The query returns candidate events; your application must check that the transaction, token, pool and hook agree. For the sample, all four events match. The LP position recipient is `0x000000000000000000000000000000000000dead`; the creator is the separate address above.
 
+Keep Bitquery's `LogHeader.Index` and Arc RPC's `logIndex` as separate fields. Their indexes differed for this sample, while the block hash, event addresses, topics and data matched. Compare those values within the same transaction when checking an RPC receipt.
+
 An old receipt may fall outside indexed history. An empty response then calls for a coverage check; it does not disprove the launch.
 
 ### Read pool creators and fee terms
@@ -202,7 +204,7 @@ subscription {
 }
 ```
 
-Save each token ID, pool ID, launch time, transaction hash and log index. Deduplicate events by transaction hash and `LogHeader.Index`. Check the receipt to attach a verified creator.
+Save each token ID, pool ID, launch time, transaction hash and log index. Deduplicate Bitquery events by transaction hash and `LogHeader.Index`. Check the receipt to attach a verified creator.
 
 Trading subscriptions use fixed token filters. Resubscribe when your token list changes. Keep a checkpoint and query recent events after reconnecting to recover gaps.
 
