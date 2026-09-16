@@ -929,6 +929,8 @@ const sidebars = {
           items: [
             "blockchain/arc-mainnet/arc-mainnet-trades-api",
             "blockchain/arc-mainnet/arc-mainnet-launchpads-api",
+            "blockchain/arc-mainnet/tolly-launchpad-api",
+            "blockchain/arc-mainnet/radardex-launchpad-api",
             "blockchain/arc-mainnet/arc-mainnet-transfers-api",
             "blockchain/arc-mainnet/arc-mainnet-events-api",
             "blockchain/arc-mainnet/arc-mainnet-calls-api",

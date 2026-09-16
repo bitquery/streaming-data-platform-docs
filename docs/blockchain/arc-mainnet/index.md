@@ -104,6 +104,8 @@ Change `query` to `subscription` and remove `limit` and `orderBy` for a live fee
 | Recent token prices and OHLCV | `Trading.Tokens`, `Trading.Pairs` | [Prices and candles](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/#ohlcv-candles-for-a-token) |
 | Trades older than 30 days, once Arc archive is available | `EVM.DEXTrades`, `EVM.DEXTradeByTokens` | [Older history](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/#trades-older-than-30-days) |
 | New tokens from verified launchpads, then their first trades | `EVM.Events`, then `Trading.Trades` | [Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/) |
+| Tolly launches, token trades, trader rankings and OHLCV | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/) |
+| RadarDEX Classic and Reflection launches, trades and prices | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/) |
 | Token and native USDC movement | `Transfers` | [Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/) |
 | Decoded logs and new pool events | `Events` | [Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/) |
 | Method calls, call trees and reverts | `Calls` | [Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/) |
