@@ -366,7 +366,7 @@ Yes. It returned Arc mainnet holder rows in the production check on 16 September
 Native USDC (`Native: true`, 18 decimals) and the ERC-20 USDC interface (`0x3600...`, 6 decimals) appear as separate Bitquery currencies. Arc's ERC-20 interface acts on the native balance, so do not add the rows without checking the flow you are measuring. A third row with contract `0xfff...fffe` and no symbol is a system ledger mirror and can be ignored.
 
 **Are USD values available?**
-The balance cubes return token amounts. Join them to `DEXTradeByTokens` or `Trading.Trades` prices when you need USD values.
+The balance cubes return token amounts. Fetch current prices from `Trading.Pairs` with `Market.Network: "Arc"`, or use `Trading.Tokens` for prices across pools, then match tokens in your app. Check the price timestamp before valuing a balance. For a historical price more than 30 days old, derive it from `EVM.DEXTrades` or `EVM.DEXTradeByTokens` only after confirming Arc archive data is available.
 
 **Is `TotalSupply` raw or decimal-adjusted?**
 Decimal-adjusted. A token with a billion supply reads `1000000000.000000000000000000`.
