@@ -25,6 +25,8 @@ Every query on this page was executed against the production endpoint before pub
 
 For platform-specific launch feeds and Trading cube examples, use the [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/) and [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/).
 
+For Minara.fun, use the separate [Minara Launchpad API](/docs/blockchain/arc-mainnet/minara-launchpad-api/). It includes verified strategy and fee-hook contracts, token/pool/creator checks, and Trading cube examples. Minara is outside the six-platform queries below.
+
 :::info Availability checked 16 September 2026
 The realtime path returned live launch events and trades. Leave the `dataset` argument out until `combined` and `archive` are enabled for Arc mainnet.
 :::
