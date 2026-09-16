@@ -1,0 +1,369 @@
+---
+title: "Tolly Launchpad API on Arc: Tokens, Trades and OHLCV"
+sidebar_label: "Tolly Launchpad API"
+description: "Track Tolly token launches on Circle Arc mainnet with Bitquery. Use GraphQL and WebSocket APIs for new tokens, Trading cube swaps, USD prices and OHLCV candles."
+sidebar_position: 3
+keywords:
+  - Tolly launchpad API
+  - Tolly token launches
+  - Tolly Trading API
+  - Tolly token price API
+  - Tolly OHLCV API
+  - Tollylabs
+  - Arc mainnet launchpad API
+  - Circle blockchain API
+---
+
+import FAQ from "@site/src/components/FAQ";
+
+# Tolly Launchpad API on Arc: Tokens, Trades and OHLCV
+
+[Tolly](https://tollylabs.com/guide) is a token launchpad on Arc mainnet, Circle's EVM chain. Its guide describes launches with USDC liquidity and trading from the first block. Track tokens created by its factory, then follow their trades across indexed markets.
+
+Use `EVM.Events` to find launches. All trading examples below use `Trading.Trades`, `Trading.Pairs`, or `Trading.Tokens`.
+
+:::note API access
+Run the saved examples in the Bitquery IDE, or create an [API access token](/docs/authorization/how-to-generate/) for `https://streaming.bitquery.io/graphql`. For streams, use `wss://streaming.bitquery.io/graphql` with [WebSocket authorization](/docs/authorization/websocket/).
+:::
+
+## Find the latest Tolly token launches
+
+Filter by the factory address and the `TokenCreated` signature. The checks for transaction success and reverted calls exclude failed launches. The 24-hour filter covers only the history currently indexed.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-latest-launches)
+
+```graphql
+query {
+  EVM(network: arc) {
+    Events(
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+      where: {
+        Block: {Time: {since_relative: {hours_ago: 24}}}
+        TransactionStatus: {Success: true}
+        Call: {Success: true, Reverted: false}
+        LogHeader: {
+          Address: {in: ["0xcad7ee36ac193bf2eddb7b3e2736c5bdb8269c8b"]}
+          Removed: false
+        }
+        Log: {Signature: {SignatureHash: {is: "875522b092d9e19a1de359e4bd218090d582fa521c9733889acf1a5ff1941255"}}}
+      }
+    ) {
+      Block {Number Time}
+      Transaction {Hash From}
+      LogHeader {Address Index}
+      Log {Signature {SignatureHash}}
+      Topics {Hash}
+    }
+  }
+}
+```
+
+## Contracts and token identity
+
+| Contract | Arc mainnet address |
+| --- | --- |
+| Tolly launch factory | `0xcad7ee36ac193bf2eddb7b3e2736c5bdb8269c8b` |
+
+The launch event signature is `875522b092d9e19a1de359e4bd218090d582fa521c9733889acf1a5ff1941255`. These contract/event pairs were checked against Arc data on 16 September 2026. Keep older factory addresses in your own registry when you need earlier launches. See the [Tolly site](https://tollylabs.com/guide) and the [Arc launchpad contract list](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/#verified-launchpad-contracts).
+
+The response's `Topics` array uses these positions:
+
+- `Topics[0].Hash`: event signature.
+- `Topics[1].Hash`: token address, padded on the left to 32 bytes.
+
+Take the final 40 hex characters of `Topics[1].Hash`, add `0x`, and lowercase the address. To query Trading, prefix the result with `bid:arc:`. For example, GLOVE's token ID is `bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e`.
+
+These examples use two tokens whose launch events matched the Tolly factory:
+
+| Sample token | Contract |
+| --- | --- |
+| GLOVE | `0xc17c325c02b65e35827ceed47c2ac581f45c251e` |
+| ARCANGEL | `0xf3729ac6530f9c8e9875728faacc6ca3f374371a` |
+
+They are user-created examples. Replace their addresses with a token returned by the launch query. Save each token's factory, launch time and transaction hash in your application.
+
+:::tip Build a launchpad token list
+The Trading cubes do not attach a Tolly launchpad label to each token. Build that list from launch events, then pass the token IDs into Trading queries. `Pair.Market.Address` identifies the trading venue's factory on EVM chains; it is not a filter for token origin. Use `Pair.Pool.Address` when you need a specific trading pool.
+:::
+
+## Stream new Tolly launches
+
+Subscribe with the same factory and signature filters. The decoded event name may be empty; the signature and raw topics still identify the launch.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-launch-stream)
+
+```graphql
+subscription {
+  EVM(network: arc) {
+    Events(
+      where: {
+        TransactionStatus: {Success: true}
+        Call: {Success: true, Reverted: false}
+        LogHeader: {
+          Address: {in: ["0xcad7ee36ac193bf2eddb7b3e2736c5bdb8269c8b"]}
+          Removed: false
+        }
+        Log: {Signature: {SignatureHash: {is: "875522b092d9e19a1de359e4bd218090d582fa521c9733889acf1a5ff1941255"}}}
+      }
+    ) {
+      Block {Number Time}
+      Transaction {Hash From}
+      LogHeader {Address Index}
+      Log {Signature {SignatureHash}}
+      Topics {Hash}
+    }
+  }
+}
+```
+
+Append new token IDs to your application's list. A Trading subscription has fixed filters: resubscribe with the updated list when a new launch arrives. Keep a time checkpoint and query recent events after reconnecting; the HTTP endpoint and WebSocket do not join these steps for you. Deduplicate launch records by transaction hash and log index.
+
+## Recent trades for a Tolly token
+
+Match the token on either side of the pair. This includes trades where it is the quote asset. The `Uniswap` family filter selects the v2/v3/v4 markets observed for Arc; extend the family filter when you verify another venue.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-recent-trades)
+
+```graphql
+query {
+  Trading {
+    Trades(
+      limit: {count: 20}
+      orderBy: {descending: Block_Time}
+      where: {
+        Block: {Time: {since_relative: {hours_ago: 24}}}
+        Pair: {Market: {NetworkBid: {is: "bid:arc"}, ProtocolFamily: {is: "Uniswap"}}}
+        any: [
+          {Pair: {Token: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}}}
+          {Pair: {QuoteToken: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}}}
+        ]
+      }
+    ) {
+      Block {Time}
+      TransactionHeader {Hash Index}
+      Trader {Address}
+      Side
+      Amounts {Base Quote}
+      AmountsInUsd {Quote}
+      PriceInUsd
+      Pair {
+        Token {Id Symbol}
+        QuoteToken {Id Symbol}
+        Market {Network Protocol}
+        Pool {Address Id}
+      }
+    }
+  }
+}
+```
+
+`Side` is relative to `Pair.Token`. If the selected token is `Pair.QuoteToken`, reverse Buy/Sell when describing that token's direction. `PriceInUsd` also refers to `Pair.Token` and is an indexed reference price; use the amount ratio when you need the executed price.
+
+Use `AmountsInUsd.Quote` for quoted USD turnover. Do not add base and quote USD amounts from the same row. One transaction can contain several swaps; use a distinct transaction hash count for transaction totals.
+
+## Stream trades for a Tolly token
+
+The same token filters work as a Trading subscription.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-trade-stream)
+
+```graphql
+subscription {
+  Trading {
+    Trades(
+      where: {
+        Pair: {Market: {NetworkBid: {is: "bid:arc"}, ProtocolFamily: {is: "Uniswap"}}}
+        any: [
+          {Pair: {Token: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}}}
+          {Pair: {QuoteToken: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}}}
+        ]
+      }
+    ) {
+      Block {Time}
+      TransactionHeader {Hash Index}
+      Trader {Address}
+      Side
+      Amounts {Base Quote}
+      AmountsInUsd {Quote}
+      PriceInUsd
+      Pair {
+        Token {Id Symbol}
+        QuoteToken {Id Symbol}
+        Market {Network Protocol}
+        Pool {Address Id}
+      }
+    }
+  }
+}
+```
+
+For several tokens, replace each `is` token filter with an `in` list. Keep both the base-token and quote-token branches.
+
+## Rank a Tolly token watchlist by volume
+
+This sample ranks GLOVE and ARCANGEL over the last 24 hours. It includes only rows where a listed token is `Pair.Token`, so the Buy/Sell counts have a consistent meaning. Extend the list from launch events to cover more tokens. It is not a total for the whole launchpad.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-watchlist-volume)
+
+```graphql
+query {
+  Trading {
+    Trades(
+      limit: {count: 20}
+      orderBy: {descendingByField: "volumeUsd"}
+      where: {
+        Block: {Time: {since_relative: {hours_ago: 24}}}
+        Pair: {
+          Market: {NetworkBid: {is: "bid:arc"}, ProtocolFamily: {is: "Uniswap"}}
+          Token: {Id: {in: [
+            "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"
+            "bid:arc:0xf3729ac6530f9c8e9875728faacc6ca3f374371a"
+          ]}}
+        }
+      }
+    ) {
+      Pair {Token {Id Symbol}}
+      trades: count
+      transactions: count(distinct: TransactionHeader_Hash)
+      traders: count(distinct: Trader_Address)
+      volumeUsd: sum(of: AmountsInUsd_Quote)
+      buys: count(if: {Side: {is: "Buy"}})
+      sells: count(if: {Side: {is: "Sell"}})
+    }
+  }
+}
+```
+
+The time filter measures trading during the selected window. It does not restrict token creation time; keep launch timestamps in your own token registry if you need a new-launch cohort.
+
+:::caution Counts and volume
+These server aggregates count the indexed rows. The [Trading Trades field notes](/docs/trading/crypto-trades-api/trades-api/#before-you-aggregate-three-things-about-a-trades-row) describe duplicate rows that can affect exact totals. For audited figures, fetch the underlying rows and check duplicates before summing. Wallet counts refer to addresses, not people.
+:::
+
+## Most active traders for a Tolly token
+
+Rank wallets by quoted USD turnover across both pair orientations. This measures activity, not profit.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-top-traders)
+
+```graphql
+query {
+  Trading {
+    Trades(
+      limit: {count: 10}
+      orderBy: {descendingByField: "volumeUsd"}
+      where: {
+        Block: {Time: {since_relative: {hours_ago: 24}}}
+        Pair: {Market: {NetworkBid: {is: "bid:arc"}, ProtocolFamily: {is: "Uniswap"}}}
+        any: [
+          {Pair: {Token: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}}}
+          {Pair: {QuoteToken: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}}}
+        ]
+      }
+    ) {
+      Trader {Address}
+      trades: count
+      transactions: count(distinct: TransactionHeader_Hash)
+      volumeUsd: sum(of: AmountsInUsd_Quote)
+    }
+  }
+}
+```
+
+## Latest price from the top market
+
+Use `Trading.Pairs` with rank 1 to retrieve the token's most recent one-minute price interval from its top market. Inspect `Interval.Time.End`: a quiet token can return an old interval. Rank 1 may return no row when the top market has not traded within the requested window.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-top-market-price)
+
+```graphql
+query {
+  Trading {
+    Pairs(
+      limit: {count: 1}
+      orderBy: {descending: Block_Time}
+      where: {
+        Token: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}}
+        Market: {NetworkBid: {is: "bid:arc"}, ProtocolFamily: {is: "Uniswap"}}
+        Block: {Time: {since_relative: {hours_ago: 24}}}
+        Interval: {Time: {Duration: {eq: 60}}}
+        Ranking: {Position: {eq: 1}}
+        Price: {IsQuotedInUsd: true}
+      }
+    ) {
+      Token {Id Symbol}
+      QuoteToken {Id Symbol}
+      Pool {Address Id}
+      Market {Network Protocol}
+      Interval {Time {Start End Duration}}
+      Price {IsQuotedInUsd Ohlc {Close}}
+      Ranking {Position Weight}
+      Volume {Usd}
+    }
+  }
+}
+```
+
+For broader token coverage, use the [Tokens cube](/docs/trading/crypto-price-api/tokens/). For a fixed pool's history, use the [Pairs cube](/docs/trading/crypto-price-api/pairs/) with its pool address.
+
+## One-minute OHLCV candles
+
+`Trading.Tokens` combines indexed pools for the token. This query returns the newest 120 one-minute intervals within the last 24 hours. Reverse their order before plotting from oldest to newest.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-tolly-ohlcv-candles)
+
+```graphql
+query {
+  Trading {
+    Tokens(
+      limit: {count: 120}
+      orderBy: {descending: Block_Time}
+      where: {
+        Token: {Id: {is: "bid:arc:0xc17c325c02b65e35827ceed47c2ac581f45c251e"}, NetworkBid: {is: "bid:arc"}}
+        Block: {Time: {since_relative: {hours_ago: 24}}}
+        Interval: {Time: {Duration: {eq: 60}}}
+        Price: {IsQuotedInUsd: true}
+      }
+    ) {
+      Token {Id Symbol}
+      Interval {Time {Start End Duration}}
+      Price {IsQuotedInUsd Ohlc {Open High Low Close}}
+      Volume {Base Usd}
+    }
+  }
+}
+```
+
+`Volume.Usd` is USD volume and `Volume.Base` is token units. These candles can differ from a single pool's price. Empty intervals may be absent; treat a missing interval as missing data unless your chart has an explicit fill rule. The current interval may still change.
+
+To stream candles, change `query` to `subscription`, remove `limit`, `orderBy`, and the historical `Block.Time` filter, and keep the token and interval filters.
+
+<FAQ
+  items={[
+    {
+      q: "Which Bitquery cube should I use for Tolly trades?",
+      a: "Use Trading.Trades for swaps and trader activity, Trading.Pairs for a selected market's price, and Trading.Tokens for token OHLCV. Use EVM.Events on network arc to find token launches."
+    },
+    {
+      q: "Can I filter Trading by the Tolly launch factory?",
+      a: "Build a list of tokens from factory launch events first. Pass those token IDs to Trading. The trading market's factory address does not identify the launchpad that created the token."
+    },
+    {
+      q: "Does an empty result mean a token has no trades?",
+      a: "No. Check the full bid:arc:0x token ID, the time window, both sides of the pair and the supported DEX families. A quiet token or missing decoder coverage can also return no rows."
+    },
+    {
+      q: "Can I request the archive dataset for these examples?",
+      a: "These examples leave dataset unset. Trading.Trades does not accept archive or combined. Arc history depends on what is currently indexed; do not assume a complete launch history from a time filter alone."
+    }
+  ]}
+/>
+
+## Related APIs
+
+- [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/)
+- [Arc Mainnet Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
+- [Circle Blockchain API for Arc Mainnet](/docs/blockchain/arc-mainnet/)
+- [Trading Trades API](/docs/trading/crypto-trades-api/trades-api/)
+- [Trading Tokens OHLCV API](/docs/trading/crypto-price-api/tokens/)

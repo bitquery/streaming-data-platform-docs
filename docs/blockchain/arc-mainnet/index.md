@@ -116,6 +116,8 @@ Change `query` to `subscription`, remove `limit` and `orderBy`, then send it to 
 | --- | --- | --- |
 | Swaps, prices, OHLCV, tokens and traders | `DEXTrades`, `DEXTradeByTokens` | [DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/) |
 | New tokens from verified launchpads, then their first trades | `Events`, `DEXTradeByTokens` | [Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/) |
+| Tolly launches, token trades, trader rankings and OHLCV | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/) |
+| RadarDEX Classic and Reflection launches, trades and prices | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/) |
 | Token and native USDC movement | `Transfers` | [Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/) |
 | Decoded logs and new pool events | `Events` | [Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/) |
 | Method calls, call trees and reverts | `Calls` | [Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/) |
