@@ -1264,9 +1264,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "new_pricing_2026",
+        id: "arc_mainnet_live_2026",
         content:
-          '<span class="announcementBar__inner"><span class="announcementBar__badge">New</span><span class="announcementBar__text">Pricing plans starting at <strong>$49/mo</strong></span><a class="announcementBar__cta" href="https://bitquery.io/pricing#plans-anchor" target="_blank" rel="noopener noreferrer">Explore plans →</a></span>',
+          '<span class="announcementBar__inner"><span class="announcementBar__badge">Now live</span><span class="announcementBar__text"><strong>Arc Mainnet</strong> data is available on Bitquery</span><a class="announcementBar__cta" href="/docs/blockchain/arc-mainnet/">Explore Arc docs →</a></span>',
         backgroundColor: "#93254b",
         textColor: "#ffffff",
         isCloseable: true,
