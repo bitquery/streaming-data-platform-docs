@@ -1,8 +1,10 @@
 ---
-title: "Circle Arc Blockchain API with GraphQL and WebSocket"
-description: "Query and stream Circle Arc blockchain mainnet data (chain ID 5042) with Bitquery APIs for trades, transfers, balances, events, calls, transactions and blocks."
+title: "Circle Blockchain API for Arc Mainnet"
+description: "Query and stream Circle blockchain data on Arc mainnet (chain ID 5042) with Bitquery GraphQL and WebSocket APIs for trades, transfers, balances and blocks."
 sidebar_position: 0
 keywords:
+  - Circle blockchain
+  - Circle blockchain API
   - Circle Arc blockchain
   - Arc mainnet API
   - Arc blockchain API
@@ -19,9 +21,9 @@ keywords:
 
 import FAQ from "@site/src/components/FAQ";
 
-# Circle Arc Blockchain API with GraphQL and WebSocket
+# Circle Blockchain API for Arc Mainnet
 
-Bitquery indexes **Circle Arc blockchain data** from mainnet as `EVM(network: arc)`. Use the same EVM cubes as Ethereum or Base to query and stream swaps, transfers, balances, logs, calls, transactions and blocks.
+Bitquery indexes **Circle blockchain data on Arc mainnet** as `EVM(network: arc)`. Use the same EVM cubes as Ethereum or Base to query and stream swaps, transfers, balances, logs, calls, transactions and blocks.
 
 Arc is Circle's EVM-compatible Layer 1. USDC pays gas, blocks reach finality in under a second, and the network is built for payments, foreign exchange and tokenized assets. [Arc Public Mainnet launched](https://www.arc.io/blog/arc-mainnet-goes-live-on-september-16-2026) on **16 September 2026**. Circle's current RPC reference still labels its listed mainnet endpoints and explorer as permissioned; Bitquery's indexed API is live.
 
