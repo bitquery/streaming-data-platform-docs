@@ -5,7 +5,7 @@ description: "Solana Moonshot API: real-time Solana memecoin and DEX data via Bi
 # Moonit API
 
 :::tip Need real-time Moonit data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Moonit data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Moonit data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 In this section we will see how to get real-time data on Moonit trades, transactions and wallet updates. Similarly you can get [pump.fun data here](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/)

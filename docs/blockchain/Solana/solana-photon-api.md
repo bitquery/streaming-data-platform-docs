@@ -9,7 +9,7 @@ import ProductCTA from "@site/src/components/ProductCTA";
 # Photon Solana API
 
 :::tip Need real-time Photon-style trader data or anything from the last ~30 days?
-For **real-time trader and wallet data over the last ~30 days** across **9 chains in one API**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Photon-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time trader and wallet data over the last ~30 days** across **10 chains in one API**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **`Trader.Address`** as a first-class filter plus **USD price, market cap, and supply on every row**. Use this page when you need **historical Photon-style trader data older than ~30 days**, raw per-swap detail, or call / event context.
 
 The queries below run on the same data that powers Photon-style terminals — the [Solana DEX API](https://bitquery.io/products/solana-dex-api) page covers venues, latency and plans.
 :::

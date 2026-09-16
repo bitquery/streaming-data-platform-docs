@@ -24,7 +24,7 @@ Meteora DAMM v2 is Meteora's current constant-product AMM on Solana, built on th
 If you arrived looking for the DAMM v2 SDK or IDL, those build and sign transactions. This page is the other half: reading what those transactions did, across every DAMM v2 pool at once.
 
 :::tip Start with the Trading API
-Most questions on this page are answered fastest by the [**Trading API**](/docs/trading/trading-data-overview). [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API**, and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) gives pre-aggregated OHLC per pool down to one second. Filter either with `Pair: { Market: { Protocol: { is: "cp_amm" } } }` for DAMM v2.
+Most questions on this page are answered fastest by the [**Trading API**](/docs/trading/trading-data-overview). [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **10 chains in one API**, and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) gives pre-aggregated OHLC per pool down to one second. Filter either with `Pair: { Market: { Protocol: { is: "cp_amm" } } }` for DAMM v2.
 
 Drop to the chain-level cubes further down when you need what the Trading API does not carry: **history older than about 30 days**, pool reserves, or per-instruction detail such as pool creation.
 :::

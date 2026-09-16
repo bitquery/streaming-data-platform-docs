@@ -10,7 +10,7 @@ description: "Ethereum EVM Photon API: get Ethereum DEX swaps, prices, and OHLC 
 
 ### Live trades with USD price, market cap and supply
 
-Streams MEV-filtered trades across all 9 chains — add `Network: {is: "Ethereum"}` inside `Pair.Market` to scope to one chain. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
+Streams MEV-filtered trades across all 10 chains — add `Network: {is: "Ethereum"}` inside `Pair.Market` to scope to one chain. Run it [in the IDE](https://ide.bitquery.io/Trading-API-Live-Trades-All-Chains).
 
 ```graphql
 subscription {

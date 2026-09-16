@@ -188,6 +188,12 @@ export const SEARCH_INDEX = [
     u: "/docs/blockchain/robinhood/",
   },
   {
+    t: "Arc Mainnet",
+    s: "Circle Arc trades, launchpads & transfers",
+    g: "Chains",
+    u: "/docs/blockchain/arc-mainnet/",
+  },
+  {
     t: "Supported chains",
     s: "All 40+ networks across V1, V2 & Kafka",
     g: "Chains",

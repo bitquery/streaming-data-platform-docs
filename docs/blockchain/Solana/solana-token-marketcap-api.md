@@ -12,7 +12,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 <VideoPlayer url="https://www.youtube.com/watch?v=Gdo-8HeeHJQ" />
 
 :::tip Need real-time Solana token market-cap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana token market-cap swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical Solana token market-cap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Solana token market-cap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Solana token market-cap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 Use Bitquery’s **Trading** API **`Tokens`** cube to stream or query **market cap**, **fully diluted valuation (USD)**, **total supply**, **price** (OHLC and averages), and **volume** for tokens on **Solana**. Filter with **`solana:`** plus the token **mint** in **`Token.Id`** / **`Currency.Id`**; ranked queries below use **`Token.Network`** **`Solana`**.

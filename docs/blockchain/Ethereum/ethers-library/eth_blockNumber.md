@@ -14,7 +14,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # Get the Latest Block Number with Bitquery Instead of eth_blockNumber
 
-`eth_blockNumber` is the JSON-RPC call that returns the height of the newest block. On Bitquery the same answer comes from the `Blocks` cube in two shapes: a query that returns the newest block with its timestamp, and a subscription that pushes a row every time a block is produced, so you never poll. Both run on Ethereum and, by changing `network`, on BNB Chain, Base, Arbitrum, Optimism, Polygon and Robinhood Chain. No node, no RPC key: an access token from [account.bitquery.io](https://account.bitquery.io/) and the same query runs in the [IDE](https://ide.bitquery.io) on a free account.
+`eth_blockNumber` is the JSON-RPC call that returns the height of the newest block. On Bitquery the same answer comes from the `Blocks` cube in two shapes: a query that returns the newest block with its timestamp, and a subscription that pushes a row every time a block is produced, so you never poll. Both run on Ethereum and, by changing `network`, on BNB Chain, Base, Arbitrum, Optimism, Polygon, Robinhood Chain and Arc. No node, no RPC key: an access token from [account.bitquery.io](https://account.bitquery.io/) and the same query runs in the [IDE](https://ide.bitquery.io) on a free account.
 
 ## Latest block number as a query
 
@@ -51,7 +51,7 @@ subscription {
 
 ## Other EVM chains
 
-Change the network name and nothing else. This is the BNB Chain stream, saved [here](https://ide.bitquery.io/eth_blockNumber-stream-bsc); `base`, `arbitrum`, `optimism`, `matic` and `robinhood` work the same way.
+Change the network name and nothing else. This is the BNB Chain stream, saved [here](https://ide.bitquery.io/eth_blockNumber-stream-bsc); `base`, `arbitrum`, `optimism`, `matic`, `robinhood` and `arc` work the same way.
 
 ```graphql
 subscription {
@@ -73,7 +73,7 @@ Add fields to the same selection: `Block { Hash ParentHash Time Number GasUsed G
   items={[
     { q: "How do I get the latest Ethereum block number without an RPC node?", a: "Query the Blocks cube with limit 1 and orderBy descending Block_Number; the row carries the number and the timestamp. Or open a subscription on Blocks to receive each new block as it is produced." },
     { q: "Is the block number from Bitquery the same as eth_blockNumber from a node?", a: "It is the height of the newest block Bitquery has indexed, which trails the chain tip by the indexing delay of the realtime pipeline. For most uses that is a matter of seconds; for chain-tip-critical logic, compare with your node." },
-    { q: "Does this work on chains other than Ethereum?", a: "Yes. The Blocks cube exists under EVM(network: ...) for BNB Chain, Base, Arbitrum, Optimism, Polygon and Robinhood Chain, and Solana has its own Blocks cube under the Solana root." },
+    { q: "Does this work on chains other than Ethereum?", a: "Yes. The Blocks cube exists under EVM(network: ...) for BNB Chain, Base, Arbitrum, Optimism, Polygon, Robinhood Chain and Arc, and Solana has its own Blocks cube under the Solana root." },
     { q: "Can I get the block hash and gas fields with the number?", a: "Yes. Add Hash, ParentHash, Time, GasUsed, GasLimit, BaseFee or Difficulty to the Block selection, and TxCount for the number of transactions." },
   ]}
 />

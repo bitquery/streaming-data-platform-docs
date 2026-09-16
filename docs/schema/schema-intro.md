@@ -15,7 +15,7 @@ Bitquery models blockchain data as **cubes** — typed collections like `Transfe
 - **Filters** — the `where` conditions that narrow results (see [filters](/docs/graphql/filters/)).
 - **Metrics** — aggregations like `sum`, `count`, and `uniq` (see [metrics](/docs/graphql/metrics/metrics/)).
 
-EVM chains (Ethereum, BSC, Base, Arbitrum, …) share one cube shape under the `EVM(...)` root; non-EVM chains (Solana, Tron, Bitcoin) have parallel cubes under their own roots.
+EVM chains (Ethereum, BSC, Base, Arbitrum, Arc, …) share one cube shape under the `EVM(...)` root; non-EVM chains (Solana, Tron, Bitcoin) have parallel cubes under their own roots.
 
 ## Browse the schema in the IDE
 

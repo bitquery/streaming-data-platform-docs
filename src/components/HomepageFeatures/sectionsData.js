@@ -204,6 +204,7 @@ export const chains = [
   { label: "Tron", to: "/docs/blockchain/Tron/", id: "tron" },
   { label: "Bitcoin", to: "/docs/blockchain/Bitcoin/", id: "btc" },
   { label: "Robinhood", to: "/docs/blockchain/robinhood/", id: "rh" },
+  { label: "Arc Mainnet", to: "/docs/blockchain/arc-mainnet/", id: "arc" },
 ];
 
 export const personas = [

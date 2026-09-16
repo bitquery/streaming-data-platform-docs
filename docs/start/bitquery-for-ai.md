@@ -62,11 +62,13 @@ endpoint returns `subscriptions must be sent over a websocket connection, not HT
 
 **V2 covers exactly these chains and no others.**
 
-- EVM root, `network:` argument — `eth`, `bsc`, `base`, `arbitrum`, `optimism`, `matic`, `robinhood`
+- EVM root, `network:` argument — `eth`, `bsc`, `base`, `arbitrum`, `optimism`, `matic`, `robinhood`, `arc`, `arc_testnet`
 - `Solana` root — Solana
 - `Tron` root — Tron
 - `Hyperliquid` root — Hyperliquid perpetuals
 - `Trading` root — cross-chain prices and trades, no `network` argument
+
+Arc mainnet uses `EVM(network: arc)`; Arc testnet uses `EVM(network: arc_testnet)`. Leave the dataset argument out on both unless a fresh probe confirms `archive` or `combined`. The mainnet also appears in the `Trading` cubes as network name `Arc` and network id `bid:arc`.
 
 **Everything else is V1 only**: Bitcoin, Litecoin, Bitcoin Cash, Dogecoin, Dash, Zcash,
 Cardano, Ripple, Stellar, Algorand, Avalanche, Celo, Fantom, Cronos, Klaytn, Moonbeam.

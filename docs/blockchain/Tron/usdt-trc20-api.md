@@ -439,4 +439,4 @@ subscription {
 - [Tron Transfers API](/docs/blockchain/Tron/tron-transfers) — all TRC10/TRC20 and native TRX transfers
 - [Tron DEX Trades API](/docs/blockchain/Tron/tron-dextrades) — SunSwap and other Tron DEX activity
 - [SunSwap API](/docs/blockchain/Tron/sunswap-api) — Tron's largest DEX
-- [Trading API overview](/docs/trading/trading-data-overview) — structured trades and prices across 9 chains
+- [Trading API overview](/docs/trading/trading-data-overview) — structured trades and prices across 10 chains

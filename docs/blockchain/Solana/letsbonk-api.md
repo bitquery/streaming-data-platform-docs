@@ -9,7 +9,7 @@ import FAQ from "@site/src/components/FAQ";
 import VideoPlayer from "../../../src/components/videoplayer.js";
 
 :::tip Need real-time LetsBonk.fun data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**. Use this page when you need **historical LetsBonk.fun data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical LetsBonk.fun data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 In this document, we will explore several examples related to LetsBonk.fun. You can also check out our [Pump Fun API Docs](/docs/blockchain/Solana/Pumpfun/Pump-Fun-API/) and [FourMeme API Docs](/docs/blockchain/BSC/four-meme-api/). For StonkFun launches on the same Raydium LaunchLab program, see the [StonkFun API](/docs/blockchain/Solana/stonkfun-api/) docs. For live DEX prices and volume across LetsBonk tokens, see [DEXrabbit's LetsBonk category](https://dexrabbit.bitquery.io/categories/letsbonk-fun-ecosystem).

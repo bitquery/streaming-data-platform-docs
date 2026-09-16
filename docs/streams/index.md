@@ -29,7 +29,7 @@ Our **WebSocket-based GraphQL subscriptions** provide **real-time cryptocurrency
 - **Latency**: ~1 second (network + parsing overhead)
 - **Use Cases**: **Crypto trading dashboards**, **DeFi interfaces**, **real-time portfolio monitoring**
 
-> Streaming live **token trades or prices**? Subscribe to the [Trading API](/docs/trading/trading-data-overview/) cubes (`Trading.Trades`, `Trading.Tokens`, `Trading.Pairs`) rather than raw per-chain `DEXTrades` — one stream covers 9 chains with USD prices, market cap, and MEV-filtered trades built in.
+> Streaming live **token trades or prices**? Subscribe to the [Trading API](/docs/trading/trading-data-overview/) cubes (`Trading.Trades`, `Trading.Tokens`, `Trading.Pairs`) rather than raw per-chain `DEXTrades` — one stream covers 10 chains with USD prices, market cap, and MEV-filtered trades built in.
 
 ### High-Performance Kafka Blockchain Streams {#kafka-streams}  
 **Multichain Support** | **Ultra-low latency** | **High throughput**
@@ -124,6 +124,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 - **[Ethereum](/docs/blockchain/Ethereum/)** & Layer 2s ([Arbitrum](/docs/blockchain/Arbitrum/), [Optimism](/docs/blockchain/Optimism/), [Base](/docs/blockchain/Base/), [Polygon](/docs/blockchain/Matic/))
 - **[Binance Smart Chain (BSC)](/docs/blockchain/BSC/)**
 - **[Robinhood](/docs/blockchain/robinhood/)**
+- **[Arc Mainnet](/docs/blockchain/arc-mainnet/)** (GraphQL and WebSocket subscriptions)
 - **[Arc Testnet](/docs/blockchain/arc-testnet/)**
 - **[Solana](/docs/blockchain/Solana/)**
 - **[TRON](/docs/blockchain/Tron/)**

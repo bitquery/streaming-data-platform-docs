@@ -23,7 +23,7 @@ That is the only change you need to make — each collection ships with the righ
 
 | Endpoint | Chains |
 | --- | --- |
-| `https://streaming.bitquery.io/graphql` | Solana, Ethereum, BSC, Base, Arbitrum, Polygon, Optimism, Tron, Robinhood Chain, plus the Trading APIs, Perpetuals, Stablecoins, Prediction Markets and Cross-chain collections |
+| `https://streaming.bitquery.io/graphql` | Solana, Ethereum, BSC, Base, Arbitrum, Polygon, Optimism, Tron, Robinhood Chain, Arc mainnet, Arc testnet, plus the Trading APIs, Perpetuals, Stablecoins, Prediction Markets and Cross-chain collections |
 | `https://graphql.bitquery.io` | Bitcoin, Litecoin, Bitcoin Cash, Bitcoin SV, Dogecoin, Dash, Zcash, Ripple, Stellar, Cardano, Algorand |
 
 Protocol-specific examples live inside their chain — Pump.fun, Raydium and Meteora are in the **Solana** collection.

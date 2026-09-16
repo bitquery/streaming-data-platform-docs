@@ -5,7 +5,7 @@ description: "Solana Xstocks API: query and stream Solana on-chain data with Bit
 # xStocks API
 
 :::tip These examples use the Trading API
-The queries on this page use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered xStocks swaps with **USD price, market cap, and supply on every row** across **9 chains in one API**, and [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) / [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) give you ready-made OHLC candles. `Trading.Trades` covers **real-time and roughly the last 30 days**; for xStocks history older than that, drop down to the chain-level [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) cube.
+The queries on this page use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered xStocks swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**, and [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) / [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs) give you ready-made OHLC candles. `Trading.Trades` covers **real-time and roughly the last 30 days**; for xStocks history older than that, drop down to the chain-level [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) cube.
 :::
 
 :::note Some tickers only trade via RFQ

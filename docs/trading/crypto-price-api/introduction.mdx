@@ -2,7 +2,7 @@
 title: "Crypto Price API: Real-Time Token Prices, OHLC and Market Cap"
 slug: /trading/crypto-price-api
 sidebar_label: "Crypto Price API"
-description: "Crypto price API for any token on nine chains: live and 30-day USD prices, OHLC from one second, market cap and supply via GraphQL, WebSocket and Kafka."
+description: "Crypto price API for any token on ten chains: live and 30-day USD prices, OHLC from one second, market cap and supply via GraphQL, WebSocket and Kafka."
 keywords:
   - "crypto price API"
   - "cryptocurrency price api"
@@ -35,7 +35,7 @@ import ProductCTA from "@site/src/components/ProductCTA";
 
 # Crypto Price API: Real-Time Token Prices, OHLC and Market Cap
 
-The Bitquery Crypto Price API returns the price of any token that trades on-chain, not only listed coins: real-time and the last 30 days for Solana, Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Tron and Robinhood Chain, in USD or against any quote token. Every row carries OHLC for intervals from one second up, mean and moving-average prices, volume, market cap and supply, over GraphQL queries, WebSocket subscriptions and Kafka. Prices are built from DEX trades with outlier filtering, and a cross-chain view aggregates the same asset across networks, so `bid:bitcoin` returns one Bitcoin price. Every query below runs as written in the [Bitquery IDE](https://ide.bitquery.io) on a free account; the trial includes complete history. For older candles, use [DEXTradeByTokens](/docs/cubes/dextradesbyTokens) or the [Solana historical page](/docs/blockchain/Solana/historical-aggregate-data/).
+The Bitquery Crypto Price API returns the price of any token that trades on-chain, not only listed coins: real-time and the last 30 days for Solana, Ethereum, BNB Smart Chain, Base, Arbitrum, Optimism, Polygon, Tron, Robinhood Chain and Arc, in USD or against any quote token. Every row carries OHLC for intervals from one second up, mean and moving-average prices, volume, market cap and supply, over GraphQL queries, WebSocket subscriptions and Kafka. Prices are built from DEX trades with outlier filtering, and a cross-chain view aggregates the same asset across networks, so `bid:bitcoin` returns one Bitcoin price. Every query below runs as written in the [Bitquery IDE](https://ide.bitquery.io) on a free account; the trial includes complete history. For older candles, use [DEXTradeByTokens](/docs/cubes/dextradesbyTokens) or the [Solana historical page](/docs/blockchain/Solana/historical-aggregate-data/).
 
 :::tip Real-time + last ~30 days only
 The Crypto Price API cubes (`Trading.Tokens`, `Trading.Currencies`, `Trading.Pairs`) are part of the **Trading cube** family — built for **real-time and the last ~30 days**. For OHLC built from raw trades **older than ~30 days**, use chain-level [`DEXTradeByTokens`](/docs/cubes/dextradesbyTokens) instead. See the [**Trading Data Overview**](/docs/trading/trading-data-overview) for the side-by-side comparison.
@@ -58,7 +58,7 @@ While you can access the aggregated price for a single trading pair, the Price I
 
 - **Pre-aggregated data**: OHLC, SMA, WMA, EMA, and mean prices calculated automatically
 - **Real-time streaming**: 1-second granularity via GraphQL subscriptions and Kafka
-- **Multi-chain support**: Ethereum, Solana, BSC, Arbitrum, Base, Optimism, Polygon, Robinhood, and more
+- **Multi-chain support**: Ethereum, Solana, BSC, Arbitrum, Base, Optimism, Polygon, Tron, Robinhood and Arc
 - **Clean data**: Automatic filtering of low-quality trades and outliers
 - **Cross-chain aggregation**: Unified view of token prices across multiple ecosystems
 
@@ -73,6 +73,7 @@ While you can access the aggregated price for a single trading pair, the Price I
 - Tron
 - Optimism
 - Robinhood
+- Arc
 
 :::tip Faster queries: filter with `NetworkBid` instead of `Network`
 
@@ -91,6 +92,7 @@ Use the same **`bid:<chain>`** convention as **`Token.Id`**.
 | Tron                | `bid:tron`         |
 | Optimism            | `bid:optimism`     |
 | Robinhood           | `bid:robinhood`    |
+| Arc                 | `bid:arc`          |
 
 :::
 

@@ -6,7 +6,7 @@ description: "Query Polygon DEX trades with Bitquery: live swap streams, OHLC ca
 # Polygon (MATIC) DEX Trades API
 
 :::tip Want structured trades, OHLC and USD on every row? Start with the Trading API
-The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path to clean Polygon market data. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **9 chains in one API** — filter with `Pair.Market.Network: Matic`. Pre-aggregated OHLC down to one second comes from [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs), so you never have to build candles yourself.
+The [**Trading API**](/docs/trading/trading-data-overview) is the fastest path to clean Polygon market data. [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns **MEV-filtered swaps with USD price, market cap and supply on every row**, across **10 chains in one API** — filter with `Pair.Market.Network: Matic`. Pre-aggregated OHLC down to one second comes from [`Trading.Tokens`](/docs/trading/crypto-price-api/tokens) and [`Trading.Pairs`](/docs/trading/crypto-price-api/pairs), so you never have to build candles yourself.
 
 Reach for the chain-level queries on this page when you need something the Trading API deliberately does not carry: **history older than the Trading window** (via `dataset: combined` or `archive`), **raw per-swap detail**, pool internals, or **call and event context**. Both are shown below, starting with the Trading API.
 :::
@@ -560,6 +560,6 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
 - [Polygon (MATIC) Address Balance API](/docs/blockchain/Matic/matic-balance-api) — token and native balances
 - [Polygon (MATIC) Transfers API](/docs/blockchain/Matic/matic-transfers) — ERC-20 and native transfers
 - [Polymarket API](/docs/examples/polymarket-api/) — prediction market trades and outcome prices on Polygon
-- [Trading API overview](/docs/trading/trading-data-overview) — structured trades, prices and OHLC across 9 chains
+- [Trading API overview](/docs/trading/trading-data-overview) — structured trades, prices and OHLC across 10 chains
 
 ---
