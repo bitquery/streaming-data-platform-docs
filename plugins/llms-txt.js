@@ -80,8 +80,11 @@ const GROUPS = [
   ["robinhood", "Robinhood Chain", (r) => r.startsWith("/docs/blockchain/robinhood/")],
   [
     "evm-chains",
-    "BSC, Base, Arbitrum, Optimism, Polygon and other EVM chains",
-    (r) => /^\/docs\/blockchain\/(BSC|Base|Arbitrum|Optimism|Matic|opBNB|Hyperliquid)\//i.test(r),
+    "BSC, Base, Arbitrum, Optimism, Polygon, Arc and other EVM chains",
+    (r) =>
+      /^\/docs\/blockchain\/(BSC|Base|Arbitrum|Optimism|Matic|opBNB|Hyperliquid|arc-mainnet|arc-testnet)\//i.test(
+        r,
+      ),
   ],
   [
     "other-chains",
