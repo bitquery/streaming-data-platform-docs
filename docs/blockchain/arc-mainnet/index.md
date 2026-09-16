@@ -106,6 +106,7 @@ Change `query` to `subscription` and remove `limit` and `orderBy` for a live fee
 | New tokens from verified launchpads, then their first trades | `EVM.Events`, then `Trading.Trades` | [Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/) |
 | Tolly launches, token trades, trader rankings and OHLCV | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/) |
 | RadarDEX Classic and Reflection launches, trades and prices | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/) |
+| Minara launches, pool creators, trades and OHLCV | `Events`, `Trading.Trades`, `Trading.Pairs`, `Trading.Tokens` | [Minara Launchpad API](/docs/blockchain/arc-mainnet/minara-launchpad-api/) |
 | Token and native USDC movement | `Transfers` | [Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/) |
 | Decoded logs and new pool events | `Events` | [Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/) |
 | Method calls, call trees and reverts | `Calls` | [Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/) |
