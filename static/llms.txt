@@ -19,7 +19,7 @@ Two generations of the API, with different schemas. Sending a query to the wrong
 most common mistake.
 
 - **V2** — `https://streaming.bitquery.io/graphql`, and `wss://` for subscriptions. Covers
-  Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Robinhood Chain, Solana, Tron and
+  Ethereum, BSC, Base, Arbitrum, Optimism, Polygon, Robinhood Chain, Arc, Solana, Tron and
   Hyperliquid. Roots are capitalised: `EVM`, `Solana`, `Tron`, `Trading`.
 - **V1** — `https://graphql.bitquery.io`. Everything else: Bitcoin, Litecoin, Bitcoin Cash,
   Dogecoin, Dash, Zcash, Cardano, Ripple, Stellar, Algorand, Filecoin, Avalanche, Celo,
@@ -90,6 +90,7 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom historical expo
 - [Solana DEX trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)
 - [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
 - [Token holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api/)
+- [Arc Mainnet API](https://docs.bitquery.io/docs/blockchain/arc-mainnet/) — trades, prices, launchpads, transfers, events, calls, transactions and balances
 - [Hyperliquid perpetuals](https://docs.bitquery.io/docs/perpetuals/hyperliquid/)
 - [Phoenix perpetuals on Solana](https://docs.bitquery.io/docs/perpetuals/solana/phoenix-perpetuals-api/)
 
