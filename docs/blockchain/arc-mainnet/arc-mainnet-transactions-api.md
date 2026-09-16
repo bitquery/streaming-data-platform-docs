@@ -1,6 +1,6 @@
 ---
 title: "Arc Mainnet Transactions, Blocks & Fees API"
-description: "Query and stream transactions, receipts, blocks and USDC gas fees on Circle's Arc mainnet with Bitquery GraphQL: transaction by hash, address history, failed transactions, block stats and fee analytics."
+description: "Query and stream Arc mainnet transactions, blocks and USDC gas fees with Bitquery GraphQL, including hashes, address history, failures and fee analytics."
 sidebar_position: 5
 keywords:
   - Arc mainnet transactions API

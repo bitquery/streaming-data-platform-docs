@@ -1,6 +1,6 @@
 ---
 title: "Arc Mainnet Calls & Traces API"
-description: "Query and stream smart contract calls and internal traces on Circle's Arc mainnet with Bitquery GraphQL: method calls by selector, internal calls of a transaction, contract deployments, reverts and top methods."
+description: "Query and stream Arc mainnet smart contract calls and traces with Bitquery GraphQL, including selectors, internal calls, deployments, reverts and top methods."
 sidebar_position: 4
 keywords:
   - Arc mainnet calls API

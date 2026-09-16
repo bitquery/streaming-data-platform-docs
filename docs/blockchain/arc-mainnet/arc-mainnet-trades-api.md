@@ -1,6 +1,6 @@
 ---
 title: "Arc Mainnet DEX Trades API & Streams"
-description: "Query and stream Uniswap v2, v3, v4 and Curve trades on Circle's Arc mainnet with Bitquery GraphQL: live swaps, latest trades, OHLCV candles, top tokens, DEX breakdown and trader activity."
+description: "Query and stream Arc mainnet DEX trades with Bitquery GraphQL, including Uniswap and Curve swaps, OHLCV candles, prices, top tokens and trader activity."
 sidebar_position: 1
 keywords:
   - Arc mainnet trades API

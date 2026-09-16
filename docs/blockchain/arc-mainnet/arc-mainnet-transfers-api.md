@@ -1,6 +1,6 @@
 ---
 title: "Arc Mainnet Transfers API & Streams"
-description: "Query and stream token transfers on Circle's Arc mainnet with Bitquery GraphQL: native USDC, ERC-20 USDC, EURC, wallet ledgers, large transfers, most-transferred tokens and daily volume."
+description: "Query and stream Arc mainnet token transfers with Bitquery GraphQL, including native USDC, ERC-20 USDC, EURC, wallet history, large transfers and daily volume."
 sidebar_position: 2
 keywords:
   - Arc mainnet transfers API

@@ -1,6 +1,6 @@
 ---
 title: "Arc Mainnet Balances & Token Supply API"
-description: "Query wallet balances, balance history and token total supply on Circle's Arc mainnet with Bitquery GraphQL: full portfolios, multi-wallet batches, per-token balance changes and TransactionBalances supply."
+description: "Query Arc mainnet wallet balances, balance history, token holders and total supply with Bitquery GraphQL APIs, including multi-wallet portfolio queries."
 sidebar_position: 6
 keywords:
   - Arc mainnet balances API

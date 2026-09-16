@@ -1,6 +1,6 @@
 ---
 title: "Arc Mainnet Events API & WebSocket Streams"
-description: "Stream every smart contract event on Circle's Arc mainnet with Bitquery GraphQL: decoded logs by contract, signature, topic0 or argument, plus Uniswap v4 Initialize, v3 PoolCreated and v2 PairCreated feeds."
+description: "Query and stream Arc mainnet smart contract events with Bitquery GraphQL, including decoded logs, topics, arguments and new Uniswap pool events in real time."
 sidebar_position: 3
 keywords:
   - Arc mainnet events API
