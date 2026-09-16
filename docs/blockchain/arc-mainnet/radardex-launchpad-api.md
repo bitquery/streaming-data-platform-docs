@@ -87,7 +87,7 @@ These examples use two tokens whose launch events matched the RadarDEX factory:
 They are user-created examples. Replace their addresses with a token returned by the launch query. Save each token's factory, launch time and transaction hash in your application.
 
 :::tip Build a launchpad token list
-The Trading cubes do not attach a RadarDEX launchpad label to each token. Build that list from launch events, then pass the token IDs into Trading queries. `Pair.Market.Address` identifies the trading venue's factory on EVM chains; it is not a filter for token origin. Use `Pair.Pool.Address` when you need a specific trading pool.
+The Trading cubes do not attach a RadarDEX launchpad label to each token. Build that list from launch events, then pass the token IDs into Trading queries. For Uniswap v2/v3, `Pair.Market.Address` is the DEX factory and `Pair.Pool.Address` is the pool. For Uniswap v4, `Pair.Market.Address` can be empty and several pools share `Pair.Pool.Address`; include `Pair.Pool.Id` to select one pool. These trading fields do not identify the launchpad that created the token.
 :::
 
 ## Stream new RadarDEX launches
@@ -308,11 +308,11 @@ query {
 }
 ```
 
-For broader token coverage, use the [Tokens cube](/docs/trading/crypto-price-api/tokens/). For a fixed pool's history, use the [Pairs cube](/docs/trading/crypto-price-api/pairs/) with its pool address.
+For broader token coverage, use the [Tokens cube](/docs/trading/crypto-price-api/tokens/). For a fixed pool's history, use the [Pairs cube](/docs/trading/crypto-price-api/pairs/) with `Pool.Address`; on Uniswap v4, also filter by its non-empty `Pool.Id`. Keep the Arc network filter.
 
 ## One-minute OHLCV candles
 
-`Trading.Tokens` combines indexed pools for the token. This query returns the newest 120 one-minute intervals within the last 24 hours. Reverse their order before plotting from oldest to newest.
+`Trading.Tokens` combines indexed pools for the token. This query returns up to 120 rows for one-minute intervals within the last 24 hours, newest first. Resolve repeated interval rows as noted below, then plot from oldest to newest.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/arc-mainnet-radardex-ohlcv-candles)
 
@@ -339,6 +339,8 @@ query {
 ```
 
 `Volume.Usd` is USD volume and `Volume.Base` is token units. These candles can differ from a single pool's price. Empty intervals may be absent; treat a missing interval as missing data unless your chart has an explicit fill rule. The current interval may still change.
+
+Token symbols can arrive after price data, so the same `Token.Id` and `Interval.Time.Start` may appear more than once. Check repeated keys before plotting; do not sum repeated rows or drop conflicting values without a rule. See the [Tokens field notes](/docs/trading/crypto-price-api/tokens/#field-notes).
 
 To stream candles, change `query` to `subscription`, remove `limit`, `orderBy`, and the historical `Block.Time` filter, and keep the token and interval filters.
 
