@@ -70,18 +70,18 @@ query {
 | --- | --- |
 | Argus launch portal | `0xb021be536808f551b31789422fd28a6c9c6e97da` |
 
-| Event | Signature hash | Key arguments |
+| Event | Signature | Key arguments |
 | --- | --- | --- |
-| `TokenCreated` | `1d8917231579f8ce39407f0d616f36f357b07329b0ce5164d0754ac15145ce0a` | `token`, `creator`, `name`, `symbol`, `poolId`, `imageURI`, `website`, `twitter`, `telegram` |
-| `CurveOpened` | `55e45784ac0f1201c142dd0d2119dd11980e98f34cb682c49340d5c28c3a9aa0` | `token`, `poolId`, `locker`, `positionId`, `liquidity`, `tickLower`, `tickUpper` |
-| `FeeConfigured` | `abe14607f311bb63e5b35c469f88100e8fb2ff250876e2364a402e2f2679e8aa` | `token`, `hook`, `lpFeeBps`, `buyTaxBps`, `sellTaxBps`, `treasuryBps`, `creatorBps`, `burnBps`, `dividendBps`, `liquidityBps` |
-| `PartsDeployed` | `a54419a494ae20a1807712ab7a33ff0928b9a0e6e03e4562885aedb8e8fcd4da` | `token`, `locker`, `hook`, `splitter` |
-| `DevBuy` | `84d429ed8af1c9cfe8bb07b556e4120e976c9f4c9232a7f50a15d31d83e232a9` | `token`, `creator`, `quoteIn`, `tokensOut` |
+| `TokenCreated` | `TokenCreated(address,address,string,string,bytes32,string,string,string,string)` | `token`, `creator`, `name`, `symbol`, `poolId`, `imageURI`, `website`, `twitter`, `telegram` |
+| `CurveOpened` | `CurveOpened(address,bytes32,address,uint256,uint128,int24,int24)` | `token`, `poolId`, `locker`, `positionId`, `liquidity`, `tickLower`, `tickUpper` |
+| `FeeConfigured` | `FeeConfigured(address,address,uint16,uint16,uint16,uint16,uint16,uint16,uint16,uint16)` | `token`, `hook`, `lpFeeBps`, `buyTaxBps`, `sellTaxBps`, `treasuryBps`, `creatorBps`, `burnBps`, `dividendBps`, `liquidityBps` |
+| `PartsDeployed` | `PartsDeployed(address,address,address,address)` | `token`, `locker`, `hook`, `splitter` |
+| `DevBuy` | `DevBuy(address,address,uint256,uint256)` | `token`, `creator`, `quoteIn`, `tokensOut` |
 
 The first four fire together on every launch. `DevBuy` fires only when the creator buys in the launch transaction. Contract and events were checked against Arc data on 17 September 2026. See the [Argus docs](https://argus.world/docs) and the [Arc launchpad contract list](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/#verified-launchpad-contracts).
 
 :::caution Decoding start
-Decoded names and arguments are available from 17 September 2026, 12:48 UTC. Earlier rows have an empty `Signature.Name`. To include them, filter on `Log.Signature.SignatureHash` from the table above and read `Topics` instead of `Arguments`.
+Decoded names and arguments are available from 17 September 2026, 12:48 UTC. Earlier rows have an empty `Signature.Name`, so the queries on this page do not return them.
 :::
 
 To query Trading, take the `token` argument, lowercase it and prefix it with `bid:arc:`. For example, PERP's token ID is `bid:arc:0x4389b473460474d68533bde2f873b5a2819f308e`.
@@ -310,7 +310,7 @@ query {
     ) {
       Block {Number Time}
       Transaction {Hash From}
-      Call {From To Signature {Name SignatureHash}}
+      Call {From To Signature {Name Signature}}
       Arguments {
         Name
         Type
@@ -560,7 +560,7 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy`, 
     },
     {
       q: "Why is Signature.Name empty on older Argus events?",
-      a: "Decoding started on 17 September 2026. Filter earlier rows by signature hash and read the token address from Topics."
+      a: "Decoding started on 17 September 2026. Rows before that have no decoded name or arguments, so name filters skip them."
     }
   ]}
 />
