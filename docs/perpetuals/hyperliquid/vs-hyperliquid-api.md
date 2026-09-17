@@ -1,5 +1,5 @@
 ---
-title: "Bitquery vs Hyperliquid's Free API and S3 Archive"
+title: "Hyperliquid Historical Data — Bitquery vs Hyperliquid's Free API and S3 Archive"
 description: "An honest comparison of Hyperliquid's native Info API, its free s3://hyperliquid-archive bucket, and Bitquery: order book granularity (L2 vs L3), what the archive actually contains, rate limits, history depth and cross-chain coverage."
 sidebar_position: 8
 keywords:
@@ -14,9 +14,9 @@ keywords:
   - Hyperliquid market data comparison
 ---
 
-# Bitquery vs Hyperliquid's free data
+# Hyperliquid Historical Data: Bitquery vs Hyperliquid's free data
 
-Hyperliquid publishes its own API and its own historical archive, both free. Any honest evaluation should start there, so this page does.
+Where to get Hyperliquid historical data depends on what you need: trades, candles, the order book or full archive history. Hyperliquid publishes its own API and its own historical archive, both free. Any honest evaluation should start there, so this page does.
 
 ## When you should just use Hyperliquid directly
 

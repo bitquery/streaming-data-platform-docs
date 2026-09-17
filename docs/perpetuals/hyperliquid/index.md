@@ -1,10 +1,12 @@
 ---
-title: "Hyperliquid API — Real-time Trades, Orders, Liquidations & Prices"
+title: "Hyperliquid API Docs — Real-time Trades, Orders, Liquidations & Prices"
 description: "Query and stream Hyperliquid data with Bitquery: trades, orders, order book updates, OHLCV candles, liquidations, funding, positions, TWAPs, mark prices and signed actions over GraphQL and WebSocket."
 sidebar_position: 1
 slug: /perpetuals/hyperliquid
 keywords:
   - Hyperliquid API
+  - Hyperliquid API docs
+  - Hyperliquid docs
   - Hyperliquid GraphQL API
   - Hyperliquid WebSocket
   - Hyperliquid streams
@@ -23,6 +25,8 @@ keywords:
 # Hyperliquid API
 
 import VideoPlayer from "../../../src/components/videoplayer.js";
+
+These are the Bitquery **Hyperliquid API docs**: how to query and stream trades, orders, the order book, candles, liquidations, funding and positions for every trader on the exchange.
 
 Bitquery indexes **Hyperliquid core** (the L1 order-book exchange) and exposes it through the `Hyperliquid` cube on the [streaming API](https://streaming.bitquery.io/graphql). Every dataset is available both as a **GraphQL query** and as a **WebSocket subscription** (real-time stream) — change `query` to `subscription` and drop `limit`/`orderBy`.
 
@@ -76,6 +80,11 @@ query {
 | Guide | What it covers |
 | --- | --- |
 | [Track Order Flow by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-order-flow-by-wallet) | Market-maker tracking, cancel-to-fill ratios, wallet-level order lifecycles using L3 data |
+| [Funding Payments by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-funding-payments-api) | Every funding payment a wallet paid or received, per-market totals, date ranges |
+| [Liquidation History by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-liquidation-history-by-wallet) | Every liquidation of one address, backstop liquidations, live alerts |
+| [TWAP Orders & Child Fills](/docs/perpetuals/hyperliquid/hyperliquid-twap-fills) | Join a TWAP order to every child fill it produced |
+| [HIP-3 Stocks API](/docs/perpetuals/hyperliquid/hip3-stocks-api) | S&P 500, US stock and commodity perps deployed through HIP-3 |
+| [Track ZEC on Hyperliquid](/docs/perpetuals/hyperliquid/track-zec-on-hyperliquid) | Positions, liquidations, funding and whale trades for one market |
 | [Bitquery vs Hyperliquid's free data](/docs/perpetuals/hyperliquid/vs-hyperliquid-api) | What the native Info API and `s3://hyperliquid-archive` do and don't cover |
 
 ## Why Bitquery instead of the native Hyperliquid WebSocket API?
@@ -109,7 +118,7 @@ Every cube carries a `Market` object that identifies the instrument:
 | `Protocol` | HIP-3 deployer namespace, empty for native markets | `xyz`, `mkts` |
 | `MaxLeverage` | Maximum leverage allowed on the market | `40` |
 
-**HIP-3** markets are builder-deployed perps — tokenized stocks (`mkts:AAPL`), indices (`xyz:KR200`, `TOTAL2`) and other synthetic assets trade alongside native Hyperliquid perps and appear in the same cubes with `Kind: hip3`.
+**HIP-3** markets are builder-deployed perps — tokenized stocks (`mkts:AAPL`), indices (`xyz:KR200`, `TOTAL2`) and other synthetic assets trade alongside native Hyperliquid perps and appear in the same cubes with `Kind: hip3`. See the [HIP-3 Stocks API](/docs/perpetuals/hyperliquid/hip3-stocks-api) for queries.
 
 `ChainId` is `hyperliquid-core` on all event cubes.
 

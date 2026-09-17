@@ -29,6 +29,8 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 Each liquidation includes the liquidated user, the `Method` (`market` for open-market liquidation, `backstop` when the backstop vault takes over), the mark price at liquidation and the actual execution.
 
+For every liquidation of one address, see [Hyperliquid Liquidation History by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-liquidation-history-by-wallet).
+
 Run it in the IDE: [Hyperliquid Liquidations ➤](https://ide.bitquery.io/hyperliquid-liquidations)
 
 ```graphql
@@ -89,7 +91,7 @@ query {
 }
 ```
 
-Filter to one wallet with `where: {Funding: {Trader: {Address: {is: "0x..."}}}}` to compute its total funding paid/received.
+Filter to one wallet with `where: {Funding: {Trader: {Address: {is: "0x..."}}}}` to compute its total funding paid/received. The [Hyperliquid Funding Payments API](/docs/perpetuals/hyperliquid/hyperliquid-funding-payments-api) page has ready-made wallet queries: per-market totals, paid-only, date ranges and a live stream.
 
 ## Current positions
 
@@ -139,3 +141,10 @@ query {
 ```
 
 All four cubes stream over WebSocket with the same shape — change `query` to `subscription` and drop `limit`/`orderBy`.
+
+## Related
+
+- [Liquidation History by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-liquidation-history-by-wallet)
+- [Funding Payments by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-funding-payments-api)
+- [HIP-3 Stocks API](/docs/perpetuals/hyperliquid/hip3-stocks-api) — funding and liquidations on stock, index and commodity perps
+- [Track ZEC on Hyperliquid](/docs/perpetuals/hyperliquid/track-zec-on-hyperliquid) — positions, liquidations and funding for one market

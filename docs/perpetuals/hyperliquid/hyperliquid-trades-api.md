@@ -149,3 +149,9 @@ subscription {
 ```
 
 Remove the `Symbol` filter to stream candle updates for every market.
+
+## Related
+
+- [HIP-3 Stocks API](/docs/perpetuals/hyperliquid/hip3-stocks-api) — trades and candles for S&P 500, US stock and commodity perps
+- [TWAP Orders & Child Fills](/docs/perpetuals/hyperliquid/hyperliquid-twap-fills) — join fills with `IsTwap: true` to their parent TWAP
+- [Track ZEC on Hyperliquid](/docs/perpetuals/hyperliquid/track-zec-on-hyperliquid) — whale trades and candles for one market
