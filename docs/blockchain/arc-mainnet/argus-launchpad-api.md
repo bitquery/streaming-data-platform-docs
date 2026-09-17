@@ -22,6 +22,8 @@ import FAQ from "@site/src/components/FAQ";
 
 Use `EVM.Events` and `EVM.Calls` to find launches. All trading examples below use `Trading.Trades`, `Trading.Pairs`, or `Trading.Tokens`.
 
+Argus carries most of the launch activity on Arc. In a sample hour on 17 September 2026 it emitted 2,983 launch events against 10 from Tolly and 2 from Archemist, and 94,843 of the 94,968 launches recorded against its `TokenCreated` signature came from the portal contract below.
+
 :::note API access
 Run the saved examples in the Bitquery IDE, or create an [API access token](/docs/authorization/how-to-generate/) for `https://streaming.bitquery.io/graphql`. For streams, use `wss://streaming.bitquery.io/graphql` with [WebSocket authorization](/docs/authorization/websocket/).
 :::
@@ -78,10 +80,22 @@ query {
 | `PartsDeployed` | `PartsDeployed(address,address,address,address)` | `token`, `locker`, `hook`, `splitter` |
 | `DevBuy` | `DevBuy(address,address,uint256,uint256)` | `token`, `creator`, `quoteIn`, `tokensOut` |
 
-The first four fire together on every launch. `DevBuy` fires only when the creator buys in the launch transaction. Contract and events were checked against Arc data on 17 September 2026. See the [Argus docs](https://argus.world/docs) and the [Arc launchpad contract list](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/#verified-launchpad-contracts).
+Each event's signature hash is its `Topics[0]`. Filter on these when you need rows the decoder has not named:
+
+| Event | Signature hash |
+| --- | --- |
+| `TokenCreated` | `1d8917231579f8ce39407f0d616f36f357b07329b0ce5164d0754ac15145ce0a` |
+| `PartsDeployed` | `a54419a494ae20a1807712ab7a33ff0928b9a0e6e03e4562885aedb8e8fcd4da` |
+| `CurveOpened` | `55e45784ac0f1201c142dd0d2119dd11980e98f34cb682c49340d5c28c3a9aa0` |
+| `FeeConfigured` | `abe14607f311bb63e5b35c469f88100e8fb2ff250876e2364a402e2f2679e8aa` |
+| `DevBuy` | `84d429ed8af1c9cfe8bb07b556e4120e976c9f4c9232a7f50a15d31d83e232a9` |
+
+The first four fire together on every launch. `DevBuy` fires only when the creator buys in the launch transaction, which was 10% of launches on 17 September 2026.
+
+The `locker`, `hook` and `splitter` in `PartsDeployed` are deployed **per token**, so they differ on every launch. Read them from the event rather than caching them as protocol constants. Contract and events were checked against Arc data on 17 September 2026. See the [Argus docs](https://argus.world/docs) and the [Arc launchpad contract list](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/#verified-launchpad-contracts).
 
 :::caution Decoding start
-Decoded names and arguments are available from 17 September 2026, 12:48 UTC. Earlier rows have an empty `Signature.Name`, so the queries on this page do not return them.
+Decoded names and arguments are available from 17 September 2026, 12:48 UTC. Earlier rows have an empty `Signature.Name`, so the queries on this page do not return them. At the time of writing that is 450,457 undecoded rows against 48,249 decoded. To reach the earlier launches, filter on `Topics` instead — see [Launches from before the decoding cutover](#launches-from-before-the-decoding-cutover).
 :::
 
 To query Trading, take the `token` argument, lowercase it and prefix it with `bid:arc:`. For example, PERP's token ID is `bid:arc:0x4389b473460474d68533bde2f873b5a2819f308e`.
@@ -327,6 +341,62 @@ query {
   }
 }
 ```
+
+## Launches from before the decoding cutover
+
+`Topics` is populated whether or not the decoder has named an event, so it reaches the whole history. `Topics[0]` is the signature hash from the [table above](#contracts-and-decoded-events); the indexed `token` and `creator` follow, each left-padded to 32 bytes.
+
+This returns every Argus event for one token, including rows that predate the cutover and so carry an empty `Signature.Name` and no `Arguments`.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-argus-launches-by-topic)
+
+```graphql
+{
+  EVM(network: arc) {
+    Events(
+      limit: {count: 10}
+      where: {
+        LogHeader: {Address: {is: "0xb021be536808f551b31789422fd28a6c9c6e97da"}}
+        Topics: {includes: [{Hash: {is: "0x00000000000000000000000041358defd0dedc90528b3f1835715e907b686e6a"}}]}
+      }
+    ) {
+      Block { Time }
+      Transaction { Hash From }
+      Log { Signature { Name SignatureHash } }
+      Topics { Hash }
+    }
+  }
+}
+```
+
+Take the final 40 hex characters of a padded topic and prefix `0x` to recover an address. Swap the padded token for a signature hash to pull one event type across every token instead. On undecoded rows, match `SignatureHash` against the table above and decode the unindexed fields from the log data in your own client using the full signatures.
+
+## Launch rate per hour
+
+Bucket launches by hour and count distinct creators beside them, which separates a real crowd from one wallet minting in a loop.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/arc-argus-launch-rate)
+
+```graphql
+{
+  EVM(network: arc) {
+    Events(
+      orderBy: {descendingByField: "launches"}
+      where: {
+        LogHeader: {Address: {is: "0xb021be536808f551b31789422fd28a6c9c6e97da"}}
+        Log: {Signature: {SignatureHash: {is: "1d8917231579f8ce39407f0d616f36f357b07329b0ce5164d0754ac15145ce0a"}}}
+        Block: {Time: {since_relative: {hours_ago: 6}}}
+      }
+    ) {
+      Block { Time(interval: {in: hours, count: 1}) }
+      launches: count
+      uniqueCreators: count(distinct: Transaction_From)
+    }
+  }
+}
+```
+
+On 17 September 2026 this returned roughly 1,500 to 3,000 launches per hour from 450 to 740 distinct creators. Filtering on `SignatureHash` rather than the event name keeps the count correct across the decoding cutover.
 
 ## Recent trades for an Argus token
 
