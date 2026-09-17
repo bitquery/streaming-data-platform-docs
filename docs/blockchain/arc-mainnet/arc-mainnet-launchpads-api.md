@@ -68,7 +68,9 @@ Sources: [Argus contract reference](https://github.com/arguspad/argus-world), [R
 
 The table lists current contracts observed on 17 September 2026. Keep old addresses in your index if you need launches from earlier contract versions.
 
-Launches are concentrated. In a sample hour on 17 September, Argus emitted 2,983 launch events against 10 from Tolly and 2 from Archemist; the [launch count query](#launch-count-by-platform) reproduces this split for any window. Argus also runs older and forked deployments that emit the same hash, such as `0xa5628a11c412596e1f63b75a2c0284f843c549d6` (22 launches) and `0x629c9592c88788b6b31e377e34f7884de9d81ffd` (94), against 94,843 from the portal above. Add them to the address list only if you need those rows.
+Launches are concentrated. In a sample hour on 17 September 2026, Argus emitted 2,983 launch events against 10 from Tolly and 2 from Archemist; the [launch count query](#launch-count-by-platform) reproduces this split for any window, and it is the figure to trust over any count quoted here, since the chain keeps moving.
+
+Argus also runs older and forked deployments that emit the same hash, including `0xa5628a11c412596e1f63b75a2c0284f843c549d6` and `0x629c9592c88788b6b31e377e34f7884de9d81ffd`. The portal in the table carried 99.9% of all launches recorded against that hash on both 17 and 18 September 2026, so filtering on it alone is enough for almost every use. Add the others to the address list only if you need those rows.
 
 ---
 
