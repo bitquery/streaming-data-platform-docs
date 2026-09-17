@@ -23,7 +23,7 @@ This page covers six launchpads whose own sites publish Arc contracts or contrac
 
 Every query on this page was executed against the production endpoint before publishing.
 
-For platform-specific launch feeds and Trading cube examples, use the [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/) and [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/).
+For platform-specific launch feeds and Trading cube examples, use the [Argus Launchpad API](/docs/blockchain/arc-mainnet/argus-launchpad-api/), [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/) and [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/).
 
 For Minara.fun, use the separate [Minara Launchpad API](/docs/blockchain/arc-mainnet/minara-launchpad-api/). It includes verified strategy and fee-hook contracts, token/pool/creator checks, and Trading cube examples. Minara is outside the six-platform queries below.
 
@@ -56,6 +56,7 @@ The contract and event pair is the stable ID for each launchpad. Display names c
 | Launchpad | Arc launch contract | Launch event | Signature hash |
 | --- | --- | --- | --- |
 | Argus | `0xa5628a11c412596e1f63b75a2c0284f843c549d6` | `TokenCreated` | `1d8917231579f8ce39407f0d616f36f357b07329b0ce5164d0754ac15145ce0a` |
+| Argus portal (v4 hooked) | `0xb021be536808f551b31789422fd28a6c9c6e97da` | `TokenCreated` | `1d8917231579f8ce39407f0d616f36f357b07329b0ce5164d0754ac15145ce0a` |
 | RadarDEX Classic | `0x4b638c1502a07a8e1a26112ee98f51a3f34bc93a` | `TokenLaunched` | `851d681a32f0efba577c4a1bd412f74b575764a6b91e499a05a48a23f3821d66` |
 | RadarDEX Reflection | `0x2d933ce4bde6f3d99540b5d7886b383e59b2b2f8` | `TokenLaunched` | `851d681a32f0efba577c4a1bd412f74b575764a6b91e499a05a48a23f3821d66` |
 | Tolly | `0xcad7ee36ac193bf2eddb7b3e2736c5bdb8269c8b` | `TokenCreated` | `875522b092d9e19a1de359e4bd218090d582fa521c9733889acf1a5ff1941255` |
