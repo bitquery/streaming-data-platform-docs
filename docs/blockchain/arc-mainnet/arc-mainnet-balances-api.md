@@ -1,22 +1,22 @@
 ---
-title: "Arc Mainnet Balances & Token Supply API"
-description: "Query Arc mainnet wallet balances, balance history, token holders and total supply with Bitquery GraphQL APIs, including multi-wallet portfolio queries."
+title: "Arc Balances & Token Supply API"
+description: "Query Arc wallet balances, balance history, token holders and total supply with Bitquery GraphQL APIs, including multi-wallet portfolio queries."
 sidebar_position: 6
 keywords:
-  - Arc mainnet balances API
-  - Arc mainnet wallet balance
-  - Arc mainnet USDC balance
-  - Arc mainnet portfolio API
-  - Arc mainnet balance history
-  - Arc mainnet token supply
-  - Arc mainnet eth_getBalance alternative
+  - Arc balances API
+  - Arc wallet balance
+  - Arc USDC balance
+  - Arc portfolio API
+  - Arc balance history
+  - Arc token supply
+  - Arc eth_getBalance alternative
   - Circle Arc balances API
   - arc Balances
-  - Bitquery Arc mainnet
+  - Bitquery Arc
 ---
-# Arc Mainnet Balances & Token Supply API
+# Arc Balances & Token Supply API
 
-Query **wallet balances, holders and token supply on Arc mainnet** with Bitquery GraphQL. Four cubes on `network: arc` cover it:
+Query **wallet balances, holders and token supply on Arc** with Bitquery GraphQL. Four cubes on `network: arc` cover it:
 
 | Cube | What it returns |
 | --- | --- |
@@ -28,7 +28,7 @@ Query **wallet balances, holders and token supply on Arc mainnet** with Bitquery
 Every query on this page was executed against the production endpoint before publishing.
 
 :::info Availability checked 16 September 2026
-`Balances`, `Holders`, `BalanceUpdates` and `TransactionBalances` all returned mainnet data. Only the realtime path answered, so leave the `dataset` argument out until `archive` and `combined` are enabled. Join balances to the [latest price query](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/#latest-price-of-a-token) when you need a USD value.
+`Balances`, `Holders`, `BalanceUpdates` and `TransactionBalances` all returned Arc data. Only the realtime path answered, so leave the `dataset` argument out until `archive` and `combined` are enabled. Join balances to the [latest price query](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/#latest-price-of-a-token) when you need a USD value.
 :::
 
 :::note API Key Required
@@ -38,9 +38,9 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
-- [Arc Mainnet Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
-- [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
+- [Arc Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
+- [Arc DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
 - [EVM Balances schema](/docs/schema/evm/balances/)
 - [EVM Token Supply API](/docs/blockchain/Ethereum/token-supply/evm-token-supply/)
 :::
@@ -360,7 +360,7 @@ subscription {
 ## FAQ
 
 **Does the `Holders` cube work?**
-Yes. It returned Arc mainnet holder rows in the production check on 16 September 2026. Filter `Balance.Amount` above zero for current holders.
+Yes. It returned Arc holder rows in the production check on 16 September 2026. Filter `Balance.Amount` above zero for current holders.
 
 **Why does the same wallet show USDC twice?**
 Native USDC (`Native: true`, 18 decimals) and the ERC-20 USDC interface (`0x3600...`, 6 decimals) appear as separate Bitquery currencies. Arc's ERC-20 interface acts on the native balance, so do not add the rows without checking the flow you are measuring. A third row with contract `0xfff...fffe` and no symbol is a system ledger mirror and can be ignored.

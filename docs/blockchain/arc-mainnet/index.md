@@ -1,35 +1,35 @@
 ---
-title: "Circle Blockchain API for Arc Mainnet"
-description: "Query and stream Circle blockchain data on Arc mainnet (chain ID 5042) with Bitquery GraphQL and WebSocket APIs for trades, transfers, balances and blocks."
+title: "Arc Blockchain API: GraphQL and WebSocket"
+description: "Query and stream Circle’s Arc blockchain data with Bitquery’s Arc Blockchain API. Get trades, transfers, balances and blocks through GraphQL and WebSocket."
 sidebar_position: 0
 keywords:
   - Circle blockchain
   - Circle blockchain API
   - Circle Arc blockchain
-  - Arc mainnet API
+  - Arc API
   - Arc blockchain API
   - Circle Arc API
-  - Arc mainnet GraphQL
-  - Arc mainnet WebSocket
-  - Arc mainnet chain ID 5042
+  - Arc GraphQL
+  - Arc WebSocket
+  - Arc chain ID 5042
   - Arc USDC gas token
-  - Arc mainnet explorer API
-  - Arc mainnet Uniswap v4
+  - Arc explorer API
+  - Arc Uniswap v4
   - EVM network arc
   - Bitquery Arc API
 ---
 
 import FAQ from "@site/src/components/FAQ";
 
-# Circle Blockchain API for Arc Mainnet
+# Arc Blockchain API
 
-Bitquery indexes **Circle blockchain data on Arc mainnet**. Use `Trading` for trading queries and streams, with `Pair.Market.Network: "Arc"` on `Trading.Trades`. Use `EVM(network: arc)` for transfers, balances, logs, calls, transactions and blocks.
+Bitquery’s [**Arc Blockchain API**](https://bitquery.io/blockchains/arc-blockchain-api) queries and streams data from Circle’s Arc blockchain (chain ID `5042`). Use `Trading` for trading queries and streams, with `Pair.Market.Network: "Arc"` on `Trading.Trades`. Use `EVM(network: arc)` for transfers, balances, logs, calls, transactions and blocks.
 
 :::tip Trading queries and streams
 Use `Trading.Trades`, `Trading.Tokens` and `Trading.Pairs` for live data and the last 30 days. Use `EVM.DEXTrades` or `EVM.DEXTradeByTokens` only for trades older than 30 days, subject to Arc archive availability.
 :::
 
-Arc is Circle's EVM-compatible Layer 1. USDC pays gas, blocks reach finality in under a second, and the network is built for payments, foreign exchange and tokenized assets. [Arc Public Mainnet launched](https://www.arc.io/blog/arc-mainnet-goes-live-on-september-16-2026) on **16 September 2026**. Circle's current RPC reference still labels its listed mainnet endpoints and explorer as permissioned; Bitquery's indexed API is live.
+Arc is Circle's EVM-compatible Layer 1. USDC pays gas, blocks reach finality in under a second, and the network is built for payments, foreign exchange and tokenized assets. [Arc launched](https://www.arc.io/blog/arc-mainnet-goes-live-on-september-16-2026) on **16 September 2026**. Circle's current RPC reference still labels its listed Arc endpoints and explorer as permissioned; Bitquery's indexed API is live.
 
 :::info Availability checked 16 September 2026
 `Trading.Trades`, `Trading.Tokens`, `Trading.Pairs`, and the realtime EVM cubes returned Arc data in production tests. Leave the dataset argument out of `Trading`; it does not support archive or combined. Arc's EVM `dataset: combined` and `dataset: archive` did not answer at this check.
@@ -41,7 +41,7 @@ To query or stream outside the Bitquery IDE, create an [API access token](/docs/
 
 ---
 
-## Arc mainnet at a glance {#network-facts}
+## Arc at a glance {#network-facts}
 
 | Property | Value |
 | --- | --- |
@@ -53,7 +53,7 @@ To query or stream outside the Bitquery IDE, create an [API access token](/docs/
 | EURC | `0xbEf5f6d51CB62b58e6A8f77868681825C6fe21c1` (6 decimals) |
 | USYC | `0x8a5D989Bbb96929F689B0200f435f53dA42bF490` (6 decimals) |
 | Uniswap v4 PoolManager seen by Bitquery | `0x8366a39cc670b4001a1121b8f6a443a643e40951` |
-| Mainnet explorer | [explorer.arc.io](https://explorer.arc.io) (listed as permissioned in Arc's RPC reference) |
+| Arc explorer | [explorer.arc.io](https://explorer.arc.io) (listed as permissioned in Arc's RPC reference) |
 | Arc RPC | `https://rpc.mainnet.arc.io` (listed as permissioned in Arc's RPC reference) |
 | Bitquery GraphQL | `https://streaming.bitquery.io/graphql` |
 
@@ -61,7 +61,7 @@ Arc's [network reference](https://docs.arc.io/arc/references/rpc-endpoints) conf
 
 ---
 
-## Quick start: latest Arc mainnet swaps {#quick-start}
+## Quick start: latest Arc swaps {#quick-start}
 
 This Trading query returns the newest Arc trade rows with USD amounts and the market name.
 
@@ -178,11 +178,11 @@ See [WebSocket subscriptions](/docs/subscriptions/websockets/) and [WebSocket au
 <FAQ
   title="FAQ"
   items={[
-    { q: "What is the Bitquery network name for Arc mainnet?", id: "what-is-the-bitquery-network-name-for-arc-mainnet", a: "Use Arc in Pair.Market.Network for Trading.Trades. For other chain data use EVM(network: arc). The chain ID is 5042.",
+    { q: "What is the Bitquery network name for Arc?", id: "what-is-the-bitquery-network-name-for-arc-mainnet", a: "Use Arc in Pair.Market.Network for Trading.Trades. For other chain data use EVM(network: arc). The chain ID is 5042.",
       answer: <p>{"Use "}<code>{"Arc"}</code>{" in "}<code>{"Pair.Market.Network"}</code>{" for Trading.Trades. For other chain data use "}<code>{"EVM(network: arc)"}</code>{". The chain ID is "}<strong>{"5042"}</strong>{"."}</p> },
     { q: "Are USD fields available?", id: "are-usd-fields-available", a: "Yes. Trading.Trades returns PriceInUsd and AmountsInUsd.Quote. Trading.Tokens and Trading.Pairs return USD candles and Volume.Usd. Field names differ from those on the EVM cubes.",
       answer: <p>{"Yes. Trading.Trades returns "}<code>{"PriceInUsd"}</code>{" and "}<code>{"AmountsInUsd.Quote"}</code>{". Trading.Tokens and Trading.Pairs return USD candles and "}<code>{"Volume.Usd"}</code>{". Field names differ from those on the EVM cubes."}</p> },
-    { q: "How far back does Arc mainnet data go?", id: "how-far-back-does-arc-mainnet-data-go", a: "Trading has a rolling window of about 30 days; Arc may have less history while indexing starts. Arc's realtime EVM dataset was live at launch, but combined and archive were not ready during the 16 September check.",
+    { q: "How far back does Arc data go?", id: "how-far-back-does-arc-mainnet-data-go", a: "Trading has a rolling window of about 30 days; Arc may have less history while indexing starts. Arc's realtime EVM dataset was live at launch, but combined and archive were not ready during the 16 September check.",
       answer: <p>{"Trading has a rolling window of about 30 days; Arc may have less history while indexing starts. Arc's realtime EVM dataset was live at launch, but combined and archive were not ready during the 16 September check. See "}<a href="#datasets">{"datasets and history"}</a>{"."}</p> },
     { q: "Can I use Trading.Trades for Arc?", id: "can-i-use-trading-trades-for-arc", a: "Yes. It is the default for Arc trade streams and trades within the last 30 days. Filter Pair.Market.Network by Arc. Use EVM trade cubes only for older trades, subject to archive availability.",
       answer: <p>{"Yes. It is the default for Arc trade streams and trades within the last 30 days. Filter "}<code>{"Pair.Market.Network"}</code>{" by "}<code>{"Arc"}</code>{". Use EVM trade cubes only for older trades, subject to archive availability."}</p> },

@@ -78,14 +78,14 @@ This guide lists **which blockchains Bitquery indexes** and how that lines up wi
 | Optimism | — | ✓ | ✓ | ✓ | ✓ |
 | Base | — | ✓ | ✓ | ✓ | ✓ |
 | Robinhood | — | ✓ | ✓ | ✓ | ✓ |
-| Arc Mainnet | — | ✓ | — | — | — |
+| [Arc Blockchain API](https://bitquery.io/blockchains/arc-blockchain-api) | — | ✓ | — | — | — |
 | Arc Testnet | — | ✓ | ✓ | — | — |
 
 :::note More networks
 
 **V1** historically covers **40+** blockchains—see the [V1 docs](https://docs.bitquery.io/v1/) for the full, schema-accurate list and **[Bitquery platform](https://bitquery.io/)** for plans. **V2** may also expose additional networks in the IDE (for example **opBNB**, **TON**) that are not repeated in the short list above—check live schema and [chain docs](/docs/blockchain/introduction/).
 
-**Arc mainnet** is live in V2 GraphQL, WebSocket subscriptions and the cross-chain `Trading` cubes. For trade streams and the last 30 days, use `Trading.Trades` with `Pair.Market.Network: "Arc"`; use `Trading.Tokens` or `Trading.Pairs` for prices and candles. Use EVM trade cubes only for trades older than 30 days, once Arc archive support is confirmed. Other chain data uses `EVM(network: arc)`; see the [Arc Mainnet API guides](/docs/blockchain/arc-mainnet/). The matrix does not list chain-level Kafka, cloud or ClickHouse coverage for Arc mainnet.
+**Arc** is live in V2 GraphQL, WebSocket subscriptions and the cross-chain `Trading` cubes. For trade streams and the last 30 days, use `Trading.Trades` with `Pair.Market.Network: "Arc"`; use `Trading.Tokens` or `Trading.Pairs` for prices and candles. Use EVM trade cubes only for trades older than 30 days, once Arc archive support is confirmed. Other chain data uses `EVM(network: arc)`; see the [Arc Blockchain API guides](/docs/blockchain/arc-mainnet/). The matrix does not list chain-level Kafka, cloud or ClickHouse coverage for Arc.
 
 **Kafka** also exposes multi-chain **`trading.prices`** and **`trading.trades`** topics—see **[Kafka streams](https://bitquery.io/products/kafka-streams)** and [Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/).
 
@@ -105,7 +105,7 @@ This guide lists **which blockchains Bitquery indexes** and how that lines up wi
 
 | Product | Get started |
 |--------|-------------|
-| **V2** | [Bitquery platform](https://bitquery.io/) · [Data streams](https://bitquery.io/products/data-streams) · [WebSocket streams](https://bitquery.io/products/websocket-streams) · Docs: [Intro](/docs/intro/) · Chains: [Ethereum](https://bitquery.io/blockchains/ethereum-blockchain-api), [BNB Chain](/docs/blockchain/BSC/), [Arbitrum](https://bitquery.io/blockchains/arbitrum-blockchain-api), [Optimism](https://bitquery.io/blockchains/optimism-blockchain-api), [Base](https://bitquery.io/blockchains/base-blockchain-api), [Polygon](https://bitquery.io/blockchains/polygon-blockchain-api), [Solana](https://bitquery.io/blockchains/solana-blockchain-api), [Tron](https://bitquery.io/blockchains/tron-blockchain-api), [Robinhood](/docs/blockchain/robinhood/), [Arc Mainnet](/docs/blockchain/arc-mainnet/) |
+| **V2** | [Bitquery platform](https://bitquery.io/) · [Data streams](https://bitquery.io/products/data-streams) · [WebSocket streams](https://bitquery.io/products/websocket-streams) · Docs: [Intro](/docs/intro/) · Chains: [Ethereum](https://bitquery.io/blockchains/ethereum-blockchain-api), [BNB Chain](/docs/blockchain/BSC/), [Arbitrum](https://bitquery.io/blockchains/arbitrum-blockchain-api), [Optimism](https://bitquery.io/blockchains/optimism-blockchain-api), [Base](https://bitquery.io/blockchains/base-blockchain-api), [Polygon](https://bitquery.io/blockchains/polygon-blockchain-api), [Solana](https://bitquery.io/blockchains/solana-blockchain-api), [Tron](https://bitquery.io/blockchains/tron-blockchain-api), [Robinhood](/docs/blockchain/robinhood/), [Arc Blockchain API](https://bitquery.io/blockchains/arc-blockchain-api) |
 | **V1** | [Bitquery platform](https://bitquery.io/) · [V1 documentation](https://docs.bitquery.io/v1/) · [V1 vs V2 (IDE & schema)](https://docs.bitquery.io/v1/docs/graphql-ide/v1-and-v2) |
 | **Kafka** | [Kafka streams](https://bitquery.io/products/kafka-streams) · [Real-time streaming hub](https://bitquery.io/products/streaming) · Docs: [Streams overview](/docs/streams/) · [Kafka concepts](/docs/streams/kafka-streaming-concepts/) |
 | **Cloud** | [Streaming & datashares](https://bitquery.io/products/streaming) · Docs: [Cloud data](/docs/cloud/) · [EVM](/docs/cloud/evm/) · [Solana](/docs/cloud/solana/) · [Bitcoin](/docs/cloud/bitcoin/) · [Tron](/docs/cloud/tron/) |

@@ -1,9 +1,9 @@
 ---
-title: "Arc Mainnet Launchpads API & Streams"
-description: "Find and stream token launches from verified Arc mainnet launchpads with Bitquery GraphQL, then query trades, prices and OHLCV for each launched token."
+title: "Arc Launchpads API & Streams"
+description: "Find and stream token launches from verified Arc launchpads with Bitquery GraphQL, then query trades, prices and OHLCV for each launched token."
 sidebar_position: 2
 keywords:
-  - Arc mainnet launchpads API
+  - Arc launchpads API
   - Arc token launches
   - Arc new tokens API
   - Arc launchpad stream
@@ -13,11 +13,11 @@ keywords:
   - Warp launchpad API
   - Archemist launchpad API
   - PEGD launchpad API
-  - Bitquery Arc mainnet
+  - Bitquery Arc
 ---
-# Arc Mainnet Launchpads API & Streams
+# Arc Launchpads API & Streams
 
-Find and stream **new token launches on Arc mainnet**, then follow each token into its first trades. The queries use `EVM.Events` for launch contracts and `EVM.DEXTradeByTokens` for market data.
+Find and stream **new token launches on Arc**, then follow each token into its first trades. The queries use `EVM.Events` for launch contracts and `EVM.DEXTradeByTokens` for market data.
 
 This page covers six launchpads whose own sites publish Arc contracts or contract interfaces and whose launch events were found through Bitquery: [Argus](https://argus.world/docs), [RadarDEX](https://www.radardex.pro/), [Tolly](https://tollylabs.com/guide), [Warp](https://circlewarp.fun/), [Archemist](https://archemist.fun/docs), and [PEGD](https://pegd.fun/docs).
 
@@ -28,7 +28,7 @@ For platform-specific launch feeds and Trading cube examples, use the [Tolly Lau
 For Minara.fun, use the separate [Minara Launchpad API](/docs/blockchain/arc-mainnet/minara-launchpad-api/). It includes verified strategy and fee-hook contracts, token/pool/creator checks, and Trading cube examples. Minara is outside the six-platform queries below.
 
 :::info Availability checked 16 September 2026
-The realtime path returned live launch events and trades. Leave the `dataset` argument out until `combined` and `archive` are enabled for Arc mainnet.
+The realtime path returned live launch events and trades. Leave the `dataset` argument out until `combined` and `archive` are enabled for Arc.
 :::
 
 :::note API Key Required
@@ -38,9 +38,9 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/)
-- [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
-- [Arc Mainnet Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/)
+- [Arc DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
+- [Arc Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/)
 - [EVM Events schema](/docs/schema/evm/events/)
 - [EVM DEXTrades schema](/docs/schema/evm/dextrades/)
 :::
@@ -53,7 +53,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 The contract and event pair is the stable ID for each launchpad. Display names can change; contracts and event hashes do not.
 
-| Launchpad | Arc mainnet launch contract | Launch event | Signature hash |
+| Launchpad | Arc launch contract | Launch event | Signature hash |
 | --- | --- | --- | --- |
 | Argus | `0xa5628a11c412596e1f63b75a2c0284f843c549d6` | `TokenCreated` | `1d8917231579f8ce39407f0d616f36f357b07329b0ce5164d0754ac15145ce0a` |
 | RadarDEX Classic | `0x4b638c1502a07a8e1a26112ee98f51a3f34bc93a` | `TokenLaunched` | `851d681a32f0efba577c4a1bd412f74b575764a6b91e499a05a48a23f3821d66` |

@@ -1,7 +1,7 @@
 ---
 title: "RadarDEX Launchpad API on Arc: Tokens, Trades and OHLCV"
 sidebar_label: "RadarDEX Launchpad API"
-description: "Track RadarDEX Classic and Reflection token launches on Circle Arc mainnet. Query swaps, traders, USD prices and OHLCV with Bitquery Trading APIs and streams."
+description: "Track RadarDEX Classic and Reflection token launches on Circle Arc. Query swaps, traders, USD prices and OHLCV with Bitquery Trading APIs and streams."
 sidebar_position: 4
 keywords:
   - RadarDEX launchpad API
@@ -10,7 +10,7 @@ keywords:
   - RadarDEX token price API
   - RadarDEX OHLCV API
   - RadarDEX Classic and Reflection
-  - Arc mainnet launchpad API
+  - Arc launchpad API
   - Circle blockchain API
 ---
 
@@ -18,7 +18,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # RadarDEX Launchpad API on Arc: Tokens, Trades and OHLCV
 
-[RadarDEX](https://www.radardex.pro/) offers Classic and Reflection token launches on Arc mainnet, Circle's EVM chain. Its launch page describes opening a Uniswap v3 pool when a token is created. Monitor both factories to build a list of RadarDEX launches.
+[RadarDEX](https://www.radardex.pro/) offers Classic and Reflection token launches on Arc, Circle's EVM chain. Its launch page describes opening a Uniswap v3 pool when a token is created. Monitor both factories to build a list of RadarDEX launches.
 
 RadarDEX's site states that it does not currently have its own token. A token name or symbol cannot prove that it belongs to the platform; match the launch contract and event.
 
@@ -63,7 +63,7 @@ query {
 
 ## Contracts and token identity
 
-| Contract | Arc mainnet address |
+| Contract | Arc address |
 | --- | --- |
 | RadarDEX Classic | `0x4b638c1502a07a8e1a26112ee98f51a3f34bc93a` |
 | RadarDEX Reflection | `0x2d933ce4bde6f3d99540b5d7886b383e59b2b2f8` |
@@ -368,7 +368,7 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy`, 
 ## Related APIs
 
 - [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/)
-- [Arc Mainnet Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
-- [Circle Blockchain API for Arc Mainnet](/docs/blockchain/arc-mainnet/)
+- [Arc Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
+- [Circle Blockchain API for Arc](/docs/blockchain/arc-mainnet/)
 - [Trading Trades API](/docs/trading/crypto-trades-api/trades-api/)
 - [Trading Tokens OHLCV API](/docs/trading/crypto-price-api/tokens/)
