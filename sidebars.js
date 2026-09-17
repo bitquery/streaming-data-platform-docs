@@ -921,7 +921,7 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Arc Mainnet",
+          label: "Arc Blockchain API",
           link: {
             type: "doc",
             id: "blockchain/arc-mainnet/index",

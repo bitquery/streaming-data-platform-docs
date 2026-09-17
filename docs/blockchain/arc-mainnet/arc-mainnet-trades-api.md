@@ -1,22 +1,22 @@
 ---
-title: "Arc Mainnet DEX Trades API & Streams"
-description: "Query and stream Circle Arc mainnet trades with the Bitquery Trading cube. Get token prices, OHLCV, USD volume and wallet activity for the last 30 days."
+title: "Arc DEX Trades API & Streams"
+description: "Query and stream Circle Arc trades with the Bitquery Trading cube. Get token prices, OHLCV, USD volume and wallet activity for the last 30 days."
 sidebar_position: 1
 keywords:
-  - Arc mainnet trades API
-  - Arc mainnet DEX trades
-  - Arc mainnet Trading cube
-  - Arc mainnet Uniswap v4 trades
-  - Arc mainnet OHLCV
-  - Arc mainnet token price
-  - Arc mainnet swap stream
+  - Arc trades API
+  - Arc DEX trades
+  - Arc Trading cube
+  - Arc Uniswap v4 trades
+  - Arc OHLCV
+  - Arc token price
+  - Arc swap stream
   - Circle blockchain trading API
   - Circle Arc DEX API
-  - Bitquery Arc mainnet
+  - Bitquery Arc
 ---
-# Arc Mainnet DEX Trades API & Streams
+# Arc DEX Trades API & Streams
 
-Use **`Trading` for Arc mainnet trading queries and live streams**. `Trading.Trades` returns trades, USD amounts, token pairs and trader addresses. Use `Trading.Tokens` for token candles across pools and `Trading.Pairs` for prices from a chosen market.
+Use **`Trading` for Arc trading queries and live streams**. `Trading.Trades` returns trades, USD amounts, token pairs and trader addresses. Use `Trading.Tokens` for token candles across pools and `Trading.Pairs` for prices from a chosen market.
 
 :::tip Choose by time range
 For live streams and trades within the last **30 days**, use the Trading cube. Filter trades with `Pair: {Market: {Network: {is: "Arc"}}}`.
@@ -31,7 +31,7 @@ Use `EVM.DEXTrades` or `EVM.DEXTradeByTokens` only for trades **older than 30 da
 Open each example with its **Run in IDE** link. Where available, **Run stream** opens the subscription version. For your own app, [create an API access token](/docs/authorization/how-to-generate/) and send queries to `https://streaming.bitquery.io/graphql`. See [WebSocket authentication](/docs/authorization/websocket/) for streams.
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/)
 - [Arc launchpad token launches and trades](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
 - [Trading.Trades reference](/docs/trading/crypto-trades-api/trades-api/)
 - [Token candles](/docs/trading/crypto-price-api/tokens/) and [pair prices](/docs/trading/crypto-price-api/pairs/)

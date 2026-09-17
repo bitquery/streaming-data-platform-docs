@@ -10,7 +10,7 @@ keywords:
   - Minara fee hook
   - Minara token price API
   - Minara OHLCV API
-  - Arc mainnet launchpad API
+  - Arc launchpad API
   - Circle blockchain API
 ---
 
@@ -18,7 +18,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # Minara Launchpad API on Arc: Tokens, Trades and OHLCV
 
-Track [Minara.fun](https://minara.fun/) token launches on Arc mainnet, Circle's EVM blockchain. Verify each token's launch and creator from on-chain events, then use the Trading cubes for swaps, pool prices and token candles.
+Track [Minara.fun](https://minara.fun/) token launches on Arc, Circle's EVM blockchain. Verify each token's launch and creator from on-chain events, then use the Trading cubes for swaps, pool prices and token candles.
 
 Use `EVM.Events` for launch records. Trading examples use `Trading.Trades`, `Trading.Pairs` and `Trading.Tokens`, with the Arc network ID `bid:arc`.
 
@@ -30,9 +30,9 @@ Leave `dataset` unset in these examples. A 24-hour filter does not promise 24 ho
 
 ## Contracts and launch identity
 
-Minara's [contract list](https://api.minara.fun/minara-fun/contracts?chainId=5042) and [launch strategy list](https://api.minara.fun/minara-fun/launch-strategies?chainId=5042) publish these Arc mainnet addresses. Check the lists for new deployments and retain verified older addresses in your own registry.
+Minara's [contract list](https://api.minara.fun/minara-fun/contracts?chainId=5042) and [launch strategy list](https://api.minara.fun/minara-fun/launch-strategies?chainId=5042) publish these Arc addresses. Check the lists for new deployments and retain verified older addresses in your own registry.
 
-| Contract | Arc mainnet address |
+| Contract | Arc address |
 | --- | --- |
 | Liquidity Launcher, launch entry point | `0xb6c6f77ee74af874a183bfd77dd0176d1ac91de6` |
 | Current InstantLaunchStrategyWithHook | `0x4d3a3f4e1a918845c2038bc064c4d250822b203e` |
@@ -401,7 +401,7 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy` a
   items={[
     {
       q: "What is Minara's 0xb6A65950534F061618B4AE102FBcbb8541a8e0cC contract?",
-      a: "It is Minara's fee hook on Arc mainnet. Its PoolRegistered event links a pool ID, token and creator at launch. Tokens are deployed through a separate shared UERC20Factory."
+      a: "It is Minara's fee hook on Arc. Its PoolRegistered event links a pool ID, token and creator at launch. Tokens are deployed through a separate shared UERC20Factory."
     },
     {
       q: "Can the shared factory identify every Minara token?",
@@ -424,9 +424,9 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy` a
 
 ## Next steps
 
-- [Arc Mainnet Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
+- [Arc Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
 - [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/)
 - [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/)
-- [Circle Blockchain API for Arc Mainnet](/docs/blockchain/arc-mainnet/)
+- [Arc Blockchain API](/docs/blockchain/arc-mainnet/)
 - [Trading Trades API](/docs/trading/crypto-trades-api/trades-api/)
 - [Minara docs](https://minara.fun/docs)

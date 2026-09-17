@@ -1,21 +1,21 @@
 ---
-title: "Arc Mainnet Calls & Traces API"
-description: "Query and stream Arc mainnet smart contract calls and traces with Bitquery GraphQL, including selectors, internal calls, deployments, reverts and top methods."
+title: "Arc Calls & Traces API"
+description: "Query and stream Arc smart contract calls and traces with Bitquery GraphQL, including selectors, internal calls, deployments, reverts and top methods."
 sidebar_position: 4
 keywords:
-  - Arc mainnet calls API
-  - Arc mainnet internal transactions
-  - Arc mainnet traces API
-  - Arc mainnet contract deployments
-  - Arc mainnet debug_traceTransaction alternative
-  - Arc mainnet reverted calls
+  - Arc calls API
+  - Arc internal transactions
+  - Arc traces API
+  - Arc contract deployments
+  - Arc debug_traceTransaction alternative
+  - Arc reverted calls
   - Circle Arc calls API
   - arc Calls
-  - Bitquery Arc mainnet
+  - Bitquery Arc
 ---
-# Arc Mainnet Calls & Traces API
+# Arc Calls & Traces API
 
-Query and stream **smart contract calls on Arc mainnet** with Bitquery GraphQL. The `EVM.Calls` cube on `network: arc` holds every call in every transaction, including internal calls, with the decoded method signature, the call path, value, gas, success and revert flags, and the enclosing transaction. It returns what `debug_traceTransaction` and `trace_filter` return, without running a node, and the same query runs as a subscription.
+Query and stream **smart contract calls on Arc** with Bitquery GraphQL. The `EVM.Calls` cube on `network: arc` holds every call in every transaction, including internal calls, with the decoded method signature, the call path, value, gas, success and revert flags, and the enclosing transaction. It returns what `debug_traceTransaction` and `trace_filter` return, without running a node, and the same query runs as a subscription.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.
 
@@ -30,9 +30,9 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
-- [Arc Mainnet Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/)
-- [Arc Mainnet Transactions API](/docs/blockchain/arc-mainnet/arc-mainnet-transactions-api/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
+- [Arc Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/)
+- [Arc Transactions API](/docs/blockchain/arc-mainnet/arc-mainnet-transactions-api/)
 - [EVM Calls schema](/docs/schema/evm/calls/)
 - [Transfers vs Events vs Calls](/docs/start/mental-model-transfers-events-calls/)
 :::

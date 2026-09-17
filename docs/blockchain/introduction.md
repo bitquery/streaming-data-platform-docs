@@ -37,7 +37,7 @@ Our V2 API version with enhanced features and real-time streaming:
 - **[Optimism](/docs/blockchain/Optimism/)**
 - **[opBNB](/docs/blockchain/supported-chains/)** (IDE / limited docs)
 - **[Robinhood](/docs/blockchain/robinhood/)**
-- **[Arc Mainnet](/docs/blockchain/arc-mainnet/)** (Circle Arc; live queries and WebSocket streams)
+- **[Arc Blockchain API](https://bitquery.io/blockchains/arc-blockchain-api)** (Circle Arc; live queries and WebSocket streams)
 
 **Non-EVM Chains:**
 - **[Solana](/docs/blockchain/Solana/)**
@@ -58,7 +58,7 @@ Our comprehensive V1 API supporting 40+ blockchains with historical data:
 
 ## Bitquery's Core Blockchain Data Capabilities
 
-**Popular APIs:** [Arc Mainnet API](/docs/blockchain/arc-mainnet/) · [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/)
+**Popular APIs:** [Arc Blockchain API](https://bitquery.io/blockchains/arc-blockchain-api) · [Solana API](/docs/blockchain/Solana/) (DEX trades, Pump.fun, Raydium) · [Polymarket API](/docs/examples/polymarket-api/polymarket-api) · [BSC API](/docs/blockchain/BSC/) · [Base API](/docs/blockchain/Base/) · [DEX API](/docs/blockchain/Ethereum/dextrades/dex-api) · [Crypto Price API](/docs/trading/crypto-price-api/)
 
 ### **Crypto Price API - Real-Time Multi-Chain Price Data**
 

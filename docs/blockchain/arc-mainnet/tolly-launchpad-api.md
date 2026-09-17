@@ -1,7 +1,7 @@
 ---
 title: "Tolly Launchpad API on Arc: Tokens, Trades and OHLCV"
 sidebar_label: "Tolly Launchpad API"
-description: "Track Tolly token launches on Circle Arc mainnet with Bitquery. Use GraphQL and WebSocket APIs for new tokens, Trading cube swaps, USD prices and OHLCV candles."
+description: "Track Tolly token launches on Circle Arc with Bitquery. Use GraphQL and WebSocket APIs for new tokens, Trading cube swaps, USD prices and OHLCV candles."
 sidebar_position: 3
 keywords:
   - Tolly launchpad API
@@ -10,7 +10,7 @@ keywords:
   - Tolly token price API
   - Tolly OHLCV API
   - Tollylabs
-  - Arc mainnet launchpad API
+  - Arc launchpad API
   - Circle blockchain API
 ---
 
@@ -18,7 +18,7 @@ import FAQ from "@site/src/components/FAQ";
 
 # Tolly Launchpad API on Arc: Tokens, Trades and OHLCV
 
-[Tolly](https://tollylabs.com/guide) is a token launchpad on Arc mainnet, Circle's EVM chain. Its guide describes launches with USDC liquidity and trading from the first block. Track tokens created by its factory, then follow their trades across indexed markets.
+[Tolly](https://tollylabs.com/guide) is a token launchpad on Arc, Circle's EVM chain. Its guide describes launches with USDC liquidity and trading from the first block. Track tokens created by its factory, then follow their trades across indexed markets.
 
 Use `EVM.Events` to find launches. All trading examples below use `Trading.Trades`, `Trading.Pairs`, or `Trading.Tokens`.
 
@@ -61,7 +61,7 @@ query {
 
 ## Contracts and token identity
 
-| Contract | Arc mainnet address |
+| Contract | Arc address |
 | --- | --- |
 | Tolly launch factory | `0xcad7ee36ac193bf2eddb7b3e2736c5bdb8269c8b` |
 
@@ -365,7 +365,7 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy`, 
 ## Related APIs
 
 - [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/)
-- [Arc Mainnet Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
-- [Circle Blockchain API for Arc Mainnet](/docs/blockchain/arc-mainnet/)
+- [Arc Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
+- [Arc Blockchain API](/docs/blockchain/arc-mainnet/)
 - [Trading Trades API](/docs/trading/crypto-trades-api/trades-api/)
 - [Trading Tokens OHLCV API](/docs/trading/crypto-price-api/tokens/)

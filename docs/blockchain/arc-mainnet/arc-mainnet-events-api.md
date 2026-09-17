@@ -1,22 +1,22 @@
 ---
-title: "Arc Mainnet Events API & WebSocket Streams"
-description: "Query and stream Arc mainnet smart contract events with Bitquery GraphQL, including decoded logs, topics, arguments and new Uniswap pool events in real time."
+title: "Arc Events API & WebSocket Streams"
+description: "Query and stream Arc smart contract events with Bitquery GraphQL, including decoded logs, topics, arguments and new Uniswap pool events in real time."
 sidebar_position: 3
 keywords:
-  - Arc mainnet events API
-  - Arc mainnet smart contract events
-  - Arc mainnet logs API
-  - Arc mainnet eth_getLogs alternative
-  - Arc mainnet event stream websocket
-  - Arc mainnet Uniswap v4 Initialize
-  - Arc mainnet new pools
+  - Arc events API
+  - Arc smart contract events
+  - Arc logs API
+  - Arc eth_getLogs alternative
+  - Arc event stream websocket
+  - Arc Uniswap v4 Initialize
+  - Arc new pools
   - Circle Arc events API
   - arc Events
-  - Bitquery Arc mainnet
+  - Bitquery Arc
 ---
-# Arc Mainnet Events API & WebSocket Streams
+# Arc Events API & WebSocket Streams
 
-Stream **every smart contract event on Arc mainnet** with Bitquery GraphQL. The `EVM.Events` cube on `network: arc` returns each log with decoded, typed arguments for known signatures, the raw topics, and the transaction, internal call and receipt that produced it. It covers what `eth_getLogs` and `eth_subscribe("logs")` return, and adds server-side filtering on decoded values.
+Stream **every smart contract event on Arc** with Bitquery GraphQL. The `EVM.Events` cube on `network: arc` returns each log with decoded, typed arguments for known signatures, the raw topics, and the transaction, internal call and receipt that produced it. It covers what `eth_getLogs` and `eth_subscribe("logs")` return, and adds server-side filtering on decoded values.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.
 
@@ -31,10 +31,10 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
-- [Arc Mainnet Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/)
-- [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
-- [Arc Mainnet Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
+- [Arc Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/)
+- [Arc DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
+- [Arc Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
 - [EVM Events schema](/docs/schema/evm/events/)
 - [Transfers vs Events vs Calls](/docs/start/mental-model-transfers-events-calls/)
 :::
@@ -387,7 +387,7 @@ Change `query` to `subscription` and drop `limit` and `orderBy` to get each new 
 
 ▶️ [Run in IDE](https://ide.bitquery.io/arc-mainnet-new-v3-v2-pools)
 
-Several v3 and v2 factory deployments appeared on mainnet, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
+Several v3 and v2 factory deployments appeared on Arc, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
 
 ```graphql
 {

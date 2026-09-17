@@ -1,21 +1,21 @@
 ---
-title: "Arc Mainnet Transfers API & Streams"
-description: "Query and stream Arc mainnet token transfers with Bitquery GraphQL, including native USDC, ERC-20 USDC, EURC, wallet history, large transfers and daily volume."
+title: "Arc Transfers API & Streams"
+description: "Query and stream Arc token transfers with Bitquery GraphQL, including native USDC, ERC-20 USDC, EURC, wallet history, large transfers and daily volume."
 sidebar_position: 2
 keywords:
-  - Arc mainnet transfers API
-  - Arc mainnet USDC transfers
-  - Arc mainnet EURC transfers
-  - Arc mainnet token transfers
-  - Arc mainnet wallet transfers
+  - Arc transfers API
+  - Arc USDC transfers
+  - Arc EURC transfers
+  - Arc token transfers
+  - Arc wallet transfers
   - Circle Arc transfers API
   - arc Transfers
-  - stream Arc mainnet transfers
-  - Bitquery Arc mainnet
+  - stream Arc transfers
+  - Bitquery Arc
 ---
-# Arc Mainnet Transfers API & Streams
+# Arc Transfers API & Streams
 
-Query and stream **token transfers on Arc mainnet** with Bitquery GraphQL. This is the shared **EVM `Transfers`** cube scoped to `network: arc`, so a query written for Ethereum or Base runs here by changing the network name.
+Query and stream **token transfers on Arc** with Bitquery GraphQL. This is the shared **EVM `Transfers`** cube scoped to `network: arc`, so a query written for Ethereum or Base runs here by changing the network name.
 
 Arc's native gas token is **USDC**, and the chain carries an ERC-20 USDC interface, EURC, USYC and user-issued assets. Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows over WebSocket.
 
@@ -30,10 +30,10 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
-- [Arc Mainnet DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
-- [Arc Mainnet Balances API](/docs/blockchain/arc-mainnet/arc-mainnet-balances-api/)
-- [Arc Mainnet Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
+- [Arc DEX Trades API](/docs/blockchain/arc-mainnet/arc-mainnet-trades-api/)
+- [Arc Balances API](/docs/blockchain/arc-mainnet/arc-mainnet-balances-api/)
+- [Arc Events API](/docs/blockchain/arc-mainnet/arc-mainnet-events-api/)
 - [Transfers vs Events vs Calls](/docs/start/mental-model-transfers-events-calls/)
 - [EVM Transfers schema](/docs/schema/evm/transfers/)
 :::
@@ -44,7 +44,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 
 ## How USDC appears in Transfers
 
-USDC exists in three forms on Arc mainnet. Check which one a row is before you sum or rank anything.
+USDC exists in three forms on Arc. Check which one a row is before you sum or rank anything.
 
 | Currency | `SmartContract` | `Native` | Decimals | What it is |
 | --- | --- | --- | --- | --- |
@@ -52,7 +52,7 @@ USDC exists in three forms on Arc mainnet. Check which one a row is before you s
 | USDC (ERC-20) | `0x3600000000000000000000000000000000000000` | `false` | 6 | The ERC-20 interface most contracts and wallets call. Symbol `USDC`, name `USDC`. |
 | System ledger | `0xfffffffffffffffffffffffffffffffffffffffe` | `false` | 0 | A system address that emits a raw `Transfer` event mirroring native USDC movements as 18-decimal integers with no symbol. Exclude it from token rankings. |
 
-Official tokens on Arc mainnet:
+Official tokens on Arc:
 
 | Token | Address | Decimals |
 | --- | --- | --- |

@@ -1,22 +1,22 @@
 ---
-title: "Arc Mainnet Transactions, Blocks & Fees API"
-description: "Query and stream Arc mainnet transactions, blocks and USDC gas fees with Bitquery GraphQL, including hashes, address history, failures and fee analytics."
+title: "Arc Transactions, Blocks & Fees API"
+description: "Query and stream Arc transactions, blocks and USDC gas fees with Bitquery GraphQL, including hashes, address history, failures and fee analytics."
 sidebar_position: 5
 keywords:
-  - Arc mainnet transactions API
-  - Arc mainnet blocks API
-  - Arc mainnet gas fees USDC
-  - Arc mainnet transaction by hash
-  - Arc mainnet receipts
-  - Arc mainnet block explorer API
-  - Arc mainnet eth_getTransactionByHash alternative
+  - Arc transactions API
+  - Arc blocks API
+  - Arc gas fees USDC
+  - Arc transaction by hash
+  - Arc receipts
+  - Arc block explorer API
+  - Arc eth_getTransactionByHash alternative
   - Circle Arc transactions API
   - arc Transactions
-  - Bitquery Arc mainnet
+  - Bitquery Arc
 ---
-# Arc Mainnet Transactions, Blocks & Fees API
+# Arc Transactions, Blocks & Fees API
 
-Query and stream **transactions, receipts and blocks on Arc mainnet** with Bitquery GraphQL. The `EVM.Transactions` and `EVM.Blocks` cubes on `network: arc` cover what a block explorer shows for a hash, an address or a block, with fees in **USDC** because USDC is the chain's gas token.
+Query and stream **transactions, receipts and blocks on Arc** with Bitquery GraphQL. The `EVM.Transactions` and `EVM.Blocks` cubes on `network: arc` cover what a block explorer shows for a hash, an address or a block, with fees in **USDC** because USDC is the chain's gas token.
 
 Every query on this page was executed against the production endpoint before publishing. Change `query` to `subscription` on any of them to stream the same rows.
 
@@ -31,9 +31,9 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::tip Related docs
-- [Arc Mainnet API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
-- [Arc Mainnet Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/) — the call tree inside a transaction
-- [Arc Mainnet Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
+- [Arc Blockchain API overview](/docs/blockchain/arc-mainnet/) — network facts, every cube and stream in one place
+- [Arc Calls API](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/) — the call tree inside a transaction
+- [Arc Transfers API](/docs/blockchain/arc-mainnet/arc-mainnet-transfers-api/)
 - [EVM Transactions schema](/docs/schema/evm/transactions/)
 - [EVM Blocks schema](/docs/schema/evm/blocks/)
 :::
