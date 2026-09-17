@@ -1,8 +1,9 @@
 ---
-title: "Hyperliquid L3 Order Book API — Market-by-Order Data with Trader Attribution"
+title: "Hyperliquid Order Book API (L3) — Market-by-Order Data with Trader Attribution"
 description: "Stream Hyperliquid's order book at L3 (market-by-order) granularity: every order delta carries its own order id and the wallet address behind it. Covers order lifecycle, book deltas and TWAPs over GraphQL and WebSocket."
 sidebar_position: 3
 keywords:
+  - Hyperliquid order book
   - Hyperliquid L3 order book
   - Hyperliquid market by order data
   - Hyperliquid order book API
@@ -18,9 +19,9 @@ keywords:
   - Bitquery Hyperliquid orders
 ---
 
-# Hyperliquid L3 Order Book API
+# Hyperliquid Order Book API (L3)
 
-This page covers the `Orders`, `BookUpdates` and `Twaps` cubes: the full order lifecycle, order-book deltas you can rebuild the book from, and TWAP order execution.
+Get the full Hyperliquid order book at order level, with the order id and wallet behind every change. This page covers the `Orders`, `BookUpdates` and `Twaps` cubes: the full order lifecycle, order-book deltas you can rebuild the book from, and TWAP order execution.
 
 ## L2 vs L3: what you get here
 
@@ -140,4 +141,10 @@ query {
 }
 ```
 
-`TwapId` matches `Trade.TwapId` on fills with `IsTwap: true`, so you can join a TWAP to its individual child fills.
+`TwapId` matches `Trade.TwapId` on fills with `IsTwap: true`, so you can join a TWAP to its individual child fills. [Hyperliquid TWAP Orders & Child Fills](/docs/perpetuals/hyperliquid/hyperliquid-twap-fills) walks through that join, with per-wallet TWAP history and an execution summary.
+
+## Related
+
+- [Track Order Flow by Wallet](/docs/perpetuals/hyperliquid/hyperliquid-order-flow-by-wallet) — market-maker tracking with L3 data
+- [TWAP Orders & Child Fills](/docs/perpetuals/hyperliquid/hyperliquid-twap-fills)
+- [HIP-3 Stocks API](/docs/perpetuals/hyperliquid/hip3-stocks-api) — order book for stock and commodity perps

@@ -1,8 +1,10 @@
 ---
-title: "Hyperliquid Liquidation History by Wallet"
+title: "Hyperliquid Liquidations — Liquidation History by Wallet"
 description: "Pull every liquidation for a single Hyperliquid address: market, method, mark price, execution, the position size before it was closed, and fees, over GraphQL and WebSocket."
 sidebar_position: 12
 keywords:
+  - Hyperliquid liquidations
+  - Hyperliquid liquidation history
   - Hyperliquid liquidation history wallet
   - Hyperliquid liquidation by address
   - was my Hyperliquid position liquidated
@@ -13,7 +15,9 @@ keywords:
   - Bitquery Hyperliquid liquidations
 ---
 
-# Hyperliquid Liquidation History by Wallet
+# Hyperliquid Liquidations: History by Wallet
+
+Look up Hyperliquid liquidations for any address: every liquidated position, its market, method, mark price and size, as a query or a live stream.
 
 The [perpetuals page](/docs/perpetuals/hyperliquid/hyperliquid-perpetuals-api#liquidations) covers the market-wide liquidation feed. This page is the other direction: **one address, its complete liquidation history**.
 
