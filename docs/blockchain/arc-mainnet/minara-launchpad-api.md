@@ -427,6 +427,6 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy` a
 - [Arc Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
 - [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/)
 - [RadarDEX Launchpad API](/docs/blockchain/arc-mainnet/radardex-launchpad-api/)
-- [Circle Blockchain API for Arc](/docs/blockchain/arc-mainnet/)
+- [Arc Blockchain API](/docs/blockchain/arc-mainnet/)
 - [Trading Trades API](/docs/trading/crypto-trades-api/trades-api/)
 - [Minara docs](https://minara.fun/docs)

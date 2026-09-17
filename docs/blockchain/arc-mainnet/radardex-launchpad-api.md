@@ -369,6 +369,6 @@ To stream candles, change `query` to `subscription`, remove `limit`, `orderBy`, 
 
 - [Tolly Launchpad API](/docs/blockchain/arc-mainnet/tolly-launchpad-api/)
 - [Arc Launchpads API](/docs/blockchain/arc-mainnet/arc-mainnet-launchpads-api/)
-- [Circle Blockchain API for Arc](/docs/blockchain/arc-mainnet/)
+- [Arc Blockchain API](/docs/blockchain/arc-mainnet/)
 - [Trading Trades API](/docs/trading/crypto-trades-api/trades-api/)
 - [Trading Tokens OHLCV API](/docs/trading/crypto-price-api/tokens/)
