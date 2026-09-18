@@ -100,7 +100,7 @@ Our newest **ultra-low latency streaming technology** provides the fastest **Sol
 ### GraphQL Subscriptions (WebSockets)
 1. **Authentication**: Use your [IDE credentials](/docs/authorization/how-to-generate/) or [OAuth tokens](/docs/authorization/websocket/)
 2. **Connect**: `wss://streaming.bitquery.io/graphql`
-3. **Start**: Create your first subscription in the [Bitquery IDE](https://ide.bitquery.io) using our [subscription examples](/docs/subscriptions/examples)
+3. **Start**: Create your first subscription in the [Bitquery IDE](https://ide.bitquery.io) using our [starter subscriptions](/docs/start/starter-subscriptions/)
 
 **Learn more**: [WebSocket Documentation](/docs/subscriptions/websockets/) | [Examples](/docs/subscriptions/examples/)
 
