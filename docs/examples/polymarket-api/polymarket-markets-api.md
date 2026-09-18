@@ -15,7 +15,7 @@ keywords:
 ---
 # Markets API
 
-Find markets on Polymarket by **market slug**, **event slug**, **condition ID**, and **token ID**. Use these parameters to narrow results to specific markets or events when building apps that combine market metadata with [trades](/docs/examples/prediction-market/prediction-trades-api/) and [settlements](/docs/examples/prediction-market/prediction-settlements-api/).
+Find markets on Polymarket by **market slug**, **event slug**, **condition ID**, or **token ID**. Use these parameters to narrow results to specific markets or events when building apps that combine market metadata with [trades](/docs/examples/prediction-market/prediction-trades-api/) and [settlements](/docs/examples/prediction-market/prediction-settlements-api/).
 
 **Network:** Polygon (`network: matic`). For full lifecycle and trade data, see the [Polymarket API](/docs/examples/polymarket-api/) overview and the [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/).
 
