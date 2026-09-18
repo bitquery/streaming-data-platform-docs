@@ -26,7 +26,7 @@ Since the April 2026 migration, Polymarket trades on the **CTF Exchange** `0xE11
 :::
 
 :::note Dataset: `realtime` and retention
-Polymarket prediction-market data on Polygon (`PredictionTrades`, `PredictionSettlements`, and related examples on this page) must use `dataset: realtime`. This dataset holds roughly the **last 7 days**, use time filters that fall inside that window. For longer history, see [Polymarket historical data exports](/docs/cloud/polymarket/).
+Polymarket prediction-market data on Polygon (`PredictionTrades`, `PredictionSettlements`, and related examples on this page) must use `dataset: realtime`. This dataset holds roughly the **last 7 days**, so use time filters that fall inside that window. For longer history, see [Polymarket historical data exports](/docs/cloud/polymarket/).
 :::
 
 ---
@@ -167,7 +167,7 @@ query PolymarketVolume(
 
 ## Order flow: buy vs sell pressure by hour
 
-Bucket trades by **hour** and split **collateral USD** using `IsOutcomeBuy` (see [Prediction Trades API, trade direction](/docs/examples/prediction-market/prediction-trades-api/)).
+Bucket trades by **hour** and split **collateral USD** using `IsOutcomeBuy` (see [Prediction Trades API: trade direction](/docs/examples/prediction-market/prediction-trades-api/)).
 
 ### One market (filter by exact question title)
 

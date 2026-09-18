@@ -144,7 +144,7 @@ The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse
 
 ## Reading Files with DuckDB
 
-No key, no client library, point DuckDB at the public sample directly:
+You need no key or client library. Point DuckDB at the public sample directly:
 
 ```sql
 SELECT *
@@ -181,7 +181,7 @@ df.head()
 
 ## Real-Time vs Batch Data Access
 
-Cloud data dumps are optimized for **batch analytics and historical workloads**.
+Cloud data dumps are built for **batch analytics and historical workloads**.
 
 If you require **low-latency or streaming Polymarket data**, Bitquery also provides:
 

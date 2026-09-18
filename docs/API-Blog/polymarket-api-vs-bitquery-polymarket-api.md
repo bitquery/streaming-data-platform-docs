@@ -67,7 +67,7 @@ The pages under `docs/examples/polymarket-api/` in this repo correspond to these
 
 Underneath, Bitquery's primary operations are PredictionTrades (buys and sells with buyer, seller, amount, price, USD-denominated collateral, and full market metadata), PredictionManagements (creation, resolution, and other lifecycle events), and PredictionSettlements (splits, merges, redemptions). Each can be run as a query for history or as a subscription for live streaming; swapping the single keyword is the only change required. For low-latency pipelines, Bitquery also publishes Kafka topics matic.predictions.proto and matic.broadcasted.predictions.proto (mempool), which require separate credentials.
 
-Because everything is GraphQL, aggregations, limitBy, orderBy: descendingByField, and computed expressions (e.g. `calculate(expression: "$buyUSD + $sellUSD")`) are first-class. That is what makes queries like "top 100 Polymarket markets by volume over a window" or "all whale trades above $10k across Polymarket in real time" one query instead of a client-side batch job over the CLOB.
+Because everything is GraphQL, aggregations, limitBy, orderBy: descendingByField, and computed expressions (e.g. `calculate(expression: "$buyUSD + $sellUSD")`) are built into the query language. That is what makes queries like "top 100 Polymarket markets by volume over a window" or "all whale trades above $10k across Polymarket in real time" one query instead of a client-side batch job over the CLOB.
 
 The one caveat is retention on the live endpoint: dataset: realtime holds roughly the **last 7 days**. For longer windows, a **full historical Polymarket dataset (Parquet on S3, Snowflake, BigQuery) is available via [Bitquery Cloud](/docs/cloud/polymarket/) on request**, with no need to self-persist the stream.
 
@@ -86,7 +86,7 @@ The one caveat is retention on the live endpoint: dataset: realtime holds roughl
 | **Whale trade filtering across all markets** | Manual | One subscription; see the [whale trades example](/docs/examples/polymarket-api/) |
 | **Real-time streaming** | WebSocket (ws-subscriptions-clob, ws-live-data), cannot unsubscribe, some filter gaps | GraphQL subscriptions plus Kafka matic.predictions.proto |
 | **Settlement (split / merge / redeem) analytics** | Indirect | Native; see [Advanced Analytics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
-| **Cross-market vertical APIs** (sports, commodity, BTC up/down) | Filter manually on Gamma | Purpose-built: [Sports](/docs/examples/polymarket-api/polymarket-sports-api/), [Commodity](/docs/examples/polymarket-api/polymarket-commodity-api/), [Bitcoin Up or Down](/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
+| **Cross-market vertical APIs** (sports, commodity, BTC up/down) | Filter manually on Gamma | Dedicated guides: [Sports](/docs/examples/polymarket-api/polymarket-sports-api/), [Commodity](/docs/examples/polymarket-api/polymarket-commodity-api/), [Bitcoin Up or Down](/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
 | **TVL / collateral (pUSD, USDC.e) custody balances** | Not exposed | Yes, via TransactionBalances on Conditional Tokens + neg-risk collateral |
 | **Historical depth** | Full CLOB history | realtime dataset ~last 7 days; full history as [Parquet exports](/docs/cloud/polymarket/) for S3, Snowflake, BigQuery |
 | **Auth** | API-key + HMAC-SHA256 (CLOB); none (Gamma) | Bitquery API token; Kafka requires separate creds |
@@ -144,9 +144,9 @@ All of these are runnable from the Bitquery IDE (linked inline from each docs pa
 
 If you want a visual reference for what Bitquery's Polymarket data looks like rendered as a live dashboard, showing top markets, whale trades, odds, and volumes, the [DexRabbit Polymarket Predictions dashboard](https://dexrabbit.bitquery.io/polymarket-predictions) runs directly on these APIs. Each panel ships with a "Get API" button that exposes the exact GraphQL query behind the chart, which you can copy into your own stack.
 
-## Bottom line
+## Which one to start with
 
-The two APIs are not rivals; they answer different questions. The official Polymarket APIs tell you **what Polymarket the application knows about your account and the current book**. Bitquery tells you **what actually happened on-chain across every Polymarket market, in a shape you can aggregate, stream, and replay**. Picking the right one, or more often using both, comes down to whether your next query starts with "place this order" or "across all markets…".
+The official Polymarket APIs tell you **what Polymarket the application knows about your account and the current book**. Bitquery tells you **what actually happened on-chain across every Polymarket market, in a shape you can aggregate, stream, and replay**. Picking the right one, or more often using both, comes down to whether your next query starts with "place this order" or "across all markets…".
 
 ## Further reading
 

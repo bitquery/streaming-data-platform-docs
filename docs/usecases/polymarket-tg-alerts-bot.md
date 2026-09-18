@@ -6,7 +6,7 @@ import VideoPlayer from "../../src/components/videoplayer.js";
 
 # How to Build a Polymarket Whale Alerts Telegram Bot with the Bitquery API
 
-Build a production-ready **Polymarket Telegram bot** that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market, all powered by the **[Bitquery Prediction Market API](/docs/examples/prediction-market/prediction-market-api/)**.
+Build a production-ready **Polymarket Telegram bot** that streams realtime trades and lets users set custom alerts on trade size, share price, trader wallet, or specific market. It is all powered by the **[Bitquery Prediction Market API](/docs/examples/prediction-market/prediction-market-api/)**.
 
 By the end of this guide you'll have a multi-user Telegram bot that subscribes to every Polymarket trade on Polygon over a single GraphQL WebSocket, filters trades against per-user alert rules, and pushes Telegram notifications with links to Polymarket, PolygonScan, and the trader's profile.
 
@@ -34,7 +34,7 @@ By the end of this guide you'll have a multi-user Telegram bot that subscribes t
 
 ## Why use Bitquery for Polymarket data
 
-Polymarket runs on Polygon and uses Gnosis CTF contracts under the hood. To build any data-driven product on top of it you typically need to either run your own Polygon archive node, index trades from the Conditional Tokens Framework (CTF), and resolve market metadata yourself, or you reach for a hosted indexer.
+Polymarket runs on Polygon and uses Gnosis CTF contracts under the hood. To build any data-driven product on top of it you need to either run your own Polygon archive node, index trades from the Conditional Tokens Framework (CTF), and resolve market metadata yourself, or reach for a hosted indexer.
 
 The Bitquery Prediction Market API solves all three concerns through a single GraphQL endpoint:
 
@@ -54,7 +54,7 @@ Before you start you'll need:
 3. **A Telegram account** plus a bot token. Open Telegram, message [@BotFather](https://t.me/BotFather), send `/newbot`, follow the prompts, and copy the `123456:ABC…` token it returns.
 4. **(Optional)** A Render or VPS account if you want to deploy the bot publicly. We cover Render at the end.
 
-Keep both tokens private, they grant API access on your behalf.
+Keep both tokens private because they grant API access on your behalf.
 
 ## Architecture overview
 
@@ -227,7 +227,7 @@ The full implementation in `polybit/bitquery.py` adds exponential-backoff reconn
 
 ## Step 3: Query top markets over HTTP
 
-For browse/search features you don't want to filter the firehose client-side, you want server-side aggregations. Bitquery's `PredictionTrades` exposes `sum`, `count`, and `count(distinct: …)` directly inside the GraphQL query, so "top markets last 1h by volume" is one request:
+For browse/search features you don't want to filter the firehose client-side. You want server-side aggregations. Bitquery's `PredictionTrades` exposes `sum`, `count`, and `count(distinct: …)` directly inside the GraphQL query, so "top markets last 1h by volume" is one request:
 
 ```graphql
 query TopMarketsByVolume($hours: Int!, $limit: Int!) {
@@ -262,7 +262,7 @@ query TopMarketsByVolume($hours: Int!, $limit: Int!) {
 }
 ```
 
-Swap `orderBy` for `unique_buyers` or `trade_count` to get the other top-market views, same shape, three different leaderboards from the same query template.
+Swap `orderBy` for `unique_buyers` or `trade_count` to get the other top-market views. That gives three leaderboards from the same query template.
 
 The HTTP client is a thin `httpx` wrapper that adds `Authorization: Bearer <token>` and POSTs to the same hostname:
 
@@ -423,7 +423,7 @@ def match_trade(event, alerts, *, cooldown_seconds=60):
     return matches
 ```
 
-Every active alert is just an in-memory dataclass, running this for ~hundreds of alerts per trade is trivially fast.
+Every active alert is just an in-memory dataclass, so running this for ~hundreds of alerts per trade is trivially fast.
 
 ## Step 6: Send notifications via Telegram
 
@@ -453,7 +453,7 @@ Notifications include inline links to:
 - `https://polygonscan.com/tx/<hash>`: straight from `Transaction.Hash`.
 - `https://polymarket.com/profile/<wallet>`: for the trader who triggered the alert (when a trader filter is set).
 
-The image preview is the question's S3 image URL (`Question.Image`) directly, no additional rendering hop needed.
+The image preview is the question's S3 image URL (`Question.Image`) directly, with no additional rendering step.
 
 ## Step 7: Persist users and alerts to JSON
 
@@ -517,7 +517,7 @@ Open your bot in Telegram, send `/start`, and try `/topmarkets`, `/search`, `/ad
 
 ## Step 9: Deploy with persistent storage
 
-Because user and alert state lives in JSON files, your hosting target needs **persistent disk**, not a free-tier ephemeral filesystem. The reference repo ships with a Render Blueprint:
+Because user and alert state lives in JSON files, your hosting target needs **persistent disk** rather than a free-tier ephemeral filesystem. The reference repo ships with a Render Blueprint:
 
 ```yaml
 # render.yaml
@@ -543,7 +543,7 @@ services:
 
 The `POLYBIT_DATA_DIR` env var redirects writes to the mounted disk, so `/var/data/users.json` and `/var/data/alerts.json` survive every redeploy. Total cost on Render: $7.25/mo (Starter Worker + 1 GB disk).
 
-For self-hosting, the same setup works under `systemd` on any VPS, just ensure the `WorkingDirectory` points at a directory that survives reboots. See [DEPLOY.md](https://github.com/Akshat-cs/PolyBit-Polymarket-Alerts-Telegram-Bot/blob/main/DEPLOY.md) in the repo for both flows.
+For self-hosting, the same setup works under `systemd` on any VPS. Make sure the `WorkingDirectory` points at a directory that survives reboots. See [DEPLOY.md](https://github.com/Akshat-cs/PolyBit-Polymarket-Alerts-Telegram-Bot/blob/main/DEPLOY.md) in the repo for both flows.
 
 ## Inspect users and alerts at runtime
 
@@ -579,7 +579,7 @@ Useful for product checks; safe to run while the bot is live.
 
 ## What you can build next
 
-The same Bitquery primitives unlock plenty of adjacent products on top of Polymarket:
+You can build other Polymarket products from the same Bitquery queries:
 
 - **Per-trader leaderboards**: aggregate `PredictionTrades` by `Buyer` over a window for top-volume wallets.
 - **PnL tracking**: combine `PredictionTrades` with `PredictionSettlements` to compute realized PnL per wallet.
@@ -601,6 +601,6 @@ All of these reuse the same GraphQL endpoint, same auth, same field shapes.
 
 ## Conclusion
 
-A multi-user **Polymarket Telegram alerts bot** is one GraphQL subscription, a small filter loop, and a Telegram client away. Bitquery handles the chain-level work, decoded trades, market metadata, server-side aggregations, so you can spend your time on product, not on indexing.
+A multi-user **Polymarket Telegram alerts bot** is one GraphQL subscription, a small filter loop, and a Telegram client away. Bitquery handles the chain-level work (decoded trades, market metadata, server-side aggregations), so you can spend your time on product, not on indexing.
 
 Get a free Bitquery token at [account.bitquery.io](https://account.bitquery.io), point it at the Prediction Market API, and start shipping.
