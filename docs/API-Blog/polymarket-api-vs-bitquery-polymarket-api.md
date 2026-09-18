@@ -1,6 +1,6 @@
 ---
-title: "Polymarket API Vs Bitquery Polymarket"
-description: "Polymarket API Vs Bitquery Polymarket: Bitquery documentation with GraphQL examples, real-time streams, and integration guidance."
+title: "Polymarket API vs Bitquery Polymarket API (2026)"
+description: "Official Polymarket APIs (Gamma, CLOB, Data API v2) compared with Bitquery's on-chain Polymarket API: what each does, limits, and when to use both."
 keywords:
   - Polymarket API
   - Bitquery Polymarket API
@@ -26,6 +26,16 @@ Bitquery's Polymarket API is the right tool for **traders and researchers**: on-
 
 In most serious production stacks the two complement each other: CLOB for execution and event/market metadata, Bitquery for trader analytics, P&L, streaming, history, and anything that needs GROUP BY.
 
+## What changed in 2026
+
+Three changes on Polymarket's side are worth knowing before you pick a stack:
+
+- **New exchange contracts and pUSD.** In April 2026 Polymarket moved trading to new CTF Exchange contracts (`0xE111180000d2663C0091e4f400237545B87B996B` and the Neg Risk exchange `0xe2222d279d744050d28e00520010520000310F59`) and switched collateral from USDC.e to **pUSD**, a USDC-backed wrapper. Order structs and SDK package names changed with it. Bitquery queries filtered by `ProtocolName: "polymarket"` keep working; only hardcoded addresses need updating.
+- **Data API v2.** `data-api.polymarket.com/v2` adds cursor pagination and a shared response envelope for wallet activity, market data and trader analytics. It is a better per-account and per-market API than v1. It is still a paginated REST surface, so protocol-wide aggregates remain a client-side job.
+- **In-house indexing.** In September 2026 Polymarket said it now indexes Polygon itself (built on rindexer) with Goldsky as backup, which makes its own app and APIs faster to reflect on-chain events. For builders this mostly improves the official APIs' freshness; it does not add GraphQL aggregation, Kafka delivery, joins with other Polygon data, or warehouse exports.
+
+The short version: the official APIs got better at what they already did. The split between "execution and account views" and "cross-market analytics and streaming" is unchanged.
+
 ## Polymarket's official API surface
 
 Polymarket splits its public surface into three REST APIs plus two WebSocket streams.
@@ -34,7 +44,7 @@ The **Gamma API** at gamma-api.polymarket.com is the market-discovery layer. It 
 
 The **CLOB API** at clob.polymarket.com is the trading layer. It handles order submission, order-book reads, price history (/prices-history), trade history, and user order management. Authenticated endpoints use API-key credentials derived from wallet signatures (Ethereum/Polygon private key signing with HMAC-SHA256 request signing), while order-book and price endpoints are public. Order submission is rate-limited in the order of 10 requests per second, and WebSocket connections are capped at around 5 concurrent per IP. The CLOB is also where you subscribe to the real-time market and user channels at wss://ws-subscriptions-clob.polymarket.com/ws/market and /ws/user.
 
-The **Data API** at data-api.polymarket.com is the user-data layer. Endpoints like GET /positions, GET /activity, and GET /trades fetch a wallet's current positions (size, average price, cash PnL, % PnL), trade history, and activity feed. Profile fields (name, pseudonym, bio, profile image) are joined inline. Polymarket also runs a public-profile endpoint on Gamma (`GET /public-profile?address=<wallet>`) and a Bridge API for deposits/withdrawals.
+The **Data API** at data-api.polymarket.com (now with a **v2** at `/v2` using cursor pagination) is the user-data layer. Endpoints like GET /positions, GET /activity, and GET /trades fetch a wallet's current positions (size, average price, cash PnL, % PnL), trade history, and activity feed. Profile fields (name, pseudonym, bio, profile image) are joined inline. Polymarket also runs a public-profile endpoint on Gamma (`GET /public-profile?address=<wallet>`) and a Bridge API for deposits/withdrawals.
 
 Finally, the **Real-Time Data Socket** at wss://ws-live-data.polymarket.com broadcasts activity and trades. In practice it is most useful for fills and order-book deltas; filtering by market_slug or event_slug has known gaps, and Polymarket does not currently support unsubscribing from channels mid-session.
 
@@ -46,7 +56,7 @@ Bitquery takes a different approach. It indexes the Polymarket contracts on Poly
 
 The pages under **`docs/examples/polymarket-api/`** in this repo correspond to these guides:
 
-- [Polymarket API overview](/docs/examples/polymarket-api/polymarket-api/): the entry point, covering the core PredictionTrades query, live subscriptions, whale trades, and top buyers and sellers.
+- [Polymarket API overview](/docs/examples/polymarket-api/): the entry point, covering the core PredictionTrades query, live subscriptions, whale trades, and top buyers and sellers.
 - [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/): filter markets by market_slug, condition_id, or token_id through PredictionManagements.
 - [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/): recent trade counts, collateral totals, and distinct-market counts for any wallet, plus guidance on which fields belong to Polymarket's Profile, Gamma, or Bridge APIs.
 - [Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/): USDC TVL in core contracts, daily volume, maker/taker splits, order flow by market, whale subscriptions, settlement flows, and top markets by volume.
@@ -59,7 +69,7 @@ Underneath, Bitquery's primary operations are PredictionTrades (buys and sells w
 
 Because everything is GraphQL, aggregations, limitBy, orderBy: descendingByField, and computed expressions (e.g. `calculate(expression: "$buyUSD + $sellUSD")`) are first-class. That is what makes queries like "top 100 Polymarket markets by volume over a window" or "all whale trades above $10k across Polymarket in real time" one query instead of a client-side batch job over the CLOB.
 
-The one caveat is retention on the live endpoint: dataset: realtime holds roughly the **last 7 days**. For longer windows, a **full historical dataset is available via [Bitquery Cloud](/docs/cloud/) on request**, with no need to self-persist the stream.
+The one caveat is retention on the live endpoint: dataset: realtime holds roughly the **last 7 days**. For longer windows, a **full historical Polymarket dataset (Parquet on S3, Snowflake, BigQuery) is available via [Bitquery Cloud](/docs/cloud/polymarket/) on request**, with no need to self-persist the stream.
 
 ## Side-by-side comparison
 
@@ -73,12 +83,12 @@ The one caveat is retention on the live endpoint: dataset: realtime holds roughl
 | **Price history per token** | Yes, via CLOB /prices-history | Yes, via PredictionTrades with time filter |
 | **On-chain fields** (tx hash, block time, log signatures, condition ID events) | Limited | Yes, native on every row |
 | **Aggregations** (top N markets by volume, top wallets, maker/taker split) | Client-side | Native GraphQL: sum, count(distinct:), limitBy, orderBy: descendingByField |
-| **Whale trade filtering across all markets** | Manual | One subscription; see the [whale trades example](/docs/examples/polymarket-api/polymarket-api/) |
+| **Whale trade filtering across all markets** | Manual | One subscription; see the [whale trades example](/docs/examples/polymarket-api/) |
 | **Real-time streaming** | WebSocket (ws-subscriptions-clob, ws-live-data), cannot unsubscribe, some filter gaps | GraphQL subscriptions plus Kafka matic.predictions.proto |
 | **Settlement (split / merge / redeem) analytics** | Indirect | Native; see [Advanced Analytics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
 | **Cross-market vertical APIs** (sports, commodity, BTC up/down) | Filter manually on Gamma | Purpose-built: [Sports](/docs/examples/polymarket-api/polymarket-sports-api/), [Commodity](/docs/examples/polymarket-api/polymarket-commodity-api/), [Bitcoin Up or Down](/docs/examples/polymarket-api/bitcoin-polymarket-api/) |
-| **TVL / USDC custody balances** | Not exposed | Yes, via TransactionBalances on Conditional Tokens + neg-risk collateral |
-| **Historical depth** | Full CLOB history | realtime dataset ~last 7 days; full historical dataset available via [Bitquery Cloud](/docs/cloud/) on request |
+| **TVL / collateral (pUSD, USDC.e) custody balances** | Not exposed | Yes, via TransactionBalances on Conditional Tokens + neg-risk collateral |
+| **Historical depth** | Full CLOB history | realtime dataset ~last 7 days; full history as [Parquet exports](/docs/cloud/polymarket/) for S3, Snowflake, BigQuery |
 | **Auth** | API-key + HMAC-SHA256 (CLOB); none (Gamma) | Bitquery API token; Kafka requires separate creds |
 | **Rate limits** | 4,000/10s (Gamma), ~10 orders/sec (CLOB) | No data or rate limits on streams; Kafka for enterprise streaming and scaling to 1,000+ simultaneous users |
 
@@ -123,7 +133,7 @@ A reasonable production architecture looks like this:
 
 If you are new to Bitquery's Polymarket coverage, four queries exercise most of the surface area:
 
-1. The basic recent-trades query from the [Polymarket API overview](/docs/examples/polymarket-api/polymarket-api/), which confirms your API token and shows the shape of a PredictionTrade.
+1. The basic recent-trades query from the [Polymarket API overview](/docs/examples/polymarket-api/), which confirms your API token and shows the shape of a PredictionTrade.
 2. The volume-ranking query from the same doc, which demonstrates limitBy, orderBy: descendingByField, and the computed sumBuyAndSell expression.
 3. A live whale-trade subscription: swap the query keyword for subscription and filter on `CollateralAmountInUSD: { gt: "10000" }` to push events as they happen.
 4. The daily volume and maker/taker split from the [Advanced Analytics page](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/), which shows how far GraphQL takes you before any client-side aggregation is required.
@@ -142,7 +152,7 @@ The two APIs are not rivals; they answer different questions. The official Polym
 
 Canonical Bitquery Polymarket references:
 
-- [Polymarket API, Trade, Prices & Market Data](/docs/examples/polymarket-api/polymarket-api/)
+- [Polymarket API, Trade, Prices & Market Data](/docs/examples/polymarket-api/)
 - [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/) for CTF Exchange, condition_id, and token_id lookups
 - [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)
 - [Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/)
@@ -157,4 +167,6 @@ Vertical guides:
 Infrastructure and live reference:
 
 - [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/)
+- [Polymarket historical data exports](/docs/cloud/polymarket/)
+- [bitquery/polymarket-api on GitHub](https://github.com/bitquery/polymarket-api)
 - [DexRabbit Polymarket Predictions dashboard](https://dexrabbit.bitquery.io/polymarket-predictions)

@@ -1135,6 +1135,11 @@ const config = {
             from: "/docs/examples/Optimism/optimism-transfers/",
           },
 
+          // Polymarket guide now lives on the category URL
+          {
+            to: "/docs/examples/polymarket-api/",
+            from: "/docs/examples/polymarket-api/polymarket-api/",
+          },
           // Polymarket redirects from old examples/polymarket-api/ path to new examples/polymarket-api/ path
           {
             to: "/docs/examples/polymarket-api/polymarket-markets-api/",

@@ -601,7 +601,7 @@ Each query exposes the same `$wallets` variable, so you can drop the same wallet
 
 | Need                                 | API                                                                                                                                                                                                |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **All Polymarket trades & prices**   | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) / [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
+| **All Polymarket trades & prices**   | [Polymarket API](/docs/examples/polymarket-api/) / [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
 | **Filter by slug, condition, token** | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)                                                                                            |
 | **Settlements & redemptions**        | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)                                                                                 |
 | **Market creation & resolution**     | [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/)                                                                                           |

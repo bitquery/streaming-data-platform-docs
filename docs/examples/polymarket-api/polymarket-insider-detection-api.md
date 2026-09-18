@@ -131,7 +131,7 @@ A recent `earliest` time means a young wallet. You can also add `count` to the s
 
 ## Step 3: Trace the Funding Source
 
-Find where the wallet's money came from. The **first inbound USDC transfer** is usually the original funder, often a centralized exchange withdrawal or a parent wallet. This query uses bridged USDC.e on Polygon (`0x2791bca1f2de4661ed88a30c99a7a9449aa84174`).
+Find where the wallet's money came from. The **first inbound USDC transfer** is usually the original funder, often a centralized exchange withdrawal or a parent wallet. This query uses bridged USDC.e on Polygon (`0x2791bca1f2de4661ed88a30c99a7a9449aa84174`), which is still how wallets are funded; Polymarket wraps it into **pUSD** (`0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB`) for trading, so add that contract if you also want pUSD moves between wallets.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/FundingSource-for-poylmarket)
 
@@ -243,7 +243,7 @@ Read this before acting on a flag.
 | **Live odds, trades, volume by sport** | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |
 | **Trader realized PnL & win rate** | [Realized PnL & Win Rate for Polymarket Trader](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
 | **User & wallet activity** | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/) |
-| **Trades, prices, whales** | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) |
+| **Trades, prices, whales** | [Polymarket API](/docs/examples/polymarket-api/) |
 | **Settlements & redemptions** | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/) |
 | **Real-time: Kafka streams** | [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/) |
 

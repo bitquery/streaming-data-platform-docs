@@ -88,7 +88,7 @@ Contact [sales@bitquery.io](mailto:sales@bitquery.io) for custom historical expo
 ## Popular protocol APIs
 
 - [Solana DEX trades](https://docs.bitquery.io/docs/blockchain/Solana/solana-dextrades/)
-- [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/polymarket-api/)
+- [Polymarket API](https://docs.bitquery.io/docs/examples/polymarket-api/)
 - [Token holders API](https://docs.bitquery.io/docs/blockchain/Ethereum/token-holders/token-holder-api/)
 - [Arc Mainnet API](https://docs.bitquery.io/docs/blockchain/arc-mainnet/) — trades, prices, launchpads, transfers, events, calls, transactions and balances
 - [Hyperliquid perpetuals](https://docs.bitquery.io/docs/perpetuals/hyperliquid/)

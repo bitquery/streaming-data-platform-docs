@@ -17,7 +17,7 @@ keywords:
 
 Find markets on Polymarket using various filters, including **market slug**, **event slug**, **condition ID**, and **token ID**. Use these parameters to narrow results to specific markets or events when building apps that combine market metadata with [trades](/docs/examples/prediction-market/prediction-trades-api/) and [settlements](/docs/examples/prediction-market/prediction-settlements-api/).
 
-**Network:** Polygon (`network: matic`). For full lifecycle and trade data, see the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) overview and the [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/).
+**Network:** Polygon (`network: matic`). For full lifecycle and trade data, see the [Polymarket API](/docs/examples/polymarket-api/) overview and the [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/).
 
 ---
 
@@ -324,6 +324,6 @@ query MarketsByConditionIdRecent($conditionIds: [String!]) {
 | **Trades & prices**              | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)                                                                                 |
 | **Settlements & redemptions**    | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)                                                                       |
 | **Market creation & resolution** | [Prediction Market API](/docs/examples/prediction-market/prediction-market-api/) / [Prediction Managements API](/docs/examples/prediction-market/prediction-managements-api/) |
-| **Polymarket overview**          | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)                                                                                                                  |
+| **Polymarket overview**          | [Polymarket API](/docs/examples/polymarket-api/)                                                                                                                  |
 | **User & wallet activity**       | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)                                                                                     |
 | **On-chain condition & tokens**  | Main Polymarket Contract (on-chain)                                                   |

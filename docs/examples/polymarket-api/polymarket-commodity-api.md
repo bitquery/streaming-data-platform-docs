@@ -44,7 +44,7 @@ Markets are filtered by **Question.Title** using case-insensitive keywords. Use 
 | **MarketId** | Specific market (prices, OHLC, volume) | `Question.MarketId` (replace with your market ID) |
 | **ProtocolName** | Polymarket only | `Marketplace.ProtocolName: "polymarket"` |
 
-**Network:** Polygon (`network: matic`). For full lifecycle and trade APIs, see the [Polymarket API](/docs/examples/polymarket-api/polymarket-api) overview and [Prediction Market API](/docs/examples/prediction-market/prediction-market-api).
+**Network:** Polygon (`network: matic`). For full lifecycle and trade APIs, see the [Polymarket API](/docs/examples/polymarket-api/) overview and [Prediction Market API](/docs/examples/prediction-market/prediction-market-api).
 
 ---
 

@@ -1063,19 +1063,14 @@ const sidebars = {
         {
           type: "category",
           label: "Polymarket API",
+          // The full guide is the category page, so /examples/polymarket-api/ (the
+          // URL that ranks for "polymarket api") serves real content instead of a
+          // thin generated index. Old child URL redirects here.
           link: {
-            type: "generated-index",
-            slug: "/examples/polymarket-api",
-            // This generated-index — not the child polymarket-api page — is what
-            // ranks (position 2, "polymarket api"). Google was discarding the old
-            // "Polymarket Implementation Guide" title and substituting the child
-            // page's, so lead with the head term here. Description was 95 chars.
-            title: "Polymarket API - Prediction Market Data",
-            description:
-              "Query Polymarket prediction markets with Bitquery GraphQL — outcome prices, trades, market lifecycle, oracle resolutions, and wallet activity on Polygon.",
+            type: "doc",
+            id: "examples/polymarket-api/polymarket-api",
           },
           items: [
-            "examples/polymarket-api/polymarket-api",
             "examples/polymarket-api/polymarket-wallet-api",
             "examples/polymarket-api/polymarket-wallet-realized-pnl",
             "examples/polymarket-api/polymarket-advanced-analytics-api",

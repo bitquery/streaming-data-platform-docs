@@ -37,7 +37,7 @@ Win Rate = 100* count(profitable trade)/count(trades)
 [This query](https://ide.bitquery.io/buys-and-sells-of-a-wallet-on-polymarket) below uses variables for **hours ago** and the **buyer** wallet. It returns two lists: **`buys`** and **`sells`**, each with **`CollateralAmountInUSD`** and **`ConditionId`** so you can group and calculate at your system.
 
 ```graphql
-query WalletTrades($hoursAgo: Int!, $title: String!, $buyer: String!) {
+query WalletTrades($hoursAgo: Int!, $buyer: String!) {
   EVM(dataset: realtime, network: matic) {
     buys: PredictionTrades(
       where: {
@@ -166,7 +166,7 @@ END IF
 
 | Topic | Link |
 | ----- | ---- |
-| PolyMarket APIs Intro | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/) |
+| PolyMarket APIs Intro | [Polymarket API](/docs/examples/polymarket-api/) |
 | Advanced Polymarket Analytics | [Advanced Polymarket Metrics](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/) |
 | Prediction trades reference | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/) |
 | Sports Related PolyMarkets | [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/) |

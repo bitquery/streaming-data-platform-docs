@@ -15,18 +15,18 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Polymarket API - Advanced Analytics
 
-This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](/docs/examples/polymarket-api/polymarket-api/), [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/).
+This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](/docs/examples/polymarket-api/), [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/).
 
 :::note API Key Required
 To run these queries outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token](/docs/authorization/how-to-generate/).
 :::
 
 :::tip Contract addresses
-Confirm **USDC.e**, **Conditional Tokens**, and **exchange** addresses on Polygon from [Polymarket](https://polymarket.com/) or block explorers before production use; upgradeable deployments can change over time.
+Since the April 2026 migration, Polymarket trades on the **CTF Exchange** `0xE111180000d2663C0091e4f400237545B87B996B` and **Neg Risk CTF Exchange** `0xe2222d279d744050d28e00520010520000310F59`, and settles in **pUSD** `0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB` (a USDC-backed wrapper around USDC.e). Confirm addresses against the [Polymarket contracts page](https://docs.polymarket.com/resources/contracts) before production use; deployments can change over time.
 :::
 
 :::note Dataset: `realtime` and retention
-Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`PredictionSettlements`**, and related examples on this page) must use **`dataset: realtime`**. This dataset holds roughly the **last 7 days**—use time filters that fall inside that window.
+Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`PredictionSettlements`**, and related examples on this page) must use **`dataset: realtime`**. This dataset holds roughly the **last 7 days**—use time filters that fall inside that window. For longer history, see [Polymarket historical data exports](/docs/cloud/polymarket/).
 :::
 
 ---
@@ -35,7 +35,7 @@ Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`Predict
 
 | Topic                                | API                               | What you get                                                                          |
 | ------------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------- |
-| **TVL Polymarket**                   | `TransactionBalances`             | Latest **USDC.e** balance for listed custody addresses                                |
+| **TVL Polymarket**                   | `TransactionBalances`             | Latest **USDC.e** and **pUSD** balances for listed custody addresses                  |
 | **Daily volume & maker/taker split** | `PredictionTrades`                | **Shares** (`Amount`), **USDC** collateral, split by **Buyer** vs CTF-style addresses |
 | **Order flow (hourly)**              | `PredictionTrades`                | **Buy** vs **sell** pressure using `IsOutcomeBuy`, optional **market title** filter   |
 | **Whale trades**                     | `PredictionTrades` (subscription) | Trades above a **USD** threshold                                                      |
@@ -52,12 +52,12 @@ Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`Predict
 
 ## USDC TVL — balances for Conditional Tokens and neg-risk collateral
 
-Summarize **USDC.e** (`0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174`) held by **Conditional Tokens** and **neg-risk wrapped collateral** contracts. Extend the `Address` list if you track additional custodians.
+Summarize collateral held by **Conditional Tokens** and **neg-risk wrapped collateral** contracts. Traders now hold and settle in **pUSD** (`0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB`), but the collateral adapters unwrap it on the way in, so custody inside these contracts is still **USDC.e** (`0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174`). The query reads both tokens; expect USDC.e to carry almost all of the balance. Extend the `Address` list if you track additional custodians.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/Polymarket-TVL)
 
 ```graphql
-query PolymarketUSDCBalancesTVL {
+query PolymarketCollateralTVL {
   EVM(dataset: realtime, network: matic) {
     TransactionBalances(
       where: {
@@ -69,7 +69,12 @@ query PolymarketUSDCBalancesTVL {
             ]
           }
           Currency: {
-            SmartContract: { is: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174" }
+            SmartContract: {
+              in: [
+                "0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB"
+                "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
+              ]
+            }
             Fungible: true
           }
         }
@@ -150,10 +155,10 @@ query PolymarketVolume(
 
 ```json
 {
-  "date": "2026-03-20",
+  "date": "2026-09-17",
   "PolymarketContractAddresses": [
-    "0x4bfb41d5b3570defd03c39a9a4d8de6bd8b8982e",
-    "0xc5d563a36ae78145c45a50134d48a1215220f80a"
+    "0xe111180000d2663c0091e4f400237545b87b996b",
+    "0xe2222d279d744050d28e00520010520000310f59"
   ]
 }
 ```
@@ -410,7 +415,7 @@ query topMarketsByVolume($limit: Int!) {
 | Trades, prices, filters     | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)                       |
 | Splits, merges, redemptions | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)             |
 | Condition ID, slug, token   | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)                        |
-| Overview                    | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)                                        |
+| Overview                    | [Polymarket API](/docs/examples/polymarket-api/)                                        |
 | Wallet-level activity       | [Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/)                     |
 | Token balances (USDC)       | [Token Balance API](/docs/blockchain/Ethereum/balances/transaction-balance-tracker/token-balance-api/) |
 

@@ -1,9 +1,10 @@
 ---
-title: "Polymarket API Guide - Data & Query Reference"
-description: "Which Polymarket API to use for each job: trades and prices, positions and redemptions, market lifecycle, wallet activity and real-time streams."
-# Keep explicit slug so URL stays /polymarket-api/polymarket-api/ (folder basename
-# would otherwise collapse this doc onto /examples/polymarket-api/).
-slug: /examples/polymarket-api/polymarket-api
+title: "Polymarket API - Prediction Market Data"
+description: "Query Polymarket on-chain data with Bitquery GraphQL: trades, outcome prices, wallet PnL, market lifecycle and oracle resolutions, with WebSocket and Kafka streams."
+# This doc is the "Polymarket API" category page. /examples/polymarket-api/ is the
+# URL that ranks for "polymarket api", so the full guide lives here; the old
+# /polymarket-api/polymarket-api/ URL redirects to it (docusaurus.config.js).
+slug: /examples/polymarket-api
 keywords:
   - Polymarket API
   - Polymarket GraphQL API
@@ -27,7 +28,7 @@ keywords:
 import FAQ from "@site/src/components/FAQ";
 import ProductCTA from "@site/src/components/ProductCTA";
 
-# Polymarket API Guide - Data & Query Reference
+# Polymarket API - Prediction Market Data
 
 The Bitquery Polymarket API provides prediction market data on Polygon via GraphQL. Use **`dataset: realtime`** on `EVM` queries for **`PredictionTrades`**, **`PredictionSettlements`**, and related prediction-market APIs—this dataset retains roughly the **last 7 days**. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
 
@@ -40,12 +41,49 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::note Dataset
-Polymarket prediction-market data on Polygon requires **`dataset: realtime`** (~**7 days** of rolling history). Add `dataset: realtime` to the `EVM(...)` argument in your GraphQL examples when using prediction trades and settlements.
+Polymarket prediction-market data on Polygon requires **`dataset: realtime`** (~**7 days** of rolling history). Add `dataset: realtime` to the `EVM(...)` argument in your GraphQL examples when using prediction trades and settlements. For anything older, use the [Polymarket historical data exports](/docs/cloud/polymarket/).
 :::
 
 ---
 
 <ProductCTA href="https://bitquery.io/products/polymarket-api" title="Polymarket API" />
+
+## Bitquery Polymarket API vs the official Polymarket API
+
+Polymarket's own APIs (Gamma, CLOB, Data API) are the right choice for **placing orders**, reading the **order book**, and looking up one market or one account at a time. Bitquery indexes Polymarket **on-chain**, straight from the exchange and Conditional Tokens contracts on Polygon, so it fits the jobs the official API is not built for:
+
+| Job | Official Polymarket API | Bitquery Polymarket API |
+| --- | --- | --- |
+| Place and manage orders, order book depth | Yes (CLOB) | No, read-only data |
+| Aggregate across **all markets** in one request (top markets, top traders, volume by day) | Paginate and compute yourself | One GraphQL query with `sum`, `count`, `limitBy` |
+| **Whale and insider detection** across every market | Manual | One subscription or query, see [insider detection](/docs/examples/polymarket-api/polymarket-insider-detection-api/) |
+| **Wallet PnL** and cross-market activity | Per-account endpoints | [Wallet API](/docs/examples/polymarket-api/polymarket-wallet-api/) and [realized PnL](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
+| Join with other Polygon data (funding transfers, balances, DEX trades) | No | Same GraphQL endpoint and schema |
+| Delivery | REST and WebSocket | GraphQL, WebSocket subscriptions, **Kafka**, and [Parquet historical exports](/docs/cloud/polymarket/) |
+
+Many teams use both: the official CLOB API to trade, and Bitquery for analytics, alerts and backfills. A longer comparison is in [Polymarket API vs Bitquery Polymarket API](/docs/API-Blog/polymarket-api-vs-bitquery-polymarket-api/).
+
+:::info Polymarket contracts and collateral (2026 migration)
+Polymarket moved trading to new exchange contracts in April 2026 and now settles in **pUSD** (`0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB`), a USDC-backed ERC-20 that wraps USDC.e. Current Polygon addresses:
+
+- **CTF Exchange:** `0xE111180000d2663C0091e4f400237545B87B996B`
+- **Neg Risk CTF Exchange:** `0xe2222d279d744050d28e00520010520000310F59`
+- **Conditional Tokens (CTF):** `0x4D97DCd97eC945f40cF65F87097ACe5EA0476045` (unchanged)
+
+Inside the Conditional Tokens contract, custody is still USDC.e; pUSD is what traders hold and what `CollateralToken` returns on trades. Queries that filter by `ProtocolName: "polymarket"` need no change. If you hardcode exchange or collateral addresses, use the ones above; the previous exchanges (`0x4bFb41d5…8982E`, `0xC5d563A3…0f80a`) no longer emit `OrderFilled`.
+:::
+
+## Polymarket API guides
+
+- [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/): activity, volume and market counts by wallet
+- [Polymarket Wallet Realized PnL](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/): profit and loss per trader
+- [Polymarket Advanced Analytics API](/docs/examples/polymarket-api/polymarket-advanced-analytics-api/): TVL, daily volume, order flow, whale streams
+- [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/): look up markets by slug, condition ID or outcome token
+- [Polymarket Insider Detection API](/docs/examples/polymarket-api/polymarket-insider-detection-api/): fresh wallets, funding sources, pre-resolution bets
+- [Polymarket Sports API](/docs/examples/polymarket-api/polymarket-sports-api/), [Commodity API](/docs/examples/polymarket-api/polymarket-commodity-api/), [Bitcoin API](/docs/examples/polymarket-api/bitcoin-polymarket-api/) and [AI & Tech API](/docs/examples/polymarket-api/polymarket-ai-tech-api/): category-specific markets
+- [Polymarket historical data (Parquet, S3, Snowflake, BigQuery)](/docs/cloud/polymarket/): full-history backfills
+- [Polymarket Telegram alerts bot](/docs/usecases/polymarket-tg-alerts-bot/): tutorial
+- [bitquery/polymarket-api on GitHub](https://github.com/bitquery/polymarket-api): SDKs and runnable examples
 
 ## What Polymarket data can I get with Bitquery?
 
@@ -622,6 +660,53 @@ query {
     { q: "Where can I get Polymarket BTC up/down market data?", a: "Filter PredictionTrades by market question or condition_id for BTC up/down markets. For a dedicated short-interval product, contact support on Telegram." },
   ]}
 />
+
+## How much Polymarket volume goes through each exchange contract?
+
+Group one day of trades by exchange contract and collateral token. This shows the split between the **CTF Exchange** and the **Neg Risk CTF Exchange**, and confirms the collateral token (pUSD) your integration should expect.
+
+[Run in Bitquery IDE](https://ide.bitquery.io/polymarket-volume-by-exchange-contract-and-collateral)
+
+```graphql
+query PolymarketVolumeByExchange($date: String!) {
+  EVM(dataset: realtime, network: matic) {
+    PredictionTrades(
+      where: {
+        TransactionStatus: { Success: true }
+        Block: { Date: { is: $date } }
+        Trade: {
+          Prediction: { Marketplace: { ProtocolName: { is: "polymarket" } } }
+        }
+      }
+      limit: { count: 10 }
+      orderBy: { descendingByField: "volume_usd" }
+    ) {
+      Trade {
+        Prediction {
+          Marketplace {
+            SmartContract
+            ProtocolVersion
+          }
+          CollateralToken {
+            Symbol
+            SmartContract
+          }
+        }
+      }
+      volume_usd: sum(of: Trade_OutcomeTrade_CollateralAmountInUSD)
+      trades: count
+    }
+  }
+}
+```
+
+**Variables (example):**
+
+```json
+{
+  "date": "2026-09-17"
+}
+```
 
 ## Support
 

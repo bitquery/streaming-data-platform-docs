@@ -1212,7 +1212,7 @@ Trade: {
 | **Market lifecycle (creation, resolution)** | [Prediction Managements API](/docs/examples/prediction-market/prediction-managements-api/)    |
 | **Trades, volume, prices**                  | [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/)              |
 | **Filter by slug, condition ID, token**     | [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/)               |
-| **Polymarket overview**                     | [Polymarket API](/docs/examples/polymarket-api/polymarket-api/)                               |
+| **Polymarket overview**                     | [Polymarket API](/docs/examples/polymarket-api/)                               |
 | **Settlements & redemptions**               | [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/)    |
 | **User & wallet activity**                  | [Polymarket Wallet & User Activity API](/docs/examples/polymarket-api/polymarket-wallet-api/) |
 | **Trader realized PnL & win rate**          | [Realized PnL & Win Rate for Polymarket Trader](/docs/examples/polymarket-api/polymarket-wallet-realized-pnl/) |
