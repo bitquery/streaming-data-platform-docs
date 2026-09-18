@@ -61,7 +61,7 @@ Polymarket's own APIs (Gamma, CLOB, Data API) are the right choice for **placing
 | Join with other Polygon data (funding transfers, balances, DEX trades) | No | Same GraphQL endpoint and schema |
 | Delivery | REST and WebSocket | GraphQL, WebSocket subscriptions, **Kafka**, and [Parquet historical exports](/docs/cloud/polymarket/) |
 
-Many teams use both: the official CLOB API to trade, and Bitquery for analytics, alerts and backfills. A longer comparison is in [Polymarket API vs Bitquery Polymarket API](/docs/API-Blog/polymarket-api-vs-bitquery-polymarket-api/).
+The two work together. Trade through the official CLOB API, and run analytics, alerts and backfills on Bitquery. A longer comparison is in [Polymarket API vs Bitquery Polymarket API](/docs/API-Blog/polymarket-api-vs-bitquery-polymarket-api/).
 
 :::info Polymarket contracts and collateral (2026 migration)
 Polymarket moved trading to new exchange contracts in April 2026 and now settles in **pUSD** (`0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB`), a USDC-backed ERC-20 that wraps USDC.e. Current Polygon addresses:

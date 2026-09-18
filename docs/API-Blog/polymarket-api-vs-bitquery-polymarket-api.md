@@ -31,10 +31,10 @@ In most serious production stacks the two complement each other: CLOB for execut
 Three changes on Polymarket's side are worth knowing before you pick a stack:
 
 - **New exchange contracts and pUSD.** In April 2026 Polymarket moved trading to new CTF Exchange contracts (`0xE111180000d2663C0091e4f400237545B87B996B` and the Neg Risk exchange `0xe2222d279d744050d28e00520010520000310F59`) and switched collateral from USDC.e to **pUSD**, a USDC-backed wrapper. Order structs and SDK package names changed with it. Bitquery queries filtered by `ProtocolName: "polymarket"` keep working; only hardcoded addresses need updating.
-- **Data API v2.** `data-api.polymarket.com/v2` adds cursor pagination and a shared response envelope for wallet activity, market data and trader analytics. It is a better per-account and per-market API than v1. It is still a paginated REST surface, so protocol-wide aggregates remain a client-side job.
+- **Data API v2.** `data-api.polymarket.com/v2` adds cursor pagination and a shared response envelope for wallet activity, market data and trader analytics. That makes it a better per-account and per-market API than v1, but you still page through REST, so protocol-wide aggregates remain a client-side job.
 - **In-house indexing.** In September 2026 Polymarket said it now indexes Polygon itself (built on rindexer) with Goldsky as backup, which makes its own app and APIs faster to reflect on-chain events. For builders this mostly improves the official APIs' freshness; it does not add GraphQL aggregation, Kafka delivery, joins with other Polygon data, or warehouse exports.
 
-The short version: the official APIs got better at what they already did. The split between "execution and account views" and "cross-market analytics and streaming" is unchanged.
+None of this moves the line between the two stacks. The official APIs got faster and easier to page through for execution and account views, and cross-market analytics and streaming still need an on-chain index.
 
 ## Polymarket's official API surface
 

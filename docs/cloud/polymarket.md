@@ -1,6 +1,6 @@
 ---
 title: "Polymarket Historical Data - Parquet, S3, Snowflake, BigQuery"
-description: "Full Polymarket historical data as Parquet: every trade, price and settlement with market question and outcome labels, delivered to S3, Snowflake or BigQuery."
+description: "Polymarket historical data as Parquet: on-chain trades, prices and settlements with market question and outcome labels, delivered to S3, Snowflake or BigQuery."
 keywords:
   - Polymarket historical data
   - Polymarket historical data API
@@ -31,7 +31,7 @@ sidebar_position: 7
 ---
 # Polymarket Historical Data
 
-Bitquery provides **Polymarket historical data** as **Parquet files**: every on-chain trade, outcome price and settlement, already joined with the market question, outcome label and collateral token. It is built for backtesting, research, leaderboards and data lake integrations where paging through a REST API is too slow.
+Bitquery provides **Polymarket historical data** as **Parquet files** covering on-chain trades, outcome prices and settlements, already joined with the market question, outcome label and collateral token. It is built for backtesting, research, leaderboards and data lake integrations where paging through a REST API is too slow.
 These datasets can be hosted directly in your own cloud storage (for example, **AWS S3**) and queried using engines like **Snowflake, BigQuery, Athena, Spark, DuckDB, etc**.
 
 Polymarket runs on **Polygon (Matic)**, so all Polymarket datasets live under the `matic/` prefix.
@@ -154,7 +154,7 @@ LIMIT 10;
 
 ## Example: daily Polymarket volume from the sample file
 
-Aggregate directly over Parquet, no ETL step. Swap the single file for a glob over your own bucket to run it across the full history.
+DuckDB can aggregate the Parquet file over HTTPS without loading it anywhere first. Swap the single file for a glob over your own bucket to run it across the full history.
 
 ```sql
 SELECT
