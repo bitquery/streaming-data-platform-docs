@@ -30,7 +30,7 @@ import ProductCTA from "@site/src/components/ProductCTA";
 
 # Polymarket API - Prediction Market Data
 
-The Bitquery Polymarket API provides prediction market data on Polygon via GraphQL. Use **`dataset: realtime`** on `EVM` queries for **`PredictionTrades`**, **`PredictionSettlements`**, and related prediction-market APIs—this dataset retains roughly the **last 7 days**. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
+The Bitquery Polymarket API provides prediction market data on Polygon via GraphQL. Use `dataset: realtime` on `EVM` queries for `PredictionTrades`, `PredictionSettlements`, and related prediction-market APIs, this dataset retains roughly the **last 7 days**. Use it to query trades, settlements, market metadata, and volume; filter by condition_id, outcome token, or trade size; and access data via REST, WebSocket subscriptions, or Kafka streams. Filter by Polymarket using `ProtocolName: "polymarket"` or `Marketplace.ProtocolName` in your queries.
 
 If you are evaluating data providers, the [Polymarket API product page](https://bitquery.io/products/polymarket-api) summarizes market, trade and position coverage with plans and real-time delivery options.
 
@@ -41,7 +41,7 @@ Follow the steps here: [How to generate Bitquery API token ➤](/docs/authorizat
 :::
 
 :::note Dataset
-Polymarket prediction-market data on Polygon requires **`dataset: realtime`** (~**7 days** of rolling history). Add `dataset: realtime` to the `EVM(...)` argument in your GraphQL examples when using prediction trades and settlements. For anything older, use the [Polymarket historical data exports](/docs/cloud/polymarket/).
+Polymarket prediction-market data on Polygon requires `dataset: realtime` (~**7 days** of rolling history). Add `dataset: realtime` to the `EVM(...)` argument in your GraphQL examples when using prediction trades and settlements. For anything older, use the [Polymarket historical data exports](/docs/cloud/polymarket/).
 :::
 
 ---
@@ -87,7 +87,7 @@ Inside the Conditional Tokens contract, custody is still USDC.e; pUSD is what tr
 
 ## What Polymarket data can I get with Bitquery?
 
-Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`) with **`dataset: realtime`** (about the **last 7 days**). Use the links below to find the right API.
+Bitquery provides **trades and prices** (buy/sell activity, volume, outcome prices), **positions and redemptions** (splits, merges after resolution), **market lifecycle** (creation, resolution, oracle outcomes), **market metadata** (condition ID, slug, token filters via CTF Exchange), **wallet activity** (volume and market counts by address), and **real-time streaming** (Kafka for trades and settlements). All data is on Polygon (`network: matic`) with `dataset: realtime` (about the **last 7 days**). Use the links below to find the right API.
 
 ### How do I get Polymarket trades and prices?
 
@@ -127,12 +127,12 @@ Use the **[Polymarket Advanced Analytics API](/docs/examples/polymarket-api/poly
 
 ### How do I stream Polymarket data in real time?
 
-Use **Kafka Streams** for ultra-low-latency Polymarket data. Subscribe to trades, settlements, and market events as they happen.
+Use **Kafka Streams** for low-latency Polymarket data. Subscribe to trades, settlements, and market events as they happen.
 
 Available Kafka topics:
 
-- `matic.predictions.proto` — Raw prediction market events
-- `matic.broadcasted.predictions.proto` — Mempool prediction market data
+- `matic.predictions.proto`: Raw prediction market events
+- `matic.broadcasted.predictions.proto`: Mempool prediction market data
 
 Note: Kafka streaming requires separate credentials. [Contact support](https://t.me/bloxy_info) or email support@bitquery.io for access.
 
@@ -654,7 +654,7 @@ query {
   items={[
     { q: "How do I get Polymarket trade data through an API?", a: "Query EVM(dataset: realtime, network: matic) for PredictionTrades with ProtocolName polymarket. Filter by wallet, condition_id, or outcome token. Use the IDE to test, then add your API token for production." },
     { q: "How do I filter trades by market or condition_id?", a: "Look up the condition_id in the Polymarket Markets API, then pass it into PredictionTrades or PredictionManagements filters. The Markets API also accepts slug and token ID." },
-    { q: "What is the Polymarket CTF Exchange?", a: "The CTF (Conditional Token Framework) Exchange is Polymarket's prediction market layer on Polygon. Bitquery indexes it as polymarket protocol — use the Polymarket Markets API to query by condition_id, slug, or token ID." },
+    { q: "What is the Polymarket CTF Exchange?", a: "The CTF (Conditional Token Framework) Exchange is Polymarket's prediction market layer on Polygon. Bitquery indexes it as polymarket protocol, use the Polymarket Markets API to query by condition_id, slug, or token ID." },
     { q: "How far back does Polymarket data go?", a: "The realtime dataset keeps roughly the last 7 days of prediction trades and settlements. For longer history or bulk loads, ask about cloud exports or archive options." },
     { q: "Can I stream Polymarket trades in real time?", a: "Yes. Change your query to a GraphQL subscription over WebSocket, or use Kafka on matic.predictions.proto if your plan includes streaming access." },
     { q: "Where can I get Polymarket BTC up/down market data?", a: "Filter PredictionTrades by market question or condition_id for BTC up/down markets. For a dedicated short-interval product, contact support on Telegram." },

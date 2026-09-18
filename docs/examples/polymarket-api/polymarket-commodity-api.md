@@ -14,15 +14,15 @@ keywords:
   - PredictionManagements commodity
   - PredictionTrades commodity
 ---
-# Polymarket Commodity API — Gold, Crude Oil & Commodity Markets
+# Polymarket Commodity API: Gold, Crude Oil & Commodity Markets
 
 Query **commodity-related prediction markets** on Polymarket: **Gold (GC)** (e.g. “Gold Up or Down”), **Crude Oil**, and other commodity price-direction markets. Use **PredictionManagements** for market creation and resolution events, **PredictionTrades** for prices and volume, and **PredictionSettlements** for redemptions and top redeemers. All data is on Polygon (`network: matic`).
 
 :::tip See it in action: DEXrabbit Polymarket showcase
 Check out our **Polymarket data showcase** on [DEXrabbit](https://dexrabbit.bitquery.io/polymarket-predictions) powered by Bitquery APIs. Explore live commodity markets:
 
-- **[Gold (GC) market example](https://dexrabbit.bitquery.io/polymarket-predictions/0x6a9b34f5f4b44a7d3dced5ac84b3300aa9ae18e163a9bb4c98b805b57bbc1abb)** — View current odds, trade statistics, volume, and top traders by PnL
-- **[Crude Oil market example](https://dexrabbit.bitquery.io/polymarket-predictions/0x9a1e4e09a4bb9321f9b3f4f04d4242f1c11046348f88d236eeb0ae038b336096)** — See price charts, trading activity, and market analytics
+- **[Gold (GC) market example](https://dexrabbit.bitquery.io/polymarket-predictions/0x6a9b34f5f4b44a7d3dced5ac84b3300aa9ae18e163a9bb4c98b805b57bbc1abb)**: View current odds, trade statistics, volume, and top traders by PnL
+- **[Crude Oil market example](https://dexrabbit.bitquery.io/polymarket-predictions/0x9a1e4e09a4bb9321f9b3f4f04d4242f1c11046348f88d236eeb0ae038b336096)**: See price charts, trading activity, and market analytics
 
 Click the **"Get API"** buttons on any market page to get ready-to-use GraphQL queries for trade statistics, top traders by PnL, volume breakdowns, and more.
 :::
@@ -597,13 +597,13 @@ query TopRedeemersGoldMarket {
 
 ### GraphQL subscriptions
 
-Any **query** on this page can be run as a **subscription**: use the same `where` filters and fields, and change the keyword **`query`** to **`subscription`**. You will receive new events (creations, resolutions, or trades) as they occur on Polygon over a WebSocket connection.
+Any **query** on this page can be run as a **subscription**: use the same `where` filters and fields, and change the keyword `query` to `subscription`. You will receive new events (creations, resolutions, or trades) as they occur on Polygon over a WebSocket connection.
 
 ### Kafka streams
 
-For **ultra-low-latency** consumption, prediction market data (including commodity markets) is available via **Kafka**:
+For **low-latency** consumption, prediction market data (including commodity markets) is available via **Kafka**:
 
-- **`matic.predictions.proto`** — Raw prediction market events (creations, resolutions, trades)
-- **`matic.broadcasted.predictions.proto`** — Mempool prediction market data
+- `matic.predictions.proto`: Raw prediction market events (creations, resolutions, trades)
+- `matic.broadcasted.predictions.proto`: Mempool prediction market data
 
 Kafka requires **separate credentials**. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.

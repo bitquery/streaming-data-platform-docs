@@ -15,7 +15,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # Polymarket API - Advanced Analytics
 
-This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use **`dataset: realtime`**, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](/docs/examples/polymarket-api/), [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/).
+This guide shows **GraphQL examples** for deeper **Polymarket** metrics on **Polygon** (`network: matic`): **TVL** of Polymarket, **daily trade aggregates**, **buy vs sell pressure** for a market, **large-trade streaming**, **split/merge settlement** totals, and **top markets by volume**. All examples use `dataset: realtime`, which covers about the **last 7 days** of data. Use it together with the [Polymarket API](/docs/examples/polymarket-api/), [Prediction Trades API](/docs/examples/prediction-market/prediction-trades-api/), and [Prediction Settlements API](/docs/examples/prediction-market/prediction-settlements-api/).
 
 :::note API Key Required
 To run these queries outside the Bitquery IDE, you need an API access token. See [How to generate Bitquery API token](/docs/authorization/how-to-generate/).
@@ -26,7 +26,7 @@ Since the April 2026 migration, Polymarket trades on the **CTF Exchange** `0xE11
 :::
 
 :::note Dataset: `realtime` and retention
-Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`PredictionSettlements`**, and related examples on this page) must use **`dataset: realtime`**. This dataset holds roughly the **last 7 days**—use time filters that fall inside that window. For longer history, see [Polymarket historical data exports](/docs/cloud/polymarket/).
+Polymarket prediction-market data on Polygon (`PredictionTrades`, `PredictionSettlements`, and related examples on this page) must use `dataset: realtime`. This dataset holds roughly the **last 7 days**, use time filters that fall inside that window. For longer history, see [Polymarket historical data exports](/docs/cloud/polymarket/).
 :::
 
 ---
@@ -50,7 +50,7 @@ Polymarket prediction-market data on Polygon (**`PredictionTrades`**, **`Predict
 
 ---
 
-## USDC TVL — balances for Conditional Tokens and neg-risk collateral
+## USDC TVL: balances for Conditional Tokens and neg-risk collateral
 
 Summarize collateral held by **Conditional Tokens** and **neg-risk wrapped collateral** contracts. Traders now hold and settle in **pUSD** (`0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB`), but the collateral adapters unwrap it on the way in, so custody inside these contracts is still **USDC.e** (`0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174`). The query reads both tokens; expect USDC.e to carry almost all of the balance. Extend the `Address` list if you track additional custodians.
 
@@ -97,16 +97,16 @@ query PolymarketCollateralTVL {
 
 ---
 
-## Daily volume — notional shares, USDC, and buyer-address split
+## Daily volume: notional shares, USDC, and buyer-address split
 
 For a **single calendar day** (UTC), aggregate:
 
-- **volume_notional_shares** — sum of outcome **`Amount`** (share-like notional)
-- **volume_usdc** — sum of **`CollateralAmountInUSD`**
-- **taker_volume_usdc_address_rule** — USDC where **`Buyer`** is in **`$PolymarketContractAddresses`**
-- **maker_volume_usdc_address_rule** — USDC where **`Buyer`** is **not** in that list
+- **volume_notional_shares**: sum of outcome `Amount` (share-like notional)
+- **volume_usdc**: sum of `CollateralAmountInUSD`
+- **taker_volume_usdc_address_rule**: USDC where `Buyer` is in `$PolymarketContractAddresses`
+- **maker_volume_usdc_address_rule**: USDC where `Buyer` is **not** in that list
 
-Use **`dataset: realtime`** (see the **Dataset: realtime and retention** note at the top of this page).
+Use `dataset: realtime` (see the **Dataset: realtime and retention** note at the top of this page).
 
 [Run in Bitquery IDE](https://ide.bitquery.io/Polymarket-Notional-Volume-Taker-VolumeMaker-Volume)
 
@@ -165,9 +165,9 @@ query PolymarketVolume(
 
 ---
 
-## Order flow — buy vs sell pressure by hour
+## Order flow: buy vs sell pressure by hour
 
-Bucket trades by **hour** and split **collateral USD** using **`IsOutcomeBuy`** (see [Prediction Trades API — trade direction](/docs/examples/prediction-market/prediction-trades-api/)).
+Bucket trades by **hour** and split **collateral USD** using `IsOutcomeBuy` (see [Prediction Trades API, trade direction](/docs/examples/prediction-market/prediction-trades-api/)).
 
 ### One market (filter by exact question title)
 
@@ -227,7 +227,7 @@ query PolymarketOrderFlowPressureOneMarket(
 
 ---
 
-## Whale trades — subscription above a USD threshold
+## Whale trades: subscription above a USD threshold
 
 Stream **successful** Polymarket trades whose **collateral** exceeds **$10,000** USD. Adjust the threshold string as needed.
 
@@ -319,9 +319,9 @@ query PolymarketSettlementFlowOneDay($day: String!) {
 
 ---
 
-## Top markets by volume — last 24 hours
+## Top markets by volume: last 24 hours
 
-Rank **Polymarket** markets by **buy + sell** collateral USD, with **buy/sell** breakdown, **trade count**, **distinct buyers/sellers**, and optional **resolution** join. Uses **`limitBy: Trade_Prediction_Question_Id`** so each row is **one market**.
+Rank **Polymarket** markets by **buy + sell** collateral USD, with **buy/sell** breakdown, **trade count**, **distinct buyers/sellers**, and optional **resolution** join. Uses `limitBy: Trade_Prediction_Question_Id` so each row is **one market**.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/top-100-markets-by-volumein-last24-hrs_1)
 

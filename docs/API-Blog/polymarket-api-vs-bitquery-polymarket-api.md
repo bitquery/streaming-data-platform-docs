@@ -14,7 +14,7 @@ keywords:
 ---
 # Polymarket API vs Bitquery Polymarket API
 
-If you are building on Polymarket—whether a dashboard, a trading bot, a research tool, or a wallet leaderboard—you have two very different data stacks to choose from. Polymarket publishes a set of **official REST and WebSocket APIs** that serve the [polymarket.com](https://polymarket.com) application itself. Bitquery offers an **on-chain-derived GraphQL API** for the same Polymarket markets on Polygon, plus subscriptions and Kafka streams.
+If you are building on Polymarket, whether a dashboard, a trading bot, a research tool, or a wallet leaderboard, you have two very different data stacks to choose from. Polymarket publishes a set of **official REST and WebSocket APIs** that serve the [polymarket.com](https://polymarket.com) application itself. Bitquery offers an **on-chain-derived GraphQL API** for the same Polymarket markets on Polygon, plus subscriptions and Kafka streams.
 
 Both give you Polymarket data. They are built for different jobs. This article walks through what each one does well, what it does not do, and when to combine them.
 
@@ -54,7 +54,7 @@ A few characteristics fall out of this design. The official APIs reflect the [po
 
 Bitquery takes a different approach. It indexes the Polymarket contracts on Polygon directly, normalizes the events into a GraphQL schema, and exposes the same operations as REST queries, GraphQL subscriptions (WebSocket), or Kafka streams. Every Polymarket query lives under EVM(network: matic) with dataset: realtime, and filters on Marketplace.ProtocolName: "polymarket".
 
-The pages under **`docs/examples/polymarket-api/`** in this repo correspond to these guides:
+The pages under `docs/examples/polymarket-api/` in this repo correspond to these guides:
 
 - [Polymarket API overview](/docs/examples/polymarket-api/): the entry point, covering the core PredictionTrades query, live subscriptions, whale trades, and top buyers and sellers.
 - [Polymarket Markets API](/docs/examples/polymarket-api/polymarket-markets-api/): filter markets by market_slug, condition_id, or token_id through PredictionManagements.
@@ -142,7 +142,7 @@ All of these are runnable from the Bitquery IDE (linked inline from each docs pa
 
 ## See it live
 
-If you want a visual reference for what Bitquery's Polymarket data looks like rendered as a live dashboard—showing top markets, whale trades, odds, and volumes—the [DexRabbit Polymarket Predictions dashboard](https://dexrabbit.bitquery.io/polymarket-predictions) runs directly on these APIs. Each panel ships with a "Get API" button that exposes the exact GraphQL query behind the chart, which you can copy into your own stack.
+If you want a visual reference for what Bitquery's Polymarket data looks like rendered as a live dashboard, showing top markets, whale trades, odds, and volumes, the [DexRabbit Polymarket Predictions dashboard](https://dexrabbit.bitquery.io/polymarket-predictions) runs directly on these APIs. Each panel ships with a "Get API" button that exposes the exact GraphQL query behind the chart, which you can copy into your own stack.
 
 ## Bottom line
 

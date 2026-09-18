@@ -144,7 +144,7 @@ The full dataset is delivered into your own cloud storage (S3, GCS) or warehouse
 
 ## Reading Files with DuckDB
 
-No key, no client library — point DuckDB at the public sample directly:
+No key, no client library, point DuckDB at the public sample directly:
 
 ```sql
 SELECT *

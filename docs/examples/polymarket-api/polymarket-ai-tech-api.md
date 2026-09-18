@@ -33,7 +33,7 @@ To query or stream data outside the Bitquery IDE, you need an API access token. 
 
 ## How AI & Tech Markets Are Identified
 
-AI and tech markets are matched by a keyword in **`Question.Title`** using `includesCaseInsensitive`. The same filter works on **PredictionManagements**, **PredictionTrades**, and **PredictionSettlements**, placed under `Prediction.Question.Title`.
+AI and tech markets are matched by a keyword in `Question.Title` using `includesCaseInsensitive`. The same filter works on **PredictionManagements**, **PredictionTrades**, and **PredictionSettlements**, placed under `Prediction.Question.Title`.
 
 | Topic            | Example `Question.Title` keyword |
 | ---------------- | -------------------------------- |
@@ -46,7 +46,7 @@ AI and tech markets are matched by a keyword in **`Question.Title`** using `incl
 | AGI              | `"AGI"`                          |
 | Big Tech         | `"Apple"`, `"Nvidia"`, `"Tesla"` |
 
-> **Tip:** To match the whole AI category, use the standalone word with surrounding spaces, `" AI "`. This avoids the substring trap where a bare `"AI"` also catches unrelated words such as "Spain" or "fair". For a specific company or model, use a precise term like `"OpenAI"` or `"GPT"`. A single market is uniquely identified by its **`Question.MarketId`**.
+> **Tip:** To match the whole AI category, use the standalone word with surrounding spaces, `" AI "`. This avoids the substring trap where a bare `"AI"` also catches unrelated words such as "Spain" or "fair". For a specific company or model, use a precise term like `"OpenAI"` or `"GPT"`. A single market is uniquely identified by its `Question.MarketId`.
 
 ---
 
@@ -388,7 +388,7 @@ Any query on this page can be run as a subscription. Keep the same `where` filte
 
 ### Kafka Streams
 
-For ultra-low-latency consumption, prediction market data (including AI and tech markets) is available via Kafka:
+For low-latency consumption, prediction market data (including AI and tech markets) is available via Kafka:
 
 - **`matic.predictions.proto`:** Raw prediction market events (creations, resolutions, trades)
 - **`matic.broadcasted.predictions.proto`:** Mempool prediction market data

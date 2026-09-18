@@ -48,7 +48,7 @@ To query or stream data outside the Bitquery IDE, you need an API access token. 
 
 ### Filter by League or Team
 
-To target a specific league, tournament, or team, match a keyword in **`Question.Title`** with `includesCaseInsensitive` (case-insensitive). The same filter works on **PredictionManagements**, **PredictionTrades**, and **PredictionSettlements**. Just place it under `Prediction.Question.Title`.
+To target a specific league, tournament, or team, match a keyword in `Question.Title` with `includesCaseInsensitive` (case-insensitive). The same filter works on **PredictionManagements**, **PredictionTrades**, and **PredictionSettlements**. Just place it under `Prediction.Question.Title`.
 
 | League / Sport     | Example `Question.Title` keyword      |
 | ------------------ | ------------------------------------- |
@@ -67,7 +67,7 @@ To target a specific league, tournament, or team, match a keyword in **`Question
 | Esports (Valorant) | `"Valorant"`, or `"Esports"` (label)  |
 | A specific team    | `"Lakers"`, `"Arsenal"`, …            |
 
-> **Tip:** A single game is uniquely identified by its **`Question.MarketId`**. Use the creation queries above to discover market IDs, then plug them into the live-odds, OHLC, volume, and trader queries below.
+> **Tip:** A single game is uniquely identified by its `Question.MarketId`. Use the creation queries above to discover market IDs, then plug them into the live-odds, OHLC, volume, and trader queries below.
 
 ---
 
@@ -75,11 +75,11 @@ To target a specific league, tournament, or team, match a keyword in **`Question
 
 #### GraphQL Subscriptions
 
-Any **query** on this page can be run in **real time** as a **subscription**: keep the same `where` filters and requested fields, and change the keyword **`query`** to **`subscription`**. You receive new events (market creations or trades) as they occur on Polygon via a WebSocket connection.
+Any **query** on this page can be run in **real time** as a **subscription**: keep the same `where` filters and requested fields, and change the keyword `query` to `subscription`. You receive new events (market creations or trades) as they occur on Polygon via a WebSocket connection.
 
 #### Kafka Streams
 
-For **ultra-low-latency** and high-throughput consumption, prediction market data (including sports) is also available via **Kafka**. The same lifecycle events and trades are delivered as Protocol Buffers on Polygon topics:
+For **low-latency** and high-throughput consumption, prediction market data (including sports) is also available via **Kafka**. The same lifecycle events and trades are delivered as Protocol Buffers on Polygon topics:
 
 - **`matic.predictions.proto`:** Raw prediction market events (creations, resolutions, trades)
 - **`matic.broadcasted.predictions.proto`:** Mempool prediction market data

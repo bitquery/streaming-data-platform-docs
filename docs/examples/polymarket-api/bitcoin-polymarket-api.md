@@ -39,10 +39,10 @@ The **subscription** below streams live Bitcoin Up or Down trades as they occur 
 
 ### Kafka streams
 
-For **ultra-low-latency** consumption, prediction market data (including Bitcoin Up/Down) is available via **Kafka**:
+For **low-latency** consumption, prediction market data (including Bitcoin Up/Down) is available via **Kafka**:
 
-- **`matic.predictions.proto`** — Raw prediction market events (trades, creations, resolutions)
-- **`matic.broadcasted.predictions.proto`** — Mempool prediction market data
+- `matic.predictions.proto`: Raw prediction market events (trades, creations, resolutions)
+- `matic.broadcasted.predictions.proto`: Mempool prediction market data
 
 Kafka requires **separate credentials**. See [Kafka Streaming Concepts](/docs/streams/kafka-streaming-concepts/). For access, [contact support](https://t.me/bloxy_info) or email support@bitquery.io.
 
@@ -482,7 +482,7 @@ subscription {
 
 ## How do I monitor specific wallets on Bitcoin Up or Down markets in real time?
 
-Stream every Bitcoin Up or Down trade where one of a given list of wallets is the **Buyer** or the **Seller**. Pass the wallets you want to watch in the `$wallets` variable — the `any` predicate matches a trade if the wallet appears on either side. Useful for wallet-level alerting bots, copy-trading signals, and PnL tracking dashboards.
+Stream every Bitcoin Up or Down trade where one of a given list of wallets is the **Buyer** or the **Seller**. Pass the wallets you want to watch in the `$wallets` variable, the `any` predicate matches a trade if the wallet appears on either side. Useful for wallet-level alerting bots, copy-trading signals, and PnL tracking dashboards.
 
 [Run in Bitquery IDE](https://ide.bitquery.io/montioring-specific-wallets-in-realtime-for-Bitcoin-Up-or-Down-markets)
 
@@ -589,11 +589,11 @@ subscription MyQuery($wallets: [String!]) {
 
 ### Same query for other Up or Down markets
 
-The same wallet-monitoring pattern works for every Polymarket Up or Down market — only the `Question.Title` filter changes. Open any of the pre-built IDE queries below to stream trades for the chain you care about:
+The same wallet-monitoring pattern works for every Polymarket Up or Down market, only the `Question.Title` filter changes. Open any of the pre-built IDE queries below to stream trades for the chain you care about:
 
-- [Solana Up or Down — monitor specific wallets](https://ide.bitquery.io/montioring-specific-wallets-in-realtime-for-Solana-Up-or-Down-markets_1)
-- [Ethereum Up or Down — monitor specific wallets](https://ide.bitquery.io/monitoring-specific-wallets-trades-in-realtime-for-Ethereum-up-or-down-market)
-- [XRP Up or Down — monitor specific wallets](https://ide.bitquery.io/monitoring-specific-wallets-trades-in-realtime-for-XRP-up-or-down-market)
+- [Solana Up or Down, monitor specific wallets](https://ide.bitquery.io/montioring-specific-wallets-in-realtime-for-Solana-Up-or-Down-markets_1)
+- [Ethereum Up or Down, monitor specific wallets](https://ide.bitquery.io/monitoring-specific-wallets-trades-in-realtime-for-Ethereum-up-or-down-market)
+- [XRP Up or Down, monitor specific wallets](https://ide.bitquery.io/monitoring-specific-wallets-trades-in-realtime-for-XRP-up-or-down-market)
 
 Each query exposes the same `$wallets` variable, so you can drop the same wallet list into all four and run them in parallel to cover every chain at once.
 

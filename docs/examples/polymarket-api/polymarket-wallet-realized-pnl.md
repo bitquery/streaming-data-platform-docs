@@ -11,11 +11,11 @@ keywords:
 ---
 # Realized PnL & Win Rate for Polymarket Trader
 
-You can use Bitquery **`PredictionTrades`** on Polygon (`network: matic`) to pull a wallet’s **outcome buys** and **outcome sells** on Polymarket over a chosen window (for example the last **24 hours**). From that response, you can aggregate by **`ConditionId`**, calculate `realised PnL` per condition, and derive the total **realized PnL** and **win rate** for Polymarket trading.
+You can use Bitquery `PredictionTrades` on Polygon (`network: matic`) to pull a wallet’s **outcome buys** and **outcome sells** on Polymarket over a chosen window (for example the last **24 hours**). From that response, you can aggregate by `ConditionId`, calculate `realised PnL` per condition, and derive the total **realized PnL** and **win rate** for Polymarket trading.
 
 ## How is PnL and Win Rate calculated?
 
-- **Buys** (`IsOutcomeBuy: true`): collateral spent acquiring outcome tokens (tracked as **`CollateralAmountInUSD`** on the trade).
+- **Buys** (`IsOutcomeBuy: true`): collateral spent acquiring outcome tokens (tracked as `CollateralAmountInUSD` on the trade).
 - **Sells** (`IsOutcomeBuy: false`): collateral received when selling outcome tokens.
 
 For each **condition** (`Trade.Prediction.ConditionId`), treat **realized PnL in the window** as:
@@ -34,7 +34,7 @@ Win Rate = 100* count(profitable trade)/count(trades)
 
 ## Get Buys and Sells for a Trader on Polymarket
 
-[This query](https://ide.bitquery.io/buys-and-sells-of-a-wallet-on-polymarket) below uses variables for **hours ago** and the **buyer** wallet. It returns two lists: **`buys`** and **`sells`**, each with **`CollateralAmountInUSD`** and **`ConditionId`** so you can group and calculate at your system.
+[This query](https://ide.bitquery.io/buys-and-sells-of-a-wallet-on-polymarket) below uses variables for **hours ago** and the **buyer** wallet. It returns two lists: `buys` and `sells`, each with `CollateralAmountInUSD` and `ConditionId` so you can group and calculate at your system.
 
 ```graphql
 query WalletTrades($hoursAgo: Int!, $buyer: String!) {
@@ -95,7 +95,7 @@ Variables:
 
 ## Aggregate by Condition ID
 
-After you receive **`buys`** and **`sells`**, aggregate **`CollateralAmountInUSD`** by **`ConditionId`** for each list.
+After you receive `buys` and `sells`, aggregate `CollateralAmountInUSD` by `ConditionId` for each list.
 
 ```text
 INITIALIZE empty map buyUsdByCondition
@@ -114,7 +114,7 @@ FOR each record IN response.sells:
 
 ## Realised PnL calculation
 
-Use the union of all **condition IDs** that appear in either **`buyUsdByCondition`** or **`sellUsdByCondition`**, so conditions with only buys or only sells are still included. For each condition, **realised PnL in the window** is **sell collateral USD minus buy collateral USD**; **total realised PnL** is the sum of those values across all conditions.
+Use the union of all **condition IDs** that appear in either `buyUsdByCondition` or `sellUsdByCondition`, so conditions with only buys or only sells are still included. For each condition, **realised PnL in the window** is **sell collateral USD minus buy collateral USD**; **total realised PnL** is the sum of those values across all conditions.
 
 ```text
 INITIALIZE totalRealizedPnL = 0
@@ -132,12 +132,12 @@ FOR each conditionId IN allConditionIds:
 
 **Summary**
 
-- **`pnlByCondition`**: `Per-ConditionId` net USD collateral flow for a given time window.
-- **`totalRealizedPnL`**: wallet-level sum of **`pnlForCondition`** over every condition in **`allConditionIds`**.
+- `pnlByCondition`: `Per-ConditionId` net USD collateral flow for a given time window.
+- `totalRealizedPnL`: wallet-level sum of `pnlForCondition` over every condition in `allConditionIds`.
 
 ## Win rate calculation
 
-Using the same **`pnlByCondition`** map from the previous step, count how many conditions had **positive** PnL versus how many had **any** activity in the window, then derive **win rate**.
+Using the same `pnlByCondition` map from the previous step, count how many conditions had **positive** PnL versus how many had **any** activity in the window, then derive **win rate**.
 
 ```text
 INITIALIZE trades = 0
@@ -158,9 +158,9 @@ END IF
 
 **Interpreting win rate**
 
-- **`trades`**: number of distinct **`ConditionId`** values with at least one matching row in **`buys`** or **`sells`** in your query result.
-- **`profitableTrades`**: subset of those where **`pnlByCondition[conditionId] > 0`**.
-- **`winRatePercent`**: **`100 * profitableTrades / trades`** when **`trades > 0`**.
+- `trades`: number of distinct `ConditionId` values with at least one matching row in `buys` or `sells` in your query result.
+- `profitableTrades`: subset of those where `pnlByCondition[conditionId] > 0`.
+- `winRatePercent`: `100 * profitableTrades / trades` when `trades > 0`.
 
 ## Related APIs
 

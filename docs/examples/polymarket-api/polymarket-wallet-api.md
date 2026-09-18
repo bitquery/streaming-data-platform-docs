@@ -16,11 +16,11 @@ Get **user- and wallet-level data** for Polymarket: recent activity, positions, 
 
 ## Check if an address ever interacted with Polymarket (on-chain transfers)
 
-Polymarket collateral on Polygon flows through conditional tokens keyed to USDC denomination at **`0x4d97DCd97eC945f40cF65F87097ACe5EA0476045`**. To see whether a wallet likely has **any** Polymarket-related receipts, query for **at least one inbound transfer** of that token (`limit: { count: 1 }`). Empty results mean no indexed match—not a guarantee that the wallet never traded (e.g. only outbound paths), but useful for onboarding and tagging.
+Polymarket collateral on Polygon flows through conditional tokens keyed to USDC denomination at `0x4d97DCd97eC945f40cF65F87097ACe5EA0476045`. To see whether a wallet likely has **any** Polymarket-related receipts, query for **at least one inbound transfer** of that token (`limit: { count: 1 }`). Empty results mean no indexed match, not a guarantee that the wallet never traded (e.g. only outbound paths), but useful for onboarding and tagging.
 
 The same pattern is documented under [Polygon (MATIC) Transfers](/docs/blockchain/Matic/matic-transfers/).
 
-**Try it:** [IDE — Polymarket interaction check](https://ide.bitquery.io/check-if-an-address-interacted-with-polymarket-ever)
+**Try it:** [IDE: Polymarket interaction check](https://ide.bitquery.io/check-if-an-address-interacted-with-polymarket-ever)
 
 ```graphql
 query ($address: String) {
