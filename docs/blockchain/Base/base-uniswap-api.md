@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Uniswap API"
-description: "Base Uniswap API: a v2, v3 and v4 trade stream plus GraphQL examples for v3 trades, top traders, hourly OHLC, volume and top tokens, each filtered to Uniswap's own contracts on Base."
+description: "Base Uniswap API: a v2, v3 and v4 trade stream plus GraphQL examples for v3 trades, top traders, hourly OHLC, 24-hour volume and top tokens, each filtered to Uniswap's own contracts on Base."
 ---
 import FAQ from "@site/src/components/FAQ";
 
@@ -10,7 +10,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Base Uniswap API
 
 :::tip Need real-time Base Uniswap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Base Uniswap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Base Uniswap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Base Uniswap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use the `EVM` queries on this page for raw per-swap detail or call and event context. An `EVM` query without a `dataset` argument runs on the realtime dataset, which holds only the last few days; add `dataset: combined` or `dataset: archive` for **historical Base Uniswap data**.
 :::
 
 Bitquery provides Uniswap data through APIs, Streams and Data Dumps.
@@ -18,7 +18,7 @@ Bitquery provides Uniswap data through APIs, Streams and Data Dumps.
 ## Filter by factory to exclude forks
 
 `Trade.Dex.ProtocolName` records which code a pool runs. Forks of v2 and v3 run the
-same code, so their trades carry the same `uniswap_v2` and `uniswap_v3` labels. In Bitquery's trade data for Base, pools from dozens of other factories carry these labels.
+same code, so their trades carry the same `uniswap_v2` and `uniswap_v3` labels. In Bitquery's trade data for Base on 18 September 2026, pools from more than 100 other factories carried the `uniswap_v2` label and more than 30 carried `uniswap_v3`. They made up about one in five transactions under the first label and one in seven under the second.
 
 To keep only Uniswap's own pools, filter on the contract that owns them, as every example
 on this page now does.
@@ -36,7 +36,7 @@ to the v4 PoolManager. Addresses are from the official
 [deployments list](https://developers.uniswap.org/deployments).
 
 The link in each example's description opens an earlier copy saved in the Bitquery IDE,
-which may still filter by `ProtocolName` and use the older buy and sell conditions. Use the
+which may still filter by `ProtocolName` or use older conditions and time windows. Use the
 code on this page when you need Uniswap's own pools only.
 
 ## Stream Base Uniswap trades
@@ -149,7 +149,7 @@ query MyQuery {
 
 ## Get Top Traders of a token on uniswap v3
 
-This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3_4) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold. `PriceAsymmetry: {lt: 0.1}` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals.
+This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3_4) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where `Side.Type` is `sell`. `PriceAsymmetry: {lt: 0.1}` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals.
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -228,7 +228,7 @@ This query retrieves [hourly open, high, low and close prices in USD](https://id
 
 ## Get trading volume, buy volume, sell volume of a token
 
-This query returns the [traded, buy and sell volume](https://ide.bitquery.io/trade_volume_base_uniswapv3) of token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b` on Uniswap v3.
+This query returns the [traded, buy and sell volume](https://ide.bitquery.io/trade_volume_base_uniswapv3) of token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b` on Uniswap v3 over the last 24 hours. `PriceAsymmetry: {lt: 0.1}` drops mispriced trades, which would otherwise skew the USD sums.
 
 ```graphql
 query MyQuery {
@@ -240,9 +240,10 @@ query MyQuery {
             SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
           }
           Dex: { OwnerAddress: { is: "0x33128a8fc17869897dce68ed026d694621f6fdfd" } }
+          PriceAsymmetry: { lt: 0.1 }
         }
         TransactionStatus: { Success: true }
-        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {

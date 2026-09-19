@@ -11,7 +11,7 @@ import ProductCTA from "@site/src/components/ProductCTA";
 Uniswap is a decentralized exchange on Ethereum for trading ERC-20 tokens. Bitquery’s APIs support Uniswap trades, pool creations, and active user metrics across v1, v2, v3 and v4 in real-time and across archive data since genesis.
 
 :::tip Real-time data or the last 30 days? Use the Trading cube
-For real-time trades and anything from the last 30 days, use the [Trading cube](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns MEV-filtered swaps with a USD price on every row. Use the queries on this page for older history, raw per-swap detail, or call and event context.
+For real-time trades and anything from the last 30 days, use the [Trading cube](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns MEV-filtered swaps with a USD price on every row. Use the `EVM` queries on this page for raw per-swap detail or call and event context. An `EVM` query without a `dataset` argument runs on the realtime dataset, which holds only the last few days; add `dataset: combined` or `dataset: archive` for older history.
 :::
 
 The same schema powers our multi-chain [DEX API](https://bitquery.io/products/dex), so these queries also run on other EVM exchanges, such as PancakeSwap or SushiSwap, once you change the DEX filter.
@@ -201,7 +201,9 @@ subscription {
 ## TradingView OHLC Stream on Uniswap Across Chains
 
 The new [Price Index Stream](/docs/trading/crypto-price-api/) helps you get token-level, pair-level, and market-level OHLC data for 1 sec interval( or higher), in real-time across all chains.
-These also includes trading metrics like SMA, EMA, VWAP, and more.
+These also include trading metrics like SMA, EMA, VWAP, and more.
+
+The `Market.Protocol` filter matches forks as well. In the Trading cube, PancakeSwap V2 on BNB Chain, QuickSwap on Polygon and SushiSwap on Ethereum all carry the `uniswap_v2` label. To keep Uniswap's own pools, filter `Market.Address` to the v2 or v3 factory, or `Market.Program` to the v4 PoolManager. The addresses differ by chain; Ethereum's are in [Filter decoded trades by factory](#filter-decoded-trades-by-factory).
 
 [Run Stream](https://ide.bitquery.io/Stream-all-Uniswap-Seconds-OHLC-Kline_1)
 
@@ -330,7 +332,7 @@ query LatestTrades {
 
 ## Top Traders of a Token
 
-Identify the top 100 USDC traders by USD volume in pools labelled Uniswap v1–v4, forks included ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold. `PriceAsymmetry: { lt: 0.1 }` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals:
+Identify the top 100 USDC traders by USD volume in pools labelled Uniswap v1–v4, forks included ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where `Side.Type` is `sell`. `PriceAsymmetry: { lt: 0.1 }` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -611,14 +613,14 @@ Track the last 10 `Initialize` events from the Uniswap V4 factory:
 
 ## Active Traders on Uniswap in the Last 7 Days
 
-Rank the 100 accounts that sent the most Uniswap v3 swaps on Ethereum in the last 7 days. It groups by `Transaction.From`, since `Trade.Seller` is often the pool:
+Rank the 100 accounts that sent the most Uniswap v3 swaps on Ethereum in the last 7 days. It groups by `Transaction.From`, since `Trade.Seller` is often the pool, and sets `dataset: combined` because the default realtime dataset holds only the last few days:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query ActiveUniswapTraders {
-  EVM(network: eth) {
+  EVM(network: eth, dataset: combined) {
     DEXTradeByTokens(
       where: {
         Trade: {
@@ -647,7 +649,7 @@ query ActiveUniswapTraders {
 
 We launched the [Price Index](/docs/trading/crypto-price-api/) in August 2025, allowing you to track price for any onchain token pair.
 
-Here's an example of tracking Uniswap token pair trading price.
+Here's an example of tracking Uniswap token pair trading price. `ProtocolFamily: "Uniswap"` also matches SushiSwap's WETH/USDC pools; filter `Market.Address` or `Market.Program` instead when you need Uniswap's own pools.
 
 Uniswap Token Pair Price API
 [Run Query ➤](https://ide.bitquery.io/latest-trade-price-of-uniswap-pair#)
@@ -699,7 +701,7 @@ query MyQuery {
 
 ## Get OHLC for a Pair on Uniswap
 
-[Run Query](https://ide.bitquery.io/OHLC-price-of-an-uniswap-pair) to get `1 minute` OHLC data for a given pair of currencies
+[Run Query](https://ide.bitquery.io/OHLC-price-of-an-uniswap-pair) to get `1 minute` OHLC data for a given pair of currencies. Like the price example above, it filters `ProtocolFamily`, so fork pools are included.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -778,7 +780,7 @@ Contact us on our telegram channel for a trial credentials.
     { q: "What is the topic0 for a Uniswap V3 swap?", a: "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67, the hash of Swap(address,address,int256,int256,uint160,uint128,int24). The v2 equivalent is 0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822 and the v4 one is 0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f." },
     { q: "Are Uniswap V3 liquidity positions NFTs?", a: "Yes. Each v3 position is an ERC-721 token minted by the NonfungiblePositionManager at 0xc36442b4a4522e871399cd717abdd847ab11fe88, which also emits IncreaseLiquidity, DecreaseLiquidity and Collect for that tokenId. v4 positions are also ERC-721, minted by the PositionManager at 0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e. v2 uses fungible ERC-20 LP tokens instead." },
     { q: "Why can't I filter Uniswap v4 swaps by pool address?", a: "Because v4 has no per-pool contract. All pools are held by the single PoolManager, so every v4 Swap log has the same emitter address and identifies its pool by the bytes32 PoolId in the event's first argument. Filter on PoolId rather than on a contract address." },
-    { q: "Which chains does Bitquery cover Uniswap on?", a: "Eight networks: Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum, Optimism, Arc and Robinhood Chain. On 18 September 2026 each one carried trades through Uniswap's own v2 and v3 factories and its v4 PoolManager; Uniswap v1 only ever ran on Ethereum. The schema is the same on all eight, so a query moves between them by switching the network argument, but the factory and PoolManager addresses differ by chain. On some chains most trades labelled uniswap_v2 are forks: on BNB Smart Chain under 0.5% came from Uniswap's own v2 factory, and more than nine in ten came from PancakeSwap V2." },
+    { q: "Which chains does Bitquery cover Uniswap on?", a: "Eight networks: Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum, Optimism, Arc and Robinhood Chain. On 18 September 2026 each one carried trades through Uniswap's own v2 and v3 factories and its v4 PoolManager; Uniswap v1 only ever ran on Ethereum. The schema is the same on all eight, so a query moves between them by switching the network argument, but the factory and PoolManager addresses differ by chain. On some chains most transactions labelled uniswap_v2 go through forks: on BNB Smart Chain under 0.5% went through Uniswap's own v2 factory, and more than nine in ten through PancakeSwap V2." },
     { q: "Is Uniswap v4 used outside Ethereum?", a: "Yes, and on some chains it is already the busiest version. Counting only Uniswap's own contracts, v4 carried more transactions than v2 and v3 combined on Robinhood Chain, Arc and BNB Smart Chain on both 17 and 18 September 2026. On Ethereum, v3 still carries more than v4." },
     { q: "Can I identify Uniswap trades by the event topic0 alone?", a: "No. v2 and v3 are heavily forked and a fork keeps the ABI, so it keeps the same topic0. SushiSwap's factory at 0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac emits the identical PairCreated signature, and at least four other Ethereum factories emitted the identical v3 PoolCreated in the last 30 days. Match the topic0 together with the factory that created the pool. In Bitquery's decoded trades, filter Trade.Dex.OwnerAddress to the factory, or Trade.Dex.SmartContract to the v4 PoolManager; Trade.Dex.ProtocolName alone also matches forks." },
   ]}

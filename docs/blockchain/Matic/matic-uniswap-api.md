@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Polygon Matic Uniswap API"
-description: "Polygon Uniswap API: GraphQL examples for v3 trades, top traders, hourly OHLC, volume and top tokens. Each filters Uniswap's own factory, so QuickSwap and other forks stay out."
+description: "Polygon Uniswap API: GraphQL examples for v3 trades, top traders, hourly OHLC, 24-hour volume and top tokens, filtered to Uniswap's own factory. Most uniswap_v2 trades on Polygon are QuickSwap."
 ---
 import FAQ from "@site/src/components/FAQ";
 
@@ -10,7 +10,7 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Matic Uniswap API
 
 :::tip Real-time data or the last 30 days? Use the Trading cube
-For real-time trades and anything from the last 30 days, use the [Trading cube](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns MEV-filtered swaps with a USD price on every row. Use the queries on this page for older history, raw per-swap detail, or call and event context.
+For real-time trades and anything from the last 30 days, use the [Trading cube](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns MEV-filtered swaps with a USD price on every row. Use the `EVM` queries on this page for raw per-swap detail or call and event context. An `EVM` query without a `dataset` argument runs on the realtime dataset, which holds only the last few days; add `dataset: combined` or `dataset: archive` for older history.
 :::
 
 
@@ -37,7 +37,7 @@ to the v4 PoolManager. Addresses are from the official
 [deployments list](https://developers.uniswap.org/deployments).
 
 The link in each example's description opens an earlier copy saved in the Bitquery IDE,
-which may still filter by `ProtocolName` and use the older buy and sell conditions. Use the
+which may still filter by `ProtocolName` or use older conditions and time windows. Use the
 code on this page when you need Uniswap's own pools only.
 
 ## Live Uniswap v3 Trades on Polygon (Trading API, recommended)
@@ -107,7 +107,7 @@ query MyQuery {
 
 ## Get Top Traders of a token on uniswap v3
 
-This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-matic) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold. `PriceAsymmetry: {lt: 0.1}` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals.
+This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-matic) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where `Side.Type` is `sell`. `PriceAsymmetry: {lt: 0.1}` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals.
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -170,13 +170,13 @@ This query retrieves [hourly open, high, low and close prices in USD](https://id
 
 ## Get trading volume, buy volume, sell volume of a token
 
-This query returns the [traded, buy and sell volume](https://ide.bitquery.io/trade_volume_matic_uniswapv3) of token `0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270` on Uniswap v3.
+This query returns the [traded, buy and sell volume](https://ide.bitquery.io/trade_volume_matic_uniswapv3) of token `0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270` on Uniswap v3 over the last 24 hours. `PriceAsymmetry: {lt: 0.1}` drops mispriced trades, which would otherwise skew the USD sums.
 
 ```graphql
 query MyQuery {
   EVM(network: matic) {
     DEXTradeByTokens(
-      where: {Trade: {Currency: {SmartContract: {is: "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"}}, Dex: {OwnerAddress: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}}, TransactionStatus: {Success: true}, Block: {Time: {since: "2025-02-12T00:00:00Z"}}}
+      where: {Trade: {Currency: {SmartContract: {is: "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"}}, Dex: {OwnerAddress: {is: "0x1f98431c8ad98523631ae4a59f267346ea31f984"}}, PriceAsymmetry: {lt: 0.1}}, TransactionStatus: {Success: true}, Block: {Time: {since_relative: {hours_ago: 24}}}}
     ) {
       Trade {
         Currency {
