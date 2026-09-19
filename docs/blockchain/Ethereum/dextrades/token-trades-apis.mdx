@@ -6,7 +6,7 @@ description: "Ethereum Token Trades Apis: get Ethereum DEX swaps, prices, and OH
 # Token Trades API
 
 :::tip Need real-time token trade data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered token trade swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical token trade data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered token trade swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use the `EVM` queries on this page for raw per-swap detail or call and event context. An `EVM` query without a `dataset` argument runs on the realtime dataset, which holds only the last few days; add `dataset: combined` or `dataset: archive` for **historical token trade data**, as several examples below do.
 :::
 
 We have three main APIs to get DEX trading data.
@@ -92,7 +92,7 @@ subscription MyQuery {
 
 ## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
 
-Fetch buys, sells, volumes, and the number of makers for a specific pool (`0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`). A [video shows how to build DexScreener-style trade stats](https://www.youtube.com/watch?v=K_H3to_nIdY) with it.
+Fetch buys, sells, volumes, and the number of makers for a specific pool (`0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`). A [video walks through building DexScreener-style trade stats with this query](https://www.youtube.com/watch?v=K_H3to_nIdY).
 
 <details>
   <summary>Buys, sells, volume and makers for one pool, with variables</summary>
@@ -570,7 +570,7 @@ Our DEX Dashboard gives you a easier way to check the data -> [DEXrabbit](https:
 
 {" "}
 
-<summary>Latest trades of WBTC and LINK, with variables</summary>
+<summary>Latest trades of WBTC and LINK</summary>
 
 ```graphql
 query LatestTrades {
@@ -640,10 +640,10 @@ query LatestTrades {
 
 ## Token Trade Analytics
 
-Run this for analytics related to token trades:
+Trade totals for one BNB Chain token over its full history: pairs, DEXs, amount and USD volume, and the number of accounts that bought and sold it. The USD sums leave out mispriced trades.
 
 <details>
-  <summary>Pairs, DEXs, volume and USD totals for one token</summary>
+  <summary>Pairs, DEXs, volume and traders for one BNB Chain token</summary>
 
 ```graphql
 {
@@ -671,12 +671,12 @@ Run this for analytics related to token trades:
         AmountInUSD(maximum: Block_Number)
       }
       pairs: uniq(of: Trade_Side_Currency_SmartContract)
-      dexes: uniq(of: Trade_Dex_SmartContract)
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
       amount: sum(of: Trade_Amount)
-      usd: sum(of: Trade_AmountInUSD)
-      usd2: sum(of: Trade_Side_AmountInUSD)
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Sender)
+      usd: sum(of: Trade_AmountInUSD, if: { Trade: { PriceAsymmetry: { lt: 0.1 } } })
+      usd2: sum(of: Trade_Side_AmountInUSD, if: { Trade: { PriceAsymmetry: { lt: 0.1 } } })
+      buyers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: sell } } } })
+      sellers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: buy } } } })
       count
     }
   }
@@ -784,7 +784,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/tok
 ## Get all Trading Pairs data of a specific token
 
 <details>
-  <summary>Every pair a token trades in, with variables</summary>
+  <summary>Pairs a token trades in, with variables</summary>
 
 ```graphql
 query tokenTrades(
@@ -1105,15 +1105,21 @@ You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/pai
 
 ## Top Gainers
 
+Pairs ranked by USD price change over the last hour, among pairs with at least 100 trades in that hour. A pair can appear twice, once for each of its tokens. `buyers` and `sellers` count the accounts that sent those swaps.
+
 <details>
-  <summary>Tokens with the biggest price gains, with variables</summary>
+  <summary>Pairs ranked by 1-hour price gain, with variables</summary>
 
 ```graphql
 query ($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "usd" }
+      orderBy: { descendingByField: "change_1h" }
       limit: { count: 100 }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Trade: { PriceAsymmetry: { lt: 0.1 } }
+      }
     ) {
       Trade {
         Currency {
@@ -1131,16 +1137,16 @@ query ($network: evm_network) {
         price_last: PriceInUSD(maximum: Block_Number)
         price_1h_ago: PriceInUSD(minimum: Block_Number)
       }
+      change_1h: calculate(expression: "($Trade_price_last - $Trade_price_1h_ago) / $Trade_price_1h_ago * 100")
       dexes: uniq(of: Trade_Dex_OwnerAddress)
       amount: sum(of: Trade_Side_Amount)
       usd: sum(of: Trade_Side_AmountInUSD)
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Seller)
+      buyers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: sell } } } })
+      sellers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: buy } } } })
       count(selectWhere: { ge: "100" })
     }
   }
 }
-
 { "network": "eth" }
 ```
 
@@ -1289,7 +1295,7 @@ The IDE has the [full latest-trades query with every field](https://ide.bitquery
 ## Token trade from a specific DEX
 
 <details>
-  <summary>WETH trades on Uniswap v3 only (fields omitted)</summary>
+  <summary>Uniswap v3 trades in which traders sold WETH (fields omitted)</summary>
 
 ```graphql
 {
@@ -1646,7 +1652,7 @@ Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for
 [Run in Bitquery IDE](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
 
 <details>
-  <summary>One trader's realised PnL and buy and sell volume</summary>
+  <summary>One trader's realised PnL and buy and sell volume, with variables</summary>
 
 ```graphql
 query ($trader: String) {
@@ -1706,7 +1712,7 @@ query ($trader: String) {
 
 ## Getting OHLC and Distinct Buys/Sells
 
-Daily OHLC, priced in WBNB, with buy and sell counts for Aave Token against WBNB on BNB Chain in July 2023. A buy is a row where `Side.Type` is `sell`; `buyers` and `sellers` count the distinct accounts that sent those swaps.
+Daily OHLC, priced in WBNB, with buy and sell counts for Aave Token against WBNB on BNB Chain from 1 July to 1 August 2023. A buy is a row where `Side.Type` is `sell`; `buyers` and `sellers` count the distinct accounts that sent those swaps.
 
 <details>
   <summary>Daily candles with buy and sell counts</summary>

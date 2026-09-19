@@ -334,7 +334,7 @@ query timeDiagram($network: evm_network) {
 
 ## Get Metadata of a token
 
-Returns a [token's metadata](https://ide.bitquery.io/get-metadata-for-base-pancakeswap-infnity-token), here cbBTC's: `Name`, `Symbol`, `SmartContract` and `Decimals`..
+Returns a [token's metadata](https://ide.bitquery.io/get-metadata-for-base-pancakeswap-infnity-token), here cbBTC's: `Name`, `Symbol`, `SmartContract` and `Decimals`.
 
 ```graphql
 query MyQuery {

@@ -19,7 +19,7 @@ See the [migration mapping](/docs/cubes/balances-cube/#migrating-from-balanceupd
 
 
 :::tip Need real-time PancakeSwap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PancakeSwap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical PancakeSwap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered PancakeSwap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use the `EVM` queries on this page for raw per-swap detail or call and event context. An `EVM` query without a `dataset` argument runs on the realtime dataset, which holds only the last few days; add `dataset: combined` or `dataset: archive` for **historical PancakeSwap data**.
 :::
 
 In this section we will use APIs from Bitquery to get the on-chain trade related data, trade metrics, trades for a token or a trader on the Pancake Swap DEX.
@@ -1067,7 +1067,7 @@ This returns the [latest reserves of one PancakeSwap v3 pool](https://ide.bitque
 
 ## All Pairs of a Token on Pancake Swap
 
-This returns [every pair of a token on PancakeSwap](https://ide.bitquery.io/All-pools-of-a-token-on-pancake-swap_2). The result contains info of the liquidity pool such as currency details, trade amount, number of trades and price of token in USD in various time frames.
+This returns [every pair of a token on PancakeSwap v3](https://ide.bitquery.io/All-pools-of-a-token-on-pancake-swap_2). The result contains info of the liquidity pool such as currency details, trade amount, number of trades and price of token in USD in various time frames.
 
 <details>
   <summary>Click to expand GraphQL query</summary>
