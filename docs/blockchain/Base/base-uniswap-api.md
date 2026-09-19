@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Base Uniswap API"
-description: "Base Uniswap API: query Base Uniswap trades, pools, and prices with Bitquery GraphQL DEX APIs. Built for traders and analytics teams."
+description: "Base Uniswap API: a v2, v3 and v4 trade stream plus GraphQL examples for v3 trades, top traders, hourly OHLC, volume and top tokens, each filtered to Uniswap's own contracts on Base."
 ---
 import FAQ from "@site/src/components/FAQ";
 
@@ -10,10 +10,33 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Base Uniswap API
 
 :::tip Need real-time Base Uniswap data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Base Uniswap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Base Uniswap data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered Base Uniswap swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical Base Uniswap data older than ~30 days**, raw per-swap detail, or call / event context.
 :::
 
 Bitquery provides Uniswap data through APIs, Streams and Data Dumps.
+
+## Filter by factory to exclude forks
+
+`Trade.Dex.ProtocolName` records which code a pool runs. Forks of v2 and v3 run the
+same code, so their trades carry the same `uniswap_v2` and `uniswap_v3` labels. In Bitquery's trade data for Base, dozens of other factories trade under both labels.
+
+To keep only Uniswap's own pools, filter on the contract that owns them, as every example
+on this page now does.
+
+| Version | Filter field | Address on Base |
+| --- | --- | --- |
+| v2 | `Trade.Dex.OwnerAddress` | `0x8909dc15e40173ff4699343b6eb8132c65e18ec6` |
+| v3 | `Trade.Dex.OwnerAddress` | `0x33128a8fc17869897dce68ed026d694621f6fdfd` |
+| v4 | `Trade.Dex.SmartContract` | `0x498581ff718922c3f8e6a244956af099b2652b2b` |
+
+`OwnerAddress` is the factory that deployed the pool. A v4 pool has no factory: its
+`OwnerAddress` is the zero address, and the PoolManager is its `SmartContract`. In the
+Trading API the factory is `Pair.Market.Address`. Addresses are from the official
+[deployments list](https://developers.uniswap.org/deployments).
+
+The link in each example's description opens an earlier copy saved in the Bitquery IDE,
+which may still filter by `ProtocolName`. Use the code on this page when you need Uniswap's
+own pools only.
 
 ## Stream Base Uniswap trades
 
@@ -23,7 +46,12 @@ Every query on this page also works as a subscription: change `query` to `subscr
 subscription BaseUniswapTrades {
   EVM(network: base) {
     DEXTrades(
-      where: { Trade: { Dex: { ProtocolFamily: { is: "Uniswap" } } } }
+      where: {
+        any: [
+          { Trade: { Dex: { OwnerAddress: { in: ["0x8909dc15e40173ff4699343b6eb8132c65e18ec6", "0x33128a8fc17869897dce68ed026d694621f6fdfd"] } } } }
+          { Trade: { Dex: { SmartContract: { is: "0x498581ff718922c3f8e6a244956af099b2652b2b" } } } }
+        ]
+      }
     ) {
       Block {
         Time
@@ -58,8 +86,7 @@ subscription BaseUniswapTrades {
 }
 ```
 
-`ProtocolFamily: "Uniswap"` covers every Uniswap version on Base. Narrow to one with `ProtocolName` (for example `uniswap_v3`), or to a single pool with `Trade: { Dex: { SmartContract: { is: "<pool>" } } }`.
-The below graphQL APIs and Streams are examples of data points you can get with Bitquery for Uniswap on Base.
+The two conditions cover the v2, v3 and v4 pools listed above. To narrow to one version, keep only that version's address. For a single pool, use `Trade: { Dex: { SmartContract: { is: "<pool>" } } }` on v2 and v3, or `Trade: { PoolId: { is: "<pool id>" } }` on v4.
 If you have any question on other data points reach out to [support](https://t.me/Bloxy_info)
 
 Need zero-latency Base data? [Read about our Kafka Streams and Contact us for a Trial](/docs/streams/kafka-streaming-concepts/).
@@ -77,13 +104,13 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](/d
 
 ## Get Latest Trades on Uniswap v3
 
-Below query will subscribe you to the latest DEX Trades on Uniswap v3. Try out the API [here](https://ide.bitquery.io/uniswap-v3-trades_2)
+The query below returns the [latest DEX trades on Uniswap v3](https://ide.bitquery.io/uniswap-v3-trades_2).
 
 ```graphql
 query MyQuery {
   EVM(dataset: realtime, network: base) {
     DEXTrades(
-      where: { Trade: { Dex: { ProtocolName: { is: "uniswap_v3" } } } }
+      where: { Trade: { Dex: { OwnerAddress: { is: "0x33128a8fc17869897dce68ed026d694621f6fdfd" } } } }
       limit: { count: 10 }
       orderBy: { descending: Block_Time }
     ) {
@@ -121,7 +148,7 @@ query MyQuery {
 
 ## Get Top Traders of a token on uniswap v3
 
-This query will fetch you top traders of a token for the selected network. You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3_4).
+This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3_4) on the selected network. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold.
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -129,7 +156,7 @@ query topTraders($network: evm_network, $token: String) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "volumeUsd"}
       limit: {count: 100}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {ProtocolName: {is: "uniswap_v3"}}}}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {OwnerAddress: {is: "0x33128a8fc17869897dce68ed026d694621f6fdfd"}}}}
     ) {
       Trade {
         Dex {
@@ -139,8 +166,8 @@ query topTraders($network: evm_network, $token: String) {
         }
         Buyer
       }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
@@ -154,7 +181,7 @@ query topTraders($network: evm_network, $token: String) {
 
 ## OHLC in USD of a Token
 
-This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on Uniswap v3 over a defined time period and interval. You can try out the API [here](https://ide.bitquery.io/OHLC-on-BASE-Uniswap-v3) on Bitquery Playground.
+This query retrieves [hourly open, high, low and close prices in USD](https://ide.bitquery.io/OHLC-on-BASE-Uniswap-v3) for one token traded on Uniswap v3.
 
 ```graphql
 {
@@ -175,7 +202,7 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
             Type: { is: buy }
           }
           PriceAsymmetry: { lt: 0.1 }
-          Dex: { ProtocolName: { is: "uniswap_v3" } }
+          Dex: { OwnerAddress: { is: "0x33128a8fc17869897dce68ed026d694621f6fdfd" } }
         }
       }
       limit: { count: 10 }
@@ -198,7 +225,7 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
 
 ## Get trading volume, buy volume, sell volume of a token
 
-This query fetches you the traded volume, buy volume and sell volume of a token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b`. Try out the API [here](https://ide.bitquery.io/trade_volume_base_uniswapv3).
+This query returns the [traded, buy and sell volume](https://ide.bitquery.io/trade_volume_base_uniswapv3) of token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b` on Uniswap v3.
 
 ```graphql
 query MyQuery {
@@ -209,6 +236,7 @@ query MyQuery {
           Currency: {
             SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
           }
+          Dex: { OwnerAddress: { is: "0x33128a8fc17869897dce68ed026d694621f6fdfd" } }
         }
         TransactionStatus: { Success: true }
         Block: { Time: { since: "2025-02-12T00:00:00Z" } }
@@ -238,7 +266,7 @@ query MyQuery {
 
 ## Get top bought tokens on uniswap v3
 
-This query will fetch you the top bought tokens on uniswap v3. Try out the query [here](https://ide.bitquery.io/top-bought-tokens-on-uniswap-v3).
+This query returns the [top bought tokens on Uniswap v3](https://ide.bitquery.io/top-bought-tokens-on-uniswap-v3). Buys are the rows where `Side.Type`, the counter-side, is `sell`.
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -246,7 +274,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "buy"}
       limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v3"}}}}
+      where: {Trade: {Dex: {OwnerAddress: {is: "0x33128a8fc17869897dce68ed026d694621f6fdfd"}}}}
     ) {
       Trade {
         Currency {
@@ -258,8 +286,8 @@ query timeDiagram($network: evm_network) {
           ProtocolName
         }
       }
-      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
     }
   }
 }
@@ -270,7 +298,7 @@ query timeDiagram($network: evm_network) {
 
 ## Get top sold tokens on uniswap v3
 
-This query will fetch you the top bought tokens on uniswap v3. Try out the query [here](https://ide.bitquery.io/top-sold-tokens-on-uniswap-v3).
+This query returns the [top sold tokens on Uniswap v3](https://ide.bitquery.io/top-sold-tokens-on-uniswap-v3). Sales are the rows where `Side.Type`, the counter-side, is `buy`.
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -278,7 +306,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "sell"}
       limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "uniswap_v3"}}}}
+      where: {Trade: {Dex: {OwnerAddress: {is: "0x33128a8fc17869897dce68ed026d694621f6fdfd"}}}}
     ) {
       Trade {
         Currency {
@@ -290,8 +318,8 @@ query timeDiagram($network: evm_network) {
           ProtocolName
         }
       }
-      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
     }
   }
 }
@@ -302,7 +330,7 @@ query timeDiagram($network: evm_network) {
 
 ## Get Metadata of a token
 
-Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContract Address`, `Decimals`. Try out the API [here](https://ide.bitquery.io/get-metadata-for-base-uniswap-token) in the Bitquery Playground.
+The query below returns a [token's metadata](https://ide.bitquery.io/get-metadata-for-base-uniswap-token): `Name`, `symbol`, `SmartContract Address` and `Decimals`.
 
 ```graphql
 query MyQuery {
@@ -315,7 +343,7 @@ query MyQuery {
           Currency: {
             SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
           }
-          Dex: { ProtocolName: { is: "uniswap_v3" } }
+          Dex: { OwnerAddress: { is: "0x33128a8fc17869897dce68ed026d694621f6fdfd" } }
         }
       }
     ) {
@@ -337,11 +365,11 @@ query MyQuery {
 
 ## Building with Bitquery and Uniswap API
 
-Check [this](/docs/usecases/base-sniper-bot/) guide to get started with building projects with real world value using Bitquery Uniswap APIs.
+Start with the [Base Sniper Bot guide](/docs/usecases/base-sniper-bot/) to build a working project on these APIs.
 
 <FAQ
   items={[
-    { q: "How do I query Uniswap on Base?", a: "Use EVM.DEXTrades with network base and Uniswap protocol filters from the examples on this page." },
+    { q: "How do I query Uniswap on Base?", a: "Use EVM.DEXTrades with network base and filter Trade.Dex.OwnerAddress to the v2 factory (0x8909dc15e40173ff4699343b6eb8132c65e18ec6) or the v3 factory (0x33128a8fc17869897dce68ed026d694621f6fdfd), or Trade.Dex.SmartContract to the v4 PoolManager (0x498581ff718922c3f8e6a244956af099b2652b2b). Protocol name filters also return forks." },
     { q: "Can I get OHLC for Uniswap pairs on Base?", a: "Use DEXTradeByTokens interval aggregation or Trading.Trades for recent USD candles." },
   ]}
 />
