@@ -6,7 +6,7 @@ description: "Ethereum Token Trades Apis: get Ethereum DEX swaps, prices, and OH
 # Token Trades API
 
 :::tip Need real-time token trade data or anything from the last ~30 days?
-For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview) — [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered token trade swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use this page when you need **historical token trade data older than ~30 days**, raw per-swap detail, or call / event context.
+For **real-time + last ~30 days**, use the [**Trading cube**](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) gives you clean, MEV-filtered token trade swaps with **USD price, market cap, and supply on every row** across **10 chains in one API**. Use the `EVM` queries on this page for raw per-swap detail or call and event context. An `EVM` query without a `dataset` argument runs on the realtime dataset, which holds only the last few days; add `dataset: combined` or `dataset: archive` for **historical token trade data**, as several examples below do.
 :::
 
 We have three main APIs to get DEX trading data.
@@ -19,10 +19,10 @@ Read [DEXTrades vs DEXTradeByTokens vs Trades cube](/docs/cubes/dextrades-dextra
 
 ## Subscribe to realtime DEXTrades on Ethereum Mainnet
 
-The below query will get you the realtime DEX trades happening on Ethereum Mainnet. Open it in the GraphQL IDE using this [link](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2).
+This subscription streams [every DEX trade on Ethereum mainnet as it happens](https://ide.bitquery.io/subscribe-to-dex-trades-on-ethereum-mainnet_2).
 
 <details>
-  <summary>Click to expand GraphQL subscription</summary>
+  <summary>Subscription: every Ethereum DEX trade as it happens</summary>
 
 ```graphql
 subscription MyQuery {
@@ -92,10 +92,10 @@ subscription MyQuery {
 
 ## Get the Buys, Sells, Buy Volume, Sell Volume and Makers
 
-Fetch buys, sells, volumes, and the number of makers for a specific pool (`0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`). See a video explanation [here](https://www.youtube.com/watch?v=K_H3to_nIdY).
+Fetch buys, sells, volumes, and the number of makers for a specific pool (`0x842293fa6ee0642bf61ebf8310e7e546039ba7f4`). A [video walks through building DexScreener-style trade stats with this query](https://www.youtube.com/watch?v=K_H3to_nIdY).
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Buys, sells, volume and makers for one pool, with variables</summary>
 
 ```graphql
 query MyQuery(
@@ -233,7 +233,7 @@ query MyQuery(
 Same metrics as above, but for multiple pools at once.
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>The same metrics for several pools, with variables</summary>
 
 ```graphql
 query MyQuery(
@@ -277,11 +277,10 @@ query MyQuery(
 
 ## Get First 500 Buyers of a specific token
 
-Below API gets you the first 500 buyers of a specific ERC-20 token, here as example we have taken this token `0x3c3a81e81dc49A522A592e7622A7E711c06bf354`.
-Try the API [here](https://ide.bitquery.io/first-500-buyers-of-a-ERC20-token_1#).
+This returns the [first 500 buyers of an ERC-20 token](https://ide.bitquery.io/first-500-buyers-of-a-ERC20-token_1#), `0x3c3a81e81dc49A522A592e7622A7E711c06bf354` in this example.
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>First 500 buyers of an ERC-20 token</summary>
 
 ```graphql
 query MyQuery {
@@ -326,7 +325,7 @@ query MyQuery {
 Use the DEXTrades API for historical buyside and sellside trades of BLUR token by the 1inch router.
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>BLUR trades routed through 1inch, from the archive (fields omitted)</summary>
 
 ```graphql
 {
@@ -379,11 +378,10 @@ Use the DEXTrades API for historical buyside and sellside trades of BLUR token b
 
 ## Get Price Change 5min, 1h, 6h and 24h of a specific token
 
-Use below query to get price change 5min, 1h, 6h and 24h of a specific token. Change the `Currency{SmartContract}` and `Dex{SmartContract}` according to your needs. Test the query [here]
-(https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_1#).
+This returns the [price change over 5 minutes, 1, 6 and 24 hours for one token](https://ide.bitquery.io/Price-change-5min-1hr-6hr-precentage-of-a-specific-token_1#). Change `Currency{SmartContract}` and `Dex{SmartContract}` to your token and pool.
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Price change over 5 minutes, 1, 6 and 24 hours</summary>
 
 ```graphql
 query MyQuery {
@@ -426,11 +424,10 @@ query MyQuery {
 
 ## Top 10 Eth Tokens by Price Change in last 1h
 
-Use below query to get top 10 Eth Tokens by Price Change in last 1h. Test the query [here]
-(https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_2).
+This returns the [10 Ethereum tokens with the biggest price change in the last hour](https://ide.bitquery.io/Top-10-eth-tokens-by-price-change-in-last-1-hr_2).
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Ten Ethereum tokens with the biggest 1-hour price change</summary>
 
 ```graphql
 query MyQuery {
@@ -508,7 +505,7 @@ query MyQuery {
 Fetch the most recent 50 trades for a given token:
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>The 50 latest trades of one token</summary>
 
 ```graphql
 query LatestTrades {
@@ -561,7 +558,7 @@ query LatestTrades {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/e4273aea-bf8d-41e4-80e8-b676005e0ce7)
+![DEXrabbit's WBTC Latest Trades tab listing each trade's time, side, price, both currencies and amounts, and USD value](https://github.com/user-attachments/assets/e4273aea-bf8d-41e4-80e8-b676005e0ce7)
 
 Our DEX Dashboard gives you a easier way to check the data -> [DEXrabbit](https://dexrabbit.bitquery.io/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#last_trades).
 
@@ -573,7 +570,7 @@ Our DEX Dashboard gives you a easier way to check the data -> [DEXrabbit](https:
 
 {" "}
 
-<summary>Click to expand GraphQL query and variables</summary>
+<summary>Latest trades of WBTC and LINK</summary>
 
 ```graphql
 query LatestTrades {
@@ -643,10 +640,10 @@ query LatestTrades {
 
 ## Token Trade Analytics
 
-Run this for analytics related to token trades:
+Trade totals for one BNB Chain token over its full history: pairs, DEXs, amount and USD volume, and the number of accounts that bought and sold it. The USD sums leave out mispriced trades.
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Pairs, DEXs, volume and traders for one BNB Chain token</summary>
 
 ```graphql
 {
@@ -674,12 +671,12 @@ Run this for analytics related to token trades:
         AmountInUSD(maximum: Block_Number)
       }
       pairs: uniq(of: Trade_Side_Currency_SmartContract)
-      dexes: uniq(of: Trade_Dex_SmartContract)
+      dexes: uniq(of: Trade_Dex_OwnerAddress)
       amount: sum(of: Trade_Amount)
-      usd: sum(of: Trade_AmountInUSD)
-      usd2: sum(of: Trade_Side_AmountInUSD)
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Sender)
+      usd: sum(of: Trade_AmountInUSD, if: { Trade: { PriceAsymmetry: { lt: 0.1 } } })
+      usd2: sum(of: Trade_Side_AmountInUSD, if: { Trade: { PriceAsymmetry: { lt: 0.1 } } })
+      buyers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: sell } } } })
+      sellers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: buy } } } })
       count
     }
   }
@@ -694,7 +691,7 @@ Use this API to get historical price and volume for a specific token (example: b
 Try it on IDE: [Historical Price & Volume API](https://ide.bitquery.io/historical-price-and-historical-volume)
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Trading.Tokens volume and price for the past 24 hours</summary>
 
 ```graphql
 {
@@ -750,10 +747,10 @@ Try it on IDE: [Historical Price & Volume API](https://ide.bitquery.io/historica
 
 ## Top Traders of a Token
 
-Fetch the top 100 traders by volume USD:
+Returns the top 100 traders of a token by USD volume. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where `Side.Type` is `sell`. `PriceAsymmetry: { lt: 0.1 }` leaves out trades whose two sides disagree on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)).
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Top 100 traders of a token, with variables</summary>
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -761,13 +758,13 @@ query topTraders($network: evm_network, $token: String) {
     DEXTradeByTokens(
       orderBy: { descendingByField: "volumeUsd" }
       limit: { count: 100 }
-      where: { Trade: { Currency: { SmartContract: { is: $token } } } }
+      where: { Trade: { Currency: { SmartContract: { is: $token } }, PriceAsymmetry: { lt: 0.1 } } }
     ) {
-      Trade {
-        Buyer
+      Transaction {
+        From
       }
-      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
-      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
@@ -782,14 +779,12 @@ query topTraders($network: evm_network, $token: String) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/302c2be2-5ebe-4fa3-8fe4-c7e8f3bc6e23)
-
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#top_traders).
 
 ## Get all Trading Pairs data of a specific token
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Pairs a token trades in, with variables</summary>
 
 ```graphql
 query tokenTrades(
@@ -848,14 +843,14 @@ query tokenTrades(
 
 </details>
 
-![image](https://github.com/user-attachments/assets/dfe5ad4b-cb32-4a53-a52c-3985d438da2b)
+![DEXrabbit's WBTC Traded Pairs tab with last price, USD price, 10-minute, 1-hour and 3-hour change, daily volume and daily trades per pair](https://github.com/user-attachments/assets/dfe5ad4b-cb32-4a53-a52c-3985d438da2b)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_trades).
 
 ## Get all DEXs where a specific token is listed
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>DEXs that trade a token, with variables</summary>
 
 ```graphql
 query tokenDexMarkets($network: evm_network, $token: String) {
@@ -885,14 +880,14 @@ query tokenDexMarkets($network: evm_network, $token: String) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/f0de1013-b634-4058-8423-78d7130fcc10)
+![DEXrabbit's WBTC DEX Markets tab listing each DEX and protocol with its trade count, pair count and WBTC volume](https://github.com/user-attachments/assets/f0de1013-b634-4058-8423-78d7130fcc10)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599#token_dex_list).
 
 ## Latest Trades of a Token pair
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Latest trades of one pair, with variables</summary>
 
 ```graphql
 query LatestTrades($network: evm_network, $token: String, $base: String) {
@@ -952,14 +947,14 @@ query LatestTrades($network: evm_network, $token: String, $base: String) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/b06fe6ff-e8ba-43f7-b9de-22666dde7bc6)
+![DEXrabbit's WETH / MISHA Latest Trades tab with time, side, price, WETH and MISHA amounts, and USD value](https://github.com/user-attachments/assets/b06fe6ff-e8ba-43f7-b9de-22666dde7bc6)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_latest_trades).
 
 ## Get OHLC data for a particular token pair
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Five-minute USD candles for one pair, with variables</summary>
 
 ```graphql
 query tradingViewPairs($network: evm_network, $token: String, $base: String) {
@@ -997,14 +992,16 @@ query tradingViewPairs($network: evm_network, $token: String, $base: String) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/33af35df-4a9b-4ec8-a26b-d4770c2e7c96)
+![DEXrabbit's 5-minute candlestick chart for WETH / MISHA with volume bars](https://github.com/user-attachments/assets/33af35df-4a9b-4ec8-a26b-d4770c2e7c96)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098).
 
 ## Top Traders of a token pair
 
+The same ranking for one pair: accounts that sent swaps between WETH and the base token, with `bought` and `sold` counted the same way.
+
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Top 100 traders of one pair, with variables</summary>
 
 ```graphql
 query pairTopTraders($network: evm_network, $token: String, $base: String) {
@@ -1015,15 +1012,16 @@ query pairTopTraders($network: evm_network, $token: String, $base: String) {
       where: {
         Trade: {
           Currency: { SmartContract: { is: $token } },
-          Side: { Amount: { gt: "0" }, Currency: { SmartContract: { is: $base } } }
+          Side: { Amount: { gt: "0" }, Currency: { SmartContract: { is: $base } } },
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
     ) {
-      Trade {
-        Buyer
+      Transaction {
+        From
       }
-      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
-      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      bought: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: sell } } } })
+      sold: sum(of: Trade_Amount, if: { Trade: { Side: { Type: { is: buy } } } })
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
@@ -1039,14 +1037,12 @@ query pairTopTraders($network: evm_network, $token: String, $base: String) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/baaf62ee-9cbe-4d3b-bf53-c29a196a46bb)
-
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_top_traders).
 
 ## Get all DEXs where a specific token pair is listed
 
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>DEXs that trade one pair, with variables</summary>
 
 ```graphql
 query pairDexList(
@@ -1103,21 +1099,27 @@ query pairDexList(
 
 </details>
 
-![image](https://github.com/user-attachments/assets/a652f6de-1066-49b6-87f7-b05e481565bf)
+![DEXrabbit's WETH / MISHA DEX Markets tab: Uniswap v2 and v3 rows with trades, last price, 10-minute, 1-hour and 3-hour change and daily volume](https://github.com/user-attachments/assets/a652f6de-1066-49b6-87f7-b05e481565bf)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth/pair/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0x0ccae1bc46fb018dd396ed4c45565d4cb9d41098#pair_dex_list).
 
 ## Top Gainers
 
+Pairs ranked by USD price change over the last hour, among pairs with at least 100 trades in that hour. A pair can appear twice, once for each of its tokens. `buyers` and `sellers` count the accounts that sent those swaps.
+
 <details>
-  <summary>Click to expand GraphQL query and variables</summary>
+  <summary>Pairs ranked by 1-hour price gain, with variables</summary>
 
 ```graphql
 query ($network: evm_network) {
   EVM(network: $network) {
     DEXTradeByTokens(
-      orderBy: { descendingByField: "usd" }
+      orderBy: { descendingByField: "change_1h" }
       limit: { count: 100 }
+      where: {
+        Block: { Time: { since_relative: { hours_ago: 1 } } }
+        Trade: { PriceAsymmetry: { lt: 0.1 } }
+      }
     ) {
       Trade {
         Currency {
@@ -1135,29 +1137,31 @@ query ($network: evm_network) {
         price_last: PriceInUSD(maximum: Block_Number)
         price_1h_ago: PriceInUSD(minimum: Block_Number)
       }
+      change_1h: calculate(expression: "($Trade_price_last - $Trade_price_1h_ago) / $Trade_price_1h_ago * 100")
       dexes: uniq(of: Trade_Dex_OwnerAddress)
       amount: sum(of: Trade_Side_Amount)
       usd: sum(of: Trade_Side_AmountInUSD)
-      buyers: uniq(of: Trade_Buyer)
-      sellers: uniq(of: Trade_Seller)
+      buyers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: sell } } } })
+      sellers: uniq(of: Transaction_From, if: { Trade: { Side: { Type: { is: buy } } } })
       count(selectWhere: { ge: "100" })
     }
   }
 }
-
 { "network": "eth" }
 ```
 
 </details>
 
-![image](https://github.com/user-attachments/assets/9b501fe8-fb44-4796-a3d4-4084f230e626)
+![DEXrabbit's Top Gainers table for Ethereum pairs with last price, 1-hour change, daily volume and daily trades](https://github.com/user-attachments/assets/9b501fe8-fb44-4796-a3d4-4084f230e626)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth).
 
 ## Top Bought tokens
 
+Tokens ranked by USD bought. Buys are the rows where `Side.Type`, the counter-side, is `sell`, and the `PriceAsymmetry` filter keeps mispriced trades out of the totals.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Tokens ranked by USD bought, with variables</summary>
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -1165,6 +1169,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: { descendingByField: "buy" }
       limit: { count: 100 }
+      where: { Trade: { PriceAsymmetry: { lt: 0.1 } } }
     ) {
       Trade {
         Currency {
@@ -1175,11 +1180,11 @@ query timeDiagram($network: evm_network) {
       }
       buy: sum(
         of: Trade_Side_AmountInUSD,
-        if: { Trade: { Side: { Type: { is: buy } } } }
+        if: { Trade: { Side: { Type: { is: sell } } } }
       )
       sell: sum(
         of: Trade_Side_AmountInUSD,
-        if: { Trade: { Side: { Type: { is: sell } } } }
+        if: { Trade: { Side: { Type: { is: buy } } } }
       )
     }
   }
@@ -1190,14 +1195,16 @@ query timeDiagram($network: evm_network) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/ef9e8091-0460-4208-841e-4595269d5b84)
+![DEXrabbit's Top Bought table for Ethereum tokens with USD bought and sold](https://github.com/user-attachments/assets/ef9e8091-0460-4208-841e-4595269d5b84)
 
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth).
 
 ## Top Sold tokens
 
+Tokens ranked by USD sold, where sales are the rows with `Side.Type` set to `buy`.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Tokens ranked by USD sold, with variables</summary>
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -1205,6 +1212,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: { descendingByField: "sell" }
       limit: { count: 100 }
+      where: { Trade: { PriceAsymmetry: { lt: 0.1 } } }
     ) {
       Trade {
         Currency {
@@ -1215,11 +1223,11 @@ query timeDiagram($network: evm_network) {
       }
       buy: sum(
         of: Trade_Side_AmountInUSD,
-        if: { Trade: { Side: { Type: { is: buy } } } }
+        if: { Trade: { Side: { Type: { is: sell } } } }
       )
       sell: sum(
         of: Trade_Side_AmountInUSD,
-        if: { Trade: { Side: { Type: { is: sell } } } }
+        if: { Trade: { Side: { Type: { is: buy } } } }
       )
     }
   }
@@ -1230,14 +1238,14 @@ query timeDiagram($network: evm_network) {
 
 </details>
 
-![image](https://github.com/user-attachments/assets/2940bea4-b27f-4e74-afc4-1d433a45a31b)
-
 You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth).
 
 ## Latest Token Trades
 
+In `DEXTrades` on EVM chains, `Buy` and `Sell` are the pool's side of the trade ([DEXTrades cube](/docs/cubes/dextrades)): `buyside` below holds trades where the pool received the token, that is, traders sold it, and `sellside` trades where traders bought it.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Buy side and sell side of one token's trades (fields omitted)</summary>
 
 ```graphql
 {
@@ -1264,7 +1272,7 @@ You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth).
       orderBy: { descending: Block_Time }
       where: {
         Trade: {
-          Buy: {
+          Sell: {
             Currency: {
               SmartContract: {
                 is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
@@ -1282,12 +1290,12 @@ You can check the data here on [DEXrabbit](https://dexrabbit.bitquery.io/eth).
 
 </details>
 
-Open it with this [link](https://ide.bitquery.io/latest-trades-for-a-token---both-buy-and-sell).
+The IDE has the [full latest-trades query with every field](https://ide.bitquery.io/latest-trades-for-a-token---both-buy-and-sell).
 
 ## Token trade from a specific DEX
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Uniswap v3 trades in which traders sold WETH (fields omitted)</summary>
 
 ```graphql
 {
@@ -1316,12 +1324,12 @@ Open it with this [link](https://ide.bitquery.io/latest-trades-for-a-token---bot
 
 </details>
 
-Open it with this [link](https://ide.bitquery.io/token-trades-for-a-specific-DEX_1).
+The IDE has the [full DEX-filtered version](https://ide.bitquery.io/token-trades-for-a-specific-DEX_1).
 
 ## Subscribe to new token trades (WebSocket)
 
 <details>
-  <summary>Click to expand GraphQL subscription</summary>
+  <summary>Subscription: new WETH trades each block (fields omitted)</summary>
 
 ```graphql
 subscription {
@@ -1346,7 +1354,7 @@ subscription {
       orderBy: { descending: Block_Time }
       where: {
         Trade: {
-          Buy: {
+          Sell: {
             Currency: {
               SmartContract: {
                 is: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
@@ -1364,12 +1372,14 @@ subscription {
 
 </details>
 
-Open it with this [link](https://ide.bitquery.io/latest-token-trades-subscription).
+The IDE has the [full subscription](https://ide.bitquery.io/latest-token-trades-subscription).
 
 ## OHLC in USD of a Token
 
+Hourly open, high, low and close prices in USD for USDT, from its trades against WETH.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Hourly USD candles for USDT</summary>
 
 ```graphql
 {
@@ -1398,10 +1408,10 @@ Open it with this [link](https://ide.bitquery.io/latest-token-trades-subscriptio
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
+        high: PriceInUSD(maximum: Trade_PriceInUSD)
+        low: PriceInUSD(minimum: Trade_PriceInUSD)
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
       }
       count
     }
@@ -1414,7 +1424,7 @@ Open it with this [link](https://ide.bitquery.io/latest-token-trades-subscriptio
 ## Get Token Metadata
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Name, symbol and decimals of a token</summary>
 
 ```graphql
 query MyQuery {
@@ -1451,7 +1461,7 @@ query MyQuery {
 ## Top Buyers of a Token
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Ten largest buyers of a token by USD</summary>
 
 ```graphql
 {
@@ -1489,7 +1499,7 @@ query MyQuery {
 ## Top Sellers of a Token
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Ten largest sellers of a token by USD</summary>
 
 ```graphql
 {
@@ -1526,8 +1536,10 @@ query MyQuery {
 
 ## Get trading volume, buy volume, sell volume of a token
 
+This returns the traded, buy and sell volume in USD of BNB's ERC-20 contract on Ethereum (`0xB8c77482e45F1F44dE1745F52C74426C631bDD52`), across every DEX, over the last 24 hours. `PriceAsymmetry: { lt: 0.1 }` drops mispriced trades, which would otherwise skew the USD sums.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>24-hour traded, buy and sell volume of one token</summary>
 
 ```graphql
 query MyQuery {
@@ -1538,9 +1550,10 @@ query MyQuery {
           Currency: {
             SmartContract: { is: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52" }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
         TransactionStatus: { Success: true }
-        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {
@@ -1575,7 +1588,7 @@ Browse multi-chain stablecoin DEX prices on [DEXrabbit's Stablecoins category](h
 [Run in Bitquery IDE](https://ide.bitquery.io/evm-peg-health_1)
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Latest stablecoin price on each DEX</summary>
 
 ```graphql
 {
@@ -1639,7 +1652,7 @@ Get realised PnL, buy volume, and sell volume for a token on EVM of a trader for
 [Run in Bitquery IDE](https://ide.bitquery.io/Realised-Pnl-Buy-volume-Sell-Volume-Ethereum)
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>One trader's realised PnL and buy and sell volume, with variables</summary>
 
 ```graphql
 query ($trader: String) {
@@ -1699,13 +1712,15 @@ query ($trader: String) {
 
 ## Getting OHLC and Distinct Buys/Sells
 
+Daily OHLC, priced in WBNB, with buy and sell counts for Aave Token against WBNB on BNB Chain from 1 July to 1 August 2023. A buy is a row where `Side.Type` is `sell`; `buyers` and `sellers` count the distinct accounts that sent those swaps.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Daily candles with buy and sell counts</summary>
 
 ```graphql
 {
   EVM(dataset: archive, network: bsc) {
-    buyside: DEXTradeByTokens(
+    daily: DEXTradeByTokens(
       limit: { count: 30 }
       orderBy: { descendingByField: "Block_time_field" }
       where: {
@@ -1717,7 +1732,6 @@ query ($trader: String) {
               }
             }
             Amount: { ge: "0" }
-            Type: { is: buy }
           }
           Currency: {
             SmartContract: { is: "0xfb6115445bff7b52feb98650c87f44907e58f802" }
@@ -1731,34 +1745,17 @@ query ($trader: String) {
         time_field: Time(interval: { in: days, count: 1 })
       }
       volume: sum(of: Trade_Amount)
-      distinctBuyer: count(distinct: Trade_Buyer)
-      distinctSeller: count(distinct: Trade_Seller)
-      distinctSender: count(distinct: Trade_Sender)
+      buyers: count(
+        distinct: Transaction_From
+        if: { Trade: { Side: { Type: { is: sell } } } }
+      )
+      sellers: count(
+        distinct: Transaction_From
+        if: { Trade: { Side: { Type: { is: buy } } } }
+      )
       distinctTransactions: count(distinct: Transaction_Hash)
-      total_sales: count(
-        if: {
-          Trade: {
-            Side: {
-              Currency: {
-                SmartContract: {
-                  is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
-                }
-              }
-            }
-          }
-        }
-      )
-      total_buys: count(
-        if: {
-          Trade: {
-            Currency: {
-              SmartContract: {
-                is: "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c"
-              }
-            }
-          }
-        }
-      )
+      total_buys: count(if: { Trade: { Side: { Type: { is: sell } } } })
+      total_sales: count(if: { Trade: { Side: { Type: { is: buy } } } })
       total_count: count
       Trade {
         Currency {
@@ -1784,7 +1781,7 @@ query ($trader: String) {
 ## Get Least Traded Token
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>The 10 least traded tokens in one November 2023 week</summary>
 
 ```graphql
 query MyQuery {
@@ -1817,8 +1814,10 @@ query MyQuery {
 
 ## First X Buyers of a Token
 
+The first 10 accounts to buy BLUR. Buyers of a token sit on the pool's `Sell` side, where the pool paid the token out, so the filter is on `Trade.Sell.Currency`. `Trade.Sell.Buyer` is often a router, so the buyer is `Transaction.From`.
+
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>First 10 buyers of BLUR</summary>
 
 ```graphql
 {
@@ -1829,7 +1828,7 @@ query MyQuery {
       orderBy: { ascending: Block_Time }
       where: {
         Trade: {
-          Buy: {
+          Sell: {
             Currency: {
               SmartContract: {
                 is: "0x5283d291dbcf85356a21ba090e6db59121208b44"
@@ -1849,7 +1848,7 @@ query MyQuery {
         Hash
       }
       Trade {
-        Buy {
+        Sell {
           Amount
           Buyer
           Currency {
@@ -1878,7 +1877,7 @@ For **EVM chains** (Ethereum, BSC, etc.) in the Trading API, use **all lowercase
 [Run in Bitquery IDE](https://ide.bitquery.io/volume-of-a-token_1)
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Volume and price change for tokens on four chains</summary>
 
 ```graphql
 query {
@@ -1961,7 +1960,7 @@ Stream **all Ethereum DEX trades** in real time with **USD price**, **market cap
 You can run this subscription [in the Bitquery IDE](https://ide.bitquery.io/All-trades-on-Ethereum-with-Price-Marketcap-supply).
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Subscription: Ethereum trades with USD price, market cap and supply</summary>
 
 ```graphql
 subscription {
@@ -2043,12 +2042,12 @@ subscription {
 
 ### Top Traders by PnL for a Specific Pool (Last 30 Minutes)
 
-Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Address`**, last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
+Rank traders by **`PnL`** on one pool: filter **`Pair.Market.Program`** (the pool; for Uniswap v3, `Pair.Market.Address` is the factory and would cover every v3 pool), last **30 minutes**, **`limit: 10`**, and **`orderBy`** **`PnL`** descending. Useful for **leaderboards**, **smart-money screens**, and **pool-specific trader analytics**.
 
 You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-eth-pool_1).
 
 <details>
-  <summary>Click to expand GraphQL query</summary>
+  <summary>Ten traders with the highest PnL in one pool over 30 minutes</summary>
 
 ```graphql
 {
@@ -2060,7 +2059,8 @@ You can run this query [in the Bitquery IDE](https://ide.bitquery.io/Top-Traders
         Block: { Time: { since_relative: { minutes_ago: 30 } } }
         Pair: {
           Market: {
-            Address: { is: "0x1f98431c8ad98523631ae4a59f267346ea31f984" }
+            Network: { is: "Ethereum" }
+            Program: { is: "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640" }
           }
         }
       }
