@@ -24,6 +24,57 @@ import VideoPlayer from "../../../../src/components/videoplayer.js";
 
 <ProductCTA href="https://bitquery.io/products/dex" title="DEX API" />
 
+## Uniswap contract addresses on Ethereum
+
+Core Uniswap contracts on Ethereum mainnet. Every address below was read from
+indexed mainnet logs rather than copied from a reference, and each one is the
+contract that actually emits the events in the next table.
+
+| Version | Contract | Address |
+| --- | --- | --- |
+| v2 | Factory | `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f` |
+| v3 | Factory | `0x1f98431c8ad98523631ae4a59f267346ea31f984` |
+| v3 | NonfungiblePositionManager | `0xc36442b4a4522e871399cd717abdd847ab11fe88` |
+| v4 | PoolManager (singleton) | `0x000000000004444c5dc75cb358380d2e3de08a90` |
+| v4 | PositionManager | `0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e` |
+
+## Uniswap event signatures and topic0 hashes
+
+`topic0` is the first log topic, the keccak-256 hash of the event signature. Use
+it to match raw logs when you are reading them outside Bitquery's decoded schema.
+
+| Version | Event | Signature | topic0 |
+| --- | --- | --- | --- |
+| v2 | PairCreated | `PairCreated(address,address,address,uint256)` | `0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9` |
+| v2 | Swap | `Swap(address,uint256,uint256,uint256,uint256,address)` | `0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822` |
+| v3 | PoolCreated | `PoolCreated(address,address,uint24,int24,address)` | `0x783cca1c0412dd0d695e784568c96da2e9c22ff989357a2e8b1d9b2b4e6b7118` |
+| v3 | Swap | `Swap(address,address,int256,int256,uint160,uint128,int24)` | `0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67` |
+| v4 | Initialize | `Initialize(bytes32,address,address,uint24,int24,address,uint160,int24)` | `0xdd466e674ea557f56295e2d0218a125ea4b4f0f6f3307b95f85e6110838d6438` |
+| v4 | Swap | `Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)` | `0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f` |
+| v4 | ModifyLiquidity | `ModifyLiquidity(bytes32,address,int24,int24,int256,bytes32)` | `0xf208f4912782fd25c7f114ca3723a2d5dd6f3bcc3ac8db5af63baa85f711d5ec` |
+
+Two differences matter when you read these logs directly.
+
+In v2 and v3 the `Swap` event is emitted by the pair or pool contract itself, so
+the pool is identified by the log's own address, and mainnet has thousands of
+distinct emitters. In v4 every pool lives inside the one PoolManager, so every
+v4 `Swap` log carries the same emitter address and the pool is identified by the
+`bytes32` PoolId in the event's first argument. Filtering v4 swaps by a pool
+address does not work; filter by PoolId.
+
+Liquidity positions are represented differently in each version. v2 gives a
+depositor fungible ERC-20 LP tokens minted by the pair itself. v3 and v4 both
+issue an ERC-721: one `tokenId` per position, from the NonfungiblePositionManager
+in v3 and the PositionManager in v4.
+
+Where they differ is which contract reports the liquidity change. The v3 manager
+emits `IncreaseLiquidity`, `DecreaseLiquidity` and `Collect` itself, so the
+position lifecycle is readable from that one contract. The v4 PositionManager
+emits only the ERC-721 events — `Transfer`, `Approval`, `ApprovalForAll` — while
+the liquidity change is emitted by the PoolManager as `ModifyLiquidity`. Reading
+a v4 position therefore means joining the NFT to the PoolManager's events by
+PoolId.
+
 ## Realtime Uniswap v1, v2, v3, v4 Trades
 
 Track live trades across all Uniswap versions: [Run Stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream_1)
@@ -669,5 +720,13 @@ Contact us on our telegram channel for a trial credentials.
     { q: "How do I query Uniswap trades on Ethereum?", a: "Filter EVM.DEXTrades with network eth and Trade.Dex.ProtocolName for uniswap_v2, uniswap_v3, or uniswap_v4." },
     { q: "Can I get pool-level OHLC for Uniswap pairs?", a: "Yes. Use DEXTradeByTokens with interval aggregation on the pair or token mint." },
     { q: "Does Bitquery support Uniswap v4?", a: "Yes where indexed — see the Uniswap v4 API doc for v4-specific pool and hook fields." },
+    { q: "What is the Uniswap V2 factory address on Ethereum?", a: "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f. It emits PairCreated(address,address,address,uint256) with topic0 0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9 every time a new v2 pair is deployed." },
+    { q: "What is the Uniswap V3 factory address on Ethereum?", a: "0x1f98431c8ad98523631ae4a59f267346ea31f984. It emits PoolCreated(address,address,uint24,int24,address) with topic0 0x783cca1c0412dd0d695e784568c96da2e9c22ff989357a2e8b1d9b2b4e6b7118." },
+    { q: "What is the Uniswap V4 PoolManager address on Ethereum?", a: "0x000000000004444c5dc75cb358380d2e3de08a90. Uniswap v4 is a singleton: every v4 pool lives inside this one contract, so it emits every v4 Swap, Initialize and ModifyLiquidity event on Ethereum." },
+    { q: "What is the Uniswap V2 PairCreated event signature?", a: "PairCreated(address,address,address,uint256). The arguments are token0, token1, the new pair contract address, and the running count of pairs created. Its topic0 is 0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9." },
+    { q: "What is the topic0 for a Uniswap V3 swap?", a: "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67, the hash of Swap(address,address,int256,int256,uint160,uint128,int24). The v2 equivalent is 0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822 and the v4 one is 0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f." },
+    { q: "Are Uniswap V3 liquidity positions NFTs?", a: "Yes. Each v3 position is an ERC-721 token minted by the NonfungiblePositionManager at 0xc36442b4a4522e871399cd717abdd847ab11fe88, which also emits IncreaseLiquidity, DecreaseLiquidity and Collect for that tokenId. Uniswap v4 positions are also ERC-721, minted by the PositionManager at 0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e. Uniswap v2 uses fungible ERC-20 LP tokens instead." },
+    { q: "Why can't I filter Uniswap v4 swaps by pool address?", a: "Because v4 has no per-pool contract. All pools are held by the single PoolManager, so every v4 Swap log has the same emitter address and identifies its pool by the bytes32 PoolId in the event's first argument. Filter on PoolId rather than on a contract address." },
+    { q: "Which chains does Bitquery cover Uniswap on?", a: "Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum and Optimism. The schema is identical across them, so a query written for Uniswap on Ethereum runs unchanged on the others by switching the network argument." },
   ]}
 />
