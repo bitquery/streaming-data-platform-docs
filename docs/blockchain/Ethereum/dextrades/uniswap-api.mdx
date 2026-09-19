@@ -10,7 +10,7 @@ import ProductCTA from "@site/src/components/ProductCTA";
 
 Uniswap is a decentralized exchange on Ethereum for trading ERC-20 tokens. Bitquery’s APIs support Uniswap trades, pool creations, and active user metrics across v1, v2, v3 and v4 in real-time and across archive data since genesis.
 
-The same schema powers our multi-chain [DEX API](https://bitquery.io/products/dex), so these queries also run on other EVM exchanges, such as PancakeSwap or SushiSwap, once you change the factory filter.
+The same schema powers our multi-chain [DEX API](https://bitquery.io/products/dex), so these queries also run on other EVM exchanges, such as PancakeSwap or SushiSwap, once you change the DEX filter.
 
 For Uniswap v3 positions, see the [Uniswap position API examples](/docs/blockchain/Ethereum/dextrades/uniswap-position-api/)
 
@@ -64,14 +64,15 @@ the `PairCreated` signature and topic0 in the table above. On the v3 side, at
 least four other Ethereum factories emitted the identical `PoolCreated` in the
 last 30 days. Any indexer keyed on topic0 alone will report those as Uniswap.
 
-To isolate the real thing, pair the topic0 with the factory that created the
-pool, from the first table.
+To isolate Uniswap's own pools, pair the topic0 with the factory that created
+them, listed in the first table.
 
 ### Filter decoded trades by factory
 
 Bitquery's decoded trades have the same catch. `Trade.Dex.ProtocolName` records
 which code a pool runs, and a fork runs the same code, so `uniswap_v2` also
-returns SushiSwap and the other v2 forks. On 18 September 2026, about one in four
+returns SushiSwap and the other v2 forks. In Bitquery's trade data for 18 September
+2026, about one in four
 Ethereum transactions with a `uniswap_v2` trade went through another factory's
 pools, and SushiSwap's factory accounted for about half of them. The `uniswap_v3`
 label is cleaner, at about 3%, and every `uniswap_v4` trade came from the
@@ -255,7 +256,7 @@ subscription {
 
 ## Latest Trades of a Pair on Uniswap
 
-Retrieve the 50 most recent WETH/USDC trades on Uniswap v1–v4, [Run query](https://ide.bitquery.io/Latest-Trades-of-a-Pair-on-Uniswap):
+Retrieve the 50 most recent WETH/USDC trades in pools labelled Uniswap v1–v4, forks included, [Run query](https://ide.bitquery.io/Latest-Trades-of-a-Pair-on-Uniswap). Add the [factory filters](#filter-decoded-trades-by-factory) to keep Uniswap's own pools only:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -324,7 +325,7 @@ query LatestTrades {
 
 ## Top Traders of a Token
 
-Identify the top 100 USDC traders by USD volume on Uniswap v1–v4 ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold:
+Identify the top 100 USDC traders by USD volume in pools labelled Uniswap v1–v4, forks included ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -348,8 +349,8 @@ query topTraders {
         }
       }
     ) {
-      Trade {
-        Buyer
+      Transaction {
+        From
       }
       bought: sum(
         of: Trade_Amount

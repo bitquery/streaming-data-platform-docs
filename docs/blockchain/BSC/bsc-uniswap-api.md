@@ -32,8 +32,8 @@ Trading API the factory is `Pair.Market.Address`. Addresses are from the officia
 [deployments list](https://developers.uniswap.org/deployments).
 
 The link in each example's description opens an earlier copy saved in the Bitquery IDE,
-which may still filter by `ProtocolName`. Use the code on this page when you need Uniswap's
-own pools only.
+which may still filter by `ProtocolName` and use the older buy and sell conditions. Use the
+code on this page when you need Uniswap's own pools only.
 
 ## Live Uniswap v3 Trades on BSC (Trading API, recommended)
 
@@ -102,7 +102,7 @@ query MyQuery {
 
 ## Get Top Traders of a token on uniswap v3
 
-This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-bsc) on the selected network. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold.
+This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-bsc) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold.
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -112,13 +112,15 @@ query topTraders($network: evm_network, $token: String) {
       limit: {count: 100}
       where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}}}
     ) {
+      Transaction {
+        From
+      }
       Trade {
         Dex {
           OwnerAddress
           ProtocolFamily
           ProtocolName
         }
-        Buyer
       }
       bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
       sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
@@ -150,10 +152,10 @@ This query retrieves [hourly open, high, low and close prices in USD](https://id
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
+        high: PriceInUSD(maximum: Trade_PriceInUSD)
+        low: PriceInUSD(minimum: Trade_PriceInUSD)
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
       }
       count
     }
