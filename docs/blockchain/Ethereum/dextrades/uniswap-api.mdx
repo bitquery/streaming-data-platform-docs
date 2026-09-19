@@ -53,7 +53,23 @@ it to match raw logs when you are reading them outside Bitquery's decoded schema
 | v4 | Swap | `Swap(bytes32,address,int128,int128,uint160,uint128,int24,uint24)` | `0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f` |
 | v4 | ModifyLiquidity | `ModifyLiquidity(bytes32,address,int24,int24,int256,bytes32)` | `0xf208f4912782fd25c7f114ca3723a2d5dd6f3bcc3ac8db5af63baa85f711d5ec` |
 
-Two differences matter when you read these logs directly.
+### A topic0 does not identify Uniswap
+
+Uniswap's v2 and v3 contracts are the most forked code on Ethereum, and a fork
+keeps the ABI, so it keeps the hash. Matching logs on topic0 alone gives you
+every fork as well as Uniswap.
+
+SushiSwap's factory at `0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac` emits exactly
+the `PairCreated` signature and topic0 in the table above. On the v3 side, at
+least four other Ethereum factories emitted the identical `PoolCreated` in the
+last 30 days. Any indexer keyed on topic0 alone will report those as Uniswap.
+
+To isolate Uniswap, pair the topic0 with the factory that created the pool — the
+addresses in the first table — or let Bitquery's decoded schema do it and filter
+on `Trade.Dex.ProtocolName` for `uniswap_v2`, `uniswap_v3` or `uniswap_v4`, which
+is resolved per pool rather than per signature.
+
+### Two more differences worth knowing
 
 In v2 and v3 the `Swap` event is emitted by the pair or pool contract itself, so
 the pool is identified by the log's own address, and mainnet has thousands of
@@ -727,6 +743,8 @@ Contact us on our telegram channel for a trial credentials.
     { q: "What is the topic0 for a Uniswap V3 swap?", a: "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67, the hash of Swap(address,address,int256,int256,uint160,uint128,int24). The v2 equivalent is 0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822 and the v4 one is 0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f." },
     { q: "Are Uniswap V3 liquidity positions NFTs?", a: "Yes. Each v3 position is an ERC-721 token minted by the NonfungiblePositionManager at 0xc36442b4a4522e871399cd717abdd847ab11fe88, which also emits IncreaseLiquidity, DecreaseLiquidity and Collect for that tokenId. Uniswap v4 positions are also ERC-721, minted by the PositionManager at 0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e. Uniswap v2 uses fungible ERC-20 LP tokens instead." },
     { q: "Why can't I filter Uniswap v4 swaps by pool address?", a: "Because v4 has no per-pool contract. All pools are held by the single PoolManager, so every v4 Swap log has the same emitter address and identifies its pool by the bytes32 PoolId in the event's first argument. Filter on PoolId rather than on a contract address." },
-    { q: "Which chains does Bitquery cover Uniswap on?", a: "Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum and Optimism. The schema is identical across them, so a query written for Uniswap on Ethereum runs unchanged on the others by switching the network argument." },
+    { q: "Which chains does Bitquery cover Uniswap on?", a: "Eight networks carry decoded Uniswap trades: Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum, Optimism, Arc and Robinhood Chain. Uniswap v2, v3 and v4 are all present on each; v1 exists on Ethereum and BNB Smart Chain. The schema is identical across them, so a query written for Uniswap on Ethereum runs unchanged on the others by switching the network argument." },
+    { q: "Is Uniswap v4 used outside Ethereum?", a: "Yes, and on some chains it is already the dominant version. On Robinhood Chain, Uniswap v4 carries more trades than v3 and v2 combined. Arc, BNB Smart Chain and Base also run substantial v4 volume. Ethereum still trades more through v3 than v4." },
+    { q: "Can I identify Uniswap trades by the event topic0 alone?", a: "No. Uniswap v2 and v3 are heavily forked and a fork keeps the ABI, so it keeps the same topic0. SushiSwap's factory at 0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac emits the identical PairCreated signature, and at least four other Ethereum factories emitted the identical v3 PoolCreated in the last 30 days. Match the topic0 together with the factory that created the pool, or filter on Trade.Dex.ProtocolName in Bitquery's decoded schema, which is resolved per pool rather than per signature." },
   ]}
 />
