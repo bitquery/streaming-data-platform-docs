@@ -64,10 +64,31 @@ the `PairCreated` signature and topic0 in the table above. On the v3 side, at
 least four other Ethereum factories emitted the identical `PoolCreated` in the
 last 30 days. Any indexer keyed on topic0 alone will report those as Uniswap.
 
-To isolate the real thing, pair the topic0 with the factory that created the pool — the
-addresses in the first table — or let Bitquery's decoded schema do it and filter
-on `Trade.Dex.ProtocolName` for `uniswap_v2`, `uniswap_v3` or `uniswap_v4`, which
-is resolved per pool rather than per signature.
+To isolate the real thing, pair the topic0 with the factory that created the
+pool, from the first table.
+
+### Filter decoded trades by factory
+
+Bitquery's decoded trades have the same catch. `Trade.Dex.ProtocolName` records
+which code a pool runs, and a fork runs the same code, so `uniswap_v2` also
+returns SushiSwap and the other v2 forks. On 18 September 2026, about one in four
+Ethereum transactions with a `uniswap_v2` trade went through another factory's
+pools, and SushiSwap's factory accounted for about half of them. The `uniswap_v3`
+label is cleaner, at about 3%, and every `uniswap_v4` trade came from the
+PoolManager.
+
+To keep only Uniswap's own pools, filter on the contract that owns them:
+
+| Version | Field | Value on Ethereum |
+| --- | --- | --- |
+| v2 | `Trade.Dex.OwnerAddress` | `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f` |
+| v3 | `Trade.Dex.OwnerAddress` | `0x1f98431c8ad98523631ae4a59f267346ea31f984` |
+| v4 | `Trade.Dex.SmartContract` | `0x000000000004444c5dc75cb358380d2e3de08a90` |
+
+`OwnerAddress` is the factory that deployed the pool. v4 pools have no factory, so
+their `OwnerAddress` is the zero address and the PoolManager is the
+`SmartContract`. The [active traders query](#active-traders-on-uniswap-in-the-last-7-days)
+below uses the v3 filter.
 
 ### Two more differences worth knowing
 
@@ -86,14 +107,19 @@ in v3 and the PositionManager in v4.
 Where they differ is which contract reports the liquidity change. The v3 manager
 emits `IncreaseLiquidity`, `DecreaseLiquidity` and `Collect` itself, so the
 position lifecycle is readable from that one contract. The v4 PositionManager
-emits only the ERC-721 events — `Transfer`, `Approval`, `ApprovalForAll` — while
-the liquidity change is emitted by the PoolManager as `ModifyLiquidity`. Reading
+emits no liquidity events. Its logs on Ethereum are the ERC-721 `Transfer`,
+`Approval` and `ApprovalForAll`, and the liquidity change is emitted by the
+PoolManager as `ModifyLiquidity`. Reading
 a v4 position therefore means joining the NFT to the PoolManager's events by
 PoolId.
 
 ## Realtime Uniswap v1, v2, v3, v4 Trades
 
 Track live trades across all Uniswap versions: [Run Stream](https://ide.bitquery.io/uniswap-all-versions-trades-stream_1)
+
+The stream filters on `ProtocolName`, so it also returns forks such as SushiSwap.
+To keep only Uniswap's own pools, use the filters in
+[Filter decoded trades by factory](#filter-decoded-trades-by-factory).
 
 <details>
   <summary>Click to expand GraphQL subscription</summary>
@@ -733,7 +759,7 @@ Contact us on our telegram channel for a trial credentials.
 
 <FAQ
   items={[
-    { q: "How do I query Uniswap trades on Ethereum?", a: "Filter EVM.DEXTrades with network eth and Trade.Dex.ProtocolName for uniswap_v2, uniswap_v3, or uniswap_v4." },
+    { q: "How do I query Uniswap trades on Ethereum?", a: "Query EVM.DEXTrades with network eth and filter Trade.Dex.OwnerAddress to the v2 factory (0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f) or the v3 factory (0x1f98431c8ad98523631ae4a59f267346ea31f984), or Trade.Dex.SmartContract to the v4 PoolManager (0x000000000004444c5dc75cb358380d2e3de08a90). Filtering on Trade.Dex.ProtocolName alone also returns forks such as SushiSwap." },
     { q: "Can I get pool-level OHLC for Uniswap pairs?", a: "Yes. Use DEXTradeByTokens with interval aggregation on the pair or token mint." },
     { q: "Does Bitquery support Uniswap v4?", a: "Yes where indexed — see the Uniswap v4 API doc for v4-specific pool and hook fields." },
     { q: "What is the Uniswap V2 factory address on Ethereum?", a: "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f. It emits PairCreated(address,address,address,uint256) with topic0 0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9 every time a new v2 pair is deployed." },
@@ -743,8 +769,8 @@ Contact us on our telegram channel for a trial credentials.
     { q: "What is the topic0 for a Uniswap V3 swap?", a: "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67, the hash of Swap(address,address,int256,int256,uint160,uint128,int24). The v2 equivalent is 0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822 and the v4 one is 0x40e9cecb9f5f1f1c5b9c97dec2917b7ee92e57ba5563708daca94dd84ad7112f." },
     { q: "Are Uniswap V3 liquidity positions NFTs?", a: "Yes. Each v3 position is an ERC-721 token minted by the NonfungiblePositionManager at 0xc36442b4a4522e871399cd717abdd847ab11fe88, which also emits IncreaseLiquidity, DecreaseLiquidity and Collect for that tokenId. v4 positions are also ERC-721, minted by the PositionManager at 0xbd216513d74c8cf14cf4747e6aaa6420ff64ee9e. v2 uses fungible ERC-20 LP tokens instead." },
     { q: "Why can't I filter Uniswap v4 swaps by pool address?", a: "Because v4 has no per-pool contract. All pools are held by the single PoolManager, so every v4 Swap log has the same emitter address and identifies its pool by the bytes32 PoolId in the event's first argument. Filter on PoolId rather than on a contract address." },
-    { q: "Which chains does Bitquery cover Uniswap on?", a: "Eight networks carry decoded trades: Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum, Optimism, Arc and Robinhood Chain. v2, v3 and v4 are all present on each; v1 exists on Ethereum and BNB Smart Chain. The schema is identical across them, so a query written for Ethereum runs unchanged on the others by switching the network argument." },
-    { q: "Is Uniswap v4 used outside Ethereum?", a: "Yes, and on some chains it is already the dominant version. On Robinhood Chain, v4 carries more trades than v3 and v2 combined. Arc, BNB Smart Chain and Base also run substantial v4 volume. Ethereum still trades more through v3 than v4." },
-    { q: "Can I identify Uniswap trades by the event topic0 alone?", a: "No. v2 and v3 are heavily forked and a fork keeps the ABI, so it keeps the same topic0. SushiSwap's factory at 0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac emits the identical PairCreated signature, and at least four other Ethereum factories emitted the identical v3 PoolCreated in the last 30 days. Match the topic0 together with the factory that created the pool, or filter on Trade.Dex.ProtocolName in the decoded schema, which is resolved per pool rather than per signature." },
+    { q: "Which chains does Bitquery cover Uniswap on?", a: "Eight networks: Ethereum, BNB Smart Chain, Base, Polygon, Arbitrum, Optimism, Arc and Robinhood Chain. On 18 September 2026 each one carried trades through Uniswap's own v2 and v3 factories and its v4 PoolManager; Uniswap v1 only ever ran on Ethereum. The schema is the same on all eight, so a query moves between them by switching the network argument, but the factory and PoolManager addresses differ by chain. On some chains most trades labelled uniswap_v2 are forks: on BNB Smart Chain under 0.5% came from Uniswap's own v2 factory, and more than nine in ten came from PancakeSwap V2." },
+    { q: "Is Uniswap v4 used outside Ethereum?", a: "Yes, and on some chains it is already the busiest version. Counting only Uniswap's own contracts, v4 carried more transactions than v2 and v3 combined on Robinhood Chain, Arc and BNB Smart Chain on both 17 and 18 September 2026. On Ethereum, v3 still carries more than v4." },
+    { q: "Can I identify Uniswap trades by the event topic0 alone?", a: "No. v2 and v3 are heavily forked and a fork keeps the ABI, so it keeps the same topic0. SushiSwap's factory at 0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac emits the identical PairCreated signature, and at least four other Ethereum factories emitted the identical v3 PoolCreated in the last 30 days. Match the topic0 together with the factory that created the pool. In Bitquery's decoded trades, filter Trade.Dex.OwnerAddress to the factory, or Trade.Dex.SmartContract to the v4 PoolManager; Trade.Dex.ProtocolName alone also matches forks." },
   ]}
 />
