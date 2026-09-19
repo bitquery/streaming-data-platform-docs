@@ -8,10 +8,10 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 # Base PancakeSwap Infinity API
 
 Bitquery provides PancakeSwap Infinity (Base) data through APIs, Streams and Data Dumps.
-The below graphQL APIs and Streams are examples of data points you can get with Bitquery for PancakeSwap Infinity on Base.
+The GraphQL APIs and streams below show the data Bitquery has for PancakeSwap Infinity on Base.
 
 
-## Live PancakeSwap Infinity Trades on Base (Trading API — recommended)
+## Live PancakeSwap Infinity Trades on Base (Trading API, recommended)
 
 This subscription streams every PancakeSwap Infinity trade on Base in real time with **USD price and USD amounts on every row**, MEV-filtered. Run it [in the IDE](https://ide.bitquery.io/Trading-API-PancakeSwap-Infinity-Trades-Base).
 
@@ -48,7 +48,7 @@ Follow the steps here to create one: [How to generate Bitquery API token ➤](/d
 
 ## Get Latest Trades on PancakeSwap Infinity
 
-Below query will subscribe you to the latest DEX Trades on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/pancakeswap-infinity-trades)
+Returns the [latest DEX trades on PancakeSwap Infinity](https://ide.bitquery.io/pancakeswap-infinity-trades).
 
 ```graphql
 query MyQuery {
@@ -94,7 +94,7 @@ query MyQuery {
 
 ## Get Latest Price of a token on PancakeSwap Infinity
 
-Below query will get you Latest Price of a token on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/Get-Latest-Price-of-a-token-on-PancakeSwap-Infinity)
+Returns the [latest price of cbBTC on PancakeSwap Infinity](https://ide.bitquery.io/Get-Latest-Price-of-a-token-on-PancakeSwap-Infinity) from its 10 most recent trades.
 
 ```graphql
 query MyQuery {
@@ -149,7 +149,7 @@ query MyQuery {
 
 ## Get Top Traders of a token on PancakeSwap Infinity
 
-This query will fetch you top traders of a token on PancakeSwap Infinity for the selected network. You can test the query [here](https://ide.bitquery.io/top-traders-of-a-token-on-pancakeswap).
+Returns the [top 100 traders of cbBTC on PancakeSwap Infinity](https://ide.bitquery.io/top-traders-of-a-token-on-pancakeswap) by USD volume. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where `Side.Type` is `sell`. `PriceAsymmetry: {lt: 0.1}` leaves out trades whose two sides disagree on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)).
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -157,18 +157,20 @@ query topTraders($network: evm_network, $token: String) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "volumeUsd"}
       limit: {count: 100}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {ProtocolName: {is: "pancakeswap_infinity"}}}}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {ProtocolName: {is: "pancakeswap_infinity"}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
+      Transaction {
+        From
+      }
       Trade {
         Dex {
           OwnerAddress
           ProtocolFamily
           ProtocolName
         }
-        Buyer
       }
-      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
-      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      bought: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: sell}}}})
+      sold: sum(of: Trade_Amount, if: {Trade: {Side: {Type: {is: buy}}}})
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
     }
@@ -176,13 +178,13 @@ query topTraders($network: evm_network, $token: String) {
 }
 {
   "network": "base",
-  "token": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b"
+  "token": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf"
 }
 ```
 
 ## OHLC in USD of a Token
 
-This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a specific token traded on PancakeSwap Infinity over a defined time period and interval. You can try out the API [here](https://ide.bitquery.io/OHLC-on-BASE-pancakeswap-infinity) on Bitquery Playground.
+Returns [hourly open, high, low and close prices in USD](https://ide.bitquery.io/OHLC-on-BASE-pancakeswap-infinity) for cbBTC traded against ETH on PancakeSwap Infinity.
 
 ```graphql
 {
@@ -192,12 +194,12 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
       where: {
         Trade: {
           Currency: {
-            SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
+            SmartContract: { is: "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf" }
           }
           Side: {
             Currency: {
               SmartContract: {
-                is: "0x4200000000000000000000000000000000000006"
+                is: "0x0000000000000000000000000000000000000000"
               }
             }
             Type: { is: buy }
@@ -213,10 +215,10 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
       }
       volume: sum(of: Trade_Amount)
       Trade {
-        high: Price(maximum: Trade_Price)
-        low: Price(minimum: Trade_Price)
-        open: Price(minimum: Block_Number)
-        close: Price(maximum: Block_Number)
+        high: PriceInUSD(maximum: Trade_PriceInUSD)
+        low: PriceInUSD(minimum: Trade_PriceInUSD)
+        open: PriceInUSD(minimum: Block_Number)
+        close: PriceInUSD(maximum: Block_Number)
       }
       count
     }
@@ -226,7 +228,7 @@ This query retrieves the Open, High, Low, and Close (OHLC) prices in USD for a s
 
 ## Get trading volume, buy volume, sell volume of a token
 
-This query fetches you the traded volume, buy volume and sell volume of a token `0x22af33fe49fd1fa80c7149773dde5890d3c76f3b` on PancakeSwap Infinity. Try out the API [here](https://ide.bitquery.io/trade_volume_base_pancakeswap_infinity).
+Returns the [traded, buy and sell volume of cbBTC](https://ide.bitquery.io/trade_volume_base_pancakeswap_infinity) (`0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf`) on PancakeSwap Infinity over the last 24 hours. `PriceAsymmetry: { lt: 0.1 }` drops mispriced trades, which would otherwise skew the USD sums.
 
 ```graphql
 query MyQuery {
@@ -235,12 +237,13 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
+            SmartContract: { is: "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf" }
           }
           Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
+          PriceAsymmetry: { lt: 0.1 }
         }
         TransactionStatus: { Success: true }
-        Block: { Time: { since: "2025-02-12T00:00:00Z" } }
+        Block: { Time: { since_relative: { hours_ago: 24 } } }
       }
     ) {
       Trade {
@@ -267,7 +270,7 @@ query MyQuery {
 
 ## Get top bought tokens on PancakeSwap Infinity
 
-This query will fetch you the top bought tokens on PancakeSwap Infinity. Try out the query [here](https://ide.bitquery.io/top-bought-tokens-on-pancakeswap_infinity).
+Returns the [top bought tokens on PancakeSwap Infinity](https://ide.bitquery.io/top-bought-tokens-on-pancakeswap_infinity). Buys are the rows where `Side.Type`, the counter-side, is `sell`, and the `PriceAsymmetry` filter keeps mispriced trades out of the totals.
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -275,7 +278,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "buy"}
       limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "pancakeswap_infinity"}}}}
+      where: {Trade: {Dex: {ProtocolName: {is: "pancakeswap_infinity"}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Trade {
         Currency {
@@ -287,8 +290,8 @@ query timeDiagram($network: evm_network) {
           ProtocolName
         }
       }
-      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
     }
   }
 }
@@ -299,7 +302,7 @@ query timeDiagram($network: evm_network) {
 
 ## Get top sold tokens on PancakeSwap Infinity
 
-This query will fetch you the top bought tokens on PancakeSwap Infinity. Try out the query [here](https://ide.bitquery.io/top-sold-tokens-on-pancake-infinty).
+Returns the [top sold tokens on PancakeSwap Infinity](https://ide.bitquery.io/top-sold-tokens-on-pancake-infinty). Sales are the rows where `Side.Type` is `buy`.
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -307,7 +310,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "sell"}
       limit: {count: 100}
-      where: {Trade: {Dex: {ProtocolName: {is: "pancakeswap_infinity"}}}}
+      where: {Trade: {Dex: {ProtocolName: {is: "pancakeswap_infinity"}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Trade {
         Currency {
@@ -319,8 +322,8 @@ query timeDiagram($network: evm_network) {
           ProtocolName
         }
       }
-      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
-      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      buy: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: sell}}}})
+      sell: sum(of: Trade_Side_AmountInUSD, if: {Trade: {Side: {Type: {is: buy}}}})
     }
   }
 }
@@ -331,7 +334,7 @@ query timeDiagram($network: evm_network) {
 
 ## Get Metadata of a token
 
-Use the below query to get Token's metadata like `Name`, `symbol`, `SmartContract Address`, `Decimals`. Try out the API [here](https://ide.bitquery.io/get-metadata-for-base-pancakeswap-infnity-token) in the Bitquery Playground.
+Returns a [token's metadata](https://ide.bitquery.io/get-metadata-for-base-pancakeswap-infnity-token), here cbBTC's: `Name`, `Symbol`, `SmartContract` and `Decimals`..
 
 ```graphql
 query MyQuery {
@@ -342,7 +345,7 @@ query MyQuery {
       where: {
         Trade: {
           Currency: {
-            SmartContract: { is: "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b" }
+            SmartContract: { is: "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf" }
           }
           Dex: { ProtocolName: { is: "pancakeswap_infinity" } }
         }
