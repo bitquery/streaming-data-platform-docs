@@ -9,6 +9,10 @@ import VideoPlayer from "../../../src/components/videoplayer.js";
 
 # BSC Uniswap API
 
+:::tip Real-time data or the last 30 days? Use the Trading cube
+For real-time trades and anything from the last 30 days, use the [Trading cube](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns MEV-filtered swaps with a USD price on every row. Use the queries on this page for older history, raw per-swap detail, or call and event context.
+:::
+
 
 ## Filter by factory to exclude forks
 
@@ -28,7 +32,8 @@ on this page now does.
 
 `OwnerAddress` is the factory that deployed the pool. A v4 pool has no factory: its
 `OwnerAddress` is the zero address, and the PoolManager is its `SmartContract`. In the
-Trading API the factory is `Pair.Market.Address`. Addresses are from the official
+Trading cube, filter `Pair.Market.Address` to the v2 or v3 factory, or `Pair.Market.Program`
+to the v4 PoolManager. Addresses are from the official
 [deployments list](https://developers.uniswap.org/deployments).
 
 The link in each example's description opens an earlier copy saved in the Bitquery IDE,
@@ -102,7 +107,7 @@ query MyQuery {
 
 ## Get Top Traders of a token on uniswap v3
 
-This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-bsc) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold.
+This query returns the [top traders of a token](https://ide.bitquery.io/top-traders-of-a-token-on-uniswapv3-bsc) on the selected network. It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold. `PriceAsymmetry: {lt: 0.1}` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals.
 
 ```graphql
 query topTraders($network: evm_network, $token: String) {
@@ -110,7 +115,7 @@ query topTraders($network: evm_network, $token: String) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "volumeUsd"}
       limit: {count: 100}
-      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}}}
+      where: {Trade: {Currency: {SmartContract: {is: $token}}, Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Transaction {
         From
@@ -197,7 +202,7 @@ query MyQuery {
 
 ## Get top bought tokens on uniswap v3
 
-This query returns the [top bought tokens on Uniswap v3](https://ide.bitquery.io/top-bought-tokens-on-bsc-uniswap-v3). Buys are the rows where `Side.Type`, the counter-side, is `sell`.
+This query returns the [top bought tokens on Uniswap v3](https://ide.bitquery.io/top-bought-tokens-on-bsc-uniswap-v3). Buys are the rows where `Side.Type`, the counter-side, is `sell`. The `PriceAsymmetry` filter keeps mispriced trades out of the totals.
 
 ```graphql
 query timeDiagram($network: evm_network) {
@@ -205,7 +210,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "buy"}
       limit: {count: 100}
-      where: {Trade: {Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}}}
+      where: {Trade: {Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Trade {
         Currency {
@@ -237,7 +242,7 @@ query timeDiagram($network: evm_network) {
     DEXTradeByTokens(
       orderBy: {descendingByField: "sell"}
       limit: {count: 100}
-      where: {Trade: {Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}}}
+      where: {Trade: {Dex: {OwnerAddress: {is: "0xdb1d10011ad0ff90774d0c6bb92e5c5c8b4461f7"}}, PriceAsymmetry: {lt: 0.1}}}
     ) {
       Trade {
         Currency {

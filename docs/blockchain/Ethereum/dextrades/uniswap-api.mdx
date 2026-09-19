@@ -10,6 +10,10 @@ import ProductCTA from "@site/src/components/ProductCTA";
 
 Uniswap is a decentralized exchange on Ethereum for trading ERC-20 tokens. Bitquery’s APIs support Uniswap trades, pool creations, and active user metrics across v1, v2, v3 and v4 in real-time and across archive data since genesis.
 
+:::tip Real-time data or the last 30 days? Use the Trading cube
+For real-time trades and anything from the last 30 days, use the [Trading cube](/docs/trading/trading-data-overview): [`Trading.Trades`](/docs/trading/crypto-trades-api/trades-api) returns MEV-filtered swaps with a USD price on every row. Use the queries on this page for older history, raw per-swap detail, or call and event context.
+:::
+
 The same schema powers our multi-chain [DEX API](https://bitquery.io/products/dex), so these queries also run on other EVM exchanges, such as PancakeSwap or SushiSwap, once you change the DEX filter.
 
 For Uniswap v3 positions, see the [Uniswap position API examples](/docs/blockchain/Ethereum/dextrades/uniswap-position-api/)
@@ -88,7 +92,8 @@ To keep only Uniswap's own pools, filter on the contract that owns them:
 
 `OwnerAddress` is the factory that deployed the pool. v4 pools have no factory, so
 their `OwnerAddress` is the zero address and the PoolManager is the
-`SmartContract`. The [active traders query](#active-traders-on-uniswap-in-the-last-7-days)
+`SmartContract`. In the Trading cube, the same contracts are `Market.Address`
+(the v2 or v3 factory) and `Market.Program` (the v4 PoolManager). The [active traders query](#active-traders-on-uniswap-in-the-last-7-days)
 below uses the v3 filter.
 
 ### Two more differences worth knowing
@@ -325,7 +330,7 @@ query LatestTrades {
 
 ## Top Traders of a Token
 
-Identify the top 100 USDC traders by USD volume in pools labelled Uniswap v1–v4, forks included ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold:
+Identify the top 100 USDC traders by USD volume in pools labelled Uniswap v1–v4, forks included ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). It ranks `Transaction.From`, the account that sent each swap, since on a sale `Trade.Buyer` is the pool or a router. `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold. `PriceAsymmetry: { lt: 0.1 }` drops trades whose two sides disagree badly on value ([PriceAsymmetry reference](/docs/graphql/metrics/priceAsymmetry/)), which would otherwise inflate the USD totals:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -346,6 +351,7 @@ query topTraders {
               in: ["uniswap_v4", "uniswap_v3", "uniswap_v2", "uniswap_v1"]
             }
           }
+          PriceAsymmetry: { lt: 0.1 }
         }
       }
     ) {
@@ -421,6 +427,8 @@ query pairTopTraders {
 ## Stream Latest Pool Creation on Uniswap V2, V3
 
 [Run Stream ➤](https://ide.bitquery.io/stream-pool-and-pair-creation-on-ethereum_1)
+
+It covers v4 as well: the PoolManager is in the contract list, and v4 pools are created by `Initialize`.
 
 [Run Query ➤](https://ide.bitquery.io/query-pool-and-pair-creation-on-ethereum_1)
 
@@ -603,14 +611,14 @@ Track the last 10 `Initialize` events from the Uniswap V4 factory:
 
 ## Active Traders on Uniswap in the Last 7 Days
 
-Identify the top 100 active Uniswap v3 traders since April 1, 2025:
+Rank the 100 accounts that sent the most Uniswap v3 swaps on Ethereum in the last 7 days. It groups by `Transaction.From`, since `Trade.Seller` is often the pool:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
 
 ```graphql
 query ActiveUniswapTraders {
-  EVM(dataset: archive, network: eth) {
+  EVM(network: eth) {
     DEXTradeByTokens(
       where: {
         Trade: {
@@ -618,13 +626,13 @@ query ActiveUniswapTraders {
             OwnerAddress: { is: "0x1f98431c8ad98523631ae4a59f267346ea31f984" }
           }
         }
-        Block: { Date: { after: "2025-04-01" } }
+        Block: { Time: { since_relative: { days_ago: 7 } } }
       }
       limit: { count: 100 }
       orderBy: { descendingByField: "tradeCount" }
     ) {
-      Trader: Trade {
-        Seller
+      Transaction {
+        From
       }
       tradeCount: count
       uniqueTokens: count(distinct: Trade_Currency_SmartContract)
