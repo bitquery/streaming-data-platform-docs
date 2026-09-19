@@ -10,9 +10,9 @@ import ProductCTA from "@site/src/components/ProductCTA";
 
 Uniswap is a decentralized exchange on Ethereum for trading ERC-20 tokens. Bitquery’s APIs support Uniswap trades, pool creations, and active user metrics across v1, v2, v3 and v4 in real-time and across archive data since genesis.
 
-The same schema powers our multi-chain [DEX API](https://bitquery.io/products/dex), so every query below also works across PancakeSwap, Raydium and 300+ other venues.
+The same schema powers our multi-chain [DEX API](https://bitquery.io/products/dex), so these queries also run on other EVM exchanges, such as PancakeSwap or SushiSwap, once you change the factory filter.
 
-To get details on Uniswap v3 Positions, check the examples available in [this page](/docs/blockchain/Ethereum/dextrades/uniswap-position-api/)
+For Uniswap v3 positions, see the [Uniswap position API examples](/docs/blockchain/Ethereum/dextrades/uniswap-position-api/)
 
 You can also explore Uniswap APIs on other chains:
 
@@ -324,7 +324,7 @@ query LatestTrades {
 
 ## Top Traders of a Token
 
-Identify the top 100 USDC traders by USD volume on Uniswap v1–v4, [test the query here](https://ide.bitquery.io/Top-Traders-of-a-Token_8):
+Identify the top 100 USDC traders by USD volume on Uniswap v1–v4 ([saved query](https://ide.bitquery.io/Top-Traders-of-a-Token_8)). `Side.Type` describes the counter-side of each trade, so `bought` sums the rows where the side was sold:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -353,11 +353,11 @@ query topTraders {
       }
       bought: sum(
         of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
+        if: { Trade: { Side: { Type: { is: sell } } } }
       )
       sold: sum(
         of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
+        if: { Trade: { Side: { Type: { is: buy } } } }
       )
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
@@ -370,7 +370,7 @@ query topTraders {
 
 ## Uniswap v2 Pair Trade Stats
 
-Get CHEFDOG/WETH v2 pooled stats (volume, bought, sold):
+Get CHEFDOG/WETH v2 pooled stats (volume, bought, sold). As above, `bought` counts rows where `Side.Type` is `sell`:
 
 <details>
   <summary>Click to expand GraphQL query</summary>
@@ -402,11 +402,11 @@ query pairTopTraders {
       }
       bought: sum(
         of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: buy } } } }
+        if: { Trade: { Side: { Type: { is: sell } } } }
       )
       sold: sum(
         of: Trade_Amount
-        if: { Trade: { Side: { Type: { is: sell } } } }
+        if: { Trade: { Side: { Type: { is: buy } } } }
       )
       volume: sum(of: Trade_Amount)
       volumeUsd: sum(of: Trade_Side_AmountInUSD)
@@ -751,7 +751,7 @@ query MyQuery {
 
 ## Uniswap Kafka Streams
 
-You can get Uniswap data with sub-second latency via Kafka Streams. Read more [here](/docs/streams/kafka-streaming-concepts/)
+You can get Uniswap data with sub-second latency via Kafka Streams. Read about [Kafka streaming concepts](/docs/streams/kafka-streaming-concepts/)
 
 Contact us on our telegram channel for a trial credentials.
 
@@ -761,7 +761,7 @@ Contact us on our telegram channel for a trial credentials.
   items={[
     { q: "How do I query Uniswap trades on Ethereum?", a: "Query EVM.DEXTrades with network eth and filter Trade.Dex.OwnerAddress to the v2 factory (0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f) or the v3 factory (0x1f98431c8ad98523631ae4a59f267346ea31f984), or Trade.Dex.SmartContract to the v4 PoolManager (0x000000000004444c5dc75cb358380d2e3de08a90). Filtering on Trade.Dex.ProtocolName alone also returns forks such as SushiSwap." },
     { q: "Can I get pool-level OHLC for Uniswap pairs?", a: "Yes. Use DEXTradeByTokens with interval aggregation on the pair or token mint." },
-    { q: "Does Bitquery support Uniswap v4?", a: "Yes where indexed — see the Uniswap v4 API doc for v4-specific pool and hook fields." },
+    { q: "Does Bitquery support Uniswap v4?", a: "Yes, on all eight networks listed in this FAQ. The Uniswap v4 API page covers v4-specific pool and hook fields." },
     { q: "What is the Uniswap V2 factory address on Ethereum?", a: "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f. It emits PairCreated(address,address,address,uint256) with topic0 0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9 every time a new v2 pair is deployed." },
     { q: "What is the Uniswap V3 factory address on Ethereum?", a: "0x1f98431c8ad98523631ae4a59f267346ea31f984. It emits PoolCreated(address,address,uint24,int24,address) with topic0 0x783cca1c0412dd0d695e784568c96da2e9c22ff989357a2e8b1d9b2b4e6b7118." },
     { q: "What is the Uniswap V4 PoolManager address on Ethereum?", a: "0x000000000004444c5dc75cb358380d2e3de08a90. v4 is a singleton: every v4 pool lives inside this one contract, so it emits every v4 Swap, Initialize and ModifyLiquidity event on Ethereum." },
